@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProfileViewController">
+            <connections>
+                <outlet property="profileTableView" destination="abO-0S-MP9" id="apA-Rg-wCR"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="abO-0S-MP9">
+                    <rect key="frame" x="0.0" y="161" width="320" height="341"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="341" id="1LF-Xv-nMh"/>
+                    </constraints>
+                    <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="hwG-c5-WHP"/>
+                        <outlet property="delegate" destination="-1" id="4Wu-4m-QsG"/>
+                    </connections>
+                </tableView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="CoAppImage.png" translatesAutoresizingMaskIntoConstraints="NO" id="OSY-ls-Qbz">
+                    <rect key="frame" x="21" y="17" width="60" height="67"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="NC1-yu-3rg"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T3k-Lp-1LU">
+                    <rect key="frame" x="15" y="498" width="63" height="65"/>
+                    <state key="normal" image="Next_Image.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="btnBackClicked:" destination="-1" eventType="touchUpInside" id="rxu-36-GSm"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="abO-0S-MP9" firstAttribute="top" secondItem="OSY-ls-Qbz" secondAttribute="bottom" constant="22" id="2EP-5q-PL3"/>
+                <constraint firstItem="OSY-ls-Qbz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="21" id="Akw-9a-Rex"/>
+                <constraint firstItem="abO-0S-MP9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Izy-2a-lM4"/>
+                <constraint firstItem="OSY-ls-Qbz" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="72" id="JVg-EV-AKd"/>
+                <constraint firstItem="T3k-Lp-1LU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="VWc-k9-j41"/>
+                <constraint firstAttribute="trailing" secondItem="abO-0S-MP9" secondAttribute="trailing" id="ezB-7H-1SR"/>
+                <constraint firstAttribute="bottom" secondItem="T3k-Lp-1LU" secondAttribute="bottom" constant="5" id="ptE-Rb-T4k"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="CoAppImage.png" width="72" height="67"/>
+        <image name="Next_Image.png" width="63" height="65"/>
+    </resources>
+</document>

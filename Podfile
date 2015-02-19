@@ -1,0 +1,5 @@
+source 'https://github.com/CocoaPods/Specs.git'
+xcodeproj 'Co\Lab .xcodeproj'
+pod 'google-plus-ios-sdk', '1.4.1'
+pod 'MBProgressHUD', '~> 0.8'
+pod 'AFNetworking', '~> 2.4'
