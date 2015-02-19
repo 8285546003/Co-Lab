@@ -5,11 +5,7 @@
 //  Created by Magnon International on 13/01/15.
 //  Copyright (c) 2015 Magnon International. All rights reserved.
 //
-//Commited from Xcode : P
-//Commited from sudesh
-//Praphat commit
-//Pull sucessfull
-//pulling from prabhat
+
 #import "AppDelegate.h"
 #import <GooglePlus/GooglePlus.h>
 
