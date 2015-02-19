@@ -9,7 +9,7 @@
 #import "HomeViewController.h"
 #import "ProfileViewController.h"
 #import "SearchViewController.h"
-#import "IdeaViewController.h"
+#import "CreateBriefViewController.h"
 #import "LatestIdeaBriefsViewController.h"
 #define kCellHeaderHeight 100
 #define kCellHeight       75
@@ -161,12 +161,12 @@ typedef enum {
     [self.navigationController pushViewController:objCreateIdea animated:YES];
 }
 -(void)goToCreateNewBriefs{
-    IdeaViewController *objCreateIdea = [IdeaViewController new];
-    [self.navigationController pushViewController:objCreateIdea animated:YES];
+    CreateBriefViewController *objCreateBrife = [CreateBriefViewController new];
+    [self.navigationController pushViewController:objCreateBrife animated:YES];
 }
 -(void)goToLatestIdeaBriefs{
-    LatestIdeaBriefsViewController *objCreateIdea = [LatestIdeaBriefsViewController new];
-    [self.navigationController pushViewController:objCreateIdea animated:YES];
+    LatestIdeaBriefsViewController *objLatestIB = [LatestIdeaBriefsViewController new];
+    [self.navigationController pushViewController:objLatestIB animated:YES];
 }
 
 @end
