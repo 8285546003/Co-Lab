@@ -9,5 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface PPUtilts : NSObject
-
+@property(nonatomic,retain) NSString *deviceTocken;
++ (instancetype)sharedInstance;
 @end

@@ -10,6 +10,8 @@
 #import <GoogleOpenSource/GoogleOpenSource.h>
 #import <GooglePlus/GooglePlus.h>
 #import <QuartzCore/QuartzCore.h>
+#import "AFNetworking.h"
+#import "PPUtilts.h"
 
 
 
@@ -47,6 +49,9 @@ typedef void(^AlertViewActionBlock)(void);
     }
 }
 -(void)viewWillAppear:(BOOL)animated{
+    
+
+    
     [super viewWillAppear:YES];
 }
 
@@ -97,12 +102,36 @@ typedef void(^AlertViewActionBlock)(void);
                         
                     } else
                     {
+
                         
-                        [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"AUTH"];
+                        
                         NSLog(@"Email= %@",[GPPSignIn sharedInstance].authentication.userEmail);
                         NSLog(@"GoogleID=%@",person.identifier);
                         NSLog(@"User Name=%@",[person.name.givenName stringByAppendingFormat:@" %@",person.name.familyName]);
                         NSLog(@"Gender=%@",person.gender);
+                        
+                        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+                        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+                        manager.responseSerializer = [AFJSONResponseSerializer serializer];
+                        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
+                        
+                        NSString *strDeviceTocken=[PPUtilts sharedInstance].deviceTocken;;
+                        if (!strDeviceTocken) {
+                            strDeviceTocken=@"";
+                        }
+                        
+                        NSDictionary *parameters = @{@"apicall":@"UserLogin",@"display_name":[person.name.givenName stringByAppendingFormat:@" %@",person.name.familyName],@"user_email":[GPPSignIn sharedInstance].authentication.userEmail,@"device_token":strDeviceTocken ,@"os_type": @"1"};
+                        [manager POST:@"http://miprojects2.com.php53-6.ord1-1.websitetestlink.com/colab/api/version" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                            
+                            [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"AUTH"];
+                             NSLog(@"JSON: %@", responseObject);
+                            
+                        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                            
+                            NSLog(@"Error: %@", error);
+                            
+                        }];
+                        
                         
                     }
                 }];
