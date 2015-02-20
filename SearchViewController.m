@@ -17,9 +17,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   txtRearch = [[UITextField alloc] init];
-   txtRearch.rightViewMode = UITextFieldViewModeAlways;
-   txtRearch.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Search_Image.png"]];
+    
+    
+    UIImageView *imgSearch=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)]; // Set frame as per space required around icon
+    [imgSearch setImage:[UIImage imageNamed:@"Search_Image.png"]];
+    
+    [imgSearch setContentMode:UIViewContentModeCenter];// Set content mode centre
+    
+    txtRearch.leftView=imgSearch;
+    txtRearch.leftViewMode=UITextFieldViewModeAlways;
+    
     
     
     [self settingBarButton];

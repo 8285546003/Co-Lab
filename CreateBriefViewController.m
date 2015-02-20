@@ -13,30 +13,29 @@
 @end
 
 @implementation CreateBriefViewController
-@synthesize ideaTableView,attachmentImage;
+@synthesize attachmentImage;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     isAttachment = NO;
     self.attachmentImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];
-    self.ideaTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 60, self.view.bounds.size.width, self.view.bounds.size.height - 60) style:UITableViewStylePlain];
-    self.ideaTableView.delegate   = self;
-    self.ideaTableView.dataSource = self;
-    self.ideaTableView.backgroundColor = YELLOWCOLOUR;
+   // createBrifTableView= [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height) style:UITableViewStylePlain];
+
+    createBrifTableView.backgroundColor = YELLOWCOLOUR;
     
-    //self.ideaTableView.hidden = YES;
-    UIImageView *headerView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Navigation_Bar_Image.png"]];
-    [headerView setFrame:CGRectMake(0, 0, self.view.bounds.size.width, 60)];
-    [self.view addSubview:headerView];
-    [self.view addSubview:self.ideaTableView];
+
+    //[self.view addSubview:self.ideaTableView];
     
     UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     gestureRecognizer.cancelsTouchesInView = NO;
-    [self.ideaTableView addGestureRecognizer:gestureRecognizer];
+    [createBrifTableView addGestureRecognizer:gestureRecognizer];
     [self settingBarButton];
 }
 
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
 - (void) hideKeyboard {
     [self.note resignFirstResponder];
 }
@@ -207,8 +206,8 @@
     [nextButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
     nextButton.tag = 3000;
     [self.view addSubview:nextButton];
-    
 }
+
 - (void)settingBarMethod:(UIButton *)settingBtn{
     NSLog(@"Button tag == %ld",(long)settingBtn.tag);
     switch (settingBtn.tag) {
@@ -290,7 +289,7 @@
     //self.attachmentImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];
     //self.attachmentImage.image = [UIImage imageNamed:@"Close_Image.png"];
     self.attachmentImage.image = chosenImage;
-    [self.ideaTableView reloadData];
+    [createBrifTableView reloadData];
     [picker dismissViewControllerAnimated:YES completion:NULL];
     
 }

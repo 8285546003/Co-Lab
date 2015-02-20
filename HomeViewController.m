@@ -30,6 +30,7 @@ typedef enum {
 @interface HomeViewController (){
     NSArray *imageArray;
     NSArray *cellTitleText;
+    __weak IBOutlet UIView *notificationView;
 }
 @property (nonatomic, strong) IBOutlet UITableView *homeTableView;
 @end
@@ -55,6 +56,9 @@ typedef enum {
     self.homeTableView.delegate   = self ;
     self.homeTableView.dataSource = self;
     // Do any additional setup after loading the view from its nib.
+}
+-(BOOL)isNotificationViewVisible{
+    return YES;
 }
 - (BOOL)prefersStatusBarHidden {
     return YES;

@@ -13,11 +13,10 @@
 
 
 @interface CreateIdeaViewController : UIViewController<UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate, UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>{
-    IBOutlet UITableView *ideaTableView;
+   __weak IBOutlet UITableView *ideaTableView;
     UIImageView *attachmentImage;
     BOOL isAttachment;
 }
-@property (nonatomic, strong) IBOutlet UITableView *ideaTableView;
 @property (nonatomic, strong) NoteView *note;
 @property (nonatomic, strong) UIImageView *attachmentImage;
 @end

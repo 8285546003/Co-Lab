@@ -14,28 +14,23 @@
 @end
 
 @implementation CreateIdeaViewController
-@synthesize ideaTableView,attachmentImage;
+@synthesize attachmentImage;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     isAttachment = NO;
     self.attachmentImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];
-    self.ideaTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 60, self.view.bounds.size.width, self.view.bounds.size.height - 60) style:UITableViewStylePlain];
-    self.ideaTableView.delegate   = self;
-    self.ideaTableView.dataSource = self;
-    self.ideaTableView.backgroundColor = YELLOWCOLOUR;
+   ideaTableView.backgroundColor = YELLOWCOLOUR;
     
-    //self.ideaTableView.hidden = YES;
-    UIImageView *headerView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Navigation_Bar_Image.png"]];
-    [headerView setFrame:CGRectMake(0, 0, self.view.bounds.size.width, 60)];
-    [self.view addSubview:headerView];
-    [self.view addSubview:self.ideaTableView];
     
     UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     gestureRecognizer.cancelsTouchesInView = NO;
-    [self.ideaTableView addGestureRecognizer:gestureRecognizer];
+    [ideaTableView addGestureRecognizer:gestureRecognizer];
     [self settingBarButton];
+}
+- (BOOL)prefersStatusBarHidden {
+    return YES;
 }
 
 - (void) hideKeyboard {
@@ -185,16 +180,16 @@
     
     NSLog(@"View height == %f",self.view.bounds.size.height);
     UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [closeButton setFrame:CGRectMake(15, self.view.bounds.size.height - 50, 50, 50)];
+    [closeButton setFrame:CGRectMake(0, self.view.bounds.size.height - 60, 50, 50)];
     [closeButton setImage:[UIImage imageNamed:@"Close_Image.png"] forState:UIControlStateNormal];
-        [closeButton setImage:[UIImage imageNamed:@"Close_Image.png"] forState:UIControlStateSelected];
+    [closeButton setImage:[UIImage imageNamed:@"Close_Image.png"] forState:UIControlStateSelected];
     [closeButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
     closeButton.tag = 1000;
     [self.view addSubview:closeButton];
     [closeButton bringSubviewToFront:self.view];
     
     UIButton *attachButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [attachButton setFrame:CGRectMake(self.ideaTableView.frame.size.width - 120, self.view.frame.size.height - 50, 50, 50)];
+    [attachButton setFrame:CGRectMake(self.view.frame.size.width-120, self.view.frame.size.height - 60, 50, 50)];
     [attachButton setImage:[UIImage imageNamed:@"Attachment_Image.png"] forState:UIControlStateNormal];
     [attachButton setImage:[UIImage imageNamed:@"Attachment_Image.png"] forState:UIControlStateSelected];
     [attachButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
@@ -202,13 +197,12 @@
     [self.view addSubview:attachButton];
     
     UIButton *nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [nextButton setFrame:CGRectMake(self.ideaTableView.frame.size.width - 65, self.view.frame.size.height - 50, 50, 50)];
+    [nextButton setFrame:CGRectMake(self.view.frame.size.width - 65, self.view.frame.size.height - 60, 50, 50)];
     [nextButton setImage:[UIImage imageNamed:@"Next_Image.png"] forState:UIControlStateNormal];
     [nextButton setImage:[UIImage imageNamed:@"Next_Image.png"] forState:UIControlStateSelected];
     [nextButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
     nextButton.tag = 3000;
     [self.view addSubview:nextButton];
-    
 }
 
 - (void)settingBarMethod:(UIButton *)settingBtn{
@@ -292,7 +286,7 @@
     //self.attachmentImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];
     //self.attachmentImage.image = [UIImage imageNamed:@"Close_Image.png"];
     self.attachmentImage.image = chosenImage;
-    [self.ideaTableView reloadData];
+    [ideaTableView reloadData];
     [picker dismissViewControllerAnimated:YES completion:NULL];
     
 }

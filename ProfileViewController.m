@@ -27,37 +27,18 @@ NSArray *cellTitleText;
     self.profileTableView.delegate   = self ;
     self.profileTableView.dataSource = self;
     self.profileTableView.frame=CGRectMake(0, self.view.frame.size.height/2, self.view.frame.size.width, self.view.frame.size.height);
+    [self settingBarButton];
     // Do any additional setup after loading the view from its nib.
 }
 
 - (void)settingBarButton{
-    
-    NSLog(@"View height == %f",self.view.bounds.size.height);
-    UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [closeButton setFrame:CGRectMake(15, self.view.bounds.size.height - 50, 50, 50)];
-    [closeButton setImage:[UIImage imageNamed:@"Close_Image.png"] forState:UIControlStateNormal];
-    [closeButton setImage:[UIImage imageNamed:@"Close_Image.png"] forState:UIControlStateSelected];
-    [closeButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
-    closeButton.tag = 1000;
-    [self.view addSubview:closeButton];
-    [closeButton bringSubviewToFront:self.view];
-    
-    UIButton *attachButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [attachButton setFrame:CGRectMake(self.view.frame.size.width - 120, self.view.frame.size.height - 50, 50, 50)];
-    [attachButton setImage:[UIImage imageNamed:@"Attachment_Image.png"] forState:UIControlStateNormal];
-    [attachButton setImage:[UIImage imageNamed:@"Attachment_Image.png"] forState:UIControlStateSelected];
-    [attachButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
-    attachButton.tag = 2000;
-    [self.view addSubview:attachButton];
-    
     UIButton *nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [nextButton setFrame:CGRectMake(self.view.frame.size.width - 65, self.view.frame.size.height - 50, 50, 50)];
+    [nextButton setFrame:CGRectMake(10, self.view.bounds.size.height - 60, 50, 50)];
     [nextButton setImage:[UIImage imageNamed:@"Next_Image.png"] forState:UIControlStateNormal];
     [nextButton setImage:[UIImage imageNamed:@"Next_Image.png"] forState:UIControlStateSelected];
     [nextButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
-    nextButton.tag = 3000;
+    nextButton.tag = 1000;
     [self.view addSubview:nextButton];
-    
 }
 
 - (void)settingBarMethod:(UIButton *)settingBtn{
@@ -67,7 +48,7 @@ NSArray *cellTitleText;
             [self.navigationController popViewControllerAnimated:YES];
             break;
         case 2000:{
-            UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Take a photo!" delegate:self cancelButtonTitle:@"Cancel"           destructiveButtonTitle:nil otherButtonTitles:@"From Galary", @"From Camra", nil];
+            UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Take a photo!" delegate:nil cancelButtonTitle:@"Cancel"           destructiveButtonTitle:nil otherButtonTitles:@"From Galary", @"From Camra", nil];
             [actionSheet showInView:self.view];
         }
             break;
@@ -143,7 +124,7 @@ NSArray *cellTitleText;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    return 60;
+    return 75;
     
 }
 

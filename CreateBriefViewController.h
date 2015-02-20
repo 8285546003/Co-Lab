@@ -11,11 +11,11 @@
 #import "RNExpandingButtonBar.h"
 #define YELLOWCOLOUR [UIColor colorWithRed:239.0/255.0 green:227.0/255.0 blue:60.0/255.0 alpha:1];
 @interface CreateBriefViewController : UIViewController<UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate, UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>{
-    IBOutlet UITableView *ideaTableView;
+   __weak IBOutlet UITableView *createBrifTableView;
     UIImageView *attachmentImage;
     BOOL isAttachment;
 }
-@property (nonatomic, strong) IBOutlet UITableView *ideaTableView;
+
 @property (nonatomic, strong) NoteView *note;
 @property (nonatomic, strong) UIImageView *attachmentImage;
 @end
