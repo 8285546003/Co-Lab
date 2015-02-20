@@ -27,6 +27,13 @@ typedef enum {
     
 }ControllerType;
 
+typedef enum ButtonType{
+    
+    PPkClose,
+    PPkNext
+    
+}ButtonType;
+
 @interface HomeViewController (){
     NSArray *imageArray;
     NSArray *cellTitleText;
@@ -55,9 +62,55 @@ typedef enum {
     
     self.homeTableView.delegate   = self ;
     self.homeTableView.dataSource = self;
+    [self settingBarButton];
     // Do any additional setup after loading the view from its nib.
 }
+
+- (void)settingBarButton{
+    
+    NSLog(@"View height == %f",self.view.bounds.size.height);
+    UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [closeButton setFrame:CGRectMake(10, self.view.bounds.size.height - 60, 50, 50)];
+    [closeButton setImage:[UIImage imageNamed:@"Close_Image.png"] forState:UIControlStateNormal];
+    [closeButton setImage:[UIImage imageNamed:@"Close_Image.png"] forState:UIControlStateSelected];
+    [closeButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
+    closeButton.tag = 0;
+    [notificationView addSubview:closeButton];
+    [closeButton bringSubviewToFront:self.view];
+    
+    UIButton *nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [nextButton setFrame:CGRectMake(self.view.frame.size.width - 60, self.view.frame.size.height - 60, 50, 50)];
+    [nextButton setImage:[UIImage imageNamed:@"Next_Image.png"] forState:UIControlStateNormal];
+    [nextButton setImage:[UIImage imageNamed:@"Next_Image.png"] forState:UIControlStateSelected];
+    [nextButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
+    nextButton.tag = 1;
+    [notificationView addSubview:nextButton];
+    
+}
+- (void)settingBarMethod:(UIButton *)settingBtn{
+    NSLog(@"Button tag == %ld",(long)settingBtn.tag);
+    switch (settingBtn.tag) {
+        case 0: notificationView.hidden=[self isNotificationViewVisible];
+            break;
+        case 1:
+           break;
+        default:
+            break;
+    }
+}
+
+
 -(BOOL)isNotificationViewVisible{
+    
+    if (PPkClose) {
+        return YES;
+    }
+    else if (PPkNext){
+        return YES;
+    }
+    else{
+        return YES;
+    }
     return YES;
 }
 - (BOOL)prefersStatusBarHidden {

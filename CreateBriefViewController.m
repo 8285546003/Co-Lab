@@ -7,7 +7,18 @@
 //
 
 #import "CreateBriefViewController.h"
+#import "UIColor+PPColor.h"
 #define KEYBOARD_HEIGHT 216
+
+typedef enum {
+    
+    PPkRedColor,
+    PPkYellowColor,
+    PPkGreenColor,
+    PPkBlueColor,
+    
+}ColorType;
+
 @interface CreateBriefViewController ()
 
 @end
@@ -20,13 +31,7 @@
     [super viewDidLoad];
     isAttachment = NO;
     self.attachmentImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];
-   // createBrifTableView= [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height) style:UITableViewStylePlain];
-
-    createBrifTableView.backgroundColor = YELLOWCOLOUR;
-    
-
-    //[self.view addSubview:self.ideaTableView];
-    
+    createBrifTableView.backgroundColor = [UIColor clearColor];
     UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     gestureRecognizer.cancelsTouchesInView = NO;
     [createBrifTableView addGestureRecognizer:gestureRecognizer];
@@ -53,7 +58,7 @@
     if (isAttachment) {
         return 4;
     }
-    return 3;
+    return 8;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -115,10 +120,26 @@
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
+    switch (indexPath.section) {
+        case PPkRedColor:cell.backgroundColor    = [UIColor    PPRedColor];
+            break;
+        case PPkYellowColor:cell.backgroundColor = [UIColor  PPYellowColor];
+            break;
+        case PPkGreenColor:cell.backgroundColor  = [UIColor    PPGreenColor];
+            break;
+        case PPkBlueColor:cell.backgroundColor   = [UIColor    PPBlueColor];
+            break;
+        default:
+            break;
+    }
+    
+
     return cell;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    
+    
     if (section == 0) {
         UIImageView *headerImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Section1_Image.png"]];
         return headerImage;
@@ -173,9 +194,10 @@
         //        [bar setExplode:YES];
         //return bar;
         UIView *tmpView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 50)];
-        tmpView.backgroundColor = YELLOWCOLOUR;
+        tmpView.backgroundColor = [UIColor clearColor];
         return tmpView;
     }
+    
     return nil;
 }
 
