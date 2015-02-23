@@ -8,7 +8,6 @@
 
 #import "LatestIdeaBriefsViewController.h"
 #import "UIColor+PPColor.h"
-#import "CLOverlayKit.h"
 
 #define KEYBOARD_HEIGHT 216
 
@@ -21,23 +20,11 @@ typedef enum {
     
 }ColorType;
 
-@interface LatestIdeaBriefsViewController ()<CLOverlayKitDelegate>
-@property (nonatomic, strong) CLOverlayAppearance *appearance;
+@interface LatestIdeaBriefsViewController ()
 @end
 
 @implementation LatestIdeaBriefsViewController
 
-- (void)customizeCLOverlayAppearance {
-    
-    /*
-     The look and feel of an overlay presented by 'CLOverlayKit' is determined by the values encapsulated in the 'CLOverlayAppearance' signleton. This model contains default values; overide them to change the appearance of your overlays. Consider the following example:
-     */
-    
-    //Aquire a reference to the 'CLOverlayAppearance' signleton
-    CLOverlayAppearance *overlayAppearance = [CLOverlayAppearance sharedOverlayAppearance];
-    
-    //Override some of the model's default values
-}
 
 -(void)onTapCancel:(id)sender {
     

@@ -275,7 +275,7 @@
                   symbolName = "-[CLOverlayKit animateOverlayDismissal]"
                   moduleName = "Co\Lab "
                   urlString = "file:///Users/magnon/Documents/Co-Lab/CLOverlayKit.m"
-                  timestampString = "446364070.175072"
+                  timestampString = "446364252.112285"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "319"
@@ -289,7 +289,7 @@
                   symbolName = "__39-[CLOverlayKit animateOverlayDismissal]_block_invoke"
                   moduleName = "Co\Lab "
                   urlString = "file:///Users/magnon/Documents/Co-Lab/CLOverlayKit.m"
-                  timestampString = "446364070.175422"
+                  timestampString = "446364252.112507"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "319"
@@ -418,11 +418,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LatestIdeaBriefsViewController.m"
-            timestampString = "446364096.616745"
+            timestampString = "446364251.611009"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
             landmarkName = "-styledNaviationBarWithFrame:"
             landmarkType = "5">
          </BreakpointContent>
@@ -434,12 +434,60 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LatestIdeaBriefsViewController.m"
-            timestampString = "446364097.840741"
+            timestampString = "446364251.611009"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
             landmarkName = "-styledButtonWithFrame:andTitle:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LatestIdeaBriefsViewController.m"
+            timestampString = "446364251.611009"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "-composeInterface"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LatestIdeaBriefsViewController.m"
+            timestampString = "446364251.611009"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "-onTapNext:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LatestIdeaBriefsViewController.m"
+            timestampString = "446364251.611009"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "-onTapCancel:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
