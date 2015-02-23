@@ -15,7 +15,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
-        self.font = [UIFont fontWithName:@"MarkerFelt-Thin" size:19];
+        self.font = [UIFont boldSystemFontOfSize:34.0f];
     }
     return self;
 }

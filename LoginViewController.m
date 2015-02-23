@@ -45,7 +45,7 @@ typedef void(^AlertViewActionBlock)(void);
     
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"AUTH"]) {
         HomeViewController *homeCont = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
-        [self.navigationController pushViewController:homeCont animated:YES];
+        [self.navigationController pushViewController:homeCont animated:NO];
     }
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -123,6 +123,8 @@ typedef void(^AlertViewActionBlock)(void);
                         [manager POST:@"http://miprojects2.com.php53-6.ord1-1.websitetestlink.com/colab/api/version" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
                             
                             [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"AUTH"];
+                            [[NSUserDefaults standardUserDefaults] setValue:[responseObject valueForKey:@"user_id"] forKey:@"USERID"];
+                            [PPUtilts sharedInstance].userID=[responseObject valueForKey:@"user_id"];
                              NSLog(@"JSON: %@", responseObject);
                             
                         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

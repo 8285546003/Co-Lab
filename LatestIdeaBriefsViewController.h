@@ -19,6 +19,7 @@
 
 @property (nonatomic, strong) NoteView *note;
 @property (nonatomic, strong) UIImageView *attachmentImage;
+@property (nonatomic, strong)NSMutableDictionary *allLatestIdeaAndBrief;
 
 
 @end
