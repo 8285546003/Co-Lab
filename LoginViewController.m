@@ -113,7 +113,6 @@ typedef void(^AlertViewActionBlock)(void);
                         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
                         manager.requestSerializer = [AFJSONRequestSerializer serializer];
                         manager.responseSerializer = [AFJSONResponseSerializer serializer];
-                        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
                         
                         NSString *strDeviceTocken=[PPUtilts sharedInstance].deviceTocken;;
                         if (!strDeviceTocken) {

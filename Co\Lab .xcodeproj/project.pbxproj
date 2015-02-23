@@ -52,6 +52,8 @@
 		68C03A8E1A95B25600555891 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 68C03A7D1A95B25600555891 /* InfoPlist.strings */; };
 		68C03A901A95B25600555891 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68C03A7F1A95B25600555891 /* Images.xcassets */; };
 		68C03A921A95B25600555891 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C03A801A95B25600555891 /* main.m */; };
+		68C686041A9AEE850006891B /* CLOverlayKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C686031A9AEE850006891B /* CLOverlayKit.m */; };
+		68C686061A9AF0000006891B /* Resources.json in Resources */ = {isa = PBXBuildFile; fileRef = 68C686051A9AF0000006891B /* Resources.json */; };
 		68D04E3F1A679EAE00E8CF9E /* CreateIdeaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D04E3D1A679EAE00E8CF9E /* CreateIdeaViewController.m */; };
 		68D04E401A679EAE00E8CF9E /* CreateIdeaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68D04E3E1A679EAE00E8CF9E /* CreateIdeaViewController.xib */; };
 		68D04E441A67A21400E8CF9E /* Section2_Image.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D04E411A67A21400E8CF9E /* Section2_Image.png */; };
@@ -136,6 +138,9 @@
 		68C03AA71A95C18400555891 /* libPods-AFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-AFNetworking.a"; path = "Pods/build/Debug-iphoneos/libPods-AFNetworking.a"; sourceTree = "<group>"; };
 		68C03AA81A95C18400555891 /* libPods-google-plus-ios-sdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-google-plus-ios-sdk.a"; path = "Pods/build/Debug-iphoneos/libPods-google-plus-ios-sdk.a"; sourceTree = "<group>"; };
 		68C03AA91A95C18400555891 /* libPods-MBProgressHUD.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-MBProgressHUD.a"; path = "Pods/build/Debug-iphoneos/libPods-MBProgressHUD.a"; sourceTree = "<group>"; };
+		68C686021A9AEE850006891B /* CLOverlayKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLOverlayKit.h; sourceTree = "<group>"; };
+		68C686031A9AEE850006891B /* CLOverlayKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLOverlayKit.m; sourceTree = "<group>"; };
+		68C686051A9AF0000006891B /* Resources.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Resources.json; sourceTree = "<group>"; };
 		68D04E3C1A679EAE00E8CF9E /* CreateIdeaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateIdeaViewController.h; sourceTree = "<group>"; };
 		68D04E3D1A679EAE00E8CF9E /* CreateIdeaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateIdeaViewController.m; sourceTree = "<group>"; };
 		68D04E3E1A679EAE00E8CF9E /* CreateIdeaViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateIdeaViewController.xib; sourceTree = "<group>"; };
@@ -363,6 +368,9 @@
 		68D1C76A1A97028900DCAED7 /* PPUtilts */ = {
 			isa = PBXGroup;
 			children = (
+				68C686051A9AF0000006891B /* Resources.json */,
+				68C686021A9AEE850006891B /* CLOverlayKit.h */,
+				68C686031A9AEE850006891B /* CLOverlayKit.m */,
 				68D1C76B1A9702D900DCAED7 /* UIColor+PPColor.h */,
 				68D1C76C1A9702D900DCAED7 /* UIColor+PPColor.m */,
 			);
@@ -486,6 +494,7 @@
 				68E19CE61A666F3F005E3032 /* HomeViewController.xib in Resources */,
 				682AABAF1A94B74E00E23A9E /* Search_Image.png in Resources */,
 				68C03A901A95B25600555891 /* Images.xcassets in Resources */,
+				68C686061A9AF0000006891B /* Resources.json in Resources */,
 				682AABA81A94B74E00E23A9E /* CoAppImage@3x.png in Resources */,
 				682AAB861A944C4D00E23A9E /* SearchViewController.xib in Resources */,
 				68A9CD3E1A652625003D09E4 /* LoginViewController.xib in Resources */,
@@ -545,6 +554,7 @@
 				68D1C76D1A9702D900DCAED7 /* UIColor+PPColor.m in Sources */,
 				68E19CE51A666F3F005E3032 /* HomeViewController.m in Sources */,
 				68D04E4A1A67D79100E8CF9E /* RNExpandingButtonBar.m in Sources */,
+				68C686041A9AEE850006891B /* CLOverlayKit.m in Sources */,
 				6828D4291A93611E0078F43D /* ProfileViewController.m in Sources */,
 				68C03A921A95B25600555891 /* main.m in Sources */,
 				68E19CFB1A66A699005E3032 /* NoteView.m in Sources */,

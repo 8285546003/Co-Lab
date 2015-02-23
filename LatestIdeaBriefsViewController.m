@@ -8,6 +8,7 @@
 
 #import "LatestIdeaBriefsViewController.h"
 #import "UIColor+PPColor.h"
+#import "CLOverlayKit.h"
 
 #define KEYBOARD_HEIGHT 216
 
@@ -20,22 +21,114 @@ typedef enum {
     
 }ColorType;
 
-@interface LatestIdeaBriefsViewController ()
-
+@interface LatestIdeaBriefsViewController ()<CLOverlayKitDelegate>
+@property (nonatomic, strong) CLOverlayAppearance *appearance;
 @end
 
 @implementation LatestIdeaBriefsViewController
 
+- (void)customizeCLOverlayAppearance {
+    
+    /*
+     The look and feel of an overlay presented by 'CLOverlayKit' is determined by the values encapsulated in the 'CLOverlayAppearance' signleton. This model contains default values; overide them to change the appearance of your overlays. Consider the following example:
+     */
+    
+    //Aquire a reference to the 'CLOverlayAppearance' signleton
+    CLOverlayAppearance *overlayAppearance = [CLOverlayAppearance sharedOverlayAppearance];
+    
+    //Override some of the model's default values
+}
+
+-(void)onTapCancel:(id)sender {
+    
+    UIButton *button = sender;
+    //CGPoint touchPoint = [self.view convertPoint:button.center fromView:button.superview];
+    
+    NSLog(@"aaaaaa");
+    
+}
+
+-(void)onTapNext:(id)sender {
+    
+    UIButton *button = sender;
+    //CGPoint touchPoint = [self.view convertPoint:button.center fromView:button.superview];
+    
+    NSLog(@"BBB");
+    
+}
+
+#pragma mark - UI Composition
+
+-(void)composeInterface {
+    
+    //Compose the top navigtion bar
+    CGSize navigationBarSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height*.09);
+    CGSize buttonSize = CGSizeMake(navigationBarSize.width*.3, navigationBarSize.height);
+    //Compose the bottom navigtion bar
+    UIVisualEffectView *bottomNavigationBar = [self styledNaviationBarWithFrame:(CGRect){0, self.view.bounds.size.height-navigationBarSize.height, navigationBarSize}];
+    if (bottomNavigationBar) {
+        
+        [self.view addSubview:bottomNavigationBar];
+        
+        UIButton *cancelButton = [self styledButtonWithFrame:(CGRect){0,0, buttonSize} andTitle:@""];
+        if (cancelButton) {
+            [cancelButton addTarget:self action:@selector(onTapCancel:) forControlEvents:UIControlEventTouchUpInside];
+            [cancelButton setImage:[UIImage imageNamed:@"Close_Image.png"] forState:UIControlStateNormal];
+            [bottomNavigationBar addSubview:cancelButton];
+        }
+        
+        UIButton *addButton = [self styledButtonWithFrame:(CGRect){bottomNavigationBar.bounds.size.width-buttonSize.width,0, buttonSize} andTitle:@""];
+        if (addButton) {
+            [addButton addTarget:self action:@selector(onTapNext:) forControlEvents:UIControlEventTouchUpInside];
+            [addButton setImage:[UIImage imageNamed:@"red_plus_down.png"] forState:UIControlStateNormal];
+            [bottomNavigationBar addSubview:addButton];
+        }
+    }
+}
+
+-(UIVisualEffectView *)styledNaviationBarWithFrame:(CGRect)frame {
+    
+    UIVisualEffectView *blurView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
+    blurView.frame = frame;
+    
+    return blurView;
+}
+
+-(UIButton *)styledButtonWithFrame:(CGRect)frame andTitle:(NSString *)title {
+    
+    //Compose new button
+    UIButton *styledButton = [[UIButton  alloc] initWithFrame:frame];
+    
+    if (styledButton) {
+        styledButton.titleLabel.font = [UIFont systemFontOfSize:frame.size.height*.3];
+        [styledButton setTitle:title forState:UIControlStateNormal];
+        [styledButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    }
+    
+    return styledButton;
+}
+
+//-(void)addGradientLayerToView:(UIView *)view atIndex:(int)index color1:(UIColor *)color1 color2:(UIColor *)color2 {
+//    //Create grey gradient background
+//    CAGradientLayer *gradient = [CAGradientLayer layer];
+//    gradient.frame = view.bounds;
+//    gradient.colors = [NSArray arrayWithObjects:(id)[color1 CGColor], (id)[color2 CGColor], nil];
+//    [view.layer insertSublayer:gradient atIndex:index];
+//}
+
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self composeInterface];
     isAttachment = NO;
     self.attachmentImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];
     latestIdeaBrifTableView.backgroundColor = [UIColor clearColor];
     UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     gestureRecognizer.cancelsTouchesInView = NO;
     [latestIdeaBrifTableView addGestureRecognizer:gestureRecognizer];
-    [self settingBarButton];
+   // [self settingBarButton];
 }
 
 - (BOOL)prefersStatusBarHidden {
@@ -97,7 +190,7 @@ typedef enum {
             break;
         case PPkBlueColor:cell.backgroundColor   = [UIColor    PPBlueColor];
             break;
-        default:
+        default:PPkRedColor:cell.backgroundColor    = [UIColor    PPRedColor];
             break;
     }
     
@@ -136,7 +229,7 @@ typedef enum {
             break;
         case PPkBlueColor:[headerView setBackgroundColor:[UIColor PPBlueColor]];
             break;
-        default:
+        default:[headerView setBackgroundColor:[UIColor PPRedColor]];
             break;
     }
     
@@ -183,6 +276,7 @@ typedef enum {
 //    else
 //        return 0.0f;
 //}
+/*
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     if(section == 2) //hear u can make decision
@@ -212,13 +306,14 @@ typedef enum {
         //        [bar setHorizontal:YES];
         //        [bar setExplode:YES];
         //return bar;
-        UIView *tmpView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 50)];
-        tmpView.backgroundColor = [UIColor clearColor];
-        return tmpView;
-    }
-    
-    return nil;
-}
+//        UIView *tmpView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 50)];
+//        tmpView.backgroundColor = [UIColor clearColor];
+//        return tmpView;
+//    }
+//    
+//    return nil;
+//}
+
 
 - (void)settingBarButton{
     
