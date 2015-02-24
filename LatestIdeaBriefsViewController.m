@@ -10,6 +10,7 @@
 #import "UIColor+PPColor.h"
 #import "AFNetworking.h"
 #import "MBProgressHUD.h"
+#import "PPUtilts.h"
 
 
 
@@ -31,7 +32,8 @@ typedef enum{
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-     [self getLatestIdeaBrief];
+    
+    [PPUtilts sharedInstance].connected?[self getLatestIdeaBrief]:kCustomAlert(@"No NetWork", @"Something went wrong please check your WIFI connection");
     isAttachment = NO;
     self.attachmentImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];
     [self settingBarButton];
@@ -53,19 +55,16 @@ typedef enum{
     
     NSDictionary *parameters = @{@"apicall":@"LatestIdeaBrief"};
     
-    [manager POST:@"http://miprojects2.com.php53-6.ord1-1.websitetestlink.com/colab/api/version" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"%@",responseObject);
-        
+    [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject valueForKey:@"Message"] isEqualToString:@"Success"]&&[[responseObject valueForKey:@"Error"] isEqualToString:@"false"]) {
+            self.allLatestIdeaAndBrief=responseObject;
+            [latestIdeaBrifTableView reloadData];
+        }
+        else{
             
         }
-        
-         NSLog(@"%@",[[self.allLatestIdeaAndBrief valueForKey:@"LatestIdeaBrief"] valueForKey:@"description"] );
-        
-                NSLog(@"JSON: %@", [responseObject valueForKey:@"Message"]);
-                self.allLatestIdeaAndBrief=responseObject;
-               [latestIdeaBrifTableView reloadData];
-                [hud hide:YES];
+
+     [hud hide:YES];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         

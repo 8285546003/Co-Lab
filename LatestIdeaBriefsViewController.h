@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "NoteView.h"
 #import "RNExpandingButtonBar.h"
+
+
 #define YELLOWCOLOUR [UIColor colorWithRed:239.0/255.0 green:227.0/255.0 blue:60.0/255.0 alpha:1];
 
 @interface LatestIdeaBriefsViewController : UIViewController<UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate, UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>{
@@ -19,7 +21,5 @@
 
 @property (nonatomic, strong) NoteView *note;
 @property (nonatomic, strong) UIImageView *attachmentImage;
-@property (nonatomic, strong)NSMutableDictionary *allLatestIdeaAndBrief;
-
-
+@property (nonatomic, strong) NSMutableDictionary *allLatestIdeaAndBrief;
 @end
