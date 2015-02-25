@@ -464,7 +464,7 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
-
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     //[self.mainDataDictionary valueForKey:@"IMAGE"];
     NSString *imageString = [UIImagePNGRepresentation(self.attachmentImage.image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     if (!imageString.length) {
@@ -477,7 +477,7 @@
         parameters = @{@"apicall":@"CreateNewIdeaBrief",@"tag":@"politics, movie",@"headline":[self.mainDataDictionary valueForKey:@"HEADER"],@"description": [self.mainDataDictionary valueForKey:@"DICRIPTION"],@"image":imageString,@"brief_id":@"0",@"is_brief":@"Yes",@"user_id":@"2"};
     }
     
-    [manager POST:@"http://miprojects2.com.php53-6.ord1-1.websitetestlink.com/colab/api/version" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
     
         NSLog(@"JSON: %@", responseObject);
         

@@ -58,6 +58,7 @@ typedef enum{
     
     [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject valueForKey:@"Message"] isEqualToString:@"Success"]&&[[responseObject valueForKey:@"Error"] isEqualToString:@"false"]) {
+            NSLog(@"JSON: %@", responseObject);
             self.allLatestIdeaAndBrief=responseObject;
             [latestIdeaBrifTableView reloadData];
         }
