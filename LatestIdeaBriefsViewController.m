@@ -16,12 +16,33 @@
 
 #define KEYBOARD_HEIGHT 216
 
+#define kPP_FIRST   CGRectMake(headerView.frame.size.width-85 , 8, 25, 25)
+#define kPP_SECOND  CGRectMake(headerView.frame.size.width-55 , 8, 25, 25)
+#define kPP_THIRD   CGRectMake(headerView.frame.size.width-25 , 8, 25, 25)
+
+
+#define kPP_FRAME_CLOSE CGRectMake(0, self.view.bounds.size.height - 60, 50, 50)
+#define kPP_FRAME_ADD   CGRectMake(self.view.frame.size.width - 65, self.view.frame.size.height - 60, 50, 50)
+
+
 typedef enum{
     R,
     Y,
     G,
     B
 } CardType;
+
+typedef enum{
+    Back,
+    Add
+} NavigationType;
+
+typedef enum{
+    CreateNewIdea,
+    CreateNewBrief,
+    AnswerTheBrief,
+    Cancel
+} ActionType;
 
 @interface LatestIdeaBriefsViewController ()
 @end
@@ -32,7 +53,7 @@ typedef enum{
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     [PPUtilts sharedInstance].connected?[self getLatestIdeaBrief]:kCustomAlert(@"No NetWork", @"Something went wrong please check your WIFI connection");
     isAttachment = NO;
     self.attachmentImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];
@@ -52,6 +73,7 @@ typedef enum{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",nil];
     
     NSDictionary *parameters = @{@"apicall":@"LatestIdeaBrief"};
     
@@ -72,6 +94,21 @@ typedef enum{
          [hud hide:YES];
         
     }];
+    
+    
+//    NSDictionary *parameters = @{@"apicall":@"LatestIdeaBrief"};
+//    
+//    [[PPUtilts sharedInstance] GetData:parameters completionBlock:^(NSArray *data, NSError *error) {
+//         self.allLatestIdeaAndBrief = data;
+//        if(!error) {
+//            dispatch_sync(dispatch_get_main_queue(), ^(void) {
+//                [latestIdeaBrifTableView reloadData];
+//            });
+//        } else {
+//            NSLog(@"error %@", error);
+//        }
+//    }];
+    
     
 }
 
@@ -157,6 +194,15 @@ typedef enum{
     txtheader.textAlignment = NSTextAlignmentLeft;
     [txtheader setBackgroundColor:[UIColor clearColor]];
     [txtheader setBorderStyle:UITextBorderStyleBezel];
+    CALayer *border = [CALayer layer];
+    CGFloat borderWidth = 2;
+    border.borderColor = [UIColor darkGrayColor].CGColor;
+    border.frame = CGRectMake(0, txtheader.frame.size.height - borderWidth, txtheader.frame.size.width, txtheader.frame.size.height);
+    border.borderWidth = borderWidth;
+    [txtheader setEnabled:NO];
+    [txtheader.layer addSublayer:border];
+    txtheader.layer.masksToBounds = YES;
+    
     
     BOOL isHot=[[[[self.allLatestIdeaAndBrief valueForKey:@"LatestIdeaBrief"] valueForKey:@"is_hot"] objectAtIndex:section] isEqualToString:@"No"]?NO:YES;
    //BOOL isBrief=[[[[self.allLatestIdeaAndBrief valueForKey:@"LatestIdeaBrief"] valueForKey:@"is_brief"] objectAtIndex:section] isEqualToString:@"No"]?NO:YES;
@@ -164,17 +210,17 @@ typedef enum{
     
     NSString *strColorType=[[[self.allLatestIdeaAndBrief valueForKey:@"LatestIdeaBrief"] valueForKey:@"color_code"] objectAtIndex:section];
     typedef void (^CaseBlockForColor)();
+    
+    
     NSDictionary *colorType = @{
                                 @"R":
                                     ^{
                                         [headerView setBackgroundColor:[UIColor    PPRedColor]];
-                                        
-                                        
+        
                                         UIImageView* IdeaImage = [[UIImageView alloc] init];
                                         IdeaImage.image=[UIImage imageNamed:@"Create_New_Idea_Image.png"];
                                         IdeaImage.frame = CGRectMake(headerView.frame.size.width-85, 8, 25, 25);
                                         [headerView addSubview:IdeaImage];
-                                        
                                         
                                         if (isHot) {
                                             UIImageView* hotImage = [[UIImageView alloc] init];
@@ -182,8 +228,6 @@ typedef enum{
                                             hotImage.frame = CGRectMake(headerView.frame.size.width-55, 8, 25, 25);
                                             [headerView addSubview:hotImage];
                                         }
-                                        
-
                                         
                                     },
                                 @"Y":
@@ -268,14 +312,13 @@ typedef enum{
 }
 
 - (void)settingBarButton{
-    
-    NSLog(@"View height == %f",self.view.bounds.size.height);
+  
     UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [closeButton setFrame:CGRectMake(0, self.view.bounds.size.height - 60, 50, 50)];
     [closeButton setImage:[UIImage imageNamed:@"Close_Image.png"] forState:UIControlStateNormal];
     [closeButton setImage:[UIImage imageNamed:@"Close_Image.png"] forState:UIControlStateSelected];
     [closeButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
-    closeButton.tag = 1000;
+    closeButton.tag = 0;
     [self.view addSubview:closeButton];
     
     UIButton *nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -283,47 +326,20 @@ typedef enum{
     [nextButton setImage:[UIImage imageNamed:@"red_plus_down.png"] forState:UIControlStateNormal];
     [nextButton setImage:[UIImage imageNamed:@"red_plus_down.png"] forState:UIControlStateSelected];
     [nextButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
-    nextButton.tag = 3000;
+    nextButton.tag = 1;
     [self.view addSubview:nextButton];
 }
 
 - (void)settingBarMethod:(UIButton *)settingBtn{
     NSLog(@"Button tag == %ld",(long)settingBtn.tag);
     switch (settingBtn.tag) {
-        case 1000:
+        case Back:
             [self.navigationController popViewControllerAnimated:YES];
             break;
-        case 2000:{
-            UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Take a photo!" delegate:nil cancelButtonTitle:@"Cancel"           destructiveButtonTitle:nil otherButtonTitles:@"From Galary", @"From Camra", nil];
-            [actionSheet showInView:self.view];
-        }
-            break;
-        case 3000:{
-            
-        }
+        case Add:
             break;
         default:
             break;
-    }
-}
-
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    
-    if(buttonIndex == 0)
-        
-    {
-        
-        NSLog(@"Delete Button Clicked");
-        [self selectPhoto];
-        
-    }
-    
-    else if(buttonIndex == 1)
-        
-    {
-        [self takePhoto];
-        NSLog(@"Create Button Clicked");
-        
     }
 }
 

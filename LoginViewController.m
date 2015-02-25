@@ -43,6 +43,8 @@ typedef void(^AlertViewActionBlock)(void);
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"AUTH"]) {
         HomeViewController *homeCont = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
         [self.navigationController pushViewController:homeCont animated:NO];
@@ -114,6 +116,7 @@ typedef void(^AlertViewActionBlock)(void);
                         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
                         manager.requestSerializer = [AFJSONRequestSerializer serializer];
                         manager.responseSerializer = [AFJSONResponseSerializer serializer];
+                        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",nil];
                         
                         NSString *strDeviceTocken=[PPUtilts sharedInstance].deviceTocken;;
                         if (!strDeviceTocken) {
@@ -126,6 +129,8 @@ typedef void(^AlertViewActionBlock)(void);
                             [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"AUTH"];
                             [[NSUserDefaults standardUserDefaults] setValue:[responseObject valueForKey:@"user_id"] forKey:@"USERID"];
                             [PPUtilts sharedInstance].userID=[responseObject valueForKey:@"user_id"];
+                            HomeViewController *homeCont = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
+                            [self.navigationController pushViewController:homeCont animated:NO];
                              NSLog(@"JSON: %@", responseObject);
                             
                         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

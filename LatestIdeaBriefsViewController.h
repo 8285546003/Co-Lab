@@ -22,4 +22,5 @@
 @property (nonatomic, strong) NoteView *note;
 @property (nonatomic, strong) UIImageView *attachmentImage;
 @property (nonatomic, strong) NSMutableDictionary *allLatestIdeaAndBrief;
+//@property (nonatomic, strong) NSMutableDictionary *arrayLatestIdeaAndBrief;
 @end

@@ -14,6 +14,7 @@
 @interface PPUtilts : NSObject
 @property(nonatomic,retain) NSString *deviceTocken;
 @property(nonatomic,retain) NSString *userID;
+//- (void)GetData:(NSDictionary *)parameters completionBlock:(void (^)(NSArray *data, NSError *error))block;
 + (instancetype)sharedInstance;
 - (BOOL)connected;
 @end
