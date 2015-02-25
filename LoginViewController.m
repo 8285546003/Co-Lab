@@ -53,7 +53,8 @@ typedef void(^AlertViewActionBlock)(void);
 }
 
 - (IBAction)signIn:(id)sender{
-[PPUtilts sharedInstance].connected?[self connectWithGoogle]:kCustomAlert(@"No NetWork", @"Something went wrong please check your WIFI connection");
+    [self connectWithGoogle];
+//[PPUtilts sharedInstance].connected?[self connectWithGoogle]:kCustomAlert(@"No NetWork", @"Something went wrong please check your WIFI connection");
 }
 
 -(void)connectWithGoogle{
@@ -114,6 +115,7 @@ typedef void(^AlertViewActionBlock)(void);
                         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
                         manager.requestSerializer = [AFJSONRequestSerializer serializer];
                         manager.responseSerializer = [AFJSONResponseSerializer serializer];
+                        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
                         
                         NSString *strDeviceTocken=[PPUtilts sharedInstance].deviceTocken;;
                         if (!strDeviceTocken) {

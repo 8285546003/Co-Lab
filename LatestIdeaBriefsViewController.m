@@ -32,8 +32,8 @@ typedef enum{
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [PPUtilts sharedInstance].connected?[self getLatestIdeaBrief]:kCustomAlert(@"No NetWork", @"Something went wrong please check your WIFI connection");
+    [self getLatestIdeaBrief];
+    //[PPUtilts sharedInstance].connected?[self getLatestIdeaBrief]:kCustomAlert(@"No NetWork", @"Something went wrong please check your WIFI connection");
     isAttachment = NO;
     self.attachmentImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];
     [self settingBarButton];
@@ -52,6 +52,7 @@ typedef enum{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     
     NSDictionary *parameters = @{@"apicall":@"LatestIdeaBrief"};
     
