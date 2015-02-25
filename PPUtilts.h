@@ -14,6 +14,8 @@
 @interface PPUtilts : NSObject
 @property(nonatomic,retain) NSString *deviceTocken;
 @property(nonatomic,retain) NSString *userID;
+@property (nonatomic, strong) NSString *colorCode;
+@property (nonatomic, strong) NSString *LatestIDId;
 + (instancetype)sharedInstance;
 - (BOOL)connected;
 @end

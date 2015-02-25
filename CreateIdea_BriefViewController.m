@@ -322,7 +322,7 @@
             tmpOverlayObj.tag = 1000;
             [tmpOverlayObj setDelegate:self];
             [self.baseScrollView addSubview:tmpOverlayObj];
-            [tmpOverlayObj renderingScreenAccordingToFrame:self.view];
+            [tmpOverlayObj renderingScreenAccordingToFrame:self.view isBrief:NO];
         }
             break;
         case 3000:{

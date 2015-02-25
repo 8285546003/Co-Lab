@@ -26,7 +26,7 @@
     }
     return nil;
 }
-- (void)renderingScreenAccordingToFrame :(UIView *)tmpView{
+- (void)renderingScreenAccordingToFrame :(UIView *)tmpView isBrief:(BOOL)Brief{
     [self setAlpha:0.0f];
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
@@ -37,7 +37,14 @@
     [UIView animateWithDuration:1.0 animations:^{
         [self setAlpha:0.9f];
     } completion:^(BOOL finished) {
-        
+        if (Brief) {
+            answerBriefBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            [answerBriefBtn setFrame:CGRectMake( 40, screenHeight - 180, 150, 40)];
+            [answerBriefBtn setImage:[UIImage imageNamed:@"CHooseAPhoto.png"] forState:UIControlStateNormal];
+            [answerBriefBtn addTarget:self.delegate action:@selector(answerBrief) forControlEvents:UIControlEventTouchUpInside];
+            answerBriefBtn.alpha = 1.0f;
+            [tmpView addSubview:answerBriefBtn];
+        }
         takePhotoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [takePhotoBtn setFrame:CGRectMake( 40, screenHeight - 80, 150, 40)];
         [takePhotoBtn setImage:[UIImage imageNamed:@"TakeAPhoto.png"] forState:UIControlStateNormal];

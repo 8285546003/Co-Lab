@@ -9,14 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "NoteView.h"
 #import "RNExpandingButtonBar.h"
+#import "OverlayView.h"
 
 
 #define YELLOWCOLOUR [UIColor colorWithRed:239.0/255.0 green:227.0/255.0 blue:60.0/255.0 alpha:1];
 
-@interface LatestIdeaBriefsViewController : UIViewController<UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate, UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>{
+@interface LatestIdeaBriefsViewController : UIViewController<UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate, UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,OverlayViewDelegate>{
     __weak IBOutlet UITableView *latestIdeaBrifTableView;
     UIImageView *attachmentImage;
     BOOL isAttachment;
+    OverlayView *tmpOverlayObj;
 }
 
 @property (nonatomic, strong) NoteView *note;

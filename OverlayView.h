@@ -20,12 +20,15 @@
     UIButton *takePhotoBtn;
     UIButton *galaryPhotoBtn;
     UIButton *closeBtn;
+    UIButton *answerBriefBtn;
 }
 
 @property (nonatomic, strong) id <OverlayViewDelegate>delegate;
 
 - (id)initOverlayView;
-- (void)renderingScreenAccordingToFrame :(UIView *)tmpView;
+- (void)renderingScreenAccordingToFrame :(UIView *)tmpView isBrief:(BOOL)Brief;
 - (void)closeMethod:(UIButton *)sender;
-
+- (void)takePhoto;
+- (void)selectPhoto;
+-(void)answerBrief;
 @end

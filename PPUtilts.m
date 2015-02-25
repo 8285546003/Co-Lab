@@ -10,7 +10,6 @@
 #import "AFNetworking.h"
 
 @implementation PPUtilts
-@synthesize deviceTocken;
 
 + (instancetype)sharedInstance
 {
