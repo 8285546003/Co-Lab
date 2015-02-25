@@ -138,16 +138,9 @@ typedef enum {
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    
-    
-    if (section == 0) {
-        UIImageView *headerImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Section1_Image.png"]];
-        return headerImage;
-    }else{
-        UIImageView *headerImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Section2_Image.png"]];
-        return headerImage;
-    }
-    
+    UILabel *headerLable=[[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width,50)];
+    headerLable.text=@"";
+    return headerLable;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

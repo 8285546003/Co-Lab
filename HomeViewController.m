@@ -59,6 +59,7 @@ typedef enum ButtonType{
     notificationView.hidden = YES;
     imageArray=ImageArray ;
     cellTitleText = CellTitleText;
+    notificationView.hidden=YES;
     
     self.homeTableView.delegate   = self;
     self.homeTableView.dataSource = self;

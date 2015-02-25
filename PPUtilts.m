@@ -7,8 +7,10 @@
 //
 
 #import "PPUtilts.h"
+#import "AFNetworking.h"
 
 @implementation PPUtilts
+@synthesize deviceTocken;
 
 + (instancetype)sharedInstance
 {
@@ -19,11 +21,9 @@
     });
     return sharedInstance;
 }
-//-(UIImageView*)addLogo InView:(UIView*)View{
-//    UIImage *imageLogo = [[UIImage alloc] init];
-//    UIImageView *imageViewForLogo = [[UIImageView alloc] initWithFrame:CGRectMake(10,View.fra, 0, 0)];
-//    [imageViewForLogo  setImage:imageLogo];
-//    return imageViewForLogo;
-//}
-
+- (BOOL)connected {
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    return [AFNetworkReachabilityManager sharedManager].reachable;
+}
+//Prabhat Pankaj
 @end

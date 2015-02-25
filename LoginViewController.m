@@ -10,6 +10,9 @@
 #import <GoogleOpenSource/GoogleOpenSource.h>
 #import <GooglePlus/GooglePlus.h>
 #import <QuartzCore/QuartzCore.h>
+#import "AFNetworking.h"
+#import "PPUtilts.h"
+
 
 
 
@@ -40,10 +43,9 @@ typedef void(^AlertViewActionBlock)(void);
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"AUTH"]) {
         HomeViewController *homeCont = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
-        [self.navigationController pushViewController:homeCont animated:YES];
+        [self.navigationController pushViewController:homeCont animated:NO];
     }
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -51,12 +53,16 @@ typedef void(^AlertViewActionBlock)(void);
 }
 
 - (IBAction)signIn:(id)sender{
-          GPPSignIn *signIn = [GPPSignIn sharedInstance];
-          signIn.shouldFetchGooglePlusUser = YES;
-          signIn.shouldFetchGoogleUserEmail = YES;
-          [signIn setScopes:[NSArray arrayWithObject:@"https://www.googleapis.com/auth/plus.login"]];
-          [signIn setDelegate:self];
-          [signIn authenticate];
+[PPUtilts sharedInstance].connected?[self connectWithGoogle]:kCustomAlert(@"No NetWork", @"Something went wrong please check your WIFI connection");
+}
+
+-(void)connectWithGoogle{
+    GPPSignIn *signIn = [GPPSignIn sharedInstance];
+    signIn.shouldFetchGooglePlusUser = YES;
+    signIn.shouldFetchGoogleUserEmail = YES;
+    [signIn setScopes:[NSArray arrayWithObject:@"https://www.googleapis.com/auth/plus.login"]];
+    [signIn setDelegate:self];
+    [signIn authenticate];
 }
 
 - (void)didReceiveMemoryWarning
@@ -97,12 +103,37 @@ typedef void(^AlertViewActionBlock)(void);
                         
                     } else
                     {
+
                         
-                        [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"AUTH"];
+                        
                         NSLog(@"Email= %@",[GPPSignIn sharedInstance].authentication.userEmail);
                         NSLog(@"GoogleID=%@",person.identifier);
                         NSLog(@"User Name=%@",[person.name.givenName stringByAppendingFormat:@" %@",person.name.familyName]);
                         NSLog(@"Gender=%@",person.gender);
+                        
+                        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+                        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+                        manager.responseSerializer = [AFJSONResponseSerializer serializer];
+                        
+                        NSString *strDeviceTocken=[PPUtilts sharedInstance].deviceTocken;;
+                        if (!strDeviceTocken) {
+                            strDeviceTocken=@"";
+                        }
+                        
+                        NSDictionary *parameters = @{@"apicall":@"UserLogin",@"display_name":[person.name.givenName stringByAppendingFormat:@" %@",person.name.familyName],@"user_email":[GPPSignIn sharedInstance].authentication.userEmail,@"device_token":strDeviceTocken ,@"os_type": @"1"};
+                        [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                            
+                            [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"AUTH"];
+                            [[NSUserDefaults standardUserDefaults] setValue:[responseObject valueForKey:@"user_id"] forKey:@"USERID"];
+                            [PPUtilts sharedInstance].userID=[responseObject valueForKey:@"user_id"];
+                             NSLog(@"JSON: %@", responseObject);
+                            
+                        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                            
+                            NSLog(@"Error: %@", error);
+                            
+                        }];
+                        
                         
                     }
                 }];

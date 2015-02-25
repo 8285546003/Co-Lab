@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <GooglePlus/GooglePlus.h>
+#import "PPUtilts.h"
 
 @interface AppDelegate () <GPPDeepLinkDelegate>
 
@@ -29,6 +30,13 @@ static NSString * const kClientID = @"1043369017986-eatg764omdvlrp4jb8tcge2uf6nk
     [GPPDeepLink setDelegate:self];
     [GPPDeepLink readDeepLinkAfterInstall];
     return YES;
+}
+- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
+    [PPUtilts sharedInstance].deviceTocken=token;
+    NSLog(@"content---%@", token);
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
