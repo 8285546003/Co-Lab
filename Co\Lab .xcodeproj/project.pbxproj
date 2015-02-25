@@ -33,8 +33,6 @@
 		6871EAC31A9B0F8300419BA1 /* ChooseAPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 6871EAC01A9B0F8300419BA1 /* ChooseAPhoto.png */; };
 		6871EAC41A9B0F8300419BA1 /* TakeAPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 6871EAC11A9B0F8300419BA1 /* TakeAPhoto.png */; };
 		6871EAC71A9B17DB00419BA1 /* OverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6871EAC61A9B17DB00419BA1 /* OverlayView.m */; };
-		6886ED371A95FFF800B33F33 /* CreateBriefViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6886ED351A95FFF800B33F33 /* CreateBriefViewController.m */; };
-		6886ED381A95FFF800B33F33 /* CreateBriefViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6886ED361A95FFF800B33F33 /* CreateBriefViewController.xib */; };
 		68A9CCFC1A65015F003D09E4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A9CCFB1A65015F003D09E4 /* Foundation.framework */; };
 		68A9CCFE1A65015F003D09E4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A9CCFD1A65015F003D09E4 /* CoreGraphics.framework */; };
 		68A9CD001A65015F003D09E4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A9CCFF1A65015F003D09E4 /* UIKit.framework */; };
@@ -58,8 +56,6 @@
 		68C03A8E1A95B25600555891 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 68C03A7D1A95B25600555891 /* InfoPlist.strings */; };
 		68C03A901A95B25600555891 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68C03A7F1A95B25600555891 /* Images.xcassets */; };
 		68C03A921A95B25600555891 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C03A801A95B25600555891 /* main.m */; };
-		68D04E3F1A679EAE00E8CF9E /* CreateIdeaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D04E3D1A679EAE00E8CF9E /* CreateIdeaViewController.m */; };
-		68D04E401A679EAE00E8CF9E /* CreateIdeaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68D04E3E1A679EAE00E8CF9E /* CreateIdeaViewController.xib */; };
 		68D04E441A67A21400E8CF9E /* Section2_Image.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D04E411A67A21400E8CF9E /* Section2_Image.png */; };
 		68D04E451A67A21400E8CF9E /* Navigation_Bar_Image.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D04E421A67A21400E8CF9E /* Navigation_Bar_Image.png */; };
 		68D04E461A67A21400E8CF9E /* Section1_Image.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D04E431A67A21400E8CF9E /* Section1_Image.png */; };
@@ -115,9 +111,6 @@
 		6871EAC11A9B0F8300419BA1 /* TakeAPhoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TakeAPhoto.png; sourceTree = "<group>"; };
 		6871EAC51A9B17DB00419BA1 /* OverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverlayView.h; sourceTree = "<group>"; };
 		6871EAC61A9B17DB00419BA1 /* OverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverlayView.m; sourceTree = "<group>"; };
-		6886ED341A95FFF800B33F33 /* CreateBriefViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateBriefViewController.h; sourceTree = "<group>"; };
-		6886ED351A95FFF800B33F33 /* CreateBriefViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateBriefViewController.m; sourceTree = "<group>"; };
-		6886ED361A95FFF800B33F33 /* CreateBriefViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateBriefViewController.xib; sourceTree = "<group>"; };
 		68A9CCF81A65015F003D09E4 /* Co\Lab .app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Co\\Lab .app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		68A9CCFB1A65015F003D09E4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		68A9CCFD1A65015F003D09E4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -150,9 +143,6 @@
 		68C03AA71A95C18400555891 /* libPods-AFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-AFNetworking.a"; path = "Pods/build/Debug-iphoneos/libPods-AFNetworking.a"; sourceTree = "<group>"; };
 		68C03AA81A95C18400555891 /* libPods-google-plus-ios-sdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-google-plus-ios-sdk.a"; path = "Pods/build/Debug-iphoneos/libPods-google-plus-ios-sdk.a"; sourceTree = "<group>"; };
 		68C03AA91A95C18400555891 /* libPods-MBProgressHUD.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-MBProgressHUD.a"; path = "Pods/build/Debug-iphoneos/libPods-MBProgressHUD.a"; sourceTree = "<group>"; };
-		68D04E3C1A679EAE00E8CF9E /* CreateIdeaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateIdeaViewController.h; sourceTree = "<group>"; };
-		68D04E3D1A679EAE00E8CF9E /* CreateIdeaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateIdeaViewController.m; sourceTree = "<group>"; };
-		68D04E3E1A679EAE00E8CF9E /* CreateIdeaViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateIdeaViewController.xib; sourceTree = "<group>"; };
 		68D04E411A67A21400E8CF9E /* Section2_Image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Section2_Image.png; sourceTree = "<group>"; };
 		68D04E421A67A21400E8CF9E /* Navigation_Bar_Image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Navigation_Bar_Image.png; sourceTree = "<group>"; };
 		68D04E431A67A21400E8CF9E /* Section1_Image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Section1_Image.png; sourceTree = "<group>"; };
@@ -249,9 +239,6 @@
 		6886ED331A95FFBA00B33F33 /* CreateBrifeClasses */ = {
 			isa = PBXGroup;
 			children = (
-				6886ED341A95FFF800B33F33 /* CreateBriefViewController.h */,
-				6886ED351A95FFF800B33F33 /* CreateBriefViewController.m */,
-				6886ED361A95FFF800B33F33 /* CreateBriefViewController.xib */,
 			);
 			name = CreateBrifeClasses;
 			sourceTree = "<group>";
@@ -409,9 +396,6 @@
 				68D04E431A67A21400E8CF9E /* Section1_Image.png */,
 				68E19CF91A66A699005E3032 /* NoteView.h */,
 				68E19CFA1A66A699005E3032 /* NoteView.m */,
-				68D04E3C1A679EAE00E8CF9E /* CreateIdeaViewController.h */,
-				68D04E3D1A679EAE00E8CF9E /* CreateIdeaViewController.m */,
-				68D04E3E1A679EAE00E8CF9E /* CreateIdeaViewController.xib */,
 				6871EAC51A9B17DB00419BA1 /* OverlayView.h */,
 				6871EAC61A9B17DB00419BA1 /* OverlayView.m */,
 				682635E61A9C47DA00AB4489 /* CreateIdea_BriefViewController.h */,
@@ -492,10 +476,8 @@
 				682AABA71A94B74E00E23A9E /* CoAppImage@2x.png in Resources */,
 				682635EA1A9C47DA00AB4489 /* CreateIdea_BriefViewController.xib in Resources */,
 				68C03A8A1A95B25600555891 /* Main_iPhone.storyboard in Resources */,
-				68D04E401A679EAE00E8CF9E /* CreateIdeaViewController.xib in Resources */,
 				68D04E451A67A21400E8CF9E /* Navigation_Bar_Image.png in Resources */,
 				68C03A881A95B25600555891 /* Main_iPad.storyboard in Resources */,
-				6886ED381A95FFF800B33F33 /* CreateBriefViewController.xib in Resources */,
 				682AABA61A94B74E00E23A9E /* CoAppImage.png in Resources */,
 				68D04E461A67A21400E8CF9E /* Section1_Image.png in Resources */,
 				682AAB981A9491B100E23A9E /* LatestIdeaBriefsViewController.xib in Resources */,
@@ -567,8 +549,6 @@
 				68A9CD3D1A652625003D09E4 /* LoginViewController.m in Sources */,
 				682AAB8C1A9462C300E23A9E /* PPUtilts.m in Sources */,
 				682AAB851A944C4D00E23A9E /* SearchViewController.m in Sources */,
-				6886ED371A95FFF800B33F33 /* CreateBriefViewController.m in Sources */,
-				68D04E3F1A679EAE00E8CF9E /* CreateIdeaViewController.m in Sources */,
 				68D1C76D1A9702D900DCAED7 /* UIColor+PPColor.m in Sources */,
 				682635E91A9C47DA00AB4489 /* CreateIdea_BriefViewController.m in Sources */,
 				68E19CE51A666F3F005E3032 /* HomeViewController.m in Sources */,
