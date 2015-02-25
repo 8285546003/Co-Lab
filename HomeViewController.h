@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CreateIdeaViewController.h"
 #import "CreateIdea_BriefViewController.h"
 
 @interface HomeViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>

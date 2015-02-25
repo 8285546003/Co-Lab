@@ -9,7 +9,6 @@
 #import "HomeViewController.h"
 #import "ProfileViewController.h"
 #import "SearchViewController.h"
-#import "CreateBriefViewController.h"
 #import "LatestIdeaBriefsViewController.h"
 #define kCellHeaderHeight 100
 #define kCellHeight       75

@@ -33,8 +33,6 @@
 		6871EAC31A9B0F8300419BA1 /* ChooseAPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 6871EAC01A9B0F8300419BA1 /* ChooseAPhoto.png */; };
 		6871EAC41A9B0F8300419BA1 /* TakeAPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 6871EAC11A9B0F8300419BA1 /* TakeAPhoto.png */; };
 		6871EAC71A9B17DB00419BA1 /* OverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6871EAC61A9B17DB00419BA1 /* OverlayView.m */; };
-		6886ED371A95FFF800B33F33 /* CreateBriefViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6886ED351A95FFF800B33F33 /* CreateBriefViewController.m */; };
-		6886ED381A95FFF800B33F33 /* CreateBriefViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6886ED361A95FFF800B33F33 /* CreateBriefViewController.xib */; };
 		68A9CCFC1A65015F003D09E4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A9CCFB1A65015F003D09E4 /* Foundation.framework */; };
 		68A9CCFE1A65015F003D09E4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A9CCFD1A65015F003D09E4 /* CoreGraphics.framework */; };
 		68A9CD001A65015F003D09E4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A9CCFF1A65015F003D09E4 /* UIKit.framework */; };
@@ -52,14 +50,17 @@
 		68A9CD541A65546E003D09E4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A9CD491A65546D003D09E4 /* QuartzCore.framework */; };
 		68A9CD551A65546E003D09E4 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A9CD4A1A65546E003D09E4 /* Security.framework */; };
 		68A9CD561A65546E003D09E4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A9CD4B1A65546E003D09E4 /* SystemConfiguration.framework */; };
+		68AD8DFB1A9DC6D000F33176 /* LatestIBCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68AD8DFA1A9DC6D000F33176 /* LatestIBCell.m */; };
+		68AD8DFD1A9DC77A00F33176 /* LatestIBCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68AD8DFC1A9DC77A00F33176 /* LatestIBCell.xib */; };
+		68AD8E0A1A9DEB3400F33176 /* ExpendableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68AD8E081A9DEB3400F33176 /* ExpendableTableViewController.m */; };
+		68AD8E0B1A9DEB3400F33176 /* ExpendableTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68AD8E091A9DEB3400F33176 /* ExpendableTableViewController.xib */; };
+		68AD8E0E1A9DEC2A00F33176 /* HVTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68AD8E0D1A9DEC2A00F33176 /* HVTableView.m */; };
 		68C03A861A95B25600555891 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C03A761A95B25600555891 /* AppDelegate.m */; };
 		68C03A881A95B25600555891 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68C03A771A95B25600555891 /* Main_iPad.storyboard */; };
 		68C03A8A1A95B25600555891 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68C03A791A95B25600555891 /* Main_iPhone.storyboard */; };
 		68C03A8E1A95B25600555891 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 68C03A7D1A95B25600555891 /* InfoPlist.strings */; };
 		68C03A901A95B25600555891 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68C03A7F1A95B25600555891 /* Images.xcassets */; };
 		68C03A921A95B25600555891 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C03A801A95B25600555891 /* main.m */; };
-		68D04E3F1A679EAE00E8CF9E /* CreateIdeaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D04E3D1A679EAE00E8CF9E /* CreateIdeaViewController.m */; };
-		68D04E401A679EAE00E8CF9E /* CreateIdeaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68D04E3E1A679EAE00E8CF9E /* CreateIdeaViewController.xib */; };
 		68D04E441A67A21400E8CF9E /* Section2_Image.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D04E411A67A21400E8CF9E /* Section2_Image.png */; };
 		68D04E451A67A21400E8CF9E /* Navigation_Bar_Image.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D04E421A67A21400E8CF9E /* Navigation_Bar_Image.png */; };
 		68D04E461A67A21400E8CF9E /* Section1_Image.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D04E431A67A21400E8CF9E /* Section1_Image.png */; };
@@ -115,9 +116,6 @@
 		6871EAC11A9B0F8300419BA1 /* TakeAPhoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TakeAPhoto.png; sourceTree = "<group>"; };
 		6871EAC51A9B17DB00419BA1 /* OverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverlayView.h; sourceTree = "<group>"; };
 		6871EAC61A9B17DB00419BA1 /* OverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverlayView.m; sourceTree = "<group>"; };
-		6886ED341A95FFF800B33F33 /* CreateBriefViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateBriefViewController.h; sourceTree = "<group>"; };
-		6886ED351A95FFF800B33F33 /* CreateBriefViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateBriefViewController.m; sourceTree = "<group>"; };
-		6886ED361A95FFF800B33F33 /* CreateBriefViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateBriefViewController.xib; sourceTree = "<group>"; };
 		68A9CCF81A65015F003D09E4 /* Co\Lab .app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Co\\Lab .app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		68A9CCFB1A65015F003D09E4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		68A9CCFD1A65015F003D09E4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -138,6 +136,14 @@
 		68A9CD491A65546D003D09E4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		68A9CD4A1A65546E003D09E4 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		68A9CD4B1A65546E003D09E4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		68AD8DF91A9DC6D000F33176 /* LatestIBCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LatestIBCell.h; sourceTree = "<group>"; };
+		68AD8DFA1A9DC6D000F33176 /* LatestIBCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LatestIBCell.m; sourceTree = "<group>"; };
+		68AD8DFC1A9DC77A00F33176 /* LatestIBCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LatestIBCell.xib; sourceTree = "<group>"; };
+		68AD8E071A9DEB3400F33176 /* ExpendableTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpendableTableViewController.h; sourceTree = "<group>"; };
+		68AD8E081A9DEB3400F33176 /* ExpendableTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpendableTableViewController.m; sourceTree = "<group>"; };
+		68AD8E091A9DEB3400F33176 /* ExpendableTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExpendableTableViewController.xib; sourceTree = "<group>"; };
+		68AD8E0C1A9DEC2A00F33176 /* HVTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HVTableView.h; sourceTree = "<group>"; };
+		68AD8E0D1A9DEC2A00F33176 /* HVTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HVTableView.m; sourceTree = "<group>"; };
 		68C03A751A95B25600555891 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		68C03A761A95B25600555891 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		68C03A781A95B25600555891 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
@@ -150,9 +156,6 @@
 		68C03AA71A95C18400555891 /* libPods-AFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-AFNetworking.a"; path = "Pods/build/Debug-iphoneos/libPods-AFNetworking.a"; sourceTree = "<group>"; };
 		68C03AA81A95C18400555891 /* libPods-google-plus-ios-sdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-google-plus-ios-sdk.a"; path = "Pods/build/Debug-iphoneos/libPods-google-plus-ios-sdk.a"; sourceTree = "<group>"; };
 		68C03AA91A95C18400555891 /* libPods-MBProgressHUD.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-MBProgressHUD.a"; path = "Pods/build/Debug-iphoneos/libPods-MBProgressHUD.a"; sourceTree = "<group>"; };
-		68D04E3C1A679EAE00E8CF9E /* CreateIdeaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateIdeaViewController.h; sourceTree = "<group>"; };
-		68D04E3D1A679EAE00E8CF9E /* CreateIdeaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateIdeaViewController.m; sourceTree = "<group>"; };
-		68D04E3E1A679EAE00E8CF9E /* CreateIdeaViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateIdeaViewController.xib; sourceTree = "<group>"; };
 		68D04E411A67A21400E8CF9E /* Section2_Image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Section2_Image.png; sourceTree = "<group>"; };
 		68D04E421A67A21400E8CF9E /* Navigation_Bar_Image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Navigation_Bar_Image.png; sourceTree = "<group>"; };
 		68D04E431A67A21400E8CF9E /* Section1_Image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Section1_Image.png; sourceTree = "<group>"; };
@@ -242,25 +245,18 @@
 				682AAB941A9491B100E23A9E /* LatestIdeaBriefsViewController.h */,
 				682AAB951A9491B100E23A9E /* LatestIdeaBriefsViewController.m */,
 				682AAB961A9491B100E23A9E /* LatestIdeaBriefsViewController.xib */,
+				68AD8DF91A9DC6D000F33176 /* LatestIBCell.h */,
+				68AD8DFA1A9DC6D000F33176 /* LatestIBCell.m */,
+				68AD8DFC1A9DC77A00F33176 /* LatestIBCell.xib */,
 			);
 			name = "Latest Idea & Brifes";
-			sourceTree = "<group>";
-		};
-		6886ED331A95FFBA00B33F33 /* CreateBrifeClasses */ = {
-			isa = PBXGroup;
-			children = (
-				6886ED341A95FFF800B33F33 /* CreateBriefViewController.h */,
-				6886ED351A95FFF800B33F33 /* CreateBriefViewController.m */,
-				6886ED361A95FFF800B33F33 /* CreateBriefViewController.xib */,
-			);
-			name = CreateBrifeClasses;
 			sourceTree = "<group>";
 		};
 		68A9CCEF1A65015F003D09E4 = {
 			isa = PBXGroup;
 			children = (
+				68AD8E031A9DE31600F33176 /* ExpendableTableView */,
 				68D1C76A1A97028900DCAED7 /* PPUtilts */,
-				6886ED331A95FFBA00B33F33 /* CreateBrifeClasses */,
 				682AAB931A94917600E23A9E /* Latest Idea & Brifes */,
 				682AAB811A944C3100E23A9E /* Search */,
 				6828D4251A9360D10078F43D /* ProfileClasses */,
@@ -341,6 +337,18 @@
 			name = LoginClasses;
 			sourceTree = "<group>";
 		};
+		68AD8E031A9DE31600F33176 /* ExpendableTableView */ = {
+			isa = PBXGroup;
+			children = (
+				68AD8E0C1A9DEC2A00F33176 /* HVTableView.h */,
+				68AD8E0D1A9DEC2A00F33176 /* HVTableView.m */,
+				68AD8E071A9DEB3400F33176 /* ExpendableTableViewController.h */,
+				68AD8E081A9DEB3400F33176 /* ExpendableTableViewController.m */,
+				68AD8E091A9DEB3400F33176 /* ExpendableTableViewController.xib */,
+			);
+			name = ExpendableTableView;
+			sourceTree = "<group>";
+		};
 		68C03A741A95B25600555891 /* Co\Lab */ = {
 			isa = PBXGroup;
 			children = (
@@ -377,6 +385,8 @@
 		68D1C76A1A97028900DCAED7 /* PPUtilts */ = {
 			isa = PBXGroup;
 			children = (
+				682AAB8A1A9462C300E23A9E /* PPUtilts.h */,
+				682AAB8B1A9462C300E23A9E /* PPUtilts.m */,
 				68D1C76B1A9702D900DCAED7 /* UIColor+PPColor.h */,
 				68D1C76C1A9702D900DCAED7 /* UIColor+PPColor.m */,
 			);
@@ -389,8 +399,6 @@
 				68E19CE21A666F3F005E3032 /* HomeViewController.h */,
 				68E19CE31A666F3F005E3032 /* HomeViewController.m */,
 				68E19CE41A666F3F005E3032 /* HomeViewController.xib */,
-				682AAB8A1A9462C300E23A9E /* PPUtilts.h */,
-				682AAB8B1A9462C300E23A9E /* PPUtilts.m */,
 			);
 			name = HomeClasses;
 			sourceTree = "<group>";
@@ -409,9 +417,6 @@
 				68D04E431A67A21400E8CF9E /* Section1_Image.png */,
 				68E19CF91A66A699005E3032 /* NoteView.h */,
 				68E19CFA1A66A699005E3032 /* NoteView.m */,
-				68D04E3C1A679EAE00E8CF9E /* CreateIdeaViewController.h */,
-				68D04E3D1A679EAE00E8CF9E /* CreateIdeaViewController.m */,
-				68D04E3E1A679EAE00E8CF9E /* CreateIdeaViewController.xib */,
 				6871EAC51A9B17DB00419BA1 /* OverlayView.h */,
 				6871EAC61A9B17DB00419BA1 /* OverlayView.m */,
 				682635E61A9C47DA00AB4489 /* CreateIdea_BriefViewController.h */,
@@ -492,14 +497,14 @@
 				682AABA71A94B74E00E23A9E /* CoAppImage@2x.png in Resources */,
 				682635EA1A9C47DA00AB4489 /* CreateIdea_BriefViewController.xib in Resources */,
 				68C03A8A1A95B25600555891 /* Main_iPhone.storyboard in Resources */,
-				68D04E401A679EAE00E8CF9E /* CreateIdeaViewController.xib in Resources */,
 				68D04E451A67A21400E8CF9E /* Navigation_Bar_Image.png in Resources */,
 				68C03A881A95B25600555891 /* Main_iPad.storyboard in Resources */,
-				6886ED381A95FFF800B33F33 /* CreateBriefViewController.xib in Resources */,
 				682AABA61A94B74E00E23A9E /* CoAppImage.png in Resources */,
+				68AD8E0B1A9DEB3400F33176 /* ExpendableTableViewController.xib in Resources */,
 				68D04E461A67A21400E8CF9E /* Section1_Image.png in Resources */,
 				682AAB981A9491B100E23A9E /* LatestIdeaBriefsViewController.xib in Resources */,
 				68D04E561A67D87200E8CF9E /* red_plus_up@2x.png in Resources */,
+				68AD8DFD1A9DC77A00F33176 /* LatestIBCell.xib in Resources */,
 				682AABAC1A94B74E00E23A9E /* logo.png in Resources */,
 				68D04E5E1A67E1DB00E8CF9E /* Attachment_Image.png in Resources */,
 				68D04E5F1A67E1DB00E8CF9E /* Next_Image.png in Resources */,
@@ -567,9 +572,10 @@
 				68A9CD3D1A652625003D09E4 /* LoginViewController.m in Sources */,
 				682AAB8C1A9462C300E23A9E /* PPUtilts.m in Sources */,
 				682AAB851A944C4D00E23A9E /* SearchViewController.m in Sources */,
-				6886ED371A95FFF800B33F33 /* CreateBriefViewController.m in Sources */,
-				68D04E3F1A679EAE00E8CF9E /* CreateIdeaViewController.m in Sources */,
+				68AD8E0A1A9DEB3400F33176 /* ExpendableTableViewController.m in Sources */,
 				68D1C76D1A9702D900DCAED7 /* UIColor+PPColor.m in Sources */,
+				68AD8DFB1A9DC6D000F33176 /* LatestIBCell.m in Sources */,
+				68AD8E0E1A9DEC2A00F33176 /* HVTableView.m in Sources */,
 				682635E91A9C47DA00AB4489 /* CreateIdea_BriefViewController.m in Sources */,
 				68E19CE51A666F3F005E3032 /* HomeViewController.m in Sources */,
 				68D04E4A1A67D79100E8CF9E /* RNExpandingButtonBar.m in Sources */,
