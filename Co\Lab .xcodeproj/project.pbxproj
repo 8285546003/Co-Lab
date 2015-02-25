@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		682635E91A9C47DA00AB4489 /* CreateIdea_BriefViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682635E71A9C47DA00AB4489 /* CreateIdea_BriefViewController.m */; };
+		682635EA1A9C47DA00AB4489 /* CreateIdea_BriefViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 682635E81A9C47DA00AB4489 /* CreateIdea_BriefViewController.xib */; };
 		6828D4291A93611E0078F43D /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6828D4271A93611E0078F43D /* ProfileViewController.m */; };
 		6828D42A1A93611E0078F43D /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6828D4281A93611E0078F43D /* ProfileViewController.xib */; };
 		682AAB851A944C4D00E23A9E /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682AAB831A944C4D00E23A9E /* SearchViewController.m */; };
@@ -27,6 +29,10 @@
 		682AABB01A94B74E00E23A9E /* Splash_Screen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 682AABA51A94B74E00E23A9E /* Splash_Screen.jpg */; };
 		682AABB21A94BD8D00E23A9E /* CoAppImage73.png in Resources */ = {isa = PBXBuildFile; fileRef = 682AABB11A94BD8D00E23A9E /* CoAppImage73.png */; };
 		682AABB41A94C08400E23A9E /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 682AABB31A94C08400E23A9E /* icon.png */; };
+		6871EAC21A9B0F8300419BA1 /* Close.png in Resources */ = {isa = PBXBuildFile; fileRef = 6871EABF1A9B0F8300419BA1 /* Close.png */; };
+		6871EAC31A9B0F8300419BA1 /* ChooseAPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 6871EAC01A9B0F8300419BA1 /* ChooseAPhoto.png */; };
+		6871EAC41A9B0F8300419BA1 /* TakeAPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 6871EAC11A9B0F8300419BA1 /* TakeAPhoto.png */; };
+		6871EAC71A9B17DB00419BA1 /* OverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6871EAC61A9B17DB00419BA1 /* OverlayView.m */; };
 		6886ED371A95FFF800B33F33 /* CreateBriefViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6886ED351A95FFF800B33F33 /* CreateBriefViewController.m */; };
 		6886ED381A95FFF800B33F33 /* CreateBriefViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6886ED361A95FFF800B33F33 /* CreateBriefViewController.xib */; };
 		68A9CCFC1A65015F003D09E4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A9CCFB1A65015F003D09E4 /* Foundation.framework */; };
@@ -77,6 +83,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		682635E61A9C47DA00AB4489 /* CreateIdea_BriefViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateIdea_BriefViewController.h; sourceTree = "<group>"; };
+		682635E71A9C47DA00AB4489 /* CreateIdea_BriefViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateIdea_BriefViewController.m; sourceTree = "<group>"; };
+		682635E81A9C47DA00AB4489 /* CreateIdea_BriefViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateIdea_BriefViewController.xib; sourceTree = "<group>"; };
 		6828D4261A93611E0078F43D /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		6828D4271A93611E0078F43D /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		6828D4281A93611E0078F43D /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
@@ -101,6 +110,11 @@
 		682AABA51A94B74E00E23A9E /* Splash_Screen.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Splash_Screen.jpg; sourceTree = "<group>"; };
 		682AABB11A94BD8D00E23A9E /* CoAppImage73.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoAppImage73.png; sourceTree = "<group>"; };
 		682AABB31A94C08400E23A9E /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		6871EABF1A9B0F8300419BA1 /* Close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Close.png; sourceTree = "<group>"; };
+		6871EAC01A9B0F8300419BA1 /* ChooseAPhoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChooseAPhoto.png; sourceTree = "<group>"; };
+		6871EAC11A9B0F8300419BA1 /* TakeAPhoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TakeAPhoto.png; sourceTree = "<group>"; };
+		6871EAC51A9B17DB00419BA1 /* OverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverlayView.h; sourceTree = "<group>"; };
+		6871EAC61A9B17DB00419BA1 /* OverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverlayView.m; sourceTree = "<group>"; };
 		6886ED341A95FFF800B33F33 /* CreateBriefViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateBriefViewController.h; sourceTree = "<group>"; };
 		6886ED351A95FFF800B33F33 /* CreateBriefViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateBriefViewController.m; sourceTree = "<group>"; };
 		6886ED361A95FFF800B33F33 /* CreateBriefViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateBriefViewController.xib; sourceTree = "<group>"; };
@@ -384,6 +398,9 @@
 		68E19CF81A66A657005E3032 /* CreateIdeaClasses */ = {
 			isa = PBXGroup;
 			children = (
+				6871EABF1A9B0F8300419BA1 /* Close.png */,
+				6871EAC01A9B0F8300419BA1 /* ChooseAPhoto.png */,
+				6871EAC11A9B0F8300419BA1 /* TakeAPhoto.png */,
 				68D04E5B1A67E1DB00E8CF9E /* Attachment_Image.png */,
 				68D04E5C1A67E1DB00E8CF9E /* Next_Image.png */,
 				68D04E5D1A67E1DB00E8CF9E /* Close_Image.png */,
@@ -395,6 +412,11 @@
 				68D04E3C1A679EAE00E8CF9E /* CreateIdeaViewController.h */,
 				68D04E3D1A679EAE00E8CF9E /* CreateIdeaViewController.m */,
 				68D04E3E1A679EAE00E8CF9E /* CreateIdeaViewController.xib */,
+				6871EAC51A9B17DB00419BA1 /* OverlayView.h */,
+				6871EAC61A9B17DB00419BA1 /* OverlayView.m */,
+				682635E61A9C47DA00AB4489 /* CreateIdea_BriefViewController.h */,
+				682635E71A9C47DA00AB4489 /* CreateIdea_BriefViewController.m */,
+				682635E81A9C47DA00AB4489 /* CreateIdea_BriefViewController.xib */,
 			);
 			name = CreateIdeaClasses;
 			sourceTree = "<group>";
@@ -454,6 +476,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				68D04E601A67E1DB00E8CF9E /* Close_Image.png in Resources */,
+				6871EAC31A9B0F8300419BA1 /* ChooseAPhoto.png in Resources */,
 				68D04E441A67A21400E8CF9E /* Section2_Image.png in Resources */,
 				68A9CD401A652B75003D09E4 /* Google_Login_ButtonImage.png in Resources */,
 				68D04E551A67D87200E8CF9E /* red_plus_up.png in Resources */,
@@ -462,10 +485,12 @@
 				682AABAB1A94B74E00E23A9E /* Latest_Idea_And_Briefs.png in Resources */,
 				68D04E571A67D87200E8CF9E /* red_x_down.png in Resources */,
 				68C03A8E1A95B25600555891 /* InfoPlist.strings in Resources */,
+				6871EAC41A9B0F8300419BA1 /* TakeAPhoto.png in Resources */,
 				68D04E591A67D87200E8CF9E /* red_x_up.png in Resources */,
 				682AABA91A94B74E00E23A9E /* Create_New_Brief_Image.png in Resources */,
 				68D04E531A67D87200E8CF9E /* red_plus_down.png in Resources */,
 				682AABA71A94B74E00E23A9E /* CoAppImage@2x.png in Resources */,
+				682635EA1A9C47DA00AB4489 /* CreateIdea_BriefViewController.xib in Resources */,
 				68C03A8A1A95B25600555891 /* Main_iPhone.storyboard in Resources */,
 				68D04E401A679EAE00E8CF9E /* CreateIdeaViewController.xib in Resources */,
 				68D04E451A67A21400E8CF9E /* Navigation_Bar_Image.png in Resources */,
@@ -492,6 +517,7 @@
 				682AABB41A94C08400E23A9E /* icon.png in Resources */,
 				682AABAA1A94B74E00E23A9E /* Create_New_Idea_Image.png in Resources */,
 				68D04E5A1A67D87200E8CF9E /* red_x_up@2x.png in Resources */,
+				6871EAC21A9B0F8300419BA1 /* Close.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -536,6 +562,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				68C03A861A95B25600555891 /* AppDelegate.m in Sources */,
+				6871EAC71A9B17DB00419BA1 /* OverlayView.m in Sources */,
 				682AAB971A9491B100E23A9E /* LatestIdeaBriefsViewController.m in Sources */,
 				68A9CD3D1A652625003D09E4 /* LoginViewController.m in Sources */,
 				682AAB8C1A9462C300E23A9E /* PPUtilts.m in Sources */,
@@ -543,6 +570,7 @@
 				6886ED371A95FFF800B33F33 /* CreateBriefViewController.m in Sources */,
 				68D04E3F1A679EAE00E8CF9E /* CreateIdeaViewController.m in Sources */,
 				68D1C76D1A9702D900DCAED7 /* UIColor+PPColor.m in Sources */,
+				682635E91A9C47DA00AB4489 /* CreateIdea_BriefViewController.m in Sources */,
 				68E19CE51A666F3F005E3032 /* HomeViewController.m in Sources */,
 				68D04E4A1A67D79100E8CF9E /* RNExpandingButtonBar.m in Sources */,
 				6828D4291A93611E0078F43D /* ProfileViewController.m in Sources */,

@@ -7,6 +7,7 @@
 //
 
 #import "CreateIdeaViewController.h"
+#import "UIColor+PPColor.h"
 #define KEYBOARD_HEIGHT 216
 
 @interface CreateIdeaViewController ()
@@ -15,18 +16,25 @@
 
 @implementation CreateIdeaViewController
 @synthesize attachmentImage;
+@synthesize titleCharCountLbl;
+@synthesize dicCharCountLbl;
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    headerTitleArray = [NSArray arrayWithObjects:@"Add headline",@"Add description",@"Add tags", nil];
     isAttachment = NO;
     self.attachmentImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];
-   ideaTableView.backgroundColor = YELLOWCOLOUR;
-    
+   ideaTableView.backgroundColor = [UIColor PPYellowColor];
+    self.view.backgroundColor = [UIColor PPYellowColor];
     
     UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     gestureRecognizer.cancelsTouchesInView = NO;
     [ideaTableView addGestureRecognizer:gestureRecognizer];
+    
+    [self.view addGestureRecognizer:gestureRecognizer];
     [self settingBarButton];
 }
 - (BOOL)prefersStatusBarHidden {
@@ -34,7 +42,9 @@
 }
 
 - (void) hideKeyboard {
-    [self.note resignFirstResponder];
+    NSLog(@"Hidding keyboards");
+    [self.view endEditing:YES];
+    //[tmpOverlayObj closeMethod:nil];
 }
 - (void)didReceiveMemoryWarning
 {
@@ -70,45 +80,31 @@
         [[cell.contentView viewWithTag:indexPath.row+1] removeFromSuperview];
     }
     NSLog(@"Is attachment value ===== %d",isAttachment);
-//    if ([cell.contentView  viewWithTag:indexPath.row + 1]) {
-//        [[cell.contentView viewWithTag:indexPath.row + 1] removeFromSuperview];
-//    }
     if (isAttachment) {
-        if (indexPath.row == 1) {
-            [cell.contentView setFrame:CGRectMake(0, 0, cell.frame.size.width, 200)];
-            
-            //self.attachmentImage.backgroundColor = [UIColor redColor];
-            [cell.contentView addSubview:self.attachmentImage];
-            //[self.attachmentImage bringSubviewToFront:cell.contentView];
-            // Configure the cell...
-            cell.backgroundColor = [UIColor redColor];
+        if (indexPath.section == 1) {
+          // [cell.contentView setFrame:CGRectMake(0, 0, cell.frame.size.width, 200)];
+           // cell.imageView.image = self.attachmentImage.image;
+            [self.attachmentImage setFrame:CGRectMake(40, 0, cell.frame.size.width - 80, 200)];
+            [cell addSubview:self.attachmentImage];
+            cell.backgroundColor = [UIColor clearColor];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
     }
-    
-    
-//        if (indexPath.row == 0) {
-//            [cell.contentView setFrame:CGRectMake(0, 0, cell.frame.size.width, 200)];
-//            self.attachmentImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];
-//            self.attachmentImage.image = [UIImage imageNamed:@"Close_Image.png"];
-//            [cell addSubview:self.attachmentImage];
-//            //[self.attachmentImage bringSubviewToFront:cell.contentView];
-//            // Configure the cell...
-//            cell.backgroundColor = [UIColor redColor];
-//            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//            return cell;
-//        }
-    
-
         self.note = [[NoteView alloc] initWithFrame:CGRectMake(40, 0, cell.frame.size.width - 80, 200)];
-        self.note.tag = indexPath.row+1;
-        //self.note.delegate = self;
-        self.note.text = @"This is the first line.\nThis is the second line.\nThis is the ... line.\nThis is the ... line.\nThis is the ... line.\nThis is the ... line.\nThis is the ... line.\n";
-        //[self.view addSubview:self.note];
+       if (indexPath.section == 0) {
+           [self.note setFontName:@"Helvetica" size:24];
+           self.note.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
+
+       }else{
+           [self.note setFontName:@"Helvetica" size:19];
+
+       }
+        self.note.tag = indexPath.section+1;
+       [self.note setDelegate:self];
         [cell.contentView setFrame:CGRectMake(0, 0, cell.frame.size.width, 200)];
         [cell.contentView addSubview:self.note];
-        // Configure the cell...
+    
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
@@ -116,13 +112,45 @@
    }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    if (section == 0) {
-        UIImageView *headerImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Section1_Image.png"]];
-        return headerImage;
-    }else{
-        UIImageView *headerImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Section2_Image.png"]];
-        return headerImage;
+    if (isAttachment && section == 1) {
+        return nil;
     }
+        CGFloat borderWidth = 2.0;
+    
+    UIView* view = [[UIView alloc] initWithFrame:CGRectMake(40, 0, tableView.frame.size.width - 80, 50)];
+    view.layer.borderColor = [UIColor blackColor].CGColor;
+    view.layer.borderWidth = borderWidth;
+    
+    UIView* mask = [[UIView alloc] initWithFrame:CGRectMake(40, 0, view.frame.size.width - borderWidth, 50)];
+    mask.backgroundColor = [UIColor blackColor];
+    view.layer.mask = mask.layer;
+    
+    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    gestureRecognizer.cancelsTouchesInView = NO;
+    [view addGestureRecognizer:gestureRecognizer];
+
+    //Adding header title
+    if (section == 0) {
+        titleCharCountLbl = [[UILabel alloc] initWithFrame:CGRectMake(view.frame.size.width+8, 2, 30, 20)];
+        titleCharCountLbl.text = @"80";
+        titleCharCountLbl.textAlignment = NSTextAlignmentRight;
+        [view addSubview:titleCharCountLbl];
+
+
+    }else if(section == 1){
+        //Adding header title
+        dicCharCountLbl = [[UILabel alloc] initWithFrame:CGRectMake(view.frame.size.width +8, 2, 30, 20)];
+        dicCharCountLbl.text = @"200";
+        dicCharCountLbl.textAlignment = NSTextAlignmentRight;
+        [view addSubview:dicCharCountLbl];
+
+    }
+    
+    UILabel *titleLbl = [[UILabel alloc] initWithFrame:CGRectMake(40, 2, 200, 20)];
+    titleLbl.text = [headerTitleArray objectAtIndex:section];
+    [view addSubview:titleLbl];
+
+    return view;
     
 }
 
@@ -130,50 +158,82 @@
     return 200.0f;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 50.00f;
+    if (isAttachment && section == 1) {
+        return 00.0f;
+    }
+
+    return 25.00f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    if (section == 2)
+    if ([tableView numberOfSections] == 4 && section == 3) {
         return 50.0f;
-    else
+    }
+    if ([tableView numberOfSections] == 3 && section == 2){
+        return 50.0f;
+    }
+    else{
         return 0.0f;
+    }
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     if(section == 2) //hear u can make decision
     {
-//        /* ---------------------------------------------------------
-//         * Now we've changed [self view] to contain our tableView and our bar.
-//         * ---------------------------------------------------------*/
-//        UIImage *image = [UIImage imageNamed:@"red_plus_up.png"];
-//        UIImage *selectedImage = [UIImage imageNamed:@"red_plus_down.png"];
-//        UIImage *toggledImage = [UIImage imageNamed:@"red_x_up.png"];
-//        UIImage *toggledSelectedImage = [UIImage imageNamed:@"red_x_down.png"];
-//        CGPoint center = CGPointMake(30.0f, 370.0f);
-//        
-//        CGRect buttonFrame = CGRectMake(0, 0, 50.0f, 50.0f);
-//        UIButton *b1 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//        [b1 setFrame:buttonFrame];
-//        [b1 setTitle:@"One" forState:UIControlStateNormal];
-//        UIButton *b2 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//        [b2 setTitle:@"Two" forState:UIControlStateNormal];
-//        [b2 setFrame:buttonFrame];
-//        UIButton *b3 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//        [b3 setTitle:@"Three" forState:UIControlStateNormal];
-//        [b3 setFrame:buttonFrame];
-//        NSArray *buttons = [NSArray arrayWithObjects:b1, b2, b3, nil];
-//        
-//        RNExpandingButtonBar *bar = [[RNExpandingButtonBar alloc] initWithImage:image selectedImage:selectedImage toggledImage:toggledImage toggledSelectedImage:toggledSelectedImage buttons:buttons center:center];
-//        [bar setHorizontal:YES];
-//        [bar setExplode:YES];
-        //return bar;
         UIView *tmpView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 50)];
-        tmpView.backgroundColor = YELLOWCOLOUR;
+        tmpView.backgroundColor = [UIColor PPYellowColor];
         return tmpView;
     }
     return nil;
+}
+
+
+#pragma UITextfieldDelegate
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range  replacementText:(NSString *)text{
+    NSLog(@"back %d",textView.tag);
+    if (textView.tag == 1) {
+        
+        int finalCOunt = 80 - (int)[textView.text length];
+        NSLog(@"Textfield %d and text is == %d",finalCOunt,textView.text.length);
+        titleCharCountLbl.text = [NSString stringWithFormat:@"%d",finalCOunt];
+        if (!text.length) {
+            return YES;
+        }
+        if (finalCOunt == 0) {
+           errorAlert = [[UIAlertView alloc] initWithTitle:@"Char count error!"
+                                                                 message:@"You have exided maximum number of character"
+                                                                delegate:nil
+                                                       cancelButtonTitle:@"OK"
+                                                       otherButtonTitles:nil];
+            if (!errorAlert.isVisible) {
+                [errorAlert show];
+            }
+            
+            return NO;
+        }
+        
+    }else if (textView.tag == 2){
+        int finalCOunt = 200 - (int)[textView.text length];
+        dicCharCountLbl.text = [NSString stringWithFormat:@"%d",finalCOunt];
+        if (!text.length) {
+            return YES;
+        }
+        if (finalCOunt == 0) {
+            
+            errorAlert = [[UIAlertView alloc] initWithTitle:@"Char count error!"
+                                                                 message:@"You have exided maximum number of character"
+                                                                delegate:nil
+                                                       cancelButtonTitle:@"OK"
+                                                       otherButtonTitles:nil];
+            if (!errorAlert.isVisible) {
+                [errorAlert show];
+            }
+            return NO;
+        }
+
+    }
+    return YES;
 }
 
 - (void)settingBarButton{
@@ -212,8 +272,13 @@
             [self.navigationController popViewControllerAnimated:YES];
             break;
         case 2000:{
-            UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Take a photo!" delegate:self cancelButtonTitle:@"Cancel"           destructiveButtonTitle:nil otherButtonTitles:@"From Galary", @"From Camra", nil];
-            [actionSheet showInView:self.view];
+//            UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Take a photo!" delegate:self cancelButtonTitle:@"Cancel"           destructiveButtonTitle:nil otherButtonTitles:@"From Galary", @"From Camra", nil];
+//            [actionSheet showInView:self.view];
+            tmpOverlayObj = [[OverlayView alloc] initOverlayView];
+            tmpOverlayObj.tag = 1000;
+            [tmpOverlayObj setDelegate:self];
+            [self.view addSubview:tmpOverlayObj];
+            [tmpOverlayObj renderingScreenAccordingToFrame:self.view];
         }
             break;
         case 3000:{
@@ -281,13 +346,28 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
-    //self.imageView.image = chosenImage;
     isAttachment = YES;
-    //self.attachmentImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];
-    //self.attachmentImage.image = [UIImage imageNamed:@"Close_Image.png"];
     self.attachmentImage.image = chosenImage;
-    [ideaTableView reloadData];
     [picker dismissViewControllerAnimated:YES completion:NULL];
+    
+    if ([ideaTableView numberOfSections] == 4) {
+        isAttachment = NO;
+        [ideaTableView beginUpdates];
+        
+        [ideaTableView deleteSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationTop];
+        
+        [ideaTableView endUpdates];
+
+    }
+    
+    
+    isAttachment = YES;
+
+    [ideaTableView beginUpdates];
+    
+    [ideaTableView insertSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationTop];
+    
+    [ideaTableView endUpdates];
     
 }
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {

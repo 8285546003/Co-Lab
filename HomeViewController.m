@@ -56,11 +56,11 @@ typedef enum ButtonType{
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    notificationView.hidden = YES;
     imageArray=ImageArray ;
     cellTitleText = CellTitleText;
     
-    self.homeTableView.delegate   = self ;
+    self.homeTableView.delegate   = self;
     self.homeTableView.dataSource = self;
     [self settingBarButton];
     // Do any additional setup after loading the view from its nib.
@@ -214,12 +214,18 @@ typedef enum ButtonType{
     [self.navigationController pushViewController:objSearch animated:YES];
 }
 -(void)goToCreateNewIdea{
-    CreateIdeaViewController *objCreateIdea = [CreateIdeaViewController new];
+    CreateIdea_BriefViewController *objCreateIdea = [CreateIdea_BriefViewController new];
+    [objCreateIdea setIsIdeaSubmitScreen:YES];
     [self.navigationController pushViewController:objCreateIdea animated:YES];
+   // CreateIdeaViewController *objCreateIdea = [CreateIdeaViewController new];
+   // [self.navigationController pushViewController:objCreateIdea animated:YES];
 }
 -(void)goToCreateNewBriefs{
-    CreateBriefViewController *objCreateBrife = [CreateBriefViewController new];
-    [self.navigationController pushViewController:objCreateBrife animated:YES];
+    CreateIdea_BriefViewController *objCreateIdea = [CreateIdea_BriefViewController new];
+    [objCreateIdea setIsIdeaSubmitScreen:NO];
+    [self.navigationController pushViewController:objCreateIdea animated:YES];
+    //CreateBriefViewController *objCreateBrife = [CreateBriefViewController new];
+    //[self.navigationController pushViewController:objCreateBrife animated:YES];
 }
 -(void)goToLatestIdeaBriefs{
     LatestIdeaBriefsViewController *objLatestIB = [LatestIdeaBriefsViewController new];

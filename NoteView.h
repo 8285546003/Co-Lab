@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface NoteView : UITextView //<UITextViewDelegate>
-
+- (void)setFontName:(NSString *)fName size:(NSInteger)size;
 @end
