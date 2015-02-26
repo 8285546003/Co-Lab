@@ -18,6 +18,7 @@
         //self.backgroundColor = [UIColor colorWithRed:1.0f green:1.0f blue:0.6f alpha:1.0f];
         self.backgroundColor = [UIColor clearColor];
         self.font = [UIFont boldSystemFontOfSize:34.0f];
+        
     }
     return self;
 }
@@ -26,4 +27,5 @@
     self.font = [UIFont fontWithName:fName size:size];
 
 }
+
 @end

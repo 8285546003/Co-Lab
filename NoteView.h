@@ -10,4 +10,5 @@
 
 @interface NoteView : UITextView //<UITextViewDelegate>
 - (void)setFontName:(NSString *)fName size:(NSInteger)size;
+
 @end

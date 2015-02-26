@@ -29,6 +29,7 @@
     
     
     BOOL isIdeaSubmitScreen;
+   
 }
 @property (nonatomic, assign) BOOL isIdeaSubmitScreen;
 @property (nonatomic, strong) NSMutableDictionary *mainDataDictionary;
