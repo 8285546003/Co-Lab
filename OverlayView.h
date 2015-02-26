@@ -23,12 +23,12 @@
     UIButton *answerBriefBtn;
 }
 
-@property (nonatomic, strong) id <OverlayViewDelegate>delegate;
+@property (nonatomic, weak) id <OverlayViewDelegate>delegate;
 
 - (id)initOverlayView;
 - (void)renderingScreenAccordingToFrame :(UIView *)tmpView isBrief:(BOOL)Brief;
 - (void)closeMethod:(UIButton *)sender;
 - (void)takePhoto;
 - (void)selectPhoto;
--(void)answerBrief;
+- (void)answerBrief;
 @end

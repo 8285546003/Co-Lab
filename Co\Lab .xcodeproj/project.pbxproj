@@ -61,6 +61,7 @@
 		68C03A8E1A95B25600555891 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 68C03A7D1A95B25600555891 /* InfoPlist.strings */; };
 		68C03A901A95B25600555891 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68C03A7F1A95B25600555891 /* Images.xcassets */; };
 		68C03A921A95B25600555891 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C03A801A95B25600555891 /* main.m */; };
+		68C6C06F1A9EEE0700BFC736 /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C6C06E1A9EEE0700BFC736 /* line.png */; };
 		68D04E441A67A21400E8CF9E /* Section2_Image.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D04E411A67A21400E8CF9E /* Section2_Image.png */; };
 		68D04E451A67A21400E8CF9E /* Navigation_Bar_Image.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D04E421A67A21400E8CF9E /* Navigation_Bar_Image.png */; };
 		68D04E461A67A21400E8CF9E /* Section1_Image.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D04E431A67A21400E8CF9E /* Section1_Image.png */; };
@@ -156,6 +157,7 @@
 		68C03AA71A95C18400555891 /* libPods-AFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-AFNetworking.a"; path = "Pods/build/Debug-iphoneos/libPods-AFNetworking.a"; sourceTree = "<group>"; };
 		68C03AA81A95C18400555891 /* libPods-google-plus-ios-sdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-google-plus-ios-sdk.a"; path = "Pods/build/Debug-iphoneos/libPods-google-plus-ios-sdk.a"; sourceTree = "<group>"; };
 		68C03AA91A95C18400555891 /* libPods-MBProgressHUD.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-MBProgressHUD.a"; path = "Pods/build/Debug-iphoneos/libPods-MBProgressHUD.a"; sourceTree = "<group>"; };
+		68C6C06E1A9EEE0700BFC736 /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line.png; sourceTree = "<group>"; };
 		68D04E411A67A21400E8CF9E /* Section2_Image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Section2_Image.png; sourceTree = "<group>"; };
 		68D04E421A67A21400E8CF9E /* Navigation_Bar_Image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Navigation_Bar_Image.png; sourceTree = "<group>"; };
 		68D04E431A67A21400E8CF9E /* Section1_Image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Section1_Image.png; sourceTree = "<group>"; };
@@ -368,6 +370,7 @@
 		68D04E471A67D77200E8CF9E /* ExpendableButton */ = {
 			isa = PBXGroup;
 			children = (
+				68C6C06E1A9EEE0700BFC736 /* line.png */,
 				68D04E4B1A67D87200E8CF9E /* red_plus_down.png */,
 				68D04E4C1A67D87200E8CF9E /* red_plus_down@2x.png */,
 				68D04E4D1A67D87200E8CF9E /* red_plus_up.png */,
@@ -519,6 +522,7 @@
 				682AABA81A94B74E00E23A9E /* CoAppImage@3x.png in Resources */,
 				682AAB861A944C4D00E23A9E /* SearchViewController.xib in Resources */,
 				68A9CD3E1A652625003D09E4 /* LoginViewController.xib in Resources */,
+				68C6C06F1A9EEE0700BFC736 /* line.png in Resources */,
 				682AABB41A94C08400E23A9E /* icon.png in Resources */,
 				682AABAA1A94B74E00E23A9E /* Create_New_Idea_Image.png in Resources */,
 				68D04E5A1A67D87200E8CF9E /* red_x_up@2x.png in Resources */,
