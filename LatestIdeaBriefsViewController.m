@@ -124,6 +124,7 @@ typedef enum{
         cell.lblTag.text=[[[self.allLatestIdeaAndBrief valueForKey:@"LatestIdeaBrief"] valueForKey:@"tag"] objectAtIndex:indexPath.row];
     
      BOOL isHot=[[[[self.allLatestIdeaAndBrief valueForKey:@"LatestIdeaBrief"] valueForKey:@"is_hot"] objectAtIndex:indexPath.row] isEqualToString:@"No"]?NO:YES;
+    
     if (isHot) {
         cell.imgHot.hidden =NO;
      }

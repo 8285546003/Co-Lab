@@ -10,6 +10,7 @@
 
 
 #import "ExpendableTableViewController.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "MBProgressHUD.h"
 #import "PPUtilts.h"
 #import "AFNetworking.h"
@@ -26,7 +27,7 @@
     [super viewDidLoad];
     
     [self getLatestIdeaBrief];
-    [self settingBarButton];
+
     
     self.table.HVTableViewDataSource = self;
     self.table.HVTableViewDelegate = self;
@@ -54,11 +55,13 @@
     [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         _allLatestIBDetails=responseObject;
         [self.table reloadData];
+        [self.table setHidden:NO];
+        [self settingBarButton];
          NSLog(@"JSON: %@", responseObject);
         [hud hide:YES];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+            [self settingBarButton];
         NSLog(@"Error: %@", error);
         [hud hide:YES];
         
@@ -131,17 +134,15 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath isExpanded:(BOOL)isexpanded
 {
     if (indexPath.row==0) {
-        return 400;
+            return 600;
     }
+   
     if (isexpanded){
-         return 400;
+         return 600;
     }
     else{
         return 175;
     }
-    
-
-    
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath isExpanded:(BOOL)isExpanded
@@ -155,6 +156,22 @@
     
     cell.lblHeading.text=[[[_allLatestIBDetails  valueForKey:@"Detail"] valueForKey:@"headline"] objectAtIndex:indexPath.row];
     cell.lblTag.text=[[[_allLatestIBDetails valueForKey:@"Detail"] valueForKey:@"tag"] objectAtIndex:indexPath.row];
+     cell.lblDescription.text=[[[_allLatestIBDetails valueForKey:@"Detail"] valueForKey:@"description"] objectAtIndex:indexPath.row];
+    NSString *imageName=[[[_allLatestIBDetails valueForKey:@"Detail"] valueForKey:@"image"] objectAtIndex:indexPath.row];
+    if ([self isImageExist:imageName]) {
+        cell.lblDescription.frame=CGRectMake(40,410, 230,162);
+        [cell.imgMain sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",BASE_URL_IMAGE,imageName]]
+                     placeholderImage:nil
+                              options:SDWebImageProgressiveDownload
+                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                if (image) {
+                                    cell.imgMain.image = image;
+                    }
+            }];
+        
+        
+        NSLog(@"image hai ObjectAtIndex %ld",(long)indexPath.row);
+    }
     
     
     BOOL isHot=[[[[_allLatestIBDetails valueForKey:@"Detail"] valueForKey:@"is_hot"] objectAtIndex:indexPath.row] isEqualToString:@"No"]?NO:YES;
@@ -180,5 +197,7 @@
     
     return cell;
 }
+
+-(BOOL)isImageExist:(NSString*)path{return (![[path stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]length] == 0);}
 
 @end

@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-SDWebImage.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-google-plus-ios-sdk.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -27,22 +32,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>3013EC78C3B57A8017CC095D</key>
+		<key>210DF6EF21D046D2E3F64C9D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>692B4E3194C2421AC2AB0D01</key>
+		<key>72F3E512A7761884E481716A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8E40B1DCB98B77CE550E7F3A</key>
+		<key>BEC5F429B0CDF68290173C35</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C8063D4B6C2FB2E3EEA8FD9B</key>
+		<key>D518E49641D2D53D0BC028BD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FA138C45E96B7397D42718F6</key>
 		<dict>
 			<key>primary</key>
 			<true/>

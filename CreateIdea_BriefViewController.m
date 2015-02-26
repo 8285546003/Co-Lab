@@ -106,7 +106,6 @@
     NoteView *noteView = [[NoteView alloc] initWithFrame:CGRectMake(40, 25, screenWidth - 80, 200)];
     [noteView setFontName:@"Helvetica" size:24];
     noteView.tag = 101;
-    
    NSString *hStr = [self.mainDataDictionary valueForKey:@"HEADER"];
     if (hStr.length) {
         noteView.text = hStr;

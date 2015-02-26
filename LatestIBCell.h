@@ -16,7 +16,9 @@
 }
 @property(nonatomic,retain)IBOutlet UILabel     *lblTag;
 @property(nonatomic,retain)IBOutlet UILabel     *lblHeading;
+@property(nonatomic,retain)IBOutlet UILabel     *lblDescription;
 @property(nonatomic,retain)IBOutlet UIImageView *imgIdea;
 @property(nonatomic,retain)IBOutlet UIImageView *imgBrief;
 @property(nonatomic,retain)IBOutlet UIImageView *imgHot;
+@property(nonatomic,retain)IBOutlet UIImageView *imgMain;
 @end
