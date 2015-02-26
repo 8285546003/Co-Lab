@@ -19,13 +19,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ExpendableTableViewController.m"
-            timestampString = "446560269.687756"
+            filePath = "CreateIdea_BriefViewController.m"
+            timestampString = "446562459.49847"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
-            landmarkName = "-tableView:expandCell:withIndexPath:"
+            startingLineNumber = "463"
+            endingLineNumber = "463"
+            landmarkName = "-saveDataToServer"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
