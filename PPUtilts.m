@@ -24,6 +24,4 @@
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     return [AFNetworkReachabilityManager sharedManager].reachable;
 }
-//Prabhat Pankaj
-//SUdesh
 @end

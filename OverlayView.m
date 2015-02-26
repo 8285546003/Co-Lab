@@ -82,5 +82,15 @@
     }];
     
 }
+- (void)takePhoto{
+    NSLog(@"take photo");
+    
+}
+- (void)selectPhoto{
+    NSLog(@"select photo");
+}
+- (void)answerBrief{
+    NSLog(@"answer brief");
+}
 
 @end

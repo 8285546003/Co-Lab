@@ -39,11 +39,6 @@
     return YES;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 -(void)getLatestIdeaBrief{
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
@@ -95,7 +90,6 @@
 }
 
 
-//perform your expand stuff (may include animation) for cell here. It will be called when the user touches a cell
 -(void)tableView:(UITableView *)tableView expandCell:(UITableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath
 {
     UILabel *detailLabel = (UILabel *)[cell viewWithTag:3];
@@ -110,7 +104,6 @@
     }];
 }
 
-//perform your collapse stuff (may include animation) for cell here. It will be called when the user touches an expanded cell so it gets collapsed or the table is in the expandOnlyOneCell satate and the user touches another item, So the last expanded item has to collapse
 -(void)tableView:(UITableView *)tableView collapseCell:(UITableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath
 {
     UILabel *detailLabel = (UILabel *)[cell viewWithTag:3];
@@ -137,7 +130,6 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath isExpanded:(BOOL)isexpanded
 {
-    //you can define different heights for each cell. (then you probably have to calculate the height or e.g. read pre-calculated heights from an array
     if (indexPath.row==0) {
         return 400;
     }
@@ -154,49 +146,6 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath isExpanded:(BOOL)isExpanded
 {
-   /*static NSString *CellIdentifier = @"CellIdentifier";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    if (cell == nil)
-    {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
-    UIImageView *imageView = (UIImageView *)[cell viewWithTag:1];
-    UILabel *textLabel = (UILabel *)[cell viewWithTag:2];
-    UILabel *detailLabel = (UILabel *)[cell viewWithTag:3];
-    UIButton *purchaseButton = (UIButton *)[cell viewWithTag:10];
-    
-    if (indexPath.row==0) {
-        cell.contentView.backgroundColor=[UIColor greenColor];
-    }
-    
-    //alternative background colors for better division ;)
-    if (indexPath.row %2 ==1)
-        cell.backgroundColor = [UIColor colorWithRed:.9 green:.9 blue:.9 alpha:1];
-    else
-        cell.backgroundColor = [UIColor colorWithRed:.8 green:.8 blue:.8 alpha:1];
-    
-    textLabel.text = [[[_allLatestIBDetails valueForKey:@"Detail"] valueForKey:@"description"] objectAtIndex:indexPath.row % 10];
-    NSString* bundlePath = [[NSBundle mainBundle] bundlePath];
-    NSString* imageFileName = [NSString stringWithFormat:@"%ld.jpg", indexPath.row % 10 + 1];
-    imageView.image = [[UIImage alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@/%@", bundlePath, imageFileName]];
-    
-    if (!isExpanded) //prepare the cell as if it was collapsed! (without any animation!)
-    {
-        
-        cell.textLabel.text=[[[_allLatestIBDetails valueForKey:@"Detail"] valueForKey:@"description"] objectAtIndex:indexPath.row];
-        detailLabel.text =[[[_allLatestIBDetails valueForKey:@"Detail"] valueForKey:@"description"] objectAtIndex:indexPath.row];
-        [cell.contentView viewWithTag:7].transform = CGAffineTransformMakeRotation(0);
-        purchaseButton.hidden = YES;
-    }
-    else ///prepare the cell as if it was expanded! (without any animation!)
-    {
-        detailLabel.text = @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
-        [cell.contentView viewWithTag:7].transform = CGAffineTransformMakeRotation(3.14);
-        purchaseButton.hidden = NO;
-    }
-    return cell;*/
     static NSString *CellIdentifier = @"CustomCellReuseID";
     LatestIBCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     

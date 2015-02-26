@@ -15,7 +15,7 @@
 
 @implementation CreateIdea_BriefViewController
 @synthesize baseScrollView;
-@synthesize attachmentImage;
+@synthesize attachmentImage,mainDataDictionary,isIdeaSubmitScreen;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -58,12 +58,10 @@
 - (void)rearrengeScrollView:(BOOL)isAttached{
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
-    CGFloat screenHeight = screenRect.size.height;
     height = 0.0f;
     [self removeAllObjectsFromScrollview];
     if (isAttached) {
         [self.baseScrollView addSubview:[self addHeader]];
-       // [self addImageAttachment];
         [self.baseScrollView addSubview:[self addDisc]];
         [self.baseScrollView addSubview:[self addTags]];
         [self.baseScrollView setContentSize:CGSizeMake(screenWidth, height)];
@@ -81,7 +79,6 @@
 - (void) hideKeyboard {
     NSLog(@"Hidding keyboards");
     [self.view endEditing:YES];
-    //[tmpOverlayObj closeMethod:nil];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -90,7 +87,6 @@
 - (void)addImageAttachment{
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
-    CGFloat screenHeight = screenRect.size.height;
     self.attachmentImage = [[UIImageView alloc] initWithFrame:CGRectMake(40, height, screenWidth - 80, 200)];
     [self.baseScrollView addSubview:self.attachmentImage];
     height += 200;
@@ -100,7 +96,6 @@
 - (UIView *)addHeader{
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
-    CGFloat screenHeight = screenRect.size.height;
     UIView *headerBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, height, screenWidth, 225)];
     headerBaseView.backgroundColor = [UIColor clearColor];
     
@@ -115,8 +110,6 @@
     noteView.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
     [noteView setDelegate:self];
     [headerBaseView addSubview:noteView];
-    //noteView.backgroundColor = [UIColor redColor];
-    
     [headerBaseView addSubview:[self addHeaderTitle]];
     height += 225;
     if (isAttachment) {
@@ -127,8 +120,6 @@
 - (UIView *)addHeaderTitle{
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
-    CGFloat screenHeight = screenRect.size.height;
-    
     CGFloat borderWidth = 2.0;
     UIView* view = [[UIView alloc] initWithFrame:CGRectMake(38, 0, screenWidth - 76, 25)];
     view.layer.borderColor = [UIColor blackColor].CGColor;
@@ -162,8 +153,6 @@
 - (UIView *)addDisc{
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
-    CGFloat screenHeight = screenRect.size.height;
-    
     UIView *headerBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, height, screenWidth, 225)];
     headerBaseView.backgroundColor = [UIColor clearColor];
     
@@ -178,8 +167,6 @@
     
     noteView.tag = 102;
     [headerBaseView addSubview:noteView];
-    //noteView.backgroundColor = [UIColor redColor];
-    
     [headerBaseView addSubview:[self addDiscTitle]];
     height += 225;
     return headerBaseView;
@@ -187,8 +174,6 @@
 - (UIView *)addDiscTitle{
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
-    CGFloat screenHeight = screenRect.size.height;
-    
     CGFloat borderWidth = 2.0;
     UIView* view = [[UIView alloc] initWithFrame:CGRectMake(38, 0, screenWidth - 76, 25)];
     view.layer.borderColor = [UIColor blackColor].CGColor;
@@ -223,8 +208,6 @@
     
     CGRect  screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
-    CGFloat screenHeight = screenRect.size.height;
-
     UIView *headerBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, height, screenWidth, 225)];
     headerBaseView.backgroundColor = [UIColor clearColor];
     
@@ -239,8 +222,6 @@
     }
 
     [headerBaseView addSubview:noteView];
-    //noteView.backgroundColor = [UIColor redColor];
-    
     [headerBaseView addSubview:[self addTagsTitle]];
     height += 225;
     return headerBaseView;
@@ -248,8 +229,6 @@
 - (UIView *)addTagsTitle{
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
-    CGFloat screenHeight = screenRect.size.height;
-
     CGFloat borderWidth = 2.0;
     UIView* view = [[UIView alloc] initWithFrame:CGRectMake(38, 0, screenWidth - 76, 25)];
     view.layer.borderColor = [UIColor blackColor].CGColor;
@@ -320,7 +299,7 @@
         case 2000:{
             tmpOverlayObj = [[OverlayView alloc] initOverlayView];
             tmpOverlayObj.tag = 1000;
-            [tmpOverlayObj setDelegate:self];
+            [tmpOverlayObj setDelegate:(id)self];
             [self.baseScrollView addSubview:tmpOverlayObj];
             [tmpOverlayObj renderingScreenAccordingToFrame:self.view isBrief:NO];
         }
@@ -384,11 +363,11 @@
 #pragma UITextViewDalegate
 #pragma UITextfieldDelegate
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range  replacementText:(NSString *)text{
-    NSLog(@"back %d",textView.tag);
+    NSLog(@"back %ld",(long)textView.tag);
     if (textView.tag == 101) {
         
         int finalCOunt = 80 - (int)[textView.text length];
-        NSLog(@"Textfield %d and text is == %d",finalCOunt,textView.text.length);
+        NSLog(@"Textfield %d and text is == %lu",finalCOunt,(unsigned long)textView.text.length);
         titleCharCountLbl.text = [NSString stringWithFormat:@"%d",finalCOunt];
         if (!text.length) {
             return YES;
@@ -465,7 +444,6 @@
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    //[self.mainDataDictionary valueForKey:@"IMAGE"];
     NSString *imageString = [UIImagePNGRepresentation(self.attachmentImage.image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     if (!imageString.length) {
         imageString = @"";
