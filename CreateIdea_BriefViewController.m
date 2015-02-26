@@ -7,6 +7,7 @@
 //
 
 #import "CreateIdea_BriefViewController.h"
+#import "MBProgressHUD.h"
 
 
 @interface CreateIdea_BriefViewController ()
@@ -24,7 +25,7 @@
     height = 0.0f;
     self.mainDataDictionary = [[NSMutableDictionary alloc] init];
     [self.mainDataDictionary setValue:@"" forKey:@"HEADER"];
-    [self.mainDataDictionary setValue:@"" forKey:@"DICRIPTION"];
+    [self.mainDataDictionary setValue:@"" forKey:@"DESCRIPTION"];
     [self.mainDataDictionary setValue:@"" forKey:@"TAGS"];
     [self.mainDataDictionary setValue:@"" forKey:@"IMAGE"];
 
@@ -104,14 +105,20 @@
     headerBaseView.backgroundColor = [UIColor clearColor];
     
     NoteView *noteView = [[NoteView alloc] initWithFrame:CGRectMake(40, 25, screenWidth - 80, 200)];
+    
     [noteView setFontName:@"Helvetica" size:24];
+    
     noteView.tag = 101;
     
-   NSString *hStr = [self.mainDataDictionary valueForKey:@"HEADER"];
+   NSString *hStr = [self.mainDataDictionary valueForKey:@"HEADER"] ;
+    
+   // NSString *text = [myTextField.text capitalizedString];
     if (hStr.length) {
         noteView.text = hStr;
     }
-    noteView.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
+    //noteTextView.autocapitalizationType = UITextAutocapitalizationTypeSentences;
+    //noteView.autocapitalizationType = UITextAutocapitalizationTypeWords;
+    
     [noteView setDelegate:self];
     [headerBaseView addSubview:noteView];
     [headerBaseView addSubview:[self addHeaderTitle]];
@@ -162,9 +169,11 @@
     
     NoteView *noteView = [[NoteView alloc] initWithFrame:CGRectMake(40, 25, screenWidth - 80, 200)];
     [noteView setFontName:@"Helvetica" size:24];
+    noteView.autocorrectionType = FALSE; // or use  UITextAutocorrectionTypeNo
     noteView.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
+   // noteView.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
     [noteView setDelegate:self];
-    NSString *hStr = [self.mainDataDictionary valueForKey:@"DICRIPTION"];
+    NSString *hStr = [self.mainDataDictionary valueForKey:@"DESCRIPTION"];
     if (hStr.length) {
         noteView.text = hStr;
     }
@@ -201,7 +210,7 @@
     
     
     UILabel *titleLbl = [[UILabel alloc] initWithFrame:CGRectMake(2, 2, 200, 20)];
-    titleLbl.text = @"Add discription";
+    titleLbl.text = @"Add description";
     [view addSubview:titleLbl];
     
     return view;
@@ -366,19 +375,25 @@
 }
 #pragma UITextViewDalegate
 #pragma UITextfieldDelegate
+
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range  replacementText:(NSString *)text{
     NSLog(@"back %ld",(long)textView.tag);
+    
+    //textView.autocapitalizationType=UITextAutocapitalizationTypeAllCharacters;
     if (textView.tag == 101) {
         
         int finalCOunt = 80 - (int)[textView.text length];
         NSLog(@"Textfield %d and text is == %lu",finalCOunt,(unsigned long)textView.text.length);
         titleCharCountLbl.text = [NSString stringWithFormat:@"%d",finalCOunt];
+        NSString *tmpSTring = [textView.text uppercaseString];
+        textView.text = tmpSTring;
+
         if (!text.length) {
             return YES;
         }
         if (finalCOunt == 0) {
             errorAlert = [[UIAlertView alloc] initWithTitle:@"Char count error!"
-                                                    message:@"You have exided maximum number of character"
+                                                    message:@"You have exceeded maximum number of character"
                                                    delegate:nil
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
@@ -398,7 +413,7 @@
         if (finalCOunt == 0) {
             
             errorAlert = [[UIAlertView alloc] initWithTitle:@"Char count error!"
-                                                    message:@"You have exided maximum number of character"
+                                                    message:@"You have exceeded maximum number of character"
                                                    delegate:nil
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
@@ -409,19 +424,20 @@
         }
         
     }
-    return YES;
+       return YES;
 }
 
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView{
     NSString *finalString = textView.text;
     switch (textView.tag) {
         case 101:{
+            //NSString *text = [finalString capitalizedString];
             [self.mainDataDictionary setValue:finalString forKey:@"HEADER"];
 
         }
         break;
         case 102:{
-            [self.mainDataDictionary setValue:finalString forKey:@"DICRIPTION"];
+            [self.mainDataDictionary setValue:finalString forKey:@"DESCRIPTION"];
 
         }
             break;
@@ -453,20 +469,48 @@
     if (!imageString.length) {
         imageString = @"";
     }
+    
+    
+    
+    if([[self.mainDataDictionary valueForKey:@"HEADER"] isEqualToString:@""]){
+        
+        kCustomAlert(@"", @"Please enter header.");
+        return;
+    }
+    else if([[self.mainDataDictionary valueForKey:@"DESCRIPTION"] isEqualToString:@""]){
+        kCustomAlert(@"", @"Please enter description.");
+        return;
+
+    }
+    else if([[self.mainDataDictionary valueForKey:@"TAGS"] isEqualToString:@""]){
+        kCustomAlert(@"", @"Please enter tags.");
+        return;
+
+    }
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
+    hud.labelText = @"Please wait...";
+    //hud.detailsLabelText=@"Latest idea and brief will be populating";
+    
     NSDictionary *parameters;
     if (isIdeaSubmitScreen) {
-        parameters = @{@"apicall":@"CreateNewIdeaBrief",@"tag":@"politics, movie",@"headline":[self.mainDataDictionary valueForKey:@"HEADER"],@"description": [self.mainDataDictionary valueForKey:@"DICRIPTION"],@"image":imageString,@"brief_id":@"0",@"is_brief":@"No",@"user_id":@"2"};
+        parameters = @{@"apicall":@"CreateNewIdeaBrief",@"tag":[self.mainDataDictionary valueForKey:@"TAGS"],@"headline":[self.mainDataDictionary valueForKey:@"HEADER"],@"description": [self.mainDataDictionary valueForKey:@"DESCRIPTION"],@"image":imageString,@"brief_id":@"0",@"is_brief":@"No",@"user_id":@"2"};
     }else{
-        parameters = @{@"apicall":@"CreateNewIdeaBrief",@"tag":@"politics, movie",@"headline":[self.mainDataDictionary valueForKey:@"HEADER"],@"description": [self.mainDataDictionary valueForKey:@"DICRIPTION"],@"image":imageString,@"brief_id":@"0",@"is_brief":@"Yes",@"user_id":@"2"};
+        parameters = @{@"apicall":@"CreateNewIdeaBrief",@"tag":[self.mainDataDictionary valueForKey:@"TAGS"],@"headline":[self.mainDataDictionary valueForKey:@"HEADER"],@"description": [self.mainDataDictionary valueForKey:@"DESCRIPTION"],@"image":imageString,@"brief_id":@"0",@"is_brief":@"Yes",@"user_id":@"2"};
     }
     
     [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
     
         NSLog(@"JSON: %@", responseObject);
+        [hud hide:YES];
+        
+       // [self removeAllObjectsFromScrollview];
+        
+        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         NSLog(@"Error: %@", error);
+        [hud hide:YES];
         
     }];
 }
