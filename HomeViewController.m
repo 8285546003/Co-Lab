@@ -9,11 +9,15 @@
 #import "HomeViewController.h"
 #import "ProfileViewController.h"
 #import "SearchViewController.h"
-#import "LatestIdeaBriefsViewController.h"
+#import "CoLabListViewController.h"
+
 #define kCellHeaderHeight 100
 #define kCellHeight       75
+
 #define ImageArray @[@"CoAppImage73.png",@"Create_New_Idea_Image.png",@"Create_New_Brief_Image.png",@"Search_Image.png",@"Profile_Image.png",@"Latest_Idea_And_Briefs.png"]
 #define  CellTitleText  @[@" CO\\Lab",@"  Create New Idea",@"  Create New Briefs",@"  Search",@"  Profile",@"  Latest Idea & Brifes"]
+
+static NSString *kApiCall=@"LatestIdeaBrief";
 
 typedef enum {
     
@@ -189,9 +193,9 @@ typedef enum ButtonType{
             
         case PPkHomeViewController:
             break;
-        case PPkCreateIdeaViewController:[self goToCreateNewIdea];
+        case PPkCreateIdeaViewController:[self goToCreateIdeaBriefsWith:YES];
             break;
-        case PPkCreateBriefViewController:[self goToCreateNewBriefs];
+        case PPkCreateBriefViewController:[self goToCreateIdeaBriefsWith:NO];
             break;
         case PPkSearchViewController:[self goToSearch];
             break;
@@ -213,18 +217,19 @@ typedef enum ButtonType{
     SearchViewController *objSearch= [SearchViewController new];
     [self.navigationController pushViewController:objSearch animated:YES];
 }
--(void)goToCreateNewIdea{
+//-(void)goToCreateNewIdea{
+//    CreateIdea_BriefViewController *objCreateIdea = [CreateIdea_BriefViewController new];
+//    [objCreateIdea setIsIdeaSubmitScreen:YES];
+//    [self.navigationController pushViewController:objCreateIdea animated:YES];
+//}
+-(void)goToCreateIdeaBriefsWith:(BOOL)NavigationType{
     CreateIdea_BriefViewController *objCreateIdea = [CreateIdea_BriefViewController new];
-    [objCreateIdea setIsIdeaSubmitScreen:YES];
-    [self.navigationController pushViewController:objCreateIdea animated:YES];
-}
--(void)goToCreateNewBriefs{
-    CreateIdea_BriefViewController *objCreateIdea = [CreateIdea_BriefViewController new];
-    [objCreateIdea setIsIdeaSubmitScreen:NO];
+    [objCreateIdea setIsIdeaSubmitScreen:NavigationType];
     [self.navigationController pushViewController:objCreateIdea animated:YES];
 }
 -(void)goToLatestIdeaBriefs{
-    LatestIdeaBriefsViewController *objLatestIB = [LatestIdeaBriefsViewController new];
+    [PPUtilts sharedInstance].apiCall=kApiCall;
+    CoLabListViewController *objLatestIB = [CoLabListViewController new];
     [self.navigationController pushViewController:objLatestIB animated:YES];
 }
 

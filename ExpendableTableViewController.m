@@ -62,7 +62,7 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [self settingBarButton];
-        NSLog(@"Error: %@", error);
+        NSLog(@"fail! \nerror: %@", [error localizedDescription]);
         [hud hide:YES];
         
     }];
@@ -153,7 +153,8 @@
     if (cell == nil) {
         cell = [[[NSBundle mainBundle]loadNibNamed:@"LatestIBCell" owner:self options:nil]lastObject];
     }
-    
+    cell.selectedBackgroundView.backgroundColor=[UIColor clearColor];
+
     cell.lblHeading.text=[[[_allLatestIBDetails  valueForKey:@"Detail"] valueForKey:@"headline"] objectAtIndex:indexPath.row];
     cell.lblTag.text=[[[_allLatestIBDetails valueForKey:@"Detail"] valueForKey:@"tag"] objectAtIndex:indexPath.row];
      cell.lblDescription.text=[[[_allLatestIBDetails valueForKey:@"Detail"] valueForKey:@"description"] objectAtIndex:indexPath.row];

@@ -18,10 +18,11 @@
     dispatch_once(&once, ^{
         sharedInstance = [[self alloc] init];
     });
+    
     return sharedInstance;
 }
+
 - (BOOL)connected {
-    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     return [AFNetworkReachabilityManager sharedManager].reachable;
 }
 @end

@@ -7,6 +7,26 @@
 //
 
 #import "ProfileViewController.h"
+#import "CoLabListViewController.h"
+#import "PPUtilts.h"
+
+
+static NSString *kMyProfileSting=@"MyBrief";
+static NSString *kMyMyIdeasSting=@"MyIdea";
+static NSString *kMyBriefsSting=@"kMyBriefsSting";
+static NSString *kMyNotificationsSting=@"kMyNotificationsSting";
+static NSString *kLogOutSting=@"kLogOutSting";
+
+typedef enum {
+    
+    PPkMyProfile,
+    PPkMyIdeas,
+    PPkMyBriefs,
+    PPkMyNotifications,
+    PPkLogOut,
+    
+}ControllerType;
+
 
 @interface ProfileViewController (){
 NSArray *imageArray;
@@ -131,11 +151,30 @@ NSArray *cellTitleText;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    NSLog(@"Profile");
-   // CreateIdeaViewController *cIdeaCont = [[CreateIdeaViewController alloc] initWithNibName:@"CreateIdeaViewController" bundle:nil];
-    //[self.navigationController pushViewController:cIdeaCont animated:YES];
-    
+    switch (indexPath.row) {
+        case PPkMyProfile:[self goToWithApiCall:kMyProfileSting];
+            break;
+        case PPkMyIdeas:[self goToWithApiCall:kMyMyIdeasSting];
+            break;
+        case PPkMyBriefs:[self goToWithApiCall:kMyBriefsSting];
+            break;
+        case PPkMyNotifications:[self goToWithApiCall:kMyNotificationsSting];
+            break;
+        case PPkLogOut:[self goToWithApiCall:kLogOutSting];
+            break;
+        default:
+            break;
+            
+    }
 }
+
+-(void)goToWithApiCall:(NSString*)apiCall{
+    [PPUtilts sharedInstance].userID= [[NSUserDefaults standardUserDefaults] valueForKey:@"USERID"];
+    [PPUtilts sharedInstance].apiCall=apiCall;
+     CoLabListViewController *objProfile = [CoLabListViewController new];
+    [self.navigationController pushViewController:objProfile animated:YES];
+}
+
 
 - (IBAction)btnBackClicked:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];

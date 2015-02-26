@@ -13,10 +13,11 @@
 #define kCustomAlert(title,msg) [[[UIAlertView alloc] initWithTitle:title message:msg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show]
 
 @interface PPUtilts : NSObject
-@property(nonatomic,retain) NSString *deviceTocken;
-@property(nonatomic,retain) NSString *userID;
+@property (nonatomic,retain)  NSString *deviceTocken;
+@property (nonatomic,retain)  NSString *userID;
 @property (nonatomic, strong) NSString *colorCode;
 @property (nonatomic, strong) NSString *LatestIDId;
+@property (nonatomic, strong) NSString *apiCall;
 + (instancetype)sharedInstance;
 - (BOOL)connected;
 @end
