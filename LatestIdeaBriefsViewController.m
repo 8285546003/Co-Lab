@@ -148,7 +148,7 @@ typedef enum{
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 350.0f;
+    return 250.0f;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     ExpendableTableViewController *obj=[ExpendableTableViewController new];
@@ -198,73 +198,5 @@ typedef enum{
     [tmpOverlayObj setDelegate:self];
     [self.view addSubview:tmpOverlayObj];
     [tmpOverlayObj renderingScreenAccordingToFrame:self.view isBrief:NO];
-}
--(void)answerBrief{
-    
-    
-}
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    
-    if(buttonIndex == 0)
-        
-    {
-        
-        NSLog(@"Delete Button Clicked");
-        [self selectPhoto];
-        
-    }
-    
-    else if(buttonIndex == 1)
-        
-    {
-        [self takePhoto];
-        NSLog(@"Create Button Clicked");
-        
-    }
-}
-
-- (void)takePhoto {
-    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        
-        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                              message:@"Device has no camera"
-                                                             delegate:nil
-                                                    cancelButtonTitle:@"OK"
-                                                    otherButtonTitles: nil];
-        
-        [myAlertView show];
-        return;
-    }
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    picker.allowsEditing = YES;
-    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    
-    [self presentViewController:picker animated:YES completion:NULL];
-    
-}
-
-- (void)selectPhoto {
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    picker.allowsEditing = YES;
-    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    [self presentViewController:picker animated:YES completion:NULL];
-}
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    
-    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
-    //self.imageView.image = chosenImage;
-    isAttachment = YES;
-    //self.attachmentImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];
-    //self.attachmentImage.image = [UIImage imageNamed:@"Close_Image.png"];
-    self.attachmentImage.image = chosenImage;
-    [latestIdeaBrifTableView reloadData];
-    [picker dismissViewControllerAnimated:YES completion:NULL];
-    
-}
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 @end

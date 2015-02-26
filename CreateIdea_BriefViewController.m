@@ -76,6 +76,10 @@
 
     }
 }
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
+
 - (void) hideKeyboard {
     NSLog(@"Hidding keyboards");
     [self.view endEditing:YES];

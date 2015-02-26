@@ -39,28 +39,29 @@
     } completion:^(BOOL finished) {
         if (Brief) {
             answerBriefBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            [answerBriefBtn setFrame:CGRectMake( 40, screenHeight - 180, 150, 40)];
+            [answerBriefBtn setFrame:CGRectMake( 40, screenHeight - 210, 150, 40)];
             [answerBriefBtn setImage:[UIImage imageNamed:@"CHooseAPhoto.png"] forState:UIControlStateNormal];
             [answerBriefBtn addTarget:self.delegate action:@selector(answerBrief) forControlEvents:UIControlEventTouchUpInside];
             answerBriefBtn.alpha = 1.0f;
+            answerBriefBtn.tag=0;
             [tmpView addSubview:answerBriefBtn];
         }
         takePhotoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [takePhotoBtn setFrame:CGRectMake( 40, screenHeight - 80, 150, 40)];
+        [takePhotoBtn setFrame:CGRectMake( 40, screenHeight - 110, 150, 40)];
         [takePhotoBtn setImage:[UIImage imageNamed:@"TakeAPhoto.png"] forState:UIControlStateNormal];
         [takePhotoBtn addTarget:self.delegate action:@selector(takePhoto) forControlEvents:UIControlEventTouchUpInside];
         takePhotoBtn.alpha = 1.0f;
         [tmpView addSubview:takePhotoBtn];
         
         galaryPhotoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [galaryPhotoBtn setFrame:CGRectMake( 40, screenHeight - 130, 150, 40)];
+        [galaryPhotoBtn setFrame:CGRectMake( 40, screenHeight - 160, 150, 40)];
         [galaryPhotoBtn setImage:[UIImage imageNamed:@"CHooseAPhoto.png"] forState:UIControlStateNormal];
         [galaryPhotoBtn addTarget:self.delegate action:@selector(selectPhoto) forControlEvents:UIControlEventTouchUpInside];
         galaryPhotoBtn.alpha = 1.0f;
         [tmpView addSubview:galaryPhotoBtn];
         
         closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [closeBtn setFrame:CGRectMake( screenWidth - 80, screenHeight - 80, 40, 40)];
+        [closeBtn setFrame:CGRectMake( screenWidth - 80, screenHeight - 110, 40, 40)];
         [closeBtn setImage:[UIImage imageNamed:@"Close.png"] forState:UIControlStateNormal];
         [closeBtn addTarget:self action:@selector(closeMethod:) forControlEvents:UIControlEventTouchUpInside];
         closeBtn.alpha = 1.0f;
@@ -71,6 +72,10 @@
     
 }
 - (void)closeMethod:(UIButton *)sender{
+    UIButton *clicked = (UIButton *)sender;
+    if (clicked.tag==0) {
+        [answerBriefBtn removeFromSuperview];
+    }
     [takePhotoBtn removeFromSuperview];
     [galaryPhotoBtn removeFromSuperview];
     [closeBtn removeFromSuperview];
