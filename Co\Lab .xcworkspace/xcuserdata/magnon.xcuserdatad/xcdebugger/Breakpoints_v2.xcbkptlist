@@ -24,9 +24,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "501"
-            endingLineNumber = "501"
-            landmarkName = "-saveDataToServer"
-            landmarkType = "5">
+            endingLineNumber = "501">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -40,9 +38,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "113"
-            endingLineNumber = "113"
-            landmarkName = "-addHeader"
-            landmarkType = "5">
+            endingLineNumber = "113">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
