@@ -72,7 +72,7 @@ typedef enum {
 
 - (void)settingBarButton{
     UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [closeButton setFrame:CGRectMake(0, self.view.bounds.size.height - 60, 50, 50)];
+    [closeButton setFrame:CGRectMake(40, self.view.bounds.size.height - 60, 50, 50)];
     [closeButton setImage:[UIImage imageNamed:@"Close_Image.png"] forState:UIControlStateNormal];
     [closeButton setImage:[UIImage imageNamed:@"Close_Image.png"] forState:UIControlStateSelected];
     [closeButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
