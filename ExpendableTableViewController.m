@@ -188,14 +188,34 @@
     typedef void (^CaseBlockForColor)();
     NSDictionary *colorType = @{
                                 @"R":
-                                    ^{[cell setBackgroundColor:[UIColor    PPRedColor]];imgIdea.hidden=NO;},
+                                    ^{[cell setBackgroundColor:[UIColor    PPRedColor]];
+                                        imgIdea.hidden=NO;
+                                        if (isHot) {imgHot.hidden =NO;imgIdea.frame=imgBrief.frame;}
+                                        else{imgIdea.frame=imgHot.frame;}
+                                    },
                                 @"Y":
-                                    ^{[cell setBackgroundColor:[UIColor    PPYellowColor]];imgIdea.hidden=NO;imgBrief.hidden=NO;},
+                                    ^{[cell setBackgroundColor:[UIColor    PPYellowColor]];
+                                        imgIdea.hidden=NO;
+                                        imgBrief.hidden=NO;
+                                        if (isHot){imgHot.hidden =NO;}
+                                        else{imgIdea.frame=imgBrief.frame;imgBrief.frame=imgHot.frame;}
+                                        
+                                    },
                                 @"G":
-                                    ^{ [cell setBackgroundColor:[UIColor    PPGreenColor]];imgIdea.hidden=NO;imgBrief.hidden=NO;},
+                                    ^{ [cell setBackgroundColor:[UIColor    PPGreenColor]];
+                                        imgIdea.hidden=NO;
+                                        imgBrief.hidden=NO;
+                                        if (isHot) {imgHot.hidden =NO;}
+                                        else{imgIdea.frame=imgBrief.frame;imgBrief.frame=imgHot.frame;}
+                                    },
                                 @"B":
-                                    ^{ [cell setBackgroundColor:[UIColor    PPBlueColor]];imgBrief.hidden=NO;}
+                                    ^{ [cell setBackgroundColor:[UIColor    PPBlueColor]];
+                                        imgBrief.hidden=NO;
+                                        if (isHot) {imgHot.hidden =NO;}
+                                        else{imgBrief.frame=imgHot.frame;}
+                                    }
                                 };
+    
     ((CaseBlockForColor)colorType[strColorType])(); // invoke the correct block of code
     
     return cell;

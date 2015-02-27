@@ -197,9 +197,11 @@ typedef enum ButtonType{
             break;
         case PPkCreateBriefViewController:[self goToCreateIdeaBriefsWith:NO];
             break;
-        case PPkSearchViewController:[self goToSearch];
+        case PPkSearchViewController:
+           // [self goToSearch];
             break;
-        case PPkProfileViewController:[self goToProfile];
+        case PPkProfileViewController:
+            //[self goToProfile];
             break;
         case PPkLatestIdeasBrifes:[self goToLatestIdeaBriefs];
             break;
@@ -217,11 +219,6 @@ typedef enum ButtonType{
     SearchViewController *objSearch= [SearchViewController new];
     [self.navigationController pushViewController:objSearch animated:YES];
 }
-//-(void)goToCreateNewIdea{
-//    CreateIdea_BriefViewController *objCreateIdea = [CreateIdea_BriefViewController new];
-//    [objCreateIdea setIsIdeaSubmitScreen:YES];
-//    [self.navigationController pushViewController:objCreateIdea animated:YES];
-//}
 -(void)goToCreateIdeaBriefsWith:(BOOL)NavigationType{
     CreateIdea_BriefViewController *objCreateIdea = [CreateIdea_BriefViewController new];
     [objCreateIdea setIsIdeaSubmitScreen:NavigationType];
