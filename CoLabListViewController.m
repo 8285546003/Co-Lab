@@ -118,7 +118,12 @@ typedef enum{
     
     cell.lblHeading.text=[[[self.allData  valueForKey:[PPUtilts sharedInstance].apiCall] valueForKey:@"headline"] objectAtIndex:indexPath.row];
     cell.lblTag.text=[[[self.allData valueForKey:[PPUtilts sharedInstance].apiCall] valueForKey:@"tag"] objectAtIndex:indexPath.row];
+    
     cell.selectedBackgroundView.backgroundColor=[UIColor clearColor];
+    UIView *cellBackgroundClearColor = [[UIView alloc] initWithFrame:cell.frame];
+    cellBackgroundClearColor.backgroundColor = [UIColor clearColor];
+    cell.selectedBackgroundView = cellBackgroundClearColor;
+    
     BOOL isHot=[[[[self.allData valueForKey:[PPUtilts sharedInstance].apiCall] valueForKey:@"is_hot"] objectAtIndex:indexPath.row] isEqualToString:@"No"]?NO:YES;
     
     UIImageView *imgIdea=(UIImageView *)[cell.contentView viewWithTag:101];
@@ -177,8 +182,6 @@ typedef enum{
 }
 
 - (void)settingBarButton{
-    
-    NSLog(@"View height == %f",self.view.bounds.size.height);
     UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [closeButton setFrame:CGRectMake(0, self.view.bounds.size.height - 60, 50, 50)];
     [closeButton setImage:[UIImage imageNamed:@"Close_Image.png"] forState:UIControlStateNormal];
@@ -188,7 +191,7 @@ typedef enum{
     [self.view addSubview:closeButton];
     
     UIButton *nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [nextButton setFrame:CGRectMake(self.view.frame.size.width - 65, self.view.frame.size.height - 60, 50, 50)];
+    [nextButton setFrame:CGRectMake(self.view.frame.size.width - 50, self.view.frame.size.height - 60, 50, 50)];
     [nextButton setImage:[UIImage imageNamed:@"red_plus_down.png"] forState:UIControlStateNormal];
     [nextButton setImage:[UIImage imageNamed:@"red_plus_down.png"] forState:UIControlStateSelected];
     [nextButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];

@@ -7,7 +7,6 @@
 //
 
 #import "NoteView.h"
-#import "PPUtilts.h"
 
 @implementation NoteView
 

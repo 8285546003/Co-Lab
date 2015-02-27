@@ -25,15 +25,9 @@
 @synthesize table;
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self getLatestIdeaBrief];
-
-    
     self.table.HVTableViewDataSource = self;
     self.table.HVTableViewDelegate = self;
-    
-
-    NSLog(@"aaaa %@   bbbbb %@",[PPUtilts sharedInstance].LatestIDId,[PPUtilts sharedInstance].colorCode);
     // Do any additional setup after loading the view from its nib.
 }
 - (BOOL)prefersStatusBarHidden {
@@ -44,8 +38,6 @@
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
     hud.labelText = @"Please wait...";
-    hud.detailsLabelText=@"Latest idea and brief will be populating";
-    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -57,7 +49,6 @@
         [self.table reloadData];
         [self.table setHidden:NO];
         [self settingBarButton];
-         NSLog(@"JSON: %@", responseObject);
         [hud hide:YES];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -70,8 +61,6 @@
 }
 
 - (void)settingBarButton{
-    
-    NSLog(@"View height == %f",self.view.bounds.size.height);
     UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [closeButton setFrame:CGRectMake(0, self.view.bounds.size.height - 60, 50, 50)];
     [closeButton setImage:[UIImage imageNamed:@"Close_Image.png"] forState:UIControlStateNormal];
@@ -95,30 +84,25 @@
 
 -(void)tableView:(UITableView *)tableView expandCell:(UITableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath
 {
-    UILabel *detailLabel = (UILabel *)[cell viewWithTag:3];
-    UIButton *purchaseButton = (UIButton *)[cell viewWithTag:10];
-    purchaseButton.alpha = 0;
-    purchaseButton.hidden = NO;
-    
-    [UIView animateWithDuration:.5 animations:^{
-        detailLabel.text = @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
-        purchaseButton.alpha = 1;
-        [cell.contentView viewWithTag:7].transform = CGAffineTransformMakeRotation(3.14);
-    }];
+//    cell.alpha=0;
+//    
+//    [UIView animateWithDuration:1.5 animations:^{
+//        cell.alpha = 1;
+//        [cell.contentView viewWithTag:3].transform = CGAffineTransformMakeRotation(3.14);
+//    }];
 }
 
 -(void)tableView:(UITableView *)tableView collapseCell:(UITableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath
 {
-    UILabel *detailLabel = (UILabel *)[cell viewWithTag:3];
-    UIButton *purchaseButton = (UIButton *)[cell viewWithTag:10];
-    
-    [UIView animateWithDuration:.5 animations:^{
-        detailLabel.text = @"Lorem ipsum dolor sit amet";
-        purchaseButton.alpha = 0;
-        [cell.contentView viewWithTag:7].transform = CGAffineTransformMakeRotation(-3.14);
-    } completion:^(BOOL finished) {
-        purchaseButton.hidden = YES;
-    }];
+//    cell.alpha=0;
+//    
+//    [UIView animateWithDuration:1.5 animations:^{
+//        cell.alpha=1;
+//        [cell.contentView viewWithTag:3].transform = CGAffineTransformMakeRotation(-3.14);
+//        
+//    } completion:^(BOOL finished) {
+//        
+//    }];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -149,12 +133,16 @@
 {
     static NSString *CellIdentifier = @"CustomCellReuseID";
     LatestIBCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
+    [cell setTag:3];
     if (cell == nil) {
         cell = [[[NSBundle mainBundle]loadNibNamed:@"LatestIBCell" owner:self options:nil]lastObject];
     }
+    
     cell.selectedBackgroundView.backgroundColor=[UIColor clearColor];
-
+    UIView *cellBackgroundClearColor = [[UIView alloc] initWithFrame:cell.frame];
+    cellBackgroundClearColor.backgroundColor = [UIColor clearColor];
+    cell.selectedBackgroundView = cellBackgroundClearColor;
+    
     cell.lblHeading.text=[[[_allLatestIBDetails  valueForKey:@"Detail"] valueForKey:@"headline"] objectAtIndex:indexPath.row];
     cell.lblTag.text=[[[_allLatestIBDetails valueForKey:@"Detail"] valueForKey:@"tag"] objectAtIndex:indexPath.row];
      cell.lblDescription.text=[[[_allLatestIBDetails valueForKey:@"Detail"] valueForKey:@"description"] objectAtIndex:indexPath.row];
@@ -169,11 +157,7 @@
                                     cell.imgMain.image = image;
                     }
             }];
-        
-        
-        NSLog(@"image hai ObjectAtIndex %ld",(long)indexPath.row);
     }
-    
     
     BOOL isHot=[[[[_allLatestIBDetails valueForKey:@"Detail"] valueForKey:@"is_hot"] objectAtIndex:indexPath.row] isEqualToString:@"No"]?NO:YES;
     // BOOL isBrief=[[[[self.allLatestIdeaAndBrief valueForKey:@"LatestIdeaBrief"] valueForKey:@"is_brief"] objectAtIndex:indexPath.row] isEqualToString:@"No"]?NO:YES;
