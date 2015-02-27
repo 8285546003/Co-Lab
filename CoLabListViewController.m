@@ -13,10 +13,15 @@
 #import "PPUtilts.h"
 #import "LatestIBCell.h"
 #import "ExpendableTableViewController.h"
+#import "CreateIdea_BriefViewController.h"
 
 #define KEYBOARD_HEIGHT 216
 
 static NSString *kApiCall=@"LatestIdeaBrief";
+
+typedef enum {
+    PPNoInternetConnection=-1005,
+}ErrorCodeType;
 
 typedef enum{
     R,
@@ -56,7 +61,6 @@ typedef enum{
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
     hud.labelText = @"Please wait...";
-    //hud.detailsLabelText=@"Latest idea and brief will be populating";
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -87,11 +91,18 @@ typedef enum{
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self settingBarButton];
-        NSLog(@"fail! \nerror: %@", [error localizedDescription]);
+        if (PPNoInternetConnection) {
+            kCustomAlert(@"Error", @"Someting went wrong please connect to your WiFi/3G",@"Ok");
+        }
+        NSLog(@"fail! \nerror: %ld", (long)error.code);
+
         [hud hide:YES];
         
     }];
     
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+   // [self getLatestIdeaBrief];
 }
 
 - (BOOL)prefersStatusBarHidden {
@@ -183,7 +194,7 @@ typedef enum{
 
 - (void)settingBarButton{
     UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [closeButton setFrame:CGRectMake(0, self.view.bounds.size.height - 60, 50, 50)];
+    [closeButton setFrame:CGRectMake(40, self.view.bounds.size.height - 60, 50, 50)];
     [closeButton setImage:[UIImage imageNamed:@"Close_Image.png"] forState:UIControlStateNormal];
     [closeButton setImage:[UIImage imageNamed:@"Close_Image.png"] forState:UIControlStateSelected];
     [closeButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
@@ -191,9 +202,9 @@ typedef enum{
     [self.view addSubview:closeButton];
     
     UIButton *nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [nextButton setFrame:CGRectMake(self.view.frame.size.width - 50, self.view.frame.size.height - 60, 50, 50)];
-    [nextButton setImage:[UIImage imageNamed:@"red_plus_down.png"] forState:UIControlStateNormal];
-    [nextButton setImage:[UIImage imageNamed:@"red_plus_down.png"] forState:UIControlStateSelected];
+    [nextButton setFrame:CGRectMake(self.view.frame.size.width - 90, self.view.frame.size.height - 60, 50, 50)];
+    [nextButton setImage:[UIImage imageNamed:@"plus.png"] forState:UIControlStateNormal];
+    [nextButton setImage:[UIImage imageNamed:@"plus.png"] forState:UIControlStateSelected];
     [nextButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
     nextButton.tag = 1;
     [self.view addSubview:nextButton];
@@ -216,21 +227,27 @@ typedef enum{
     tmpOverlayObj.tag = 1000;
     [tmpOverlayObj setDelegate:self];
     [self.view addSubview:tmpOverlayObj];
-    [tmpOverlayObj renderingScreenAccordingToFrame:self.view isBrief:NO];
+    [tmpOverlayObj createOrAnswerIB:self.view With:NO];
 }
-- (void) photoFromCamraOrGalary{
-    
+- (void)createIdea{
+    CreateIdea_BriefViewController *objCreateIdea = [CreateIdea_BriefViewController new];
+    [objCreateIdea setIsIdeaSubmitScreen:YES];
+    [objCreateIdea setIsCurrentControllerPresented:YES];
+    [tmpOverlayObj closeIBView:nil];
+    [self presentViewController:objCreateIdea animated:YES completion:nil];
 }
-- (void) hideKeyboard {
-    [self.view endEditing:YES];
+- (void)createBrief{
+    CreateIdea_BriefViewController *objCreateIdea = [CreateIdea_BriefViewController new];
+    [objCreateIdea setIsIdeaSubmitScreen:NO];
+    [objCreateIdea setIsCurrentControllerPresented:YES];
+    [tmpOverlayObj closeIBView:nil];
+    [self presentViewController:objCreateIdea animated:YES completion:nil];
 }
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
--(void)sectionTapped{
-    
 }
 
 @end

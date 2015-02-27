@@ -11,7 +11,7 @@
 
 @protocol OverlayViewDelegate <NSObject>
 
-- (void) photoFromCamraOrGalary;
+//- (void) photoFromCamraOrGalary;
 
 @end
 
@@ -20,15 +20,24 @@
     UIButton *takePhotoBtn;
     UIButton *galaryPhotoBtn;
     UIButton *closeBtn;
+    UIButton *createIdeaBtn;
+    UIButton *createBriefBtn;
     UIButton *answerBriefBtn;
 }
 
 @property (nonatomic, weak) id <OverlayViewDelegate>delegate;
 
 - (id)initOverlayView;
-- (void)renderingScreenAccordingToFrame :(UIView *)tmpView isBrief:(BOOL)Brief;
+- (void)renderingScreenAccordingToFrame:(UIView *)tmpView;
+
+- (void)createOrAnswerIB:(UIView *)inView With:(BOOL)Answer;
+- (void)closeIBView:(UIButton *)sender;
+
 - (void)closeMethod:(UIButton *)sender;
 - (void)takePhoto;
 - (void)selectPhoto;
+
+- (void)createIdea;
+- (void)createBrief;
 - (void)answerBrief;
 @end

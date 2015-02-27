@@ -17,6 +17,11 @@
 #import "LatestIBCell.h"
 #import "UIColor+PPColor.h"
 
+typedef enum {
+    PPNoInternetConnection=-1005,
+}ErrorCodeType;
+
+
 @interface ExpendableTableViewController ()
 
 @end
@@ -28,6 +33,7 @@
     [self getLatestIdeaBrief];
     self.table.HVTableViewDataSource = self;
     self.table.HVTableViewDelegate = self;
+
     // Do any additional setup after loading the view from its nib.
 }
 - (BOOL)prefersStatusBarHidden {
@@ -53,10 +59,14 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [self settingBarButton];
-        NSLog(@"fail! \nerror: %@", [error localizedDescription]);
-        [hud hide:YES];
-        
+        if (PPNoInternetConnection) {
+            kCustomAlert(@"Error", @"Someting went wrong please connect to your WiFi/3G",@"Ok");
+        }
+        NSLog(@"errror code: %ld", (long)operation.response.statusCode);
     }];
+    
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
 }
 
@@ -117,8 +127,15 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath isExpanded:(BOOL)isexpanded
 {
+    NSString *imageName=[[[_allLatestIBDetails valueForKey:@"Detail"] valueForKey:@"image"] objectAtIndex:indexPath.row];
+
     if (indexPath.row==0) {
+        if ([self isImageExist:imageName]) {
+            return 700;
+        }
+        else{
             return 600;
+        }
     }
    
     if (isexpanded){

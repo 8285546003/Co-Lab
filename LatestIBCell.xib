@@ -14,7 +14,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="312" height="588"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView hidden="YES" userInteractionEnabled="NO" tag="103" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="red_plus_down.png" id="zwW-v2-Zdg">
+                    <imageView hidden="YES" userInteractionEnabled="NO" tag="103" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hot_icon.png" id="zwW-v2-Zdg">
                         <rect key="frame" x="252" y="29" width="20" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
@@ -36,20 +36,20 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line.png" id="2kC-S6-NIU">
-                        <rect key="frame" x="35" y="42" width="255" height="21"/>
+                        <rect key="frame" x="31" y="42" width="255" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line.png" id="i2X-Uq-58X">
-                        <rect key="frame" x="35" y="20" width="255" height="11"/>
+                        <rect key="frame" x="31" y="20" width="255" height="11"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="KaW-ro-pdY">
-                        <rect key="frame" x="41" y="245" width="230" height="162"/>
+                        <rect key="frame" x="50" y="245" width="221" height="162"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="17" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fiq-P0-b1D">
-                        <rect key="frame" x="41" y="285" width="231" height="154"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fiq-P0-b1D">
+                        <rect key="frame" x="52" y="285" width="222" height="154"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -57,7 +57,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yZB-c2-EPa">
-                        <rect key="frame" x="41" y="52" width="230" height="197"/>
+                        <rect key="frame" x="50" y="50" width="221" height="197"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -77,8 +77,8 @@
     <resources>
         <image name="Create_New_Brief_Image.png" width="73" height="73"/>
         <image name="Create_New_Idea_Image.png" width="73" height="73"/>
+        <image name="hot_icon.png" width="73" height="73"/>
         <image name="line.png" width="128" height="128"/>
-        <image name="red_plus_down.png" width="40" height="40"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

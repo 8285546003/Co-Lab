@@ -17,7 +17,7 @@
 
 @implementation CreateIdea_BriefViewController
 @synthesize baseScrollView;
-@synthesize attachmentImage,mainDataDictionary,isIdeaSubmitScreen;
+@synthesize attachmentImage,mainDataDictionary,isIdeaSubmitScreen,isCurrentControllerPresented;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -300,14 +300,19 @@
     NSLog(@"Button tag == %ld",(long)settingBtn.tag);
     switch (settingBtn.tag) {
         case 1000:
+            if (isCurrentControllerPresented) {
+                [[self presentingViewController] dismissViewControllerAnimated:NO completion:nil];
+            }
+            else{
             [self.navigationController popViewControllerAnimated:YES];
+            }
             break;
         case 2000:{
             tmpOverlayObj = [[OverlayView alloc] initOverlayView];
             tmpOverlayObj.tag = 1000;
             [tmpOverlayObj setDelegate:(id)self];
             [self.baseScrollView addSubview:tmpOverlayObj];
-            [tmpOverlayObj renderingScreenAccordingToFrame:self.view isBrief:NO];
+            [tmpOverlayObj renderingScreenAccordingToFrame:self.view];
         }
             break;
         case 3000:{
@@ -463,16 +468,16 @@
     
     if([[self.mainDataDictionary valueForKey:@"HEADER"] isEqualToString:@""]){
         
-        kCustomAlert(@"", @"Please enter header.");
+        kCustomAlert(@"", @"Please enter header.",@"Ok");
         return;
     }
     else if([[self.mainDataDictionary valueForKey:@"DESCRIPTION"] isEqualToString:@""]){
-        kCustomAlert(@"", @"Please enter description.");
+        kCustomAlert(@"", @"Please enter description.",@"Ok");
         return;
         
     }
     else if([[self.mainDataDictionary valueForKey:@"TAGS"] isEqualToString:@""]){
-        kCustomAlert(@"", @"Please enter tags.");
+        kCustomAlert(@"", @"Please enter tags.",@"Ok");
         return;
         
     }

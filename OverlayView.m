@@ -11,14 +11,6 @@
 
 @implementation OverlayView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
-
 - (id)initOverlayView{
     if (self = [super init]) {
         
@@ -26,7 +18,7 @@
     }
     return nil;
 }
-- (void)renderingScreenAccordingToFrame :(UIView *)tmpView isBrief:(BOOL)Brief{
+- (void)renderingScreenAccordingToFrame:(UIView *)tmpView{
     [self setAlpha:0.0f];
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
@@ -37,15 +29,6 @@
     [UIView animateWithDuration:1.0 animations:^{
         [self setAlpha:0.9f];
     } completion:^(BOOL finished) {
-        if (Brief) {
-            answerBriefBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            [answerBriefBtn setFrame:CGRectMake( 40, screenHeight - 210, 150, 40)];
-            [answerBriefBtn setImage:[UIImage imageNamed:@"CHooseAPhoto.png"] forState:UIControlStateNormal];
-            [answerBriefBtn addTarget:self.delegate action:@selector(answerBrief) forControlEvents:UIControlEventTouchUpInside];
-            answerBriefBtn.alpha = 1.0f;
-            answerBriefBtn.tag=0;
-            [tmpView addSubview:answerBriefBtn];
-        }
         takePhotoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [takePhotoBtn setFrame:CGRectMake( 40, screenHeight - 110, 150, 40)];
         [takePhotoBtn setImage:[UIImage imageNamed:@"TakeAPhoto.png"] forState:UIControlStateNormal];
@@ -72,14 +55,9 @@
     
 }
 - (void)closeMethod:(UIButton *)sender{
-    UIButton *clicked = (UIButton *)sender;
-    if (clicked.tag==0) {
-        [answerBriefBtn removeFromSuperview];
-    }
     [takePhotoBtn removeFromSuperview];
     [galaryPhotoBtn removeFromSuperview];
     [closeBtn removeFromSuperview];
-    
     [UIView animateWithDuration:1.0 animations:^{
         [self setAlpha:0.0];
     } completion:^(BOOL finished) {
@@ -97,5 +75,71 @@
 - (void)answerBrief{
     NSLog(@"answer brief");
 }
+- (void)createIdea{
+    
+}
+- (void)createBrief{
+    
+    
+}
+
+
+
+
+
+
+
+- (void)createOrAnswerIB:(UIView *)inView With:(BOOL)Answer{
+    
+    [self setAlpha:0.0f];
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    CGFloat screenHeight = screenRect.size.height;
+    self.backgroundColor = [UIColor blackColor];
+    [self setFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
+    
+    [UIView animateWithDuration:1.0 animations:^{
+        [self setAlpha:0.9f];
+    } completion:^(BOOL finished) {
+        
+        createIdeaBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [createIdeaBtn setFrame:CGRectMake( 40, screenHeight - 110, 150, 40)];
+        [createIdeaBtn setImage:[UIImage imageNamed:@"createnewidea.png"] forState:UIControlStateNormal];
+        [createIdeaBtn addTarget:self.delegate action:@selector(createIdea) forControlEvents:UIControlEventTouchUpInside];
+        createIdeaBtn.alpha = 1.0f;
+        [inView addSubview:createIdeaBtn];
+        
+        createBriefBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [createBriefBtn setFrame:CGRectMake( 40, screenHeight - 160, 150, 40)];
+        [createBriefBtn setImage:[UIImage imageNamed:@"newbreif.png"] forState:UIControlStateNormal];
+        [createBriefBtn addTarget:self.delegate action:@selector(createBrief) forControlEvents:UIControlEventTouchUpInside];
+        galaryPhotoBtn.alpha = 1.0f;
+        [inView addSubview:createBriefBtn];
+        
+        closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [closeBtn setFrame:CGRectMake( screenWidth - 80, screenHeight - 110, 40, 40)];
+        [closeBtn setImage:[UIImage imageNamed:@"Close.png"] forState:UIControlStateNormal];
+        [closeBtn addTarget:self action:@selector(closeIBView:) forControlEvents:UIControlEventTouchUpInside];
+        closeBtn.alpha = 1.0f;
+        [inView addSubview:closeBtn];
+        
+    }];
+    
+    
+}
+- (void)closeIBView:(UIButton *)sender{
+    
+    [createIdeaBtn removeFromSuperview];
+    [createBriefBtn removeFromSuperview];
+    [closeBtn removeFromSuperview];
+    [UIView animateWithDuration:1.0 animations:^{
+        [self setAlpha:0.0];
+    } completion:^(BOOL finished) {
+        [self removeFromSuperview];
+    }];
+    
+}
+
+
 
 @end
