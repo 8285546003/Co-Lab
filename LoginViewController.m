@@ -13,16 +13,7 @@
 #import "AFNetworking.h"
 #import "PPUtilts.h"
 
-
-
-
-typedef void(^AlertViewActionBlock)(void);
-
 @interface LoginViewController ()<GPPSignInDelegate>
-
-
-@property (nonatomic, copy) void (^confirmActionBlock)(void);
-@property (nonatomic, copy) void (^cancelActionBlock)(void);
 
 @end
 
@@ -48,10 +39,6 @@ typedef void(^AlertViewActionBlock)(void);
         [self.navigationController pushViewController:homeCont animated:NO];
     }
 }
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:YES];
-}
-
 - (IBAction)signIn:(id)sender{
     [self connectWithGoogle];
 //[PPUtilts sharedInstance].connected?[self connectWithGoogle]:kCustomAlert(@"No NetWork", @"Something went wrong please check your WIFI connection");
@@ -76,6 +63,13 @@ typedef void(^AlertViewActionBlock)(void);
 - (void)finishedWithAuth:(GTMOAuth2Authentication *)auth error:(NSError *)error {
     
     if (error) {
+        NSLog(@"%@",error.description);
+        NSLog(@"%@",error.debugDescription);
+
+        
+        
+        [self.navigationController popToRootViewControllerAnimated:FALSE];
+        
         // Do some error handling here.
     } else {
         
@@ -129,7 +123,8 @@ typedef void(^AlertViewActionBlock)(void);
                             [[NSUserDefaults standardUserDefaults] setValue:[responseObject valueForKey:@"user_id"] forKey:@"USERID"];
                             [PPUtilts sharedInstance].userID=[responseObject valueForKey:@"user_id"];
                              NSLog(@"JSON: %@", responseObject);
-                            
+                            HomeViewController *homeCont = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
+                            [self.navigationController pushViewController:homeCont animated:NO];
                         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                             
                             NSLog(@"Error: %@", error);
@@ -142,12 +137,4 @@ typedef void(^AlertViewActionBlock)(void);
 
 }
 }
-- (void)didDisconnectWithError:(NSError *)error {
-  
-}
-
-- (void)presentSignInViewController:(UIViewController *)viewController {
-    [[self navigationController] pushViewController:viewController animated:YES];
-}
-
 @end

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -14,10 +14,15 @@
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="abO-0S-MP9">
-                    <rect key="frame" x="0.0" y="99" width="320" height="391"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CoAppImage.png" id="OSY-ls-Qbz">
+                    <rect key="frame" x="21" y="17" width="60" height="67"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="abO-0S-MP9">
+                    <rect key="frame" x="0.0" y="92" width="320" height="413"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
@@ -25,26 +30,17 @@
                         <outlet property="delegate" destination="-1" id="4Wu-4m-QsG"/>
                     </connections>
                 </tableView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CoAppImage.png" translatesAutoresizingMaskIntoConstraints="NO" id="OSY-ls-Qbz">
-                    <rect key="frame" x="21" y="17" width="60" height="67"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="67" id="qOv-sZ-lDA"/>
-                    </constraints>
-                </imageView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstItem="abO-0S-MP9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="2wX-gs-wVP"/>
-                <constraint firstItem="OSY-ls-Qbz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="21" id="3JX-j4-0ft"/>
-                <constraint firstAttribute="trailing" secondItem="abO-0S-MP9" secondAttribute="trailing" id="60o-AE-ezd"/>
-                <constraint firstAttribute="bottom" secondItem="abO-0S-MP9" secondAttribute="bottom" constant="78" id="MB9-oW-Pvp"/>
-                <constraint firstItem="OSY-ls-Qbz" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="17" id="XVB-JU-05M"/>
-                <constraint firstItem="abO-0S-MP9" firstAttribute="top" secondItem="OSY-ls-Qbz" secondAttribute="bottom" constant="15" id="ZdV-wi-xlM"/>
-            </constraints>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <point key="canvasLocation" x="431" y="181"/>
         </view>
     </objects>
     <resources>
         <image name="CoAppImage.png" width="60" height="60"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>

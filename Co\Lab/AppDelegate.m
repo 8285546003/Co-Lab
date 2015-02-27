@@ -71,7 +71,7 @@ static NSString * const kClientID = @"1043369017986-eatg764omdvlrp4jb8tcge2uf6nk
          annotation:(id)annotation {
     if (url) {
         HomeViewController *homeCont = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
-        [navCont pushViewController:homeCont animated:YES];
+        [navCont pushViewController:homeCont animated:NO];
     }
     return [GPPURLHandler handleURL:url
                   sourceApplication:sourceApplication
@@ -79,7 +79,6 @@ static NSString * const kClientID = @"1043369017986-eatg764omdvlrp4jb8tcge2uf6nk
 }
 
 #pragma mark - GPPDeepLinkDelegate
-
 - (void)didReceiveDeepLink:(GPPDeepLink *)deepLink {
     // An example to handle the deep link data.
     UIAlertView *alert = [[UIAlertView alloc]

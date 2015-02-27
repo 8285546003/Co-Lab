@@ -8,12 +8,14 @@
 
 #import "ProfileViewController.h"
 #import "CoLabListViewController.h"
+//#import <GoogleOpenSource/GoogleOpenSource.h>
+#import <GooglePlus/GooglePlus.h>
 #import "PPUtilts.h"
 
 
-static NSString *kMyProfileSting=@"MyBrief";
+//static NSString *kMyProfileSting=@"MyProfile";
 static NSString *kMyMyIdeasSting=@"MyIdea";
-static NSString *kMyBriefsSting=@"kMyBriefsSting";
+static NSString *kMyBriefsSting=@"MyBrief";
 static NSString *kMyNotificationsSting=@"kMyNotificationsSting";
 static NSString *kLogOutSting=@"kLogOutSting";
 
@@ -46,7 +48,7 @@ NSArray *cellTitleText;
     
     self.profileTableView.delegate   = self ;
     self.profileTableView.dataSource = self;
-    self.profileTableView.frame=CGRectMake(0, self.view.frame.size.height/2, self.view.frame.size.width, self.view.frame.size.height);
+   // self.profileTableView.frame=CGRectMake(0, self.view.frame.size.height/2, self.view.frame.size.width, self.view.frame.size.height);
     [self settingBarButton];
     // Do any additional setup after loading the view from its nib.
 }
@@ -143,8 +145,14 @@ NSArray *cellTitleText;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    return 75;
+    if (indexPath.row==0){
+        return 100;;
+    }
+    else{
+        return 75;
+
+    }
+
     
 }
 
@@ -152,7 +160,7 @@ NSArray *cellTitleText;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     switch (indexPath.row) {
-        case PPkMyProfile:[self goToWithApiCall:kMyProfileSting];
+        case PPkMyProfile:
             break;
         case PPkMyIdeas:[self goToWithApiCall:kMyMyIdeasSting];
             break;
@@ -169,10 +177,22 @@ NSArray *cellTitleText;
 }
 
 -(void)goToWithApiCall:(NSString*)apiCall{
-    [PPUtilts sharedInstance].userID= [[NSUserDefaults standardUserDefaults] valueForKey:@"USERID"];
-    [PPUtilts sharedInstance].apiCall=apiCall;
-     CoLabListViewController *objProfile = [CoLabListViewController new];
-    [self.navigationController pushViewController:objProfile animated:YES];
+    if (apiCall==kLogOutSting) {
+        [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"AUTH"];
+        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"USERID"];
+        //if ([[GPPSignIn sharedInstance]hasAuthInKeychain]) {
+            [[GPPSignIn sharedInstance]signOut];
+           // [[GPPSignIn sharedInstance]disconnect];
+        //}
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+    else{
+        [PPUtilts sharedInstance].userID= [[NSUserDefaults standardUserDefaults] valueForKey:@"USERID"];
+        [PPUtilts sharedInstance].apiCall=apiCall;
+        CoLabListViewController *objProfile = [CoLabListViewController new];
+        [self.navigationController pushViewController:objProfile animated:NO];
+    }
+
 }
 
 
