@@ -120,9 +120,14 @@ typedef enum{
     cell.lblTag.text=[[[self.allData valueForKey:[PPUtilts sharedInstance].apiCall] valueForKey:@"tag"] objectAtIndex:indexPath.row];
     cell.selectedBackgroundView.backgroundColor=[UIColor clearColor];
     BOOL isHot=[[[[self.allData valueForKey:[PPUtilts sharedInstance].apiCall] valueForKey:@"is_hot"] objectAtIndex:indexPath.row] isEqualToString:@"No"]?NO:YES;
+    UIImageView *imgIdea=(UIImageView *)[cell.contentView viewWithTag:101];
     
+//    [imgIdea setFrame:CGRectMake(tableView.frame.size.width-20, 0, 120, 120)];
+//    [imgIdea setImage:[UIImage imageNamed:@"close.png"]];
+    UIImageView *imgBrief=(UIImageView *)[cell.contentView viewWithTag:102];
+    UIImageView *imgHot=(UIImageView *)[cell.contentView viewWithTag:103];
     if (isHot) {
-        cell.imgHot.hidden =NO;
+        imgHot.hidden =NO;
     }
     
     NSString *strColorType=[[[self.allData valueForKey:[PPUtilts sharedInstance].apiCall] valueForKey:@"color_code"] objectAtIndex:indexPath.row];
@@ -130,16 +135,40 @@ typedef enum{
     NSDictionary *colorType = @{
                                 
                                 @"R":
-                                    ^{[cell setBackgroundColor:[UIColor    PPRedColor]];cell.imgIdea.hidden=NO;},
+                                    ^{[cell setBackgroundColor:[UIColor    PPRedColor]];
+                                        imgIdea.hidden=NO;
+                                        
+                                       // imgIdea.frame=imgHot.frame;
+                                    },
                                 @"Y":
-                                    ^{[cell setBackgroundColor:[UIColor    PPYellowColor]];cell.imgIdea.hidden=NO;cell.imgBrief.hidden=NO;},
+                                    ^{[cell setBackgroundColor:[UIColor    PPYellowColor]];
+                                        
+                                        imgIdea.hidden=NO;
+                                        imgBrief.hidden=NO;
+                                       
+                                        
+                                       // imgIdea.frame=imgBrief.frame;
+                                        //imgBrief.frame=imgHot.frame;
+                                    },
                                 @"G":
-                                    ^{ [cell setBackgroundColor:[UIColor    PPGreenColor]];cell.imgIdea.hidden=NO;cell.imgBrief.hidden=NO;},
+                                    ^{ [cell setBackgroundColor:[UIColor    PPGreenColor]];
+                                        imgIdea.hidden=NO;
+                                        imgBrief.hidden=NO;
+                                        
+                                        
+                                       // imgIdea.frame=imgBrief.frame;
+                                        //imgBrief.frame=imgHot.frame;
+                                    },
                                 @"B":
-                                    ^{ [cell setBackgroundColor:[UIColor    PPBlueColor]];cell.imgBrief.hidden=NO;}
+                                    ^{ [cell setBackgroundColor:[UIColor    PPBlueColor]];
+                                        imgBrief.hidden=NO;
+                                       
+                                        
+                                       // imgBrief.frame=imgHot.frame;
+                                    
+                                    }
                                 };
     ((CaseBlockForColor)colorType[strColorType])(); // invoke the correct block of code
-    
     return cell;
     
 }
