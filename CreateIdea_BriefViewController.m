@@ -203,7 +203,7 @@
     
     
     UILabel *titleLbl = [[UILabel alloc] initWithFrame:CGRectMake(2, 2, 200, 20)];
-    titleLbl.text = @"Add discription";
+    titleLbl.text = @"Add description";
     [view addSubview:titleLbl];
     
     return view;

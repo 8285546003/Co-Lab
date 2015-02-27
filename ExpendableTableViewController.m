@@ -177,22 +177,24 @@
     
     BOOL isHot=[[[[_allLatestIBDetails valueForKey:@"Detail"] valueForKey:@"is_hot"] objectAtIndex:indexPath.row] isEqualToString:@"No"]?NO:YES;
     // BOOL isBrief=[[[[self.allLatestIdeaAndBrief valueForKey:@"LatestIdeaBrief"] valueForKey:@"is_brief"] objectAtIndex:indexPath.row] isEqualToString:@"No"]?NO:YES;
-    
+    UIImageView *imgIdea=(UIImageView *)[cell.contentView viewWithTag:101];
+    UIImageView *imgBrief=(UIImageView *)[cell.contentView viewWithTag:102];
+    UIImageView *imgHot=(UIImageView *)[cell.contentView viewWithTag:103];
     if (isHot) {
-        cell.imgHot.hidden =NO;
+        imgHot.hidden =NO;
     }
     
     NSString *strColorType=[[[_allLatestIBDetails valueForKey:@"Detail"] valueForKey:@"color_code"] objectAtIndex:indexPath.row];
     typedef void (^CaseBlockForColor)();
     NSDictionary *colorType = @{
                                 @"R":
-                                    ^{[cell setBackgroundColor:[UIColor    PPRedColor]];cell.imgIdea.hidden=NO;},
+                                    ^{[cell setBackgroundColor:[UIColor    PPRedColor]];imgIdea.hidden=NO;},
                                 @"Y":
-                                    ^{[cell setBackgroundColor:[UIColor    PPYellowColor]];cell.imgIdea.hidden=NO;cell.imgBrief.hidden=NO;},
+                                    ^{[cell setBackgroundColor:[UIColor    PPYellowColor]];imgIdea.hidden=NO;imgBrief.hidden=NO;},
                                 @"G":
-                                    ^{ [cell setBackgroundColor:[UIColor    PPGreenColor]];cell.imgIdea.hidden=NO;cell.imgBrief.hidden=NO;},
+                                    ^{ [cell setBackgroundColor:[UIColor    PPGreenColor]];imgIdea.hidden=NO;imgBrief.hidden=NO;},
                                 @"B":
-                                    ^{ [cell setBackgroundColor:[UIColor    PPBlueColor]];cell.imgBrief.hidden=NO;}
+                                    ^{ [cell setBackgroundColor:[UIColor    PPBlueColor]];imgBrief.hidden=NO;}
                                 };
     ((CaseBlockForColor)colorType[strColorType])(); // invoke the correct block of code
     
