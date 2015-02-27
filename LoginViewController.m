@@ -63,13 +63,7 @@
 - (void)finishedWithAuth:(GTMOAuth2Authentication *)auth error:(NSError *)error {
     
     if (error) {
-        NSLog(@"%@",error.description);
-        NSLog(@"%@",error.debugDescription);
-
-        
-        
         [self.navigationController popToRootViewControllerAnimated:FALSE];
-        
         // Do some error handling here.
     } else {
         

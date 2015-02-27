@@ -180,10 +180,7 @@ NSArray *cellTitleText;
     if (apiCall==kLogOutSting) {
         [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"AUTH"];
         [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"USERID"];
-        //if ([[GPPSignIn sharedInstance]hasAuthInKeychain]) {
-            [[GPPSignIn sharedInstance]signOut];
-           // [[GPPSignIn sharedInstance]disconnect];
-        //}
+        [[GPPSignIn sharedInstance]signOut];
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
     else{
