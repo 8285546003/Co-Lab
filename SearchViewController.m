@@ -7,95 +7,166 @@
 //
 
 #import "SearchViewController.h"
+#import "MBProgressHUD.h"
+#import "AFNetworking.h"
+#import "PPUtilts.h"
+#import "CoLabListViewController.h"
 
-@interface SearchViewController (){
- IBOutlet UITextField *txtRearch;
-}
+
+@interface SearchViewController ()
+
 @end
 
 @implementation SearchViewController
-
+@synthesize allData,allDataTableView,txtSearch;
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
-    UIImageView *imgSearch=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)]; // Set frame as per space required around icon
-    [imgSearch setImage:[UIImage imageNamed:@"Search_Image.png"]];
-    
-    [imgSearch setContentMode:UIViewContentModeCenter];// Set content mode centre
-    
-    txtRearch.leftView=imgSearch;
-    txtRearch.leftViewMode=UITextFieldViewModeAlways;
-    
-    
-    
+
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    imageView.image = [UIImage imageNamed:@"s1"];
+    self.txtSearch.leftView = imageView;
+    self.txtSearch.leftViewMode=UITextFieldViewModeAlways;\
+    self.txtSearch.delegate=self;
     [self settingBarButton];
+    
+    self.allDataTableView.backgroundColor=[UIColor clearColor];
+    
+    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    gestureRecognizer.cancelsTouchesInView = NO;
+    
+    [self.view addGestureRecognizer:gestureRecognizer];
     
     
     // Do any additional setup after loading the view from its nib.
 }
-- (void)settingBarButton{
+- (void) hideKeyboard {
+    [self.view endEditing:YES];
+}
+
+#pragma mark - Table view data source
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     
-    NSLog(@"View height == %f",self.view.bounds.size.height);
-    UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [closeButton setFrame:CGRectMake(0, self.view.bounds.size.height - 60, 50, 50)];
-    [closeButton setImage:[UIImage imageNamed:@"Close_Image.png"] forState:UIControlStateNormal];
-    [closeButton setImage:[UIImage imageNamed:@"Close_Image.png"] forState:UIControlStateSelected];
-    [closeButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
-    closeButton.tag = 1000;
-    [self.view addSubview:closeButton];
-    [closeButton bringSubviewToFront:self.view];
     
-    UIButton *attachButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [attachButton setFrame:CGRectMake(self.view.frame.size.width-120, self.view.frame.size.height - 60, 50, 50)];
-    [attachButton setImage:[UIImage imageNamed:@"Attachment_Image.png"] forState:UIControlStateNormal];
-    [attachButton setImage:[UIImage imageNamed:@"Attachment_Image.png"] forState:UIControlStateSelected];
-    [attachButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
-    attachButton.tag = 2000;
-    [self.view addSubview:attachButton];
+    if ([[self.allData valueForKey:@"Message"] isEqualToString:@"No record found."]) {
+        
+        return 1;
+        
+    }
+    else{
+    return [[[self.allData valueForKey:@"TagSearch"] valueForKey:@"headline"]count];
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     
-    UIButton *nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [nextButton setFrame:CGRectMake(self.view.frame.size.width - 65, self.view.frame.size.height - 60, 50, 50)];
-    [nextButton setImage:[UIImage imageNamed:@"Next_Image.png"] forState:UIControlStateNormal];
-    [nextButton setImage:[UIImage imageNamed:@"Next_Image.png"] forState:UIControlStateSelected];
-    [nextButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
-    nextButton.tag = 3000;
-    [self.view addSubview:nextButton];
+    static NSString *CellIdentifier = @"CustomCellReuseID";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
+    cell.backgroundColor=[UIColor clearColor];
+    
+    if ([[self.allData valueForKey:@"Message"] isEqualToString:@"No record found."]) {
+        cell.imageView.image=[UIImage imageNamed:@"found"];
+    }
+    else{
+    cell.textLabel.text=[[[self.allData valueForKey:@"TagSearch"] valueForKey:@"headline"]objectAtIndex:indexPath.row];
+    
+        cell.imageView.image=nil;
+    }
+    
+
+    
+    return cell;
     
 }
-- (void)settingBarMethod:(UIButton *)settingBtn{
-    NSLog(@"Button tag == %ld",(long)settingBtn.tag);
-    switch (settingBtn.tag) {
-        case 1000:
-            [self.navigationController popViewControllerAnimated:YES];
-            break;
-        case 2000:{
-            UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Take a photo!" delegate:nil cancelButtonTitle:@"Cancel"           destructiveButtonTitle:nil otherButtonTitles:@"From Galary", @"From Camra", nil];
-            [actionSheet showInView:self.view];
-        }
-            break;
-        case 3000:{
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if ([[self.allData valueForKey:@"Message"] isEqualToString:@"No record found."]) {
+        
+        return 200;
+        
+    }
+    else{
+
+        return 44;
+    }
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self goToLatestIdeaBriefs];
+}
+
+
+-(void)getDataFromTag:(NSString*)tag{
+
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    
+    NSDictionary *parameters=@{@"apicall":@"TagSearch",@"tag":tag};
+    
+    
+    [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"JSON: %@", responseObject);
+            [self settingBarButton];
+            self.allData=responseObject;
+            self.allDataTableView.tableFooterView.frame=CGRectZero;
+            [self.allDataTableView reloadData];
+           [self.allDataTableView setHidden:NO];
+        if ([[responseObject valueForKey:@"Message"] isEqualToString:@"No record found."]) {
+            
+            
             
         }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self settingBarButton];
+        
+    }];
+
+}
+
+- (void)settingBarButton{
+    UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [closeButton setFrame:CANCEL_BUTTON_FRAME];
+    [closeButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateNormal];
+    [closeButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateSelected];
+    [closeButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
+    closeButton.tag=Cancel;
+    [self.view addSubview:closeButton];
+    [closeButton bringSubviewToFront:self.view];
+}
+- (void)settingBarMethod:(UIButton *)settingBtn{
+    switch (settingBtn.tag) {
+        case Cancel:
+            [self.navigationController popViewControllerAnimated:YES];
+            break;
+        case Add:
+            break;
+        case Attachment:
             break;
         default:
             break;
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+-(void)goToLatestIdeaBriefs{
+    [PPUtilts sharedInstance].apiCall=kApiCall;
+    CoLabListViewController *objLatestIB = [CoLabListViewController new];
+    [self.navigationController pushViewController:objLatestIB animated:YES];
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma UITextfieldDelegate
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    [self getDataFromTag:[txtSearch.text stringByAppendingString:string]];
+    return YES;
 }
-*/
-
 @end

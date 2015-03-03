@@ -17,9 +17,6 @@
 #import "LatestIBCell.h"
 #import "UIColor+PPColor.h"
 
-typedef enum {
-    PPNoInternetConnection=-1005,
-}ErrorCodeType;
 
 
 @interface ExpendableTableViewController ()
@@ -33,8 +30,6 @@ typedef enum {
     [self getLatestIdeaBrief];
     self.table.HVTableViewDataSource = self;
     self.table.HVTableViewDelegate = self;
-
-    // Do any additional setup after loading the view from its nib.
 }
 - (BOOL)prefersStatusBarHidden {
     return YES;
@@ -62,7 +57,6 @@ typedef enum {
         if (PPNoInternetConnection) {
             kCustomAlert(@"Error", @"Someting went wrong please connect to your WiFi/3G",@"Ok");
         }
-        NSLog(@"errror code: %ld", (long)operation.response.statusCode);
     }];
     
 }
@@ -72,19 +66,21 @@ typedef enum {
 
 - (void)settingBarButton{
     UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [closeButton setFrame:CGRectMake(40, self.view.bounds.size.height - 60, 50, 50)];
-    [closeButton setImage:[UIImage imageNamed:@"Close_Image.png"] forState:UIControlStateNormal];
-    [closeButton setImage:[UIImage imageNamed:@"Close_Image.png"] forState:UIControlStateSelected];
+    [closeButton setFrame:CANCEL_BUTTON_FRAME];
+    [closeButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateNormal];
+    [closeButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateSelected];
     [closeButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
-    closeButton.tag = 0;
+    closeButton.tag = Cancel;
     [self.view addSubview:closeButton];
 }
 - (void)settingBarMethod:(UIButton *)settingBtn{
     switch (settingBtn.tag) {
-        case 0:
+        case Cancel:
             [self.navigationController popViewControllerAnimated:YES];
             break;
-        case 1:
+        case Add:
+            break;
+        case Attachment:
             break;
         default:
             break;
@@ -94,25 +90,12 @@ typedef enum {
 
 -(void)tableView:(UITableView *)tableView expandCell:(UITableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath
 {
-//    cell.alpha=0;
-//    
-//    [UIView animateWithDuration:1.5 animations:^{
-//        cell.alpha = 1;
-//        [cell.contentView viewWithTag:3].transform = CGAffineTransformMakeRotation(3.14);
-//    }];
+
 }
 
 -(void)tableView:(UITableView *)tableView collapseCell:(UITableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath
 {
-//    cell.alpha=0;
-//    
-//    [UIView animateWithDuration:1.5 animations:^{
-//        cell.alpha=1;
-//        [cell.contentView viewWithTag:3].transform = CGAffineTransformMakeRotation(-3.14);
-//        
-//    } completion:^(BOOL finished) {
-//        
-//    }];
+
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -177,7 +160,6 @@ typedef enum {
     }
     
     BOOL isHot=[[[[_allLatestIBDetails valueForKey:@"Detail"] valueForKey:@"is_hot"] objectAtIndex:indexPath.row] isEqualToString:@"No"]?NO:YES;
-    // BOOL isBrief=[[[[self.allLatestIdeaAndBrief valueForKey:@"LatestIdeaBrief"] valueForKey:@"is_brief"] objectAtIndex:indexPath.row] isEqualToString:@"No"]?NO:YES;
     UIImageView *imgIdea=(UIImageView *)[cell.contentView viewWithTag:101];
     UIImageView *imgBrief=(UIImageView *)[cell.contentView viewWithTag:102];
     UIImageView *imgHot=(UIImageView *)[cell.contentView viewWithTag:103];

@@ -12,9 +12,12 @@
 #import <QuartzCore/QuartzCore.h>
 #import "AFNetworking.h"
 #import "PPUtilts.h"
+#import "MBProgressHUD.h"
 
 @interface LoginViewController ()<GPPSignInDelegate>
-
+{
+    MBProgressHUD *hud;
+}
 @end
 
 
@@ -34,12 +37,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"AUTH"]) {
         HomeViewController *homeCont = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
         [self.navigationController pushViewController:homeCont animated:NO];
     }
 }
 - (IBAction)signIn:(id)sender{
+    hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
+    hud.labelText = @"Please wait...";
     [self connectWithGoogle];
 //[PPUtilts sharedInstance].connected?[self connectWithGoogle]:kCustomAlert(@"No NetWork", @"Something went wrong please check your WIFI connection");
 }
@@ -117,10 +124,11 @@
                             [[NSUserDefaults standardUserDefaults] setValue:[responseObject valueForKey:@"user_id"] forKey:@"USERID"];
                             [PPUtilts sharedInstance].userID=[responseObject valueForKey:@"user_id"];
                              NSLog(@"JSON: %@", responseObject);
+                            [hud hide:YES];
                             HomeViewController *homeCont = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
                             [self.navigationController pushViewController:homeCont animated:NO];
                         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                            
+                            [hud hide:YES];
                             NSLog(@"Error: %@", error);
                             
                         }];

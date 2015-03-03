@@ -86,6 +86,8 @@
 		68C6C06F1A9EEE0700BFC736 /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C6C06E1A9EEE0700BFC736 /* line.png */; };
 		68C6C0811A9F43BA00BFC736 /* CoLabListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C6C07F1A9F43BA00BFC736 /* CoLabListViewController.m */; };
 		68C6C0821A9F43BA00BFC736 /* CoLabListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68C6C0801A9F43BA00BFC736 /* CoLabListViewController.xib */; };
+		68CD073B1AA484FD0080C563 /* s1.png in Resources */ = {isa = PBXBuildFile; fileRef = 68CD073A1AA484FD0080C563 /* s1.png */; };
+		68CD073D1AA494490080C563 /* found.png in Resources */ = {isa = PBXBuildFile; fileRef = 68CD073C1AA494480080C563 /* found.png */; };
 		68D1C76D1A9702D900DCAED7 /* UIColor+PPColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D1C76C1A9702D900DCAED7 /* UIColor+PPColor.m */; };
 		68E19CE51A666F3F005E3032 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E19CE31A666F3F005E3032 /* HomeViewController.m */; };
 		68E19CE61A666F3F005E3032 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68E19CE41A666F3F005E3032 /* HomeViewController.xib */; };
@@ -191,6 +193,8 @@
 		68C6C07E1A9F43BA00BFC736 /* CoLabListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoLabListViewController.h; sourceTree = "<group>"; };
 		68C6C07F1A9F43BA00BFC736 /* CoLabListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoLabListViewController.m; sourceTree = "<group>"; };
 		68C6C0801A9F43BA00BFC736 /* CoLabListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoLabListViewController.xib; sourceTree = "<group>"; };
+		68CD073A1AA484FD0080C563 /* s1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = s1.png; sourceTree = "<group>"; };
+		68CD073C1AA494480080C563 /* found.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = found.png; sourceTree = "<group>"; };
 		68D1C76B1A9702D900DCAED7 /* UIColor+PPColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+PPColor.h"; sourceTree = "<group>"; };
 		68D1C76C1A9702D900DCAED7 /* UIColor+PPColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+PPColor.m"; sourceTree = "<group>"; };
 		68E19CE21A666F3F005E3032 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
@@ -353,6 +357,8 @@
 		68A9CD331A651FFA003D09E4 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				68CD073C1AA494480080C563 /* found.png */,
+				68CD073A1AA484FD0080C563 /* s1.png */,
 				687D6A261AA0A103005FF45A /* hot_icon.png */,
 				68C6C06E1A9EEE0700BFC736 /* line.png */,
 				687D69E51AA08C14005FF45A /* answer_brief.png */,
@@ -516,6 +522,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68CD073D1AA494490080C563 /* found.png in Resources */,
+				68CD073B1AA484FD0080C563 /* s1.png in Resources */,
 				687D69F41AA08C14005FF45A /* Close.png in Resources */,
 				687D69F91AA08C14005FF45A /* TakeAPhoto.png in Resources */,
 				68C6C0821A9F43BA00BFC736 /* CoLabListViewController.xib in Resources */,

@@ -17,23 +17,9 @@
 
 #define KEYBOARD_HEIGHT 216
 
-static NSString *kApiCall=@"LatestIdeaBrief";
-
 typedef enum {
     PPNoInternetConnection=-1005,
 }ErrorCodeType;
-
-typedef enum{
-    R,
-    Y,
-    G,
-    B
-} CardType;
-
-typedef enum{
-    Cancle,
-    Add,
-} ActionType;
 
 
 @interface CoLabListViewController ()
@@ -46,11 +32,10 @@ typedef enum{
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //[PPUtilts sharedInstance].connected?[self getLatestIdeaBrief]:kCustomAlert(@"No NetWork", @"Something went wrong please check your WIFI connection");
     isAttachment = NO;
-    self.attachmentImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];
+    self.allDataTableView.frame=CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    self.attachmentImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 200)];
     [self getLatestIdeaBrief];
-    // Do any additional setup after loading the view from its nib.
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -71,10 +56,14 @@ typedef enum{
         parameters = @{@"apicall":[PPUtilts sharedInstance].apiCall};
          }
     else{
-        parameters = @{@"apicall":[PPUtilts sharedInstance].apiCall,@"user_id":[PPUtilts sharedInstance].userID};
+        
+        if ([PPUtilts sharedInstance].userID) {
+            parameters = @{@"apicall":[PPUtilts sharedInstance].apiCall,@"user_id":[PPUtilts sharedInstance].userID};
+        }
+        else{
+       
+        }
     }
-    
-    
     [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject valueForKey:@"Message"] isEqualToString:@"Success"]&&[[responseObject valueForKey:@"Error"] isEqualToString:@"false"]) {
             NSLog(@"JSON: %@", responseObject);
@@ -94,15 +83,12 @@ typedef enum{
         if (PPNoInternetConnection) {
             kCustomAlert(@"Error", @"Someting went wrong please connect to your WiFi/3G",@"Ok");
         }
-        NSLog(@"fail! \nerror: %ld", (long)error.code);
-
         [hud hide:YES];
         
     }];
     
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-   // [self getLatestIdeaBrief];
 }
 
 - (BOOL)prefersStatusBarHidden {
@@ -113,7 +99,6 @@ typedef enum{
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
     return [[[self.allData valueForKey:[PPUtilts sharedInstance].apiCall] valueForKey:@"color_code"]count];
 }
 
@@ -192,36 +177,43 @@ typedef enum{
     [self.navigationController pushViewController:obj animated:YES];
 }
 
+//-----------------------------------BUTTON NAVIGATION BUTTONS---------------------------------------------------
+
 - (void)settingBarButton{
+    
     UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [closeButton setFrame:CGRectMake(40, self.view.bounds.size.height - 60, 50, 50)];
-    [closeButton setImage:[UIImage imageNamed:@"Close_Image.png"] forState:UIControlStateNormal];
+    [closeButton setFrame:CANCEL_BUTTON_FRAME];
+    [closeButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateNormal];
     [closeButton setImage:[UIImage imageNamed:@"Close_Image.png"] forState:UIControlStateSelected];
     [closeButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
-    closeButton.tag = 0;
+    closeButton.tag = Cancel;
     [self.view addSubview:closeButton];
     
-    UIButton *nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [nextButton setFrame:CGRectMake(self.view.frame.size.width - 90, self.view.frame.size.height - 60, 50, 50)];
-    [nextButton setImage:[UIImage imageNamed:@"plus.png"] forState:UIControlStateNormal];
-    [nextButton setImage:[UIImage imageNamed:@"plus.png"] forState:UIControlStateSelected];
-    [nextButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
-    nextButton.tag = 1;
-    [self.view addSubview:nextButton];
+    UIButton *addButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [addButton setFrame:ADD_BUTTON_FRAME];
+    [addButton setImage:[UIImage imageNamed:ADD_BUTTON_NAME] forState:UIControlStateNormal];
+    [addButton setImage:[UIImage imageNamed:ADD_BUTTON_NAME] forState:UIControlStateSelected];
+    [addButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
+    addButton.tag = Add;
+    [self.view addSubview:addButton];
 }
 
 - (void)settingBarMethod:(UIButton *)settingBtn{
-    NSLog(@"Button tag == %ld",(long)settingBtn.tag);
     switch (settingBtn.tag) {
-        case Cancle:
+        case Cancel:
             [self.navigationController popViewControllerAnimated:YES];
             break;
         case Add:[self addOverLay];
+            break;
+        case Attachment:
             break;
         default:
             break;
     }
 }
+
+//-----------------------------------------OVERLAY---------------------------------------------
+
 -(void)addOverLay{
     tmpOverlayObj = [[OverlayView alloc] initOverlayView];
     tmpOverlayObj.tag = 1000;
@@ -242,12 +234,6 @@ typedef enum{
     [objCreateIdea setIsCurrentControllerPresented:YES];
     [tmpOverlayObj closeIBView:nil];
     [self presentViewController:objCreateIdea animated:YES completion:nil];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

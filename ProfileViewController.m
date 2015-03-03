@@ -8,27 +8,8 @@
 
 #import "ProfileViewController.h"
 #import "CoLabListViewController.h"
-//#import <GoogleOpenSource/GoogleOpenSource.h>
 #import <GooglePlus/GooglePlus.h>
 #import "PPUtilts.h"
-
-
-//static NSString *kMyProfileSting=@"MyProfile";
-static NSString *kMyMyIdeasSting=@"MyIdea";
-static NSString *kMyBriefsSting=@"MyBrief";
-static NSString *kMyNotificationsSting=@"kMyNotificationsSting";
-static NSString *kLogOutSting=@"kLogOutSting";
-
-typedef enum {
-    
-    PPkMyProfile,
-    PPkMyIdeas,
-    PPkMyBriefs,
-    PPkMyNotifications,
-    PPkLogOut,
-    
-}ControllerType;
-
 
 @interface ProfileViewController (){
 NSArray *imageArray;
@@ -48,9 +29,7 @@ NSArray *cellTitleText;
     
     self.profileTableView.delegate   = self ;
     self.profileTableView.dataSource = self;
-   // self.profileTableView.frame=CGRectMake(0, self.view.frame.size.height/2, self.view.frame.size.width, self.view.frame.size.height);
     [self settingBarButton];
-    // Do any additional setup after loading the view from its nib.
 }
 
 - (void)settingBarButton{
@@ -66,38 +45,18 @@ NSArray *cellTitleText;
 - (void)settingBarMethod:(UIButton *)settingBtn{
     NSLog(@"Button tag == %ld",(long)settingBtn.tag);
     switch (settingBtn.tag) {
-        case 1000:
+        case Cancel:
             [self.navigationController popViewControllerAnimated:YES];
             break;
-        case 2000:{
-            UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Take a photo!" delegate:nil cancelButtonTitle:@"Cancel"           destructiveButtonTitle:nil otherButtonTitles:@"From Galary", @"From Camra", nil];
-            [actionSheet showInView:self.view];
-        }
+        case Add:
             break;
-        case 3000:{
-            
-        }
+        case Attachment:
             break;
         default:
             break;
     }
 }
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 #pragma UITableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -125,11 +84,7 @@ NSArray *cellTitleText;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:MyIdentifier];
     }
-    
-    // Here we use the provided setImageWithURL: method to load the web image
-    // Ensure you use a placeholder image otherwise cells will be initialized with no image
-    //    [cell.imageView setImageWithURL:[NSURL URLWithString:@"http://example.com/image.jpg"]
-    //                   placeholderImage:[UIImage imageNamed:@"placeholder"]];
+
     [cell setBackgroundColor:[UIColor clearColor]];
     cell.textLabel.textColor=[UIColor whiteColor];
     [cell.imageView setImage:[UIImage imageNamed:[imageArray objectAtIndex:indexPath.row]]];
@@ -177,7 +132,7 @@ NSArray *cellTitleText;
 }
 
 -(void)goToWithApiCall:(NSString*)apiCall{
-    if (apiCall==kLogOutSting) {
+    if (apiCall==kLogOutSting||![[NSUserDefaults standardUserDefaults] valueForKey:@"USERID"]) {
         [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"AUTH"];
         [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"USERID"];
         [[GPPSignIn sharedInstance]signOut];
