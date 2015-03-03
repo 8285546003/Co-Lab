@@ -52,6 +52,9 @@
     if ([PPUtilts sharedInstance].apiCall==kApiCall) {
         parameters = @{@"apicall":[PPUtilts sharedInstance].apiCall};
          }
+    else if ([PPUtilts sharedInstance].apiCall==kApiCallTagSearch){
+          parameters = @{@"apicall":[PPUtilts sharedInstance].apiCall,@"tag":[PPUtilts sharedInstance].tagSearch};
+    }
     else{
         
         if ([PPUtilts sharedInstance].userID) {
@@ -62,16 +65,16 @@
         }
     }
     [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if ([[responseObject valueForKey:@"Message"] isEqualToString:@"Success"]&&[[responseObject valueForKey:@"Error"] isEqualToString:@"false"]) {
+       // if ([[responseObject valueForKey:@"Message"] isEqualToString:@"Success"]&&[[responseObject valueForKey:@"Error"] isEqualToString:@"false"]) {
             NSLog(@"JSON: %@", responseObject);
             [self settingBarButton];
             self.allData=responseObject;
             [allDataTableView setHidden:NO];
             [allDataTableView reloadData];
-        }
-        else{
+       // }
+//else{
             [self settingBarButton];
-        }
+       // }
         
         [hud hide:YES];
         

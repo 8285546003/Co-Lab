@@ -245,6 +245,7 @@
 		68A9CCEF1A65015F003D09E4 = {
 			isa = PBXGroup;
 			children = (
+				68CC913F1AA5AB0B00F3CB48 /* Models */,
 				68CC90E31AA5AA3100F3CB48 /* Images */,
 				68CC90C21AA5A8E300F3CB48 /* PPUtilts */,
 				68CC90CD1AA5A8E300F3CB48 /* Xib */,
@@ -442,6 +443,13 @@
 				68CC91121AA5AA3100F3CB48 /* 750x1334.png */,
 			);
 			path = SplashScreen;
+			sourceTree = "<group>";
+		};
+		68CC913F1AA5AB0B00F3CB48 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

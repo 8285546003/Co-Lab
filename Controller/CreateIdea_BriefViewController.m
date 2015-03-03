@@ -147,7 +147,7 @@
         
         
      UILabel *titleLbl = [[UILabel alloc] initWithFrame:CGRectMake(2, 2, 200, 20)];
-    titleLbl.text = @"Add headline";
+    titleLbl.text = @"1. Add headline";
     [view addSubview:titleLbl];
     
     return view;
@@ -202,7 +202,7 @@
     
     
     UILabel *titleLbl = [[UILabel alloc] initWithFrame:CGRectMake(2, 2, 200, 20)];
-    titleLbl.text = @"Add description";
+    titleLbl.text = @"2. Add description";
     [view addSubview:titleLbl];
     
     return view;
@@ -248,7 +248,7 @@
     gestureRecognizer.cancelsTouchesInView = NO;
     [view addGestureRecognizer:gestureRecognizer];
     UILabel *titleLbl = [[UILabel alloc] initWithFrame:CGRectMake(2, 2, 200, 20)];
-    titleLbl.text = @"Add tags";
+    titleLbl.text = @"3. Add tags";
     [view addSubview:titleLbl];
     
     return view;

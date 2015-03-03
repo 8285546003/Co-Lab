@@ -35,8 +35,8 @@ NSArray *cellTitleText;
 - (void)settingBarButton{
     UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [closeButton setFrame:CANCEL_BUTTON_FRAME];
-    [closeButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateNormal];
-    [closeButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateSelected];
+    [closeButton setImage:[UIImage imageNamed:@"white_arrow.png"] forState:UIControlStateNormal];
+    [closeButton setImage:[UIImage imageNamed:@"white_arrow.png"] forState:UIControlStateSelected];
     [closeButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
     closeButton.tag = PPkCancel;
     [self.view addSubview:closeButton];

@@ -55,7 +55,7 @@
         
     }
     else{
-    return [[[self.allData valueForKey:@"TagSearch"] valueForKey:@"headline"]count];
+    return [[[self.allData valueForKey:@"SearchAuto"] valueForKey:@"tag"] count];
     }
 }
 
@@ -75,7 +75,7 @@
         cell.imageView.image=[UIImage imageNamed:@"found"];
     }
     else{
-    cell.textLabel.text=[[[self.allData valueForKey:@"TagSearch"] valueForKey:@"headline"]objectAtIndex:indexPath.row];
+    cell.textLabel.text=[[[self.allData valueForKey:@"SearchAuto"] valueForKey:@"tag"] objectAtIndex:indexPath.row];
     
         cell.imageView.image=nil;
     }
@@ -98,6 +98,7 @@
     }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [PPUtilts sharedInstance].tagSearch=[[[self.allData valueForKey:@"SearchAuto"] valueForKey:@"tag"]objectAtIndex:indexPath.row];
     [self goToLatestIdeaBriefs];
 }
 
@@ -109,8 +110,7 @@
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     
-    NSDictionary *parameters=@{@"apicall":@"TagSearch",@"tag":tag};
-    
+    NSDictionary *parameters=@{@"apicall":@"SearchAuto",@"tag":tag};
     
     [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"JSON: %@", responseObject);
@@ -119,11 +119,6 @@
             self.allDataTableView.tableFooterView.frame=CGRectZero;
             [self.allDataTableView reloadData];
            [self.allDataTableView setHidden:NO];
-        if ([[responseObject valueForKey:@"Message"] isEqualToString:@"No record found."]) {
-            
-            
-            
-        }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self settingBarButton];
@@ -162,7 +157,7 @@
 
 
 -(void)goToLatestIdeaBriefs{
-    [PPUtilts sharedInstance].apiCall=kApiCall;
+    [PPUtilts sharedInstance].apiCall=kApiCallTagSearch;
     CoLabListViewController *objLatestIB = [CoLabListViewController new];
     [self.navigationController pushViewController:objLatestIB animated:YES];
 }
