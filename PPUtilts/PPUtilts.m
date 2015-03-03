@@ -26,4 +26,9 @@
     return [AFNetworkReachabilityManager sharedManager].reachable;
 }
 
+-(BOOL)isNotificationViewHidden{
+    return YES;
+}
+
+
 @end

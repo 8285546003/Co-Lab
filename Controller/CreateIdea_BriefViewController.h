@@ -27,12 +27,16 @@
     BOOL isAttachment;
     CGFloat height;
     
-    
+__weak  IBOutlet UILabel     *lbltitle;
+__weak  IBOutlet UIImageView *headerImage;
+
     BOOL isIdeaSubmitScreen;
 }
 @property (nonatomic, assign) BOOL isIdeaSubmitScreen;
 @property (nonatomic, strong) NSMutableDictionary *mainDataDictionary;
 @property (nonatomic, strong) IBOutlet UIScrollView *baseScrollView;
 @property (nonatomic, strong) UIImageView *attachmentImage;
-@property (nonatomic, assign) BOOL isCurrentControllerPresented;;
+@property (nonatomic, assign) BOOL isCurrentControllerPresented;
+
+
 @end

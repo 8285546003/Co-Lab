@@ -30,11 +30,17 @@
     [self.mainDataDictionary setValue:@"" forKey:@"TAGS"];
     [self.mainDataDictionary setValue:@"" forKey:@"IMAGE"];
 
-    
-    [self.baseScrollView setFrame:self.view.bounds];
+    self.baseScrollView.frame=CGRectMake(0, 65, self.view.frame.size.width, self.view.frame.size.height);
+  //  [self.baseScrollView setFrame:self.view.bounds];
     if (self.isIdeaSubmitScreen) {
+        lbltitle.text=@"Create New Idea";
+        headerImage.image=[UIImage imageNamed:@"Create_New_Idea_Image.png"];
+        self.view.backgroundColor=[UIColor PPYellowColor];
         self.baseScrollView.backgroundColor = [UIColor PPYellowColor];
     }else{
+        lbltitle.text=@"Create New Brief";
+        headerImage.image=[UIImage imageNamed:@"Create_New_Brief_Image.png"];
+        self.view.backgroundColor=[UIColor PPBlueColor];
         self.baseScrollView.backgroundColor = [UIColor PPBlueColor];
     }
     

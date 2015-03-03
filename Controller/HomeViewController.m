@@ -10,6 +10,7 @@
 #import "ProfileViewController.h"
 #import "SearchViewController.h"
 #import "CoLabListViewController.h"
+#import "NotificationViewController.h"
 #import "PPUtilts.h"
 
 #define kCellHeaderHeight 100
@@ -41,64 +42,44 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    notificationView.hidden = YES;
+    //notificationView.hidden = YES;
     imageArray=ImageArray ;
     cellTitleText = CellTitleText;
     notificationView.hidden=YES;
     
     self.homeTableView.delegate   = self;
     self.homeTableView.dataSource = self;
-    [self settingBarButton];
+    if (![PPUtilts sharedInstance].isNotificationViewHidden) {
+        [self settingBarButton];
+        notificationView.hidden = NO;
+    }
     // Do any additional setup after loading the view from its nib.
 }
 
 - (void)settingBarButton{
-    
-    NSLog(@"View height == %f",self.view.bounds.size.height);
     UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [closeButton setFrame:CGRectMake(10, self.view.bounds.size.height - 60, 50, 50)];
+    [closeButton setFrame:CANCEL_BUTTON_FRAME];
     [closeButton setImage:[UIImage imageNamed:@"Close_Image.png"] forState:UIControlStateNormal];
     [closeButton setImage:[UIImage imageNamed:@"Close_Image.png"] forState:UIControlStateSelected];
     [closeButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
-    closeButton.tag = 0;
+    closeButton.tag =PPkCancel;
     [notificationView addSubview:closeButton];
     [closeButton bringSubviewToFront:self.view];
-    
-    UIButton *nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [nextButton setFrame:CGRectMake(self.view.frame.size.width - 60, self.view.frame.size.height - 60, 50, 50)];
-    [nextButton setImage:[UIImage imageNamed:@"Next_Image.png"] forState:UIControlStateNormal];
-    [nextButton setImage:[UIImage imageNamed:@"Next_Image.png"] forState:UIControlStateSelected];
-    [nextButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
-    nextButton.tag = 1;
-    [notificationView addSubview:nextButton];
-    
 }
 - (void)settingBarMethod:(UIButton *)settingBtn{
     NSLog(@"Button tag == %ld",(long)settingBtn.tag);
     switch (settingBtn.tag) {
-        case 0: notificationView.hidden=[self isNotificationViewVisible];
+        case PPkCancel:[self goToNotificationViewController];
             break;
-        case 1:
+        case PPkAttachment:
            break;
+        case PPkAddOrNext:
+            break;
         default:
             break;
     }
 }
 
-
--(BOOL)isNotificationViewVisible{
-    
-    if (PPkCancel) {
-        return YES;
-    }
-    else if (PPkAddOrNext){
-        return YES;
-    }
-    else{
-        return YES;
-    }
-    return YES;
-}
 - (BOOL)prefersStatusBarHidden {
     return YES;
 }
@@ -208,6 +189,10 @@
     [PPUtilts sharedInstance].apiCall=kApiCall;
     CoLabListViewController *objLatestIB = [CoLabListViewController new];
     [self.navigationController pushViewController:objLatestIB animated:YES];
+}
+-(void)goToNotificationViewController{
+     NotificationViewController *objNotification = [NotificationViewController new];
+    [self.navigationController pushViewController:objNotification animated:YES];
 }
 
 @end

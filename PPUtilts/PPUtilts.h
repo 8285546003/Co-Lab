@@ -93,4 +93,5 @@ typedef enum {
 @property (nonatomic, strong) NSString *tagSearch;
 + (instancetype)sharedInstance;
 - (BOOL)connected;
+-(BOOL)isNotificationViewHidden;
 @end
