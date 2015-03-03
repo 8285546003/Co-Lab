@@ -109,7 +109,7 @@
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    
+    NSLog(@"%@",tag);
     NSDictionary *parameters=@{@"apicall":@"SearchAuto",@"tag":tag};
     
     [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -165,7 +165,16 @@
 
 #pragma UITextfieldDelegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    [self getDataFromTag:[txtSearch.text stringByAppendingString:string]];
+    const char * _char = [string cStringUsingEncoding:NSUTF8StringEncoding];
+    int isBackSpace = strcmp(_char, "\b");
+    
+    if (isBackSpace == -8) {
+         string = [txtSearch.text substringToIndex:[txtSearch.text length] - 1];
+        [self getDataFromTag:string];
+    }
+    else{
+         [self getDataFromTag:[txtSearch.text stringByAppendingString:string]];
+    }
     return YES;
 }
 @end
