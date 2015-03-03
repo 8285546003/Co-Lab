@@ -10,30 +10,14 @@
 #import "ProfileViewController.h"
 #import "SearchViewController.h"
 #import "CoLabListViewController.h"
+#import "PPUtilts.h"
 
 #define kCellHeaderHeight 100
 #define kCellHeight       75
 
-#define ImageArray @[@"CoAppImage.png",@"Create_New_Idea_Image.png",@"Create_New_Brief_Image.png",@"Search_Image.png",@"Profile_Image.png",@"Latest_Idea_And_Briefs.png"]
-#define  CellTitleText  @[@" CO\\Lab",@"  Create New Idea",@"  Create New Briefs",@"  Search",@"  Profile",@"  Latest Idea & Brifes"]
 
-typedef enum {
-    
-  PPkHomeViewController,
-  PPkCreateIdeaViewController,
-  PPkCreateBriefViewController,
-  PPkSearchViewController,
-  PPkProfileViewController,
-  PPkLatestIdeasBrifes
-    
-}ControllerType;
 
-typedef enum ButtonType{
-    
-    PPkClose,
-    PPkNext
-    
-}ButtonType;
+
 
 @interface HomeViewController (){
     NSArray *imageArray;
@@ -104,10 +88,10 @@ typedef enum ButtonType{
 
 -(BOOL)isNotificationViewVisible{
     
-    if (PPkClose) {
+    if (PPkCancel) {
         return YES;
     }
-    else if (PPkNext){
+    else if (PPkAddOrNext){
         return YES;
     }
     else{

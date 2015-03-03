@@ -33,24 +33,23 @@ NSArray *cellTitleText;
 }
 
 - (void)settingBarButton{
-    UIButton *nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [nextButton setFrame:CGRectMake(10, self.view.bounds.size.height - 60, 50, 50)];
-    [nextButton setImage:[UIImage imageNamed:@"Next_Image.png"] forState:UIControlStateNormal];
-    [nextButton setImage:[UIImage imageNamed:@"Next_Image.png"] forState:UIControlStateSelected];
-    [nextButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
-    nextButton.tag = 1000;
-    [self.view addSubview:nextButton];
+    UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [closeButton setFrame:CANCEL_BUTTON_FRAME];
+    [closeButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateNormal];
+    [closeButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateSelected];
+    [closeButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
+    closeButton.tag = PPkCancel;
+    [self.view addSubview:closeButton];
 }
 
 - (void)settingBarMethod:(UIButton *)settingBtn{
-    NSLog(@"Button tag == %ld",(long)settingBtn.tag);
     switch (settingBtn.tag) {
-        case Cancel:
+        case PPkCancel:
             [self.navigationController popViewControllerAnimated:YES];
             break;
-        case Add:
+        case PPkAttachment:
             break;
-        case Attachment:
+        case PPkAddOrNext:
             break;
         default:
             break;

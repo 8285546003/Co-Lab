@@ -17,9 +17,6 @@
 
 #define KEYBOARD_HEIGHT 216
 
-typedef enum {
-    PPNoInternetConnection=-1005,
-}ErrorCodeType;
 
 
 @interface CoLabListViewController ()
@@ -181,31 +178,31 @@ typedef enum {
 
 - (void)settingBarButton{
     
-    UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [closeButton setFrame:CANCEL_BUTTON_FRAME];
-    [closeButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateNormal];
-    [closeButton setImage:[UIImage imageNamed:@"Close_Image.png"] forState:UIControlStateSelected];
-    [closeButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
-    closeButton.tag = Cancel;
-    [self.view addSubview:closeButton];
+    UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [cancelButton setFrame:CANCEL_BUTTON_FRAME];
+    [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateNormal];
+    [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateSelected];
+    [cancelButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
+    cancelButton.tag = PPkCancel;
+    [self.view addSubview:cancelButton];
     
     UIButton *addButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [addButton setFrame:ADD_BUTTON_FRAME];
     [addButton setImage:[UIImage imageNamed:ADD_BUTTON_NAME] forState:UIControlStateNormal];
     [addButton setImage:[UIImage imageNamed:ADD_BUTTON_NAME] forState:UIControlStateSelected];
     [addButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
-    addButton.tag = Add;
+    addButton.tag = PPkAddOrNext;
     [self.view addSubview:addButton];
 }
 
 - (void)settingBarMethod:(UIButton *)settingBtn{
     switch (settingBtn.tag) {
-        case Cancel:
+        case PPkCancel:
             [self.navigationController popViewControllerAnimated:YES];
             break;
-        case Add:[self addOverLay];
+        case PPkAttachment:
             break;
-        case Attachment:
+        case PPkAddOrNext:[self addOverLay];
             break;
         default:
             break;
@@ -216,7 +213,6 @@ typedef enum {
 
 -(void)addOverLay{
     tmpOverlayObj = [[OverlayView alloc] initOverlayView];
-    tmpOverlayObj.tag = 1000;
     [tmpOverlayObj setDelegate:self];
     [self.view addSubview:tmpOverlayObj];
     [tmpOverlayObj createOrAnswerIB:self.view With:NO];

@@ -83,7 +83,6 @@
 }
 
 - (void) hideKeyboard {
-    NSLog(@"Hidding keyboards");
     [self.view endEditing:YES];
 }
 - (void)didReceiveMemoryWarning {
@@ -107,7 +106,7 @@
     
     NoteView *noteView = [[NoteView alloc] initWithFrame:CGRectMake(40, 25, screenWidth - 80, 200)];
     [noteView setFontName:@"Helvetica" size:24];
-    noteView.tag = 101;
+    noteView.tag = PPkHeader;
    NSString *hStr = [self.mainDataDictionary valueForKey:@"HEADER"];
     if (hStr.length) {
         noteView.text = hStr;
@@ -171,7 +170,7 @@
         noteView.text = hStr;
     }
     
-    noteView.tag = 102;
+    noteView.tag = PPkDescription;
     [headerBaseView addSubview:noteView];
     [headerBaseView addSubview:[self addDiscTitle]];
     height += 225;
@@ -219,7 +218,7 @@
     
     NoteView *noteView = [[NoteView alloc] initWithFrame:CGRectMake(40, 25, screenWidth - 80, 200)];
     [noteView setFontName:@"Helvetica" size:24];
-    noteView.tag = 103;
+    noteView.tag = PPkTags;
     noteView.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
     [noteView setDelegate:self];
     NSString *hStr = [self.mainDataDictionary valueForKey:@"TAGS"];
@@ -259,69 +258,59 @@
 
 #pragma Setting bar button
 - (void)settingBarButton{
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGFloat screenWidth = screenRect.size.width;
-    CGFloat screenHeight = screenRect.size.height;
 
     [self removeSettingButtonFromSuperView];
     
-    UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [closeButton setFrame:CGRectMake(40, screenHeight - 60, 40, 40)];
-    [closeButton setImage:[UIImage imageNamed:@"Close_Image.png"] forState:UIControlStateNormal];
-    [closeButton setImage:[UIImage imageNamed:@"Close_Image.png"] forState:UIControlStateSelected];
-    [closeButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
-    closeButton.tag = 1000;
-    [self.view addSubview:closeButton];
-    [closeButton bringSubviewToFront:self.view];
+    UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [cancelButton setFrame:CANCEL_BUTTON_FRAME];
+    [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateNormal];
+    [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateSelected];
+    [cancelButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
+    cancelButton.tag = PPkCancel;
+    [self.view addSubview:cancelButton];
+    [cancelButton bringSubviewToFront:self.view];
     
     UIButton *attachButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [attachButton setFrame:CGRectMake(screenWidth-130, screenHeight - 60, 40, 40)];
-    [attachButton setImage:[UIImage imageNamed:@"Attachment_Image.png"] forState:UIControlStateNormal];
-    [attachButton setImage:[UIImage imageNamed:@"Attachment_Image.png"] forState:UIControlStateSelected];
+    [attachButton setFrame:ATTACHMENT_BUTTON_FRAME];
+    [attachButton setImage:[UIImage imageNamed:ATTACHMENT_BUTTON_NAME] forState:UIControlStateNormal];
+    [attachButton setImage:[UIImage imageNamed:ATTACHMENT_BUTTON_NAME] forState:UIControlStateSelected];
     [attachButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
-    attachButton.tag = 2000;
+    attachButton.tag = PPkAttachment;
     [self.view addSubview:attachButton];
     
     UIButton *nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [nextButton setFrame:CGRectMake(screenWidth - 80, screenHeight - 60, 40, 40)];
+    [nextButton setFrame:ADD_BUTTON_FRAME];
     [nextButton setImage:[UIImage imageNamed:@"Next_Image.png"] forState:UIControlStateNormal];
     [nextButton setImage:[UIImage imageNamed:@"Next_Image.png"] forState:UIControlStateSelected];
     [nextButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
-    nextButton.tag = 3000;
+    nextButton.tag = PPkAddOrNext;
     [self.view addSubview:nextButton];
 }
 
 - (void)removeSettingButtonFromSuperView{
-    [[self.view viewWithTag:1000] removeFromSuperview];
-    [[self.view viewWithTag:2000] removeFromSuperview];
-    [[self.view viewWithTag:3000] removeFromSuperview];
+    [[self.view viewWithTag:PPkCancel] removeFromSuperview];
+    [[self.view viewWithTag:PPkAttachment] removeFromSuperview];
+    [[self.view viewWithTag:PPkAddOrNext] removeFromSuperview];
 }
 - (void)settingBarMethod:(UIButton *)settingBtn{
     NSLog(@"Button tag == %ld",(long)settingBtn.tag);
     switch (settingBtn.tag) {
-        case 1000:
-            if (isCurrentControllerPresented) {
-                [[self presentingViewController] dismissViewControllerAnimated:NO completion:nil];
-            }
-            else{
-            [self.navigationController popViewControllerAnimated:YES];
-            }
+        case PPkCancel:
+            isCurrentControllerPresented?[[self presentingViewController] dismissViewControllerAnimated:NO completion:nil]:[self.navigationController popViewControllerAnimated:YES];
+             break;
+        case PPkAttachment:[self AddOverLay];
             break;
-        case 2000:{
-            tmpOverlayObj = [[OverlayView alloc] initOverlayView];
-            tmpOverlayObj.tag = 1000;
-            [tmpOverlayObj setDelegate:(id)self];
-            [self.baseScrollView addSubview:tmpOverlayObj];
-            [tmpOverlayObj renderingScreenAccordingToFrame:self.view];
-        }
-            break;
-        case 3000:{
-            [self saveDataToServer];
-        }
+        case PPkAddOrNext:[self saveDataToServer];
             break;
         default:
             break;
     }
+}
+-(void)AddOverLay{
+    tmpOverlayObj = [[OverlayView alloc] initOverlayView];
+    [tmpOverlayObj setDelegate:(id)self];
+    [self.baseScrollView addSubview:tmpOverlayObj];
+    [tmpOverlayObj renderingScreenAccordingToFrame:self.view];
 }
 
 - (void)takePhoto {
@@ -375,7 +364,7 @@
 #pragma UITextfieldDelegate
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range  replacementText:(NSString *)text{
     NSLog(@"back %ld",(long)textView.tag);
-    if (textView.tag == 101) {
+    if (textView.tag == PPkHeader) {
         
         int finalCOunt = 80 - (int)[textView.text length];
         NSLog(@"Textfield %d and text is == %lu",finalCOunt,(unsigned long)textView.text.length);
@@ -399,7 +388,7 @@
             return NO;
         }
         
-    }else if (textView.tag == 102){
+    }else if (textView.tag == PPkDescription){
         int finalCOunt = 200 - (int)[textView.text length];
         dicCharCountLbl.text = [NSString stringWithFormat:@"%d",finalCOunt];
         if (!text.length) {
@@ -424,21 +413,13 @@
 
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView{
     NSString *finalString = textView.text;
+    
     switch (textView.tag) {
-        case 101:{
-            [self.mainDataDictionary setValue:finalString forKey:@"HEADER"];
-
-        }
+        case PPkHeader:[self.mainDataDictionary setValue:finalString forKey:@"HEADER"];
         break;
-        case 102:{
-            [self.mainDataDictionary setValue:finalString forKey:@"DESCRIPTION"];
-
-        }
+        case PPkDescription:[self.mainDataDictionary setValue:finalString forKey:@"DESCRIPTION"];
             break;
-        case 103:{
-            [self.mainDataDictionary setValue:finalString forKey:@"TAGS"];
-
-        }
+        case PPkTags:[self.mainDataDictionary setValue:finalString forKey:@"TAGS"];
             break;
         default:
             break;
@@ -497,7 +478,6 @@
         NSLog(@"JSON: %@", responseObject);
         [hud hide:YES];
         
-        // [self removeAllObjectsFromScrollview];
         
         
         

@@ -65,22 +65,22 @@
 }
 
 - (void)settingBarButton{
-    UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [closeButton setFrame:CANCEL_BUTTON_FRAME];
-    [closeButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateNormal];
-    [closeButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateSelected];
-    [closeButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
-    closeButton.tag = Cancel;
-    [self.view addSubview:closeButton];
+    UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [cancelButton setFrame:CANCEL_BUTTON_FRAME];
+    [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateNormal];
+    [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateSelected];
+    [cancelButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
+    cancelButton.tag = PPkCancel;
+    [self.view addSubview:cancelButton];
 }
 - (void)settingBarMethod:(UIButton *)settingBtn{
     switch (settingBtn.tag) {
-        case Cancel:
+        case PPkCancel:
             [self.navigationController popViewControllerAnimated:YES];
             break;
-        case Add:
+        case PPkAttachment:
             break;
-        case Attachment:
+        case PPkAddOrNext:
             break;
         default:
             break;
