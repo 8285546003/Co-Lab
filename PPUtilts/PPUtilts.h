@@ -66,7 +66,7 @@ typedef enum{
 } ActionType;
 
 typedef enum{
-    PPkHeader,
+    PPkHeader=101,
     PPkDescription,
     PPkTags
 } TagType;

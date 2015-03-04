@@ -22,6 +22,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSLog(@"%f",self.view.frame.size.height);
+    
     isAttachment = NO;
     height = 0.0f;
     self.mainDataDictionary = [[NSMutableDictionary alloc] init];
@@ -31,7 +33,6 @@
     [self.mainDataDictionary setValue:@"" forKey:@"IMAGE"];
 
     self.baseScrollView.frame=CGRectMake(0, 65, self.view.frame.size.width, self.view.frame.size.height);
-  //  [self.baseScrollView setFrame:self.view.bounds];
     if (self.isIdeaSubmitScreen) {
         lbltitle.text=@"Create New Idea";
         headerImage.image=[UIImage imageNamed:@"Create_New_Idea_Image.png"];
@@ -68,21 +69,27 @@
     CGFloat screenWidth = screenRect.size.width;
     height = 0.0f;
     [self removeAllObjectsFromScrollview];
-    if (isAttached) {
-        [self.baseScrollView addSubview:[self addHeader]];
-        [self.baseScrollView addSubview:[self addDisc]];
-        [self.baseScrollView addSubview:[self addTags]];
-        [self.baseScrollView setContentSize:CGSizeMake(screenWidth, height)];
-        [self settingBarButton];
+    [self.baseScrollView addSubview:[self addHeader]];
+    [self.baseScrollView addSubview:[self addDisc]];
+    [self.baseScrollView addSubview:[self addTags]];
+    [self.baseScrollView setContentSize:CGSizeMake(screenWidth, height)];
+    [self settingBarButton];
 
-    }else{
-        [self.baseScrollView addSubview:[self addHeader]];
-        [self.baseScrollView addSubview:[self addDisc]];
-        [self.baseScrollView addSubview:[self addTags]];
-        [self.baseScrollView setContentSize:CGSizeMake(screenWidth, height)];
-        [self settingBarButton];
-
-    }
+//    if (isAttached) {
+//        [self.baseScrollView addSubview:[self addHeader]];
+//        [self.baseScrollView addSubview:[self addDisc]];
+//        [self.baseScrollView addSubview:[self addTags]];
+//        [self.baseScrollView setContentSize:CGSizeMake(screenWidth, height)];
+//        [self settingBarButton];
+//
+//    }else{
+//        [self.baseScrollView addSubview:[self addHeader]];
+//        [self.baseScrollView addSubview:[self addDisc]];
+//        [self.baseScrollView addSubview:[self addTags]];
+//        [self.baseScrollView setContentSize:CGSizeMake(screenWidth, height)];
+//        [self settingBarButton];
+//
+//    }
 }
 - (BOOL)prefersStatusBarHidden {
     return YES;
@@ -113,7 +120,7 @@
     NoteView *noteView = [[NoteView alloc] initWithFrame:CGRectMake(40, 25, screenWidth - 80, 200)];
     [noteView setFontName:@"Helvetica" size:24];
     noteView.tag = PPkHeader;
-   NSString *hStr = [self.mainDataDictionary valueForKey:@"HEADER"];
+     NSString *hStr = [self.mainDataDictionary valueForKey:@"HEADER"];
     if (hStr.length) {
         noteView.text = hStr;
     }
@@ -268,16 +275,16 @@
     [self removeSettingButtonFromSuperView];
     
     UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [cancelButton setFrame:CANCEL_BUTTON_FRAME];
+    [cancelButton setFrame:CGRectMake(40, self.view.bounds.size.height+50,50, 50)];
     [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateNormal];
     [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateSelected];
     [cancelButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
     cancelButton.tag = PPkCancel;
     [self.view addSubview:cancelButton];
-    [cancelButton bringSubviewToFront:self.view];
     
     UIButton *attachButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [attachButton setFrame:ATTACHMENT_BUTTON_FRAME];
+    [attachButton setFrame: CGRectMake(self.view.frame.size.width-100, self.view.frame.size.height +50, 50, 50)
+];
     [attachButton setImage:[UIImage imageNamed:ATTACHMENT_BUTTON_NAME] forState:UIControlStateNormal];
     [attachButton setImage:[UIImage imageNamed:ATTACHMENT_BUTTON_NAME] forState:UIControlStateSelected];
     [attachButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
@@ -285,7 +292,7 @@
     [self.view addSubview:attachButton];
     
     UIButton *nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [nextButton setFrame:ADD_BUTTON_FRAME];
+    [nextButton setFrame:CGRectMake(self.view.frame.size.width - 40, self.view.frame.size.height + 50, 50, 50)];
     [nextButton setImage:[UIImage imageNamed:@"Next_Image.png"] forState:UIControlStateNormal];
     [nextButton setImage:[UIImage imageNamed:@"Next_Image.png"] forState:UIControlStateSelected];
     [nextButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
@@ -314,6 +321,7 @@
 }
 -(void)AddOverLay{
     tmpOverlayObj = [[OverlayView alloc] initOverlayView];
+    tmpOverlayObj.tag=1000;
     [tmpOverlayObj setDelegate:(id)self];
     [self.baseScrollView addSubview:tmpOverlayObj];
     [tmpOverlayObj renderingScreenAccordingToFrame:self.view];
@@ -470,7 +478,6 @@
     }
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
     hud.labelText = @"Please wait...";
-    //hud.detailsLabelText=@"Latest idea and brief will be populating";
     
     NSDictionary *parameters;
     if (isIdeaSubmitScreen) {
@@ -478,14 +485,10 @@
     }else{
         parameters = @{@"apicall":@"CreateNewIdeaBrief",@"tag":[self.mainDataDictionary valueForKey:@"TAGS"],@"headline":[self.mainDataDictionary valueForKey:@"HEADER"],@"description": [self.mainDataDictionary valueForKey:@"DESCRIPTION"],@"image":imageString,@"brief_id":@"0",@"is_brief":@"Yes",@"user_id":@"2"};
     }
-    
     [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"JSON: %@", responseObject);
         [hud hide:YES];
-        
-        
-        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         

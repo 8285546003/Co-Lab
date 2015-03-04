@@ -46,10 +46,16 @@
     
     NSDictionary *parameters = @{@"apicall":@"Detail",@"id":[PPUtilts sharedInstance].LatestIDId,@"color_code":[PPUtilts sharedInstance].colorCode};
     [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+if ([[[responseObject valueForKey:@"StatusArr"] valueForKey:@"Error"] isEqualToString:@"false"]&&[[[responseObject valueForKey:@"StatusArr"] valueForKey:@"Message"]isEqualToString:@"Success"]) {
         _allLatestIBDetails=responseObject;
         [self.table reloadData];
         [self.table setHidden:NO];
+    }
+else{
+    kCustomAlert(@"Error", @"Somthing went wrong", @"Ok");
+}
         [self settingBarButton];
+
         [hud hide:YES];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

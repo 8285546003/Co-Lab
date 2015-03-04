@@ -28,7 +28,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    NSLog(@"%f",self.view.frame.size.height);
+
     isAttachment = NO;
     self.allDataTableView.frame=CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     self.attachmentImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 200)];
@@ -65,16 +66,16 @@
         }
     }
     [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-       // if ([[responseObject valueForKey:@"Message"] isEqualToString:@"Success"]&&[[responseObject valueForKey:@"Error"] isEqualToString:@"false"]) {
+        if ([[[responseObject valueForKey:@"StatusArr"] valueForKey:@"Error"] isEqualToString:@"false"]&&[[[responseObject valueForKey:@"StatusArr"] valueForKey:@"Message"]isEqualToString:@"Success"]) {
             NSLog(@"JSON: %@", responseObject);
             [self settingBarButton];
             self.allData=responseObject;
             [allDataTableView setHidden:NO];
             [allDataTableView reloadData];
-       // }
-//else{
+       }else{
+           kCustomAlert(@"Error", @"Somthing went wrong", @"Ok");
             [self settingBarButton];
-       // }
+        }
         
         [hud hide:YES];
         

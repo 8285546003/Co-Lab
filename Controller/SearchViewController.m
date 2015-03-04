@@ -114,11 +114,17 @@
     
     [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"JSON: %@", responseObject);
+            if ([[responseObject valueForKey:@"Error"] isEqualToString:@"false"]&&[[responseObject valueForKey:@"Message"] isEqualToString:@"Success"]) {
             [self settingBarButton];
             self.allData=responseObject;
-            self.allDataTableView.tableFooterView.frame=CGRectZero;
             [self.allDataTableView reloadData];
-           [self.allDataTableView setHidden:NO];
+            [self.allDataTableView setHidden:NO];
+            }
+            else{
+                kCustomAlert(@"Error", @"Somthing went wrong", @"Ok");
+                [self settingBarButton];
+            }
+
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self settingBarButton];

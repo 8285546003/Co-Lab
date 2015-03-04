@@ -20,7 +20,7 @@
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="8be-If-uan">
                     <rect key="frame" x="0.0" y="55" width="320" height="513"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </scrollView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="wGP-MX-aut">
                     <rect key="frame" x="50" y="12" width="40" height="40"/>
@@ -37,8 +37,8 @@
                 </label>
             </subviews>
             <color key="backgroundColor" red="0.89019607840000003" green="0.85882352939999995" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="300" y="242"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <point key="canvasLocation" x="383" y="240"/>
         </view>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

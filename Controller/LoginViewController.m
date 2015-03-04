@@ -120,13 +120,21 @@
                         NSDictionary *parameters = @{@"apicall":@"UserLogin",@"display_name":[person.name.givenName stringByAppendingFormat:@" %@",person.name.familyName],@"user_email":[GPPSignIn sharedInstance].authentication.userEmail,@"device_token":strDeviceTocken ,@"os_type": @"1"};
                         [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
                             
+                            if ([[responseObject valueForKey:@"Error"] isEqualToString:@"false"]&&[[responseObject valueForKey:@"Message"] isEqualToString:@"Success"]) {
+                                
+                            
                             [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"AUTH"];
                             [[NSUserDefaults standardUserDefaults] setValue:[responseObject valueForKey:@"user_id"] forKey:@"USERID"];
                             [PPUtilts sharedInstance].userID=[responseObject valueForKey:@"user_id"];
-                             NSLog(@"JSON: %@", responseObject);
-                            [hud hide:YES];
                             HomeViewController *homeCont = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
                             [self.navigationController pushViewController:homeCont animated:NO];
+                            }
+                            else{
+                                
+                                kCustomAlert(@"Error", @"Somthing went wrong", @"Ok");
+                            }
+                            [hud hide:YES];
+
                         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                             [hud hide:YES];
                             NSLog(@"Error: %@", error);
