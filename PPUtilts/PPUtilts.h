@@ -45,6 +45,9 @@ static NSString *kResultMessage             =@"Success";
 static NSString *kResultError               =@"false";
 static NSString *kResultNoRecord            =@"No record found.";
 
+static NSString *kStaticIdentifier          =@"LatestIBCell";
+
+
 
 
 typedef enum {
@@ -79,6 +82,13 @@ typedef enum{
     PPkDescription,
     PPkTags
 } TagType;
+
+typedef enum{
+    PP101=101,
+    PP102,
+    PP103
+} ViewTagType;
+
 
 
 typedef enum{

@@ -24,6 +24,8 @@
 @interface ExpendableTableViewController (){
     StatusModel  *statusModel;
     ExpenModel   *ibModel;
+    
+    IBModelDetails* ibModelDetails;
 }
 
 @end
@@ -57,10 +59,13 @@
     StatusModelDetails* status = statusModel.StatusArr[0];
     NSLog(@"%@ %@",status.Message,status.Error);
         
-      //  if (status.Message==kResultMessage||status.Error==kResultError){
+         if ([status.Error isEqualToString:kResultError]) {
             [self.table reloadData];
             [self.table setHidden:NO];
-       // }
+        }
+        else{
+             kCustomAlert(@"Error", @"Someting went wrong please connect to your WiFi/3G",@"Ok");
+         }
 
         [self settingBarButton];
         [hud hide:YES];
@@ -123,34 +128,23 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath isExpanded:(BOOL)isexpanded
 {
-    IBModelDetails* ibModelDetails = ibModel.Detail[indexPath.row];
     NSString *imageName=ibModelDetails.image;
 
-
-    if (indexPath.row==0) {
-        if ([self isImageExist:imageName]) {
-            return 700;
-        }
-        else{
-            return 600;
-        }
+    if (indexPath.row==0){
+        if ([self isImageExist:imageName]) {return 700;}
+        else{return 600;}
     }
-   
-    if (isexpanded){
-         return 600;
-    }
-    else{
-        return 175;
-    }
+    if (isexpanded){return 600;}
+    else{return 175;}
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath isExpanded:(BOOL)isExpanded
 {
-    static NSString *CellIdentifier = @"CustomCellReuseID";
+    NSString *CellIdentifier = kStaticIdentifier;
     LatestIBCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     [cell setTag:3];
     if (cell == nil) {
-        cell = [[[NSBundle mainBundle]loadNibNamed:@"LatestIBCell" owner:self options:nil]lastObject];
+        cell = [[[NSBundle mainBundle]loadNibNamed:kStaticIdentifier owner:self options:nil]lastObject];
     }
     
     cell.selectedBackgroundView.backgroundColor=[UIColor clearColor];
@@ -158,7 +152,7 @@
     cellBackgroundClearColor.backgroundColor = [UIColor clearColor];
     cell.selectedBackgroundView = cellBackgroundClearColor;
     
-    IBModelDetails* ibModelDetails = ibModel.Detail[indexPath.row];
+    ibModelDetails = ibModel.Detail[indexPath.row];
     
     cell.lblHeading.text=ibModelDetails.headline;
     cell.lblTag.text=ibModelDetails.user_email;
@@ -183,9 +177,10 @@
     BOOL isHot=[ibModelDetails.is_hot isEqualToString:@"No"]?NO:YES;
 
     
-    UIImageView *imgIdea=(UIImageView *)[cell.contentView viewWithTag:101];
-    UIImageView *imgBrief=(UIImageView *)[cell.contentView viewWithTag:102];
-    UIImageView *imgHot=(UIImageView *)[cell.contentView viewWithTag:103];
+    UIImageView *imgIdea=(UIImageView *) [cell.contentView viewWithTag:PP101];
+    UIImageView *imgBrief=(UIImageView *)[cell.contentView viewWithTag:PP102];
+    UIImageView *imgHot=(UIImageView *)  [cell.contentView viewWithTag:PP103];
+    
     if (isHot) {
         imgHot.hidden =NO;
     }

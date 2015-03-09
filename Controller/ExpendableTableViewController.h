@@ -8,10 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "HVTableView.h"
-@interface ExpendableTableViewController : UIViewController<HVTableViewDelegate, HVTableViewDataSource> {
-    NSArray *cellTitles;
-}
-
+@interface ExpendableTableViewController : UIViewController<HVTableViewDelegate, HVTableViewDataSource>
 @property (weak, nonatomic) IBOutlet HVTableView *table;
-//@property (nonatomic, strong) NSMutableDictionary *allLatestIBDetails;
 @end

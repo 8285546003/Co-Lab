@@ -74,7 +74,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    static NSString *CellIdentifier = @"CustomCellReuseID";
+    NSString *CellIdentifier = kStaticIdentifier;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
@@ -148,26 +148,18 @@
         StatusModelDetails* status = statusModel.StatusArr[0];
         
         NSLog(@"%@ %@",status.Message,status.Error);
-        if (status.Message==kResultMessage||status.Error==kResultError||status.Message==kResultNoRecord){
+        
+        
+        if ([status.Error isEqualToString:kResultError]) {
             [self.allDataTableView reloadData];
             [self.allDataTableView setHidden:NO];
         }
         else{
-            
+            kCustomAlert(@"Error", @"Someting went wrong please connect to your WiFi/3G",@"Ok");
+ 
         }
-        [self.allDataTableView reloadData];
-        [self.allDataTableView setHidden:NO];
-        
-        //[self.allDataTableView reloadData];
-       // [self.allDataTableView setHidden:NO];
-           // self.allData=responseObject;
 
- //           }
-     //       else{
-           //     kCustomAlert(@"Error", @"Somthing went wrongt", @"Ok");
-                [self settingBarButton];
-        //    }
-
+            [self settingBarButton];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self settingBarButton];

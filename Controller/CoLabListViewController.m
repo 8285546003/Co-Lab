@@ -27,11 +27,15 @@
 
 
 @interface CoLabListViewController (){
+    //------------Models-----------------
     StatusModel    *statusModel;
     IBModel        *ibModel;
     TagSearchModel *tagModel;
     MyIdeaModel    *myIdeaModel;
     MyBriefModel   *myBriefModel;
+    
+    IBModelDetails* ibModelDetails;
+    
     NSString *isHot;
     NSString *strColorType;
 }
@@ -70,8 +74,8 @@
     }
 
     if ([PPUtilts sharedInstance].apiCall==kApiCallLatestIdeaBrief) {
-        parameters = @{@"apicall":kApiCallLatestIdeaBrief};
-         }
+           parameters = @{@"apicall":kApiCallLatestIdeaBrief};
+    }
     else if ([PPUtilts sharedInstance].apiCall==kApiCallTagSearch){
           parameters = @{@"apicall":kApiCallTagSearch,@"tag":[PPUtilts sharedInstance].tagSearch};
     }
@@ -81,46 +85,31 @@
     else if ([PPUtilts sharedInstance].apiCall==kApiCallMyBrief){
         parameters = @{@"apicall":kApiCallMyBrief,@"user_id":[PPUtilts sharedInstance].userID};
     }
-    
     else{
         
-//        if ([PPUtilts sharedInstance].userID) {
-//            parameters = @{@"apicall":[PPUtilts sharedInstance].apiCall,@"user_id":[PPUtilts sharedInstance].userID};
-//        }
-//        else{
-//       
-//        }
+        
     }
     [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
-        if ([PPUtilts sharedInstance].apiCall==kApiCallLatestIdeaBrief) {
-            ibModel = [[IBModel alloc] initWithDictionary:responseObject error:nil];
-        }
-        else if ([PPUtilts sharedInstance].apiCall==kApiCallMyIdea){
-            myIdeaModel = [[MyIdeaModel alloc] initWithDictionary:responseObject error:nil];
-
-        }
-        else if ([PPUtilts sharedInstance].apiCall==kApiCallMyBrief){
-          
-            
-            myBriefModel = [[MyBriefModel alloc] initWithDictionary:responseObject error:nil];
-
-        }
-        
-        else{
-            tagModel = [[TagSearchModel alloc] initWithDictionary:responseObject error:nil];
-        }
+        if ([PPUtilts sharedInstance].apiCall==kApiCallLatestIdeaBrief) {ibModel = [[IBModel alloc] initWithDictionary:responseObject error:nil];}
+        else if ([PPUtilts sharedInstance].apiCall==kApiCallMyIdea){myIdeaModel = [[MyIdeaModel alloc] initWithDictionary:responseObject error:nil];}
+        else if ([PPUtilts sharedInstance].apiCall==kApiCallMyBrief){myBriefModel = [[MyBriefModel alloc] initWithDictionary:responseObject error:nil];}
+        else{tagModel = [[TagSearchModel alloc] initWithDictionary:responseObject error:nil];}
         
         statusModel = [[StatusModel alloc] initWithDictionary:responseObject error:nil];
-      //  StatusModelDetails* status = statusModel.StatusArr[0];
+        StatusModelDetails* status = statusModel.StatusArr[0];
         
-       // if (status.Message==kResultMessage||status.Error==kResultError) {
+        
+        NSLog(@"%@ %@",status.Message,status.Error);
+        NSLog(@"JSON: %@", responseObject);
+        
+        if ([status.Error isEqualToString:kResultError]) {
             [allDataTableView setHidden:NO];
             [allDataTableView reloadData];
-       // }
-        
-         //   NSLog(@"%@ %@",status.Message,status.Error);
-            NSLog(@"JSON: %@", responseObject);
+        }
+        else{
+            kCustomAlert(@"Error", @"Someting went wrong please connect to your WiFi/3G",@"Ok");
+        }
 
             [self settingBarButton];
             [hud hide:YES];
@@ -146,61 +135,32 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if ([PPUtilts sharedInstance].apiCall==kApiCallLatestIdeaBrief) {
-        return ibModel.LatestIdeaBrief.count;
-    }
-    else if ([PPUtilts sharedInstance].apiCall==kApiCallMyIdea){
-        return myIdeaModel.MyIdea.count;
-    }
-    else if ([PPUtilts sharedInstance].apiCall==kApiCallMyBrief){
-        
-    return myBriefModel.MyBrief.count;
-    }
-    
-    else{
-        return tagModel.TagSearch.count;
-    }
+    if ([PPUtilts sharedInstance].apiCall==kApiCallLatestIdeaBrief){return ibModel.LatestIdeaBrief.count;}
+    else if ([PPUtilts sharedInstance].apiCall==kApiCallMyIdea){return myIdeaModel.MyIdea.count;}
+    else if ([PPUtilts sharedInstance].apiCall==kApiCallMyBrief){return myBriefModel.MyBrief.count;}
+    else{return tagModel.TagSearch.count;}
     return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    static NSString *CellIdentifier = @"CustomCellReuseID";
+     NSString *CellIdentifier = kStaticIdentifier;
     LatestIBCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
-        cell = [[[NSBundle mainBundle]loadNibNamed:@"LatestIBCell" owner:self options:nil]lastObject];
-    }
-    if ([PPUtilts sharedInstance].apiCall==kApiCallLatestIdeaBrief){
-        IBModelDetails* ibModelDetails = ibModel.LatestIdeaBrief[indexPath.row];
-        cell.lblHeading.text=ibModelDetails.headline;
-        cell.lblTag.text=ibModelDetails.tag;
-        isHot=ibModelDetails.is_hot;
-        strColorType=ibModelDetails.color_code;
-    }
-    else if ([PPUtilts sharedInstance].apiCall==kApiCallMyIdea){
-        IBModelDetails* ibModelDetails = myIdeaModel.MyIdea[indexPath.row];
-        cell.lblHeading.text=ibModelDetails.headline;
-        cell.lblTag.text=ibModelDetails.tag;
-        isHot=ibModelDetails.is_hot;
-        strColorType=ibModelDetails.color_code;
-    }
-    else if ([PPUtilts sharedInstance].apiCall==kApiCallMyBrief){
-        IBModelDetails* ibModelDetails = myBriefModel.MyBrief[indexPath.row];
-        cell.lblHeading.text=ibModelDetails.headline;
-        cell.lblTag.text=ibModelDetails.tag;
-        isHot=ibModelDetails.is_hot;
-        strColorType=ibModelDetails.color_code;
+        cell = [[[NSBundle mainBundle]loadNibNamed:kStaticIdentifier owner:self options:nil]lastObject];
     }
     
-    else{
-        IBModelDetails* ibModelDetails = tagModel.TagSearch[indexPath.row];
-        cell.lblHeading.text=ibModelDetails.headline;
-        cell.lblTag.text=ibModelDetails.tag;
-        isHot=ibModelDetails.is_hot;
-        strColorType=ibModelDetails.color_code;
-    }
+    if ([PPUtilts sharedInstance].apiCall==kApiCallLatestIdeaBrief){ibModelDetails = ibModel.LatestIdeaBrief[indexPath.row];}
+    else if ([PPUtilts sharedInstance].apiCall==kApiCallMyIdea){ibModelDetails = myIdeaModel.MyIdea[indexPath.row];}
+    else if ([PPUtilts sharedInstance].apiCall==kApiCallMyBrief){ibModelDetails = myBriefModel.MyBrief[indexPath.row];}
+    else{ibModelDetails = tagModel.TagSearch[indexPath.row];}
+    
+    cell.lblHeading.text=ibModelDetails.headline;
+    cell.lblTag.text=ibModelDetails.tag;
+    isHot=ibModelDetails.is_hot;
+    strColorType=ibModelDetails.color_code;
     
     cell.selectedBackgroundView.backgroundColor=[UIColor clearColor];
     UIView *cellBackgroundClearColor = [[UIView alloc] initWithFrame:cell.frame];
@@ -251,28 +211,16 @@
     return 250.0f;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    ExpendableTableViewController *obj=[ExpendableTableViewController new];
-    if ([PPUtilts sharedInstance].apiCall==kApiCallLatestIdeaBrief) {
-        IBModelDetails* ibModelDetails = ibModel.LatestIdeaBrief[indexPath.row];
-        [PPUtilts sharedInstance].colorCode=ibModelDetails.color_code;
-        [PPUtilts sharedInstance].LatestIDId=ibModelDetails.id;
-    }
-    else if ([PPUtilts sharedInstance].apiCall==kApiCallMyIdea){
-        IBModelDetails* ibModelDetails = myIdeaModel.MyIdea[indexPath.row];
-        [PPUtilts sharedInstance].colorCode=ibModelDetails.color_code;
-        [PPUtilts sharedInstance].LatestIDId=ibModelDetails.id;
-    }
-    else if ([PPUtilts sharedInstance].apiCall==kApiCallMyBrief){
-        IBModelDetails* ibModelDetails = myBriefModel.MyBrief[indexPath.row];
-        [PPUtilts sharedInstance].colorCode=ibModelDetails.color_code;
-        [PPUtilts sharedInstance].LatestIDId=ibModelDetails.id;
-    }
     
-    else{
-        IBModelDetails* ibModelDetails = tagModel.TagSearch[indexPath.row];
-        [PPUtilts sharedInstance].colorCode=ibModelDetails.color_code;
-        [PPUtilts sharedInstance].LatestIDId=ibModelDetails.id;
-    }
+    ExpendableTableViewController *obj=[ExpendableTableViewController new];
+    
+    if ([PPUtilts sharedInstance].apiCall==kApiCallLatestIdeaBrief) {ibModelDetails = ibModel.LatestIdeaBrief[indexPath.row];}
+    else if ([PPUtilts sharedInstance].apiCall==kApiCallMyIdea){ibModelDetails = myIdeaModel.MyIdea[indexPath.row];}
+    else if ([PPUtilts sharedInstance].apiCall==kApiCallMyBrief){ibModelDetails = myBriefModel.MyBrief[indexPath.row];}
+    else{ibModelDetails = tagModel.TagSearch[indexPath.row];}
+    
+    [PPUtilts sharedInstance].colorCode=ibModelDetails.color_code;
+    [PPUtilts sharedInstance].LatestIDId=ibModelDetails.id;
     [self.navigationController pushViewController:obj animated:YES];
 }
 
