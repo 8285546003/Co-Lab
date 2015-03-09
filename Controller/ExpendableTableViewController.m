@@ -16,10 +16,16 @@
 #import "AFNetworking.h"
 #import "LatestIBCell.h"
 #import "UIColor+PPColor.h"
+#import "StatusModel.h"
+#import "ExpenModel.h"
+#import "ExpenModelDetails.h"
 
 
 
-@interface ExpendableTableViewController ()
+@interface ExpendableTableViewController (){
+    StatusModel  *statusModel;
+    ExpenModel   *ibModel;
+}
 
 @end
 
@@ -45,17 +51,19 @@
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     
     NSDictionary *parameters = @{@"apicall":@"Detail",@"id":[PPUtilts sharedInstance].LatestIDId,@"color_code":[PPUtilts sharedInstance].colorCode};
+    
     [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-if ([[[responseObject valueForKey:@"StatusArr"] valueForKey:@"Error"] isEqualToString:@"false"]&&[[[responseObject valueForKey:@"StatusArr"] valueForKey:@"Message"]isEqualToString:@"Success"]) {
-        _allLatestIBDetails=responseObject;
-        [self.table reloadData];
-        [self.table setHidden:NO];
-    }
-else{
-    kCustomAlert(@"Error", @"Somthing went wrong", @"Ok");
-}
-        [self settingBarButton];
+    ibModel = [[ExpenModel alloc] initWithDictionary:responseObject error:nil];
+    statusModel = [[StatusModel alloc] initWithDictionary:responseObject error:nil];
+    StatusModelDetails* status = statusModel.StatusArr[0];
+    NSLog(@"%@ %@",status.Message,status.Error);
+        
+      //  if (status.Message==kResultMessage||status.Error==kResultError){
+            [self.table reloadData];
+            [self.table setHidden:NO];
+       // }
 
+        [self settingBarButton];
         [hud hide:YES];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -111,12 +119,14 @@ else{
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[_allLatestIBDetails valueForKey:@"Detail"] count];
+    return ibModel.Detail.count;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath isExpanded:(BOOL)isexpanded
 {
-    NSString *imageName=[[[_allLatestIBDetails valueForKey:@"Detail"] valueForKey:@"image"] objectAtIndex:indexPath.row];
+    ExpenModelDetails* ibModelDetails = ibModel.Detail[indexPath.row];
+    NSString *imageName=ibModelDetails.image;
+
 
     if (indexPath.row==0) {
         if ([self isImageExist:imageName]) {
@@ -149,10 +159,15 @@ else{
     cellBackgroundClearColor.backgroundColor = [UIColor clearColor];
     cell.selectedBackgroundView = cellBackgroundClearColor;
     
-    cell.lblHeading.text=[[[_allLatestIBDetails  valueForKey:@"Detail"] valueForKey:@"headline"] objectAtIndex:indexPath.row];
-    cell.lblTag.text=[[[_allLatestIBDetails valueForKey:@"Detail"] valueForKey:@"tag"] objectAtIndex:indexPath.row];
-     cell.lblDescription.text=[[[_allLatestIBDetails valueForKey:@"Detail"] valueForKey:@"description"] objectAtIndex:indexPath.row];
-    NSString *imageName=[[[_allLatestIBDetails valueForKey:@"Detail"] valueForKey:@"image"] objectAtIndex:indexPath.row];
+    ExpenModelDetails* ibModelDetails = ibModel.Detail[indexPath.row];
+    
+    cell.lblHeading.text=ibModelDetails.headline;
+    cell.lblTag.text=ibModelDetails.user_email;
+    cell.lblDescription.text=ibModelDetails.description_idea_brief;
+    
+    NSString *imageName=ibModelDetails.image;
+
+    
     if ([self isImageExist:imageName]) {
         cell.lblDescription.frame=CGRectMake(40,410, 230,162);
         [cell.imgMain sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",BASE_URL_IMAGE,imageName]]
@@ -165,7 +180,10 @@ else{
             }];
     }
     
-    BOOL isHot=[[[[_allLatestIBDetails valueForKey:@"Detail"] valueForKey:@"is_hot"] objectAtIndex:indexPath.row] isEqualToString:@"No"]?NO:YES;
+    
+    BOOL isHot=[ibModelDetails.is_hot isEqualToString:@"No"]?NO:YES;
+
+    
     UIImageView *imgIdea=(UIImageView *)[cell.contentView viewWithTag:101];
     UIImageView *imgBrief=(UIImageView *)[cell.contentView viewWithTag:102];
     UIImageView *imgHot=(UIImageView *)[cell.contentView viewWithTag:103];
@@ -173,7 +191,8 @@ else{
         imgHot.hidden =NO;
     }
     
-    NSString *strColorType=[[[_allLatestIBDetails valueForKey:@"Detail"] valueForKey:@"color_code"] objectAtIndex:indexPath.row];
+    NSString *strColorType=ibModelDetails.color_code;
+    
     typedef void (^CaseBlockForColor)();
     NSDictionary *colorType = @{
                                 @"R":

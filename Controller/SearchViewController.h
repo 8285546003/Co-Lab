@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface SearchViewController : UIViewController<UITextFieldDelegate>
-@property (nonatomic, strong) NSMutableDictionary *allData;
+//@property (nonatomic, strong) NSMutableDictionary *allData;
 @property (nonatomic, weak) IBOutlet UITableView *allDataTableView;
 @property (nonatomic, weak) IBOutlet UITextField *txtSearch;
 @end

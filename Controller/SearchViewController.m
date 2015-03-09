@@ -11,14 +11,21 @@
 #import "AFNetworking.h"
 #import "PPUtilts.h"
 #import "CoLabListViewController.h"
+#import "StatusModel.h"
+#import "StatusModelDetails.h"
+#import "SearchModel.h"
+#import "SearchModelDetails.h"
 
 
-@interface SearchViewController ()
+@interface SearchViewController (){
+    StatusModel  *statusModel;
+    SearchModel      *ibModel;
+}
 
 @end
 
 @implementation SearchViewController
-@synthesize allData,allDataTableView,txtSearch;
+@synthesize allDataTableView,txtSearch;
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -27,7 +34,6 @@
     self.txtSearch.leftView = imageView;
     self.txtSearch.leftViewMode=UITextFieldViewModeAlways;\
     self.txtSearch.delegate=self;
-    [self settingBarButton];
     
     self.allDataTableView.backgroundColor=[UIColor clearColor];
     
@@ -39,6 +45,12 @@
     
     // Do any additional setup after loading the view from its nib.
 }
+
+-(void)viewWillAppear:(BOOL)animated{
+    [self settingBarButton];
+
+    [super viewWillAppear:YES];
+}
 - (void) hideKeyboard {
     [self.view endEditing:YES];
 }
@@ -49,14 +61,14 @@
 {
     
     
-    if ([[self.allData valueForKey:@"Message"] isEqualToString:@"No record found."]) {
+  //  if ([[self.allData valueForKey:@"Message"] isEqualToString:@"No record found."]) {
         
-        return 1;
+  //      return 1;
         
-    }
-    else{
-    return [[[self.allData valueForKey:@"SearchAuto"] valueForKey:@"tag"] count];
-    }
+  //  }
+//else{
+    return ibModel.SearchAuto.count;
+  //  }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -69,16 +81,26 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    cell.backgroundColor=[UIColor clearColor];
+     cell.backgroundColor=[UIColor clearColor];
     
-    if ([[self.allData valueForKey:@"Message"] isEqualToString:@"No record found."]) {
-        cell.imageView.image=[UIImage imageNamed:@"found"];
+     SearchModelDetails* ibModelDetails = ibModel.SearchAuto[indexPath.row];
+     StatusModelDetails* status = statusModel.StatusArr[0];
+    
+    if (status.Message==kResultNoRecord){
+        cell.textLabel.text=kResultNoRecord;
     }
     else{
-    cell.textLabel.text=[[[self.allData valueForKey:@"SearchAuto"] valueForKey:@"tag"] objectAtIndex:indexPath.row];
-    
-        cell.imageView.image=nil;
+        cell.textLabel.text=ibModelDetails.tag;
+
     }
+   // if ([[self.allData valueForKey:@"Message"] isEqualToString:@"No record found."]) {
+        //cell.imageView.image=[UIImage imageNamed:@"found"];
+  //  }
+ //   else{
+   // cell.textLabel.text=[[[self.allData valueForKey:@"SearchAuto"] valueForKey:@"tag"] objectAtIndex:indexPath.row];
+
+       // cell.imageView.image=nil;
+  //  }
     
 
     
@@ -87,18 +109,23 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if ([[self.allData valueForKey:@"Message"] isEqualToString:@"No record found."]) {
-        
+    StatusModelDetails* status = statusModel.StatusArr[0];
+    
+    if (status.Message==kResultNoRecord) {
         return 200;
-        
+
     }
+    
+  
     else{
 
         return 44;
     }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [PPUtilts sharedInstance].tagSearch=[[[self.allData valueForKey:@"SearchAuto"] valueForKey:@"tag"]objectAtIndex:indexPath.row];
+    SearchModelDetails* ibModelDetails = ibModel.SearchAuto[indexPath.row];
+    
+    [PPUtilts sharedInstance].tagSearch=ibModelDetails.tag;
     [self goToLatestIdeaBriefs];
 }
 
@@ -114,16 +141,32 @@
     
     [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"JSON: %@", responseObject);
-            if ([[responseObject valueForKey:@"Error"] isEqualToString:@"false"]&&[[responseObject valueForKey:@"Message"] isEqualToString:@"Success"]) {
-            [self settingBarButton];
-            self.allData=responseObject;
+ //           if ([[responseObject valueForKey:@"Error"] isEqualToString:@"false"]&&[[responseObject valueForKey:@"Message"] isEqualToString:@"Success"]) {
+        
+        ibModel = [[SearchModel alloc] initWithDictionary:responseObject error:nil];
+        statusModel = [[StatusModel alloc] initWithDictionary:responseObject error:nil];
+        StatusModelDetails* status = statusModel.StatusArr[0];
+        
+        NSLog(@"%@ %@",status.Message,status.Error);
+        if (status.Message==kResultMessage||status.Error==kResultError||status.Message==kResultNoRecord){
             [self.allDataTableView reloadData];
             [self.allDataTableView setHidden:NO];
-            }
-            else{
-                kCustomAlert(@"Error", @"Somthing went wrong", @"Ok");
+        }
+        else{
+            
+        }
+        [self.allDataTableView reloadData];
+        [self.allDataTableView setHidden:NO];
+        
+        //[self.allDataTableView reloadData];
+       // [self.allDataTableView setHidden:NO];
+           // self.allData=responseObject;
+
+ //           }
+     //       else{
+           //     kCustomAlert(@"Error", @"Somthing went wrongt", @"Ok");
                 [self settingBarButton];
-            }
+        //    }
 
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

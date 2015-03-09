@@ -116,13 +116,13 @@ NSArray *cellTitleText;
     switch (indexPath.row) {
         case PPkMyProfile:
             break;
-        case PPkMyIdeas:[self goToWithApiCall:kMyMyIdeasSting];
+        case PPkMyIdeas:[self goToWithApiCall:kApiCallMyIdea];
             break;
-        case PPkMyBriefs:[self goToWithApiCall:kMyBriefsSting];
+        case PPkMyBriefs:[self goToWithApiCall:kApiCallMyBrief];
             break;
-        case PPkMyNotifications:[self goToWithApiCall:kMyNotificationsSting];
+        case PPkMyNotifications:[self goToWithApiCall:kApiCallNotifications];
             break;
-        case PPkLogOut:[self goToWithApiCall:kLogOutSting];
+        case PPkLogOut:[self goToWithApiCall:kApiCallLogOut];
             break;
         default:
             break;
@@ -131,7 +131,7 @@ NSArray *cellTitleText;
 }
 
 -(void)goToWithApiCall:(NSString*)apiCall{
-    if (apiCall==kLogOutSting||![[NSUserDefaults standardUserDefaults] valueForKey:@"USERID"]) {
+    if (apiCall==kApiCallLogOut||![[NSUserDefaults standardUserDefaults] valueForKey:@"USERID"]) {
         [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"AUTH"];
         [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"USERID"];
         [[GPPSignIn sharedInstance]signOut];

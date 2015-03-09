@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define BASE_URL @"http://miprojects2.com.php53-6.ord1-1.websitetestlink.com/colab/api/version"
+#define BASE_URL @"http://miprojects2.com.php53-6.ord1-1.websitetestlink.com/colab/api/version1"
 #define BASE_URL_IMAGE @"http://miprojects2.com.php53-6.ord1-1.websitetestlink.com/colab/"
 
 
@@ -28,14 +28,23 @@
 #define ImageArray @[@"CoAppImage.png",@"Create_New_Idea_Image.png",@"Create_New_Brief_Image.png",@"Search_Image.png",@"Profile_Image.png",@"Latest_Idea_And_Briefs.png"]
 #define  CellTitleText  @[@" CO\\Lab",@"  Create New Idea",@"  Create New Briefs",@"  Search",@"  Profile",@"  Latest Idea & Brifes"]
 
-static NSString *kApiCall           =@"LatestIdeaBrief";
-static NSString *kApiCallTagSearch  =@"TagSearch";
+
+static NSString *kApiCallLogin               =@"UserLogin";
+static NSString *kApiCallCreateNewIdeaBrief  =@"CreateNewIdeaBrief";
+static NSString *kApiCallLatestIdeaBrief     =@"LatestIdeaBrief";
+static NSString *kApiCallTagSearch           =@"TagSearch";
+static NSString *kApiCallMyBrief             =@"MyBrief";
+static NSString *kApiCallMyIdea              =@"MyIdea";
+static NSString *kApiCallSearchAuto          =@"SearchAuto";
+static NSString *kApiCallDetail              =@"Detail";
+static NSString *kApiCallLogOut              =@"LogOut";
+static NSString *kApiCallNotifications       =@"Notifications";
 
 
-static NSString *kMyMyIdeasSting=@"MyIdea";
-static NSString *kMyBriefsSting=@"MyBrief";
-static NSString *kMyNotificationsSting=@"kMyNotificationsSting";
-static NSString *kLogOutSting=@"kLogOutSting";
+static NSString *kResultMessage             =@"Success";
+static NSString *kResultError               =@"false";
+static NSString *kResultNoRecord            =@"No record found.";
+
 
 
 typedef enum {
@@ -93,5 +102,9 @@ typedef enum {
 @property (nonatomic, strong) NSString *tagSearch;
 + (instancetype)sharedInstance;
 - (BOOL)connected;
--(BOOL)isNotificationViewHidden;
+- (BOOL)isNotificationViewHidden;
+
++ (BOOL)isiPhone5;
++ (BOOL)isiPhone6;
++ (BOOL)isiPhone6Plus;
 @end

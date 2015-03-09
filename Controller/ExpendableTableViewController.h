@@ -13,5 +13,5 @@
 }
 
 @property (weak, nonatomic) IBOutlet HVTableView *table;
-@property (nonatomic, strong) NSMutableDictionary *allLatestIBDetails;
+//@property (nonatomic, strong) NSMutableDictionary *allLatestIBDetails;
 @end

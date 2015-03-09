@@ -186,7 +186,7 @@
     [self.navigationController pushViewController:objCreateIdea animated:YES];
 }
 -(void)goToLatestIdeaBriefs{
-    [PPUtilts sharedInstance].apiCall=kApiCall;
+    [PPUtilts sharedInstance].apiCall=kApiCallLatestIdeaBrief;
     CoLabListViewController *objLatestIB = [CoLabListViewController new];
     [self.navigationController pushViewController:objLatestIB animated:YES];
 }

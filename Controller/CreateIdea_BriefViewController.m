@@ -22,7 +22,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSLog(@"%f",self.view.frame.size.height);
     
     isAttachment = NO;
     height = 0.0f;
@@ -60,6 +59,7 @@
 
 }
 - (void)viewWillAppear:(BOOL)animated{
+    [self settingBarButton];
     [super viewWillAppear:animated];
     
 }
@@ -69,27 +69,27 @@
     CGFloat screenWidth = screenRect.size.width;
     height = 0.0f;
     [self removeAllObjectsFromScrollview];
-    [self.baseScrollView addSubview:[self addHeader]];
-    [self.baseScrollView addSubview:[self addDisc]];
-    [self.baseScrollView addSubview:[self addTags]];
-    [self.baseScrollView setContentSize:CGSizeMake(screenWidth, height)];
-    [self settingBarButton];
+//    [self.baseScrollView addSubview:[self addHeader]];
+//    [self.baseScrollView addSubview:[self addDisc]];
+//    [self.baseScrollView addSubview:[self addTags]];
+//    [self.baseScrollView setContentSize:CGSizeMake(screenWidth, height)];
+    
 
-//    if (isAttached) {
-//        [self.baseScrollView addSubview:[self addHeader]];
-//        [self.baseScrollView addSubview:[self addDisc]];
-//        [self.baseScrollView addSubview:[self addTags]];
-//        [self.baseScrollView setContentSize:CGSizeMake(screenWidth, height)];
-//        [self settingBarButton];
-//
-//    }else{
-//        [self.baseScrollView addSubview:[self addHeader]];
-//        [self.baseScrollView addSubview:[self addDisc]];
-//        [self.baseScrollView addSubview:[self addTags]];
-//        [self.baseScrollView setContentSize:CGSizeMake(screenWidth, height)];
-//        [self settingBarButton];
-//
-//    }
+    if (isAttached) {
+        [self.baseScrollView addSubview:[self addHeader]];
+        [self.baseScrollView addSubview:[self addDisc]];
+        [self.baseScrollView addSubview:[self addTags]];
+        [self.baseScrollView setContentSize:CGSizeMake(screenWidth, height)];
+        //[self settingBarButton];
+
+    }else{
+        [self.baseScrollView addSubview:[self addHeader]];
+        [self.baseScrollView addSubview:[self addDisc]];
+        [self.baseScrollView addSubview:[self addTags]];
+        [self.baseScrollView setContentSize:CGSizeMake(screenWidth, height)];
+       // [self settingBarButton];
+
+    }
 }
 - (BOOL)prefersStatusBarHidden {
     return YES;
@@ -272,10 +272,10 @@
 #pragma Setting bar button
 - (void)settingBarButton{
 
-    [self removeSettingButtonFromSuperView];
+   // [self removeSettingButtonFromSuperView];
     
     UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [cancelButton setFrame:CGRectMake(40, self.view.bounds.size.height+50,50, 50)];
+    [cancelButton setFrame:CANCEL_BUTTON_FRAME];
     [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateNormal];
     [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateSelected];
     [cancelButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
@@ -283,7 +283,7 @@
     [self.view addSubview:cancelButton];
     
     UIButton *attachButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [attachButton setFrame: CGRectMake(self.view.frame.size.width-100, self.view.frame.size.height +50, 50, 50)
+    [attachButton setFrame:ATTACHMENT_BUTTON_FRAME
 ];
     [attachButton setImage:[UIImage imageNamed:ATTACHMENT_BUTTON_NAME] forState:UIControlStateNormal];
     [attachButton setImage:[UIImage imageNamed:ATTACHMENT_BUTTON_NAME] forState:UIControlStateSelected];
@@ -292,7 +292,7 @@
     [self.view addSubview:attachButton];
     
     UIButton *nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [nextButton setFrame:CGRectMake(self.view.frame.size.width - 40, self.view.frame.size.height + 50, 50, 50)];
+    [nextButton setFrame:ADD_BUTTON_FRAME];
     [nextButton setImage:[UIImage imageNamed:@"Next_Image.png"] forState:UIControlStateNormal];
     [nextButton setImage:[UIImage imageNamed:@"Next_Image.png"] forState:UIControlStateSelected];
     [nextButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
@@ -367,6 +367,7 @@
     
     [self rearrengeScrollView:isAttachment];
     self.attachmentImage.image = chosenImage;
+    [tmpOverlayObj closeMethod:nil];
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
@@ -481,9 +482,9 @@
     
     NSDictionary *parameters;
     if (isIdeaSubmitScreen) {
-        parameters = @{@"apicall":@"CreateNewIdeaBrief",@"tag":[self.mainDataDictionary valueForKey:@"TAGS"],@"headline":[self.mainDataDictionary valueForKey:@"HEADER"],@"description": [self.mainDataDictionary valueForKey:@"DESCRIPTION"],@"image":imageString,@"brief_id":@"0",@"is_brief":@"No",@"user_id":@"2"};
+        parameters = @{@"apicall":@"CreateNewIdeaBrief",@"tag":[self.mainDataDictionary valueForKey:@"TAGS"],@"headline":[self.mainDataDictionary valueForKey:@"HEADER"],@"description": [self.mainDataDictionary valueForKey:@"DESCRIPTION"],@"image":imageString,@"brief_id":@"0",@"is_brief":@"No",@"user_id":[PPUtilts sharedInstance].userID};
     }else{
-        parameters = @{@"apicall":@"CreateNewIdeaBrief",@"tag":[self.mainDataDictionary valueForKey:@"TAGS"],@"headline":[self.mainDataDictionary valueForKey:@"HEADER"],@"description": [self.mainDataDictionary valueForKey:@"DESCRIPTION"],@"image":imageString,@"brief_id":@"0",@"is_brief":@"Yes",@"user_id":@"2"};
+        parameters = @{@"apicall":@"CreateNewIdeaBrief",@"tag":[self.mainDataDictionary valueForKey:@"TAGS"],@"headline":[self.mainDataDictionary valueForKey:@"HEADER"],@"description": [self.mainDataDictionary valueForKey:@"DESCRIPTION"],@"image":imageString,@"brief_id":@"0",@"is_brief":@"Yes",@"user_id":[PPUtilts sharedInstance].userID};
     }
     [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         

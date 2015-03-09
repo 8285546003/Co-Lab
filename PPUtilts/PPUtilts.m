@@ -29,6 +29,43 @@
 -(BOOL)isNotificationViewHidden{
     return YES;
 }
-
-
++ (BOOL)isiPhone6{
+    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+    if( screenHeight < screenWidth ){
+        screenHeight = screenWidth;
+    }
+    if ( screenHeight > 480 && screenHeight < 736 ){
+        return YES;
+    }
+    else{
+        return NO;
+    }
+}
++ (BOOL)isiPhone5{
+    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+    if( screenHeight < screenWidth ){
+        screenHeight = screenWidth;
+    }
+    if( screenHeight > 480 && screenHeight < 667 ){
+        return YES;
+    }
+    else{
+        return NO;
+    }
+}
++ (BOOL)isiPhone6Plus{
+    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+    if( screenHeight < screenWidth ){
+        screenHeight = screenWidth;
+    }
+    if ( screenHeight > 480 ){
+        return YES;
+    }
+    else{
+        return NO;
+    }
+}
 @end
