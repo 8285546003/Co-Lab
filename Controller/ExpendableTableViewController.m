@@ -18,7 +18,6 @@
 #import "UIColor+PPColor.h"
 #import "StatusModel.h"
 #import "ExpenModel.h"
-#import "ExpenModelDetails.h"
 
 
 
@@ -124,7 +123,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath isExpanded:(BOOL)isexpanded
 {
-    ExpenModelDetails* ibModelDetails = ibModel.Detail[indexPath.row];
+    IBModelDetails* ibModelDetails = ibModel.Detail[indexPath.row];
     NSString *imageName=ibModelDetails.image;
 
 
@@ -159,7 +158,7 @@
     cellBackgroundClearColor.backgroundColor = [UIColor clearColor];
     cell.selectedBackgroundView = cellBackgroundClearColor;
     
-    ExpenModelDetails* ibModelDetails = ibModel.Detail[indexPath.row];
+    IBModelDetails* ibModelDetails = ibModel.Detail[indexPath.row];
     
     cell.lblHeading.text=ibModelDetails.headline;
     cell.lblTag.text=ibModelDetails.user_email;

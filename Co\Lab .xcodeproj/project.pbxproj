@@ -8,15 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		685447781AAD628D0044E3C7 /* ExpenModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 685447771AAD628D0044E3C7 /* ExpenModel.m */; };
-		6854477B1AAD62A60044E3C7 /* ExpenModelDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 6854477A1AAD62A60044E3C7 /* ExpenModelDetails.m */; };
 		6854477E1AAD675B0044E3C7 /* SearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6854477D1AAD675B0044E3C7 /* SearchModel.m */; };
 		685447841AAD6DA20044E3C7 /* SearchModelDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 685447831AAD6DA20044E3C7 /* SearchModelDetails.m */; };
 		685447871AAD74540044E3C7 /* TagSearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 685447861AAD74540044E3C7 /* TagSearchModel.m */; };
-		6854478A1AAD74650044E3C7 /* TagSearchModelDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 685447891AAD74650044E3C7 /* TagSearchModelDetails.m */; };
 		6854478D1AAD9A710044E3C7 /* MyIdeaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6854478C1AAD9A710044E3C7 /* MyIdeaModel.m */; };
-		685447901AAD9A830044E3C7 /* MyIdeaModelDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 6854478F1AAD9A830044E3C7 /* MyIdeaModelDetails.m */; };
 		685447931AAD9E700044E3C7 /* MyBriefModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 685447921AAD9E700044E3C7 /* MyBriefModel.m */; };
-		685447961AAD9E800044E3C7 /* MyBriefModelDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 685447951AAD9E800044E3C7 /* MyBriefModelDetails.m */; };
 		68A9CCFC1A65015F003D09E4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A9CCFB1A65015F003D09E4 /* Foundation.framework */; };
 		68A9CCFE1A65015F003D09E4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A9CCFD1A65015F003D09E4 /* CoreGraphics.framework */; };
 		68A9CD001A65015F003D09E4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A9CCFF1A65015F003D09E4 /* UIKit.framework */; };
@@ -116,24 +112,16 @@
 /* Begin PBXFileReference section */
 		685447761AAD628D0044E3C7 /* ExpenModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpenModel.h; sourceTree = "<group>"; };
 		685447771AAD628D0044E3C7 /* ExpenModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpenModel.m; sourceTree = "<group>"; };
-		685447791AAD62A60044E3C7 /* ExpenModelDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpenModelDetails.h; sourceTree = "<group>"; };
-		6854477A1AAD62A60044E3C7 /* ExpenModelDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpenModelDetails.m; sourceTree = "<group>"; };
 		6854477C1AAD675B0044E3C7 /* SearchModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchModel.h; sourceTree = "<group>"; };
 		6854477D1AAD675B0044E3C7 /* SearchModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchModel.m; sourceTree = "<group>"; };
 		685447821AAD6DA20044E3C7 /* SearchModelDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchModelDetails.h; sourceTree = "<group>"; };
 		685447831AAD6DA20044E3C7 /* SearchModelDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchModelDetails.m; sourceTree = "<group>"; };
 		685447851AAD74540044E3C7 /* TagSearchModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagSearchModel.h; sourceTree = "<group>"; };
 		685447861AAD74540044E3C7 /* TagSearchModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagSearchModel.m; sourceTree = "<group>"; };
-		685447881AAD74650044E3C7 /* TagSearchModelDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagSearchModelDetails.h; sourceTree = "<group>"; };
-		685447891AAD74650044E3C7 /* TagSearchModelDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagSearchModelDetails.m; sourceTree = "<group>"; };
 		6854478B1AAD9A710044E3C7 /* MyIdeaModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyIdeaModel.h; sourceTree = "<group>"; };
 		6854478C1AAD9A710044E3C7 /* MyIdeaModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyIdeaModel.m; sourceTree = "<group>"; };
-		6854478E1AAD9A830044E3C7 /* MyIdeaModelDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyIdeaModelDetails.h; sourceTree = "<group>"; };
-		6854478F1AAD9A830044E3C7 /* MyIdeaModelDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyIdeaModelDetails.m; sourceTree = "<group>"; };
 		685447911AAD9E700044E3C7 /* MyBriefModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBriefModel.h; sourceTree = "<group>"; };
 		685447921AAD9E700044E3C7 /* MyBriefModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBriefModel.m; sourceTree = "<group>"; };
-		685447941AAD9E800044E3C7 /* MyBriefModelDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBriefModelDetails.h; sourceTree = "<group>"; };
-		685447951AAD9E800044E3C7 /* MyBriefModelDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBriefModelDetails.m; sourceTree = "<group>"; };
 		68A9CCF81A65015F003D09E4 /* Co\Lab .app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Co\\Lab .app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		68A9CCFB1A65015F003D09E4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		68A9CCFD1A65015F003D09E4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -516,24 +504,16 @@
 				68D3405F1AA7153D00B7D9A2 /* StatusModelDetails.m */,
 				685447761AAD628D0044E3C7 /* ExpenModel.h */,
 				685447771AAD628D0044E3C7 /* ExpenModel.m */,
-				685447791AAD62A60044E3C7 /* ExpenModelDetails.h */,
-				6854477A1AAD62A60044E3C7 /* ExpenModelDetails.m */,
 				6854477C1AAD675B0044E3C7 /* SearchModel.h */,
 				6854477D1AAD675B0044E3C7 /* SearchModel.m */,
 				685447821AAD6DA20044E3C7 /* SearchModelDetails.h */,
 				685447831AAD6DA20044E3C7 /* SearchModelDetails.m */,
 				685447851AAD74540044E3C7 /* TagSearchModel.h */,
 				685447861AAD74540044E3C7 /* TagSearchModel.m */,
-				685447881AAD74650044E3C7 /* TagSearchModelDetails.h */,
-				685447891AAD74650044E3C7 /* TagSearchModelDetails.m */,
 				6854478B1AAD9A710044E3C7 /* MyIdeaModel.h */,
 				6854478C1AAD9A710044E3C7 /* MyIdeaModel.m */,
-				6854478E1AAD9A830044E3C7 /* MyIdeaModelDetails.h */,
-				6854478F1AAD9A830044E3C7 /* MyIdeaModelDetails.m */,
 				685447911AAD9E700044E3C7 /* MyBriefModel.h */,
 				685447921AAD9E700044E3C7 /* MyBriefModel.m */,
-				685447941AAD9E800044E3C7 /* MyBriefModelDetails.h */,
-				685447951AAD9E800044E3C7 /* MyBriefModelDetails.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -698,10 +678,8 @@
 				68CC90941AA5A8C300F3CB48 /* ProfileViewController.m in Sources */,
 				68D340631AA7161F00B7D9A2 /* IBModelDetails.m in Sources */,
 				68CC90951AA5A8C300F3CB48 /* SearchViewController.m in Sources */,
-				685447961AAD9E800044E3C7 /* MyBriefModelDetails.m in Sources */,
 				68CC90DA1AA5A8E300F3CB48 /* PPUtilts.m in Sources */,
 				685447781AAD628D0044E3C7 /* ExpenModel.m in Sources */,
-				685447901AAD9A830044E3C7 /* MyIdeaModelDetails.m in Sources */,
 				68D340571AA70F0500B7D9A2 /* IBModel.m in Sources */,
 				68CC90D61AA5A8E300F3CB48 /* HVTableView.m in Sources */,
 				68CC908F1AA5A8C300F3CB48 /* CoLabListViewController.m in Sources */,
@@ -715,14 +693,12 @@
 				685447841AAD6DA20044E3C7 /* SearchModelDetails.m in Sources */,
 				6854478D1AAD9A710044E3C7 /* MyIdeaModel.m in Sources */,
 				68CC90D91AA5A8E300F3CB48 /* OverlayView.m in Sources */,
-				6854477B1AAD62A60044E3C7 /* ExpenModelDetails.m in Sources */,
 				68CC90911AA5A8C300F3CB48 /* ExpendableTableViewController.m in Sources */,
 				68CC90901AA5A8C300F3CB48 /* CreateIdea_BriefViewController.m in Sources */,
 				68CFE2671AA5E00A0082D3A8 /* NotificationViewController.m in Sources */,
 				68CC90921AA5A8C300F3CB48 /* HomeViewController.m in Sources */,
 				685447931AAD9E700044E3C7 /* MyBriefModel.m in Sources */,
 				68CC908E1AA5A8C300F3CB48 /* UIColor+PPColor.m in Sources */,
-				6854478A1AAD74650044E3C7 /* TagSearchModelDetails.m in Sources */,
 				6854477E1AAD675B0044E3C7 /* SearchModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

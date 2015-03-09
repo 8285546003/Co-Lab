@@ -7,9 +7,9 @@
 //
 
 #import "JSONModel.h"
-#import "ExpenModelDetails.h"
+#import "IBModelDetails.h"
 
 @interface ExpenModel : JSONModel
-@property (strong, nonatomic) NSArray<ExpenModelDetails,ConvertOnDemand>* Detail;
+@property (strong, nonatomic) NSArray<IBModelDetails,ConvertOnDemand>* Detail;
 
 @end

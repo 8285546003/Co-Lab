@@ -7,9 +7,9 @@
 //
 
 #import "JSONModel.h"
-#import "MyBriefModelDetails.h"
+#import "IBModelDetails.h"
 
 @interface MyBriefModel : JSONModel
-@property (strong, nonatomic) NSArray<MyBriefModelDetails,ConvertOnDemand>* MyBrief;
+@property (strong, nonatomic) NSArray<IBModelDetails,ConvertOnDemand>* MyBrief;
 
 @end

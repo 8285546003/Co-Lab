@@ -9,6 +9,7 @@
 #import "CreateIdea_BriefViewController.h"
 #import "MBProgressHUD.h"
 #import "AFNetworking.h"
+#import "CoLabListViewController.h"
 
 
 @interface CreateIdea_BriefViewController ()
@@ -481,10 +482,14 @@
     hud.labelText = @"Please wait...";
     
     NSDictionary *parameters;
+    
+    if (![PPUtilts sharedInstance].userID) {
+        [PPUtilts sharedInstance].userID=[[NSUserDefaults standardUserDefaults] valueForKey:@"USERID"];
+    }
     if (isIdeaSubmitScreen) {
-        parameters = @{@"apicall":@"CreateNewIdeaBrief",@"tag":[self.mainDataDictionary valueForKey:@"TAGS"],@"headline":[self.mainDataDictionary valueForKey:@"HEADER"],@"description": [self.mainDataDictionary valueForKey:@"DESCRIPTION"],@"image":imageString,@"brief_id":@"0",@"is_brief":@"No",@"user_id":[PPUtilts sharedInstance].userID};
+        parameters = @{@"apicall":@"CreateNewIdeaBrief",@"tag":[self.mainDataDictionary valueForKey:@"TAGS"],@"headline":[self.mainDataDictionary valueForKey:@"HEADER"],@"description_idea_brief": [self.mainDataDictionary valueForKey:@"DESCRIPTION"],@"image":imageString,@"brief_id":@"0",@"is_brief":@"No",@"user_id":[PPUtilts sharedInstance].userID};
     }else{
-        parameters = @{@"apicall":@"CreateNewIdeaBrief",@"tag":[self.mainDataDictionary valueForKey:@"TAGS"],@"headline":[self.mainDataDictionary valueForKey:@"HEADER"],@"description": [self.mainDataDictionary valueForKey:@"DESCRIPTION"],@"image":imageString,@"brief_id":@"0",@"is_brief":@"Yes",@"user_id":[PPUtilts sharedInstance].userID};
+        parameters = @{@"apicall":@"CreateNewIdeaBrief",@"tag":[self.mainDataDictionary valueForKey:@"TAGS"],@"headline":[self.mainDataDictionary valueForKey:@"HEADER"],@"description_idea_brief": [self.mainDataDictionary valueForKey:@"DESCRIPTION"],@"image":imageString,@"brief_id":@"0",@"is_brief":@"Yes",@"user_id":[PPUtilts sharedInstance].userID};
     }
     [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         

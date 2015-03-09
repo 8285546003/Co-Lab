@@ -7,9 +7,9 @@
 //
 
 #import "JSONModel.h"
-#import "TagSearchModelDetails.h"
+#import "IBModelDetails.h"
 
 @interface TagSearchModel : JSONModel
 
-@property (strong, nonatomic) NSArray<TagSearchModelDetails,ConvertOnDemand>* TagSearch;
+@property (strong, nonatomic) NSArray<IBModelDetails,ConvertOnDemand>* TagSearch;
 @end

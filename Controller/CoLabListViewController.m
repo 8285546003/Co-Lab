@@ -19,7 +19,6 @@
 #import "IBModel.h"
 #import "IBModelDetails.h"
 #import "TagSearchModel.h"
-#import "MyIdeaModelDetails.h"
 #import "MyIdeaModel.h"
 #import "MyBriefModel.h"
 
@@ -65,6 +64,11 @@
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     NSDictionary *parameters;
+    
+    if (![PPUtilts sharedInstance].userID) {
+        [PPUtilts sharedInstance].userID=[[NSUserDefaults standardUserDefaults] valueForKey:@"USERID"];
+    }
+
     if ([PPUtilts sharedInstance].apiCall==kApiCallLatestIdeaBrief) {
         parameters = @{@"apicall":kApiCallLatestIdeaBrief};
          }
@@ -176,25 +180,26 @@
         strColorType=ibModelDetails.color_code;
     }
     else if ([PPUtilts sharedInstance].apiCall==kApiCallMyIdea){
-        MyIdeaModelDetails* ibModelDetails = myIdeaModel.MyIdea[indexPath.row];
+        IBModelDetails* ibModelDetails = myIdeaModel.MyIdea[indexPath.row];
         cell.lblHeading.text=ibModelDetails.headline;
         cell.lblTag.text=ibModelDetails.tag;
         isHot=ibModelDetails.is_hot;
         strColorType=ibModelDetails.color_code;
     }
     else if ([PPUtilts sharedInstance].apiCall==kApiCallMyBrief){
-        MyBriefModelDetails* ibModelDetails = myBriefModel.MyBrief[indexPath.row];
+        IBModelDetails* ibModelDetails = myBriefModel.MyBrief[indexPath.row];
         cell.lblHeading.text=ibModelDetails.headline;
         cell.lblTag.text=ibModelDetails.tag;
         isHot=ibModelDetails.is_hot;
         strColorType=ibModelDetails.color_code;
     }
     
-    else{TagSearchModelDetails* tagModelDetails = tagModel.TagSearch[indexPath.row];
-        cell.lblHeading.text=tagModelDetails.headline;
-        cell.lblTag.text=tagModelDetails.tag;
-        isHot=tagModelDetails.is_hot;
-        strColorType=tagModelDetails.color_code;
+    else{
+        IBModelDetails* ibModelDetails = tagModel.TagSearch[indexPath.row];
+        cell.lblHeading.text=ibModelDetails.headline;
+        cell.lblTag.text=ibModelDetails.tag;
+        isHot=ibModelDetails.is_hot;
+        strColorType=ibModelDetails.color_code;
     }
     
     cell.selectedBackgroundView.backgroundColor=[UIColor clearColor];
@@ -253,19 +258,20 @@
         [PPUtilts sharedInstance].LatestIDId=ibModelDetails.id;
     }
     else if ([PPUtilts sharedInstance].apiCall==kApiCallMyIdea){
-        MyIdeaModelDetails* ibModelDetails = myIdeaModel.MyIdea[indexPath.row];
+        IBModelDetails* ibModelDetails = myIdeaModel.MyIdea[indexPath.row];
         [PPUtilts sharedInstance].colorCode=ibModelDetails.color_code;
         [PPUtilts sharedInstance].LatestIDId=ibModelDetails.id;
     }
     else if ([PPUtilts sharedInstance].apiCall==kApiCallMyBrief){
-        MyBriefModelDetails* ibModelDetails = myBriefModel.MyBrief[indexPath.row];
+        IBModelDetails* ibModelDetails = myBriefModel.MyBrief[indexPath.row];
         [PPUtilts sharedInstance].colorCode=ibModelDetails.color_code;
         [PPUtilts sharedInstance].LatestIDId=ibModelDetails.id;
     }
     
-    else{TagSearchModelDetails* tagModelDetails = tagModel.TagSearch[indexPath.row];
-        [PPUtilts sharedInstance].colorCode=tagModelDetails.color_code;
-        [PPUtilts sharedInstance].LatestIDId=tagModelDetails.id;
+    else{
+        IBModelDetails* ibModelDetails = tagModel.TagSearch[indexPath.row];
+        [PPUtilts sharedInstance].colorCode=ibModelDetails.color_code;
+        [PPUtilts sharedInstance].LatestIDId=ibModelDetails.id;
     }
     [self.navigationController pushViewController:obj animated:YES];
 }
