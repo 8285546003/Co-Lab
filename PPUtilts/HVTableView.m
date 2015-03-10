@@ -155,7 +155,8 @@
 			actionToTake = 0;
 		}
 	}
-	
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
 	return cell;
 }
 

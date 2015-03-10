@@ -177,7 +177,7 @@
     NoteView *noteView = [[NoteView alloc] initWithFrame:CGRectMake(40, 25, screenWidth - 80, 200)];
     [noteView setFontName:@"Helvetica" size:24];
     noteView.autocorrectionType = FALSE; // or use  UITextAutocorrectionTypeNo
-    noteView.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
+   // noteView.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
     [noteView setDelegate:self];
     NSString *hStr = [self.mainDataDictionary valueForKey:@"DESCRIPTION"];
     if (hStr.length) {
@@ -233,7 +233,7 @@
     NoteView *noteView = [[NoteView alloc] initWithFrame:CGRectMake(40, 25, screenWidth - 80, 200)];
     [noteView setFontName:@"Helvetica" size:24];
     noteView.tag = PPkTags;
-    noteView.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
+   // noteView.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
     [noteView setDelegate:self];
     NSString *hStr = [self.mainDataDictionary valueForKey:@"TAGS"];
     if (hStr.length) {
@@ -325,7 +325,7 @@
     tmpOverlayObj.tag=1000;
     [tmpOverlayObj setDelegate:(id)self];
     [self.baseScrollView addSubview:tmpOverlayObj];
-    [tmpOverlayObj renderingScreenAccordingToFrame:self.view];
+    [tmpOverlayObj renderingScreenAccordingToFrame];
 }
 
 - (void)takePhoto {
@@ -360,14 +360,20 @@
     
     
 }
-
+- (UIImage *)imageWithImage:(UIImage *)image convertToSize:(CGSize)size {
+    UIGraphicsBeginImageContext(size);
+    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    UIImage *destImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return destImage;
+}
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
     isAttachment = YES;
     
     [self rearrengeScrollView:isAttachment];
-    self.attachmentImage.image = chosenImage;
+    self.attachmentImage.image = [self imageWithImage:chosenImage convertToSize:CGSizeMake(150, 150)];
     [tmpOverlayObj closeMethod:nil];
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
@@ -379,9 +385,7 @@
 #pragma UITextViewDalegate
 #pragma UITextfieldDelegate
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range  replacementText:(NSString *)text{
-    NSLog(@"back %ld",(long)textView.tag);
     if (textView.tag == PPkHeader) {
-        
         int finalCOunt = 80 - (int)[textView.text length];
         NSLog(@"Textfield %d and text is == %lu",finalCOunt,(unsigned long)textView.text.length);
         titleCharCountLbl.text = [NSString stringWithFormat:@"%d",finalCOunt];
@@ -455,8 +459,9 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    manager.responseSerializer.acceptableContentTypes = CONTENT_TYPE_HTML;
     NSString *imageString = [UIImagePNGRepresentation(self.attachmentImage.image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    
     if (!imageString.length) {
         imageString = @"";
     }

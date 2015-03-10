@@ -30,10 +30,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.team.ios</string>
+			<string>com.colab.apns</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.team.ios</string>
+				<string>com.colab.apns</string>
 			</array>
 		</dict>
 	</array>

@@ -145,6 +145,8 @@
         cell = [[[NSBundle mainBundle]loadNibNamed:kStaticIdentifier owner:self options:nil]lastObject];
     }
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     if ([PPUtilts sharedInstance].apiCall==kApiCallLatestIdeaBrief){ibModelDetails = ibModel.LatestIdeaBrief[indexPath.row];}
     else if ([PPUtilts sharedInstance].apiCall==kApiCallMyIdea){ibModelDetails = myIdeaModel.MyIdea[indexPath.row];}
     else if ([PPUtilts sharedInstance].apiCall==kApiCallMyBrief){ibModelDetails = myBriefModel.MyBrief[indexPath.row];}
@@ -258,7 +260,7 @@
     tmpOverlayObj = [[OverlayView alloc] initOverlayView];
     [tmpOverlayObj setDelegate:self];
     [self.view addSubview:tmpOverlayObj];
-    [tmpOverlayObj createOrAnswerIB:self.view With:NO];
+    [tmpOverlayObj createOrAnswerIB:NO];
 }
 - (void)createIdea{
     CreateIdea_BriefViewController *objCreateIdea = [CreateIdea_BriefViewController new];

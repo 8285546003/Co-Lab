@@ -40,7 +40,7 @@
     if (cell == nil) {
         cell = [[[NSBundle mainBundle]loadNibNamed:@"NotificationViewCell" owner:self options:nil]lastObject];
     }
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.lblNotificationDescription.text=@"nlmsndfl;sdnflk;jsdhknsdALCJDOSW;FHIadjklFNSLKASDFNlkAJSDFHA;Lndflk;asFHL;Andlj;aSDHL;ANSdlh;dna'LFH;AKSLfhl;sdfJKG";
 //    cell.lblHeading.text=[[[self.allData  valueForKey:[PPUtilts sharedInstance].apiCall] valueForKey:@"headline"] objectAtIndex:indexPath.row];
 //    cell.lblTag.text=[[[self.allData valueForKey:[PPUtilts sharedInstance].apiCall] valueForKey:@"tag"] objectAtIndex:indexPath.row];

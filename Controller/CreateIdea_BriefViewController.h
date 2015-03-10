@@ -14,7 +14,7 @@
 #import "PPUtilts.h"
 
 
-@interface CreateIdea_BriefViewController : UIViewController<UIScrollViewDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>{
+@interface CreateIdea_BriefViewController : UIViewController<UIScrollViewDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>{
     IBOutlet UIScrollView *baseScrollView;
     UILabel *titleCharCountLbl;
     UILabel *dicCharCountLbl;

@@ -32,7 +32,7 @@
 #define ATTACHED_IMAGE_FRAME    CGRectMake(0, 0, self.view.frame.size.width, 200)
 
 
-#define kheightForRowAtIndexPath 200.0f
+#define kheightForRowAtIndexPath 210.0f
 #define kCellHeightAtIndexZero   100
 #define kCellHeightAtIndexfive   125
 #define kCellHeight              75

@@ -28,9 +28,9 @@
 @property (nonatomic, weak) id <OverlayViewDelegate>delegate;
 
 - (id)initOverlayView;
-- (void)renderingScreenAccordingToFrame:(UIView *)tmpView;
+- (void)renderingScreenAccordingToFrame;
 
-- (void)createOrAnswerIB:(UIView *)inView With:(BOOL)Answer;
+- (void)createOrAnswerIB:(BOOL)Answer;
 - (void)closeIBView:(UIButton *)sender;
 
 - (void)closeMethod:(UIButton *)sender;

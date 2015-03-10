@@ -74,6 +74,7 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [self settingBarButton];
+            [hud hide:YES];
         if (PPNoInternetConnection) {
             kCustomErrorAlert;
         }
@@ -148,11 +149,12 @@
     if (cell == nil) {
         cell = [[[NSBundle mainBundle]loadNibNamed:kStaticIdentifier owner:self options:nil]lastObject];
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    cell.selectedBackgroundView.backgroundColor=[UIColor clearColor];
-    UIView *cellBackgroundClearColor = [[UIView alloc] initWithFrame:cell.frame];
-    cellBackgroundClearColor.backgroundColor = [UIColor clearColor];
-    cell.selectedBackgroundView = cellBackgroundClearColor;
+//    cell.selectedBackgroundView.backgroundColor=[UIColor clearColor];
+//    UIView *cellBackgroundClearColor = [[UIView alloc] initWithFrame:cell.frame];
+//    cellBackgroundClearColor.backgroundColor = [UIColor clearColor];
+//    cell.selectedBackgroundView = cellBackgroundClearColor;
     
     ibModelDetails = ibModel.Detail[indexPath.row];
     

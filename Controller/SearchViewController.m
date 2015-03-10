@@ -81,8 +81,8 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
+     cell.selectionStyle = UITableViewCellSelectionStyleNone;
      cell.backgroundColor=[UIColor clearColor];
-    
      SearchModelDetails* ibModelDetails = ibModel.SearchAuto[indexPath.row];
      StatusModelDetails* status = statusModel.StatusArr[0];
     

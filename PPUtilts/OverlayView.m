@@ -18,37 +18,37 @@
     }
     return nil;
 }
-- (void)renderingScreenAccordingToFrame:(UIView *)tmpView{
+- (void)renderingScreenAccordingToFrame{
     [self setAlpha:0.0f];
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
     CGFloat screenHeight = screenRect.size.height;
     self.backgroundColor = [UIColor blackColor];
-    [self setFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
+    [self setFrame:CGRectMake(0, 0, screenWidth, screenHeight+100)];
     
     [UIView animateWithDuration:1.0 animations:^{
         [self setAlpha:0.9f];
     } completion:^(BOOL finished) {
         takePhotoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [takePhotoBtn setFrame:CGRectMake( 40, screenHeight - 110, 150, 40)];
+        [takePhotoBtn setFrame:CGRectMake( 40, screenHeight - 180, 150, 40)];
         [takePhotoBtn setImage:[UIImage imageNamed:@"TakeAPhoto.png"] forState:UIControlStateNormal];
         [takePhotoBtn addTarget:self.delegate action:@selector(takePhoto) forControlEvents:UIControlEventTouchUpInside];
         takePhotoBtn.alpha = 1.0f;
-        [tmpView addSubview:takePhotoBtn];
+        [self addSubview:takePhotoBtn];
         
         galaryPhotoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [galaryPhotoBtn setFrame:CGRectMake( 40, screenHeight - 160, 150, 40)];
-        [galaryPhotoBtn setImage:[UIImage imageNamed:@"CHooseAPhoto.png"] forState:UIControlStateNormal];
+        [galaryPhotoBtn setFrame:CGRectMake( 40, screenHeight - 230, 150, 40)];
+        [galaryPhotoBtn setImage:[UIImage imageNamed:@"ChooseAPhoto.png"] forState:UIControlStateNormal];
         [galaryPhotoBtn addTarget:self.delegate action:@selector(selectPhoto) forControlEvents:UIControlEventTouchUpInside];
         galaryPhotoBtn.alpha = 1.0f;
-        [tmpView addSubview:galaryPhotoBtn];
+        [self addSubview:galaryPhotoBtn];
         
         closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [closeBtn setFrame:CGRectMake( screenWidth - 80, screenHeight - 110, 40, 40)];
+        [closeBtn setFrame:CGRectMake( screenWidth - 80, screenHeight - 180, 40, 40)];
         [closeBtn setImage:[UIImage imageNamed:@"Close.png"] forState:UIControlStateNormal];
         [closeBtn addTarget:self action:@selector(closeMethod:) forControlEvents:UIControlEventTouchUpInside];
         closeBtn.alpha = 1.0f;
-        [tmpView addSubview:closeBtn];
+        [self addSubview:closeBtn];
 
     }];
  
@@ -89,7 +89,7 @@
 
 
 
-- (void)createOrAnswerIB:(UIView *)inView With:(BOOL)Answer{
+- (void)createOrAnswerIB:(BOOL)Answer{
     
     [self setAlpha:0.0f];
     CGRect screenRect = [[UIScreen mainScreen] bounds];
@@ -107,21 +107,21 @@
         [createIdeaBtn setImage:[UIImage imageNamed:@"createnewidea.png"] forState:UIControlStateNormal];
         [createIdeaBtn addTarget:self.delegate action:@selector(createIdea) forControlEvents:UIControlEventTouchUpInside];
         createIdeaBtn.alpha = 1.0f;
-        [inView addSubview:createIdeaBtn];
+        [self addSubview:createIdeaBtn];
         
         createBriefBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [createBriefBtn setFrame:CGRectMake( 40, screenHeight - 160, 150, 40)];
         [createBriefBtn setImage:[UIImage imageNamed:@"newbreif.png"] forState:UIControlStateNormal];
         [createBriefBtn addTarget:self.delegate action:@selector(createBrief) forControlEvents:UIControlEventTouchUpInside];
         galaryPhotoBtn.alpha = 1.0f;
-        [inView addSubview:createBriefBtn];
+        [self addSubview:createBriefBtn];
         
         closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [closeBtn setFrame:CGRectMake( screenWidth - 80, screenHeight - 110, 40, 40)];
         [closeBtn setImage:[UIImage imageNamed:@"Close.png"] forState:UIControlStateNormal];
         [closeBtn addTarget:self action:@selector(closeIBView:) forControlEvents:UIControlEventTouchUpInside];
         closeBtn.alpha = 1.0f;
-        [inView addSubview:closeBtn];
+        [self addSubview:closeBtn];
         
     }];
     

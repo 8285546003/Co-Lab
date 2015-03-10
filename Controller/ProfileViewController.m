@@ -31,7 +31,9 @@ NSArray *cellTitleText;
     self.profileTableView.dataSource = self;
     [self settingBarButton];
 }
-
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
 - (void)settingBarButton{
     UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [cancelButton setFrame:CANCEL_BUTTON_FRAME];
@@ -91,6 +93,7 @@ NSArray *cellTitleText;
     else{
          cell.textLabel.font = [UIFont systemFontOfSize:15];
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
        return cell;
 }
 
@@ -114,7 +117,7 @@ NSArray *cellTitleText;
             break;
         case PPkMyBriefs:[self goToWithApiCall:kApiCallMyBrief];
             break;
-        case PPkMyNotifications:[self goToWithApiCall:kApiCallNotifications];
+        case PPkMyNotifications://[self goToWithApiCall:kApiCallNotifications];
             break;
         case PPkLogOut:[self goToWithApiCall:kApiCallLogOut];
             break;
