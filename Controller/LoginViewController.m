@@ -38,16 +38,16 @@
 {
     [super viewDidLoad];
     
-    
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"AUTH"]) {
         HomeViewController *homeCont = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
         [self.navigationController pushViewController:homeCont animated:NO];
     }
 }
 - (IBAction)signIn:(id)sender{
-    //hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
-   // hud.labelText = PLEASE_WAIT;
+    hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
+    hud.labelText = PLEASE_WAIT;
     [self connectWithGoogle];
+   
 //[PPUtilts sharedInstance].connected?[self connectWithGoogle]:kCustomAlert(@"No NetWork", @"Something went wrong please check your WIFI connection");
 }
 
@@ -68,9 +68,11 @@
 #pragma mark - GPPSignInDelegate
 
 - (void)finishedWithAuth:(GTMOAuth2Authentication *)auth error:(NSError *)error {
-    
+   // hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
+   // hud.labelText = PLEASE_WAIT;
     if (error) {
         [self.navigationController popToRootViewControllerAnimated:FALSE];
+        [hud hide:YES];
         // Do some error handling here.
     } else {
         
@@ -100,13 +102,6 @@
                     } else
                     {
 
-                        
-                        
-                        NSLog(@"Email= %@",[GPPSignIn sharedInstance].authentication.userEmail);
-                        NSLog(@"GoogleID=%@",person.identifier);
-                        NSLog(@"User Name=%@",[person.name.givenName stringByAppendingFormat:@" %@",person.name.familyName]);
-                        NSLog(@"Gender=%@",person.gender);
-                        
                         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
                         manager.requestSerializer = [AFJSONRequestSerializer serializer];
                         manager.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -117,7 +112,7 @@
                             strDeviceTocken=@"";
                         }
                         
-                        NSDictionary *parameters = @{kApiCall:@"UserLogin",@"display_name":[person.name.givenName stringByAppendingFormat:@" %@",person.name.familyName],@"user_email":[GPPSignIn sharedInstance].authentication.userEmail,@"device_token":strDeviceTocken ,@"os_type": @"1"};
+                        NSDictionary *parameters = @{kApiCall:@"UserLogin",@"display_name":[person.name.givenName stringByAppendingFormat:@" %@",person.name.familyName],@"user_email":[GPPSignIn sharedInstance].authentication.userEmail,@"device_token":strDeviceTocken ,@"os_type":@"1"};
                         [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
                             
                             if ([[responseObject valueForKey:@"Error"] isEqualToString:@"false"]&&[[responseObject valueForKey:@"Message"] isEqualToString:@"Success"]) {
@@ -125,7 +120,14 @@
                             [[NSUserDefaults standardUserDefaults] setValue:[responseObject valueForKey:kUserid] forKey:@"USERID"];
                             [PPUtilts sharedInstance].userID=[responseObject valueForKey:kUserid];
                             HomeViewController *homeCont = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
-                            [self.navigationController pushViewController:homeCont animated:NO];
+                               // NSMutableArray *viewControllers = [NSMutableArray arrayWithArray: self.navigationController.viewControllers];
+                                //[viewControllers removeObjectIdenticalTo:self];
+                               // self.navigationController.viewControllers = viewControllers;
+                                [self.navigationController pushViewController:homeCont animated:NO];
+
+
+                                [hud hide:YES];
+
                             }
                             else{
                                 kCustomErrorAlert;
@@ -133,7 +135,7 @@
                             //[hud hide:YES];
 
                         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                            //[hud hide:YES];
+                            [hud hide:YES];
                             NSLog(@"Error: %@", error);
                             kCustomErrorAlert;
                             

@@ -383,7 +383,21 @@
     
 }
 #pragma UITextViewDalegate
-#pragma UITextfieldDelegate
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
+    switch (textView.tag) {
+        case PPkHeader: //[self.baseScrollView setContentOffset:CGPointMake(0,50) animated:YES];
+            break;
+        case PPkDescription:[self.baseScrollView setContentOffset:CGPointMake(0,250) animated:YES];
+            break;
+        case PPkTags:[self.baseScrollView setContentOffset:CGPointMake(0,300) animated:YES];
+            break;
+        default:
+            break;
+    }
+    return YES;
+}
+
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range  replacementText:(NSString *)text{
     if (textView.tag == PPkHeader) {
         int finalCOunt = 80 - (int)[textView.text length];
@@ -428,6 +442,11 @@
         }
         
     }
+    if ([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
+    }
+    return YES;
     return YES;
 }
 
@@ -497,7 +516,18 @@
     }
     [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSLog(@"JSON: %@", responseObject);
+        NSLog(@"JSON: %hhd", [[responseObject valueForKey:@"Error"]  isEqualToString:@"Request fail please try again"]);
+       // [self.navigationController popViewControllerAnimated:NO];
+        if ([[responseObject valueForKey:@"Error"]  isEqualToString:@"Request fail please try again"]) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        else{
+            [PPUtilts sharedInstance].apiCall=kApiCallLatestIdeaBrief;
+            CoLabListViewController *objLatestIB = [CoLabListViewController new];
+            [self.navigationController pushViewController:objLatestIB animated:YES];
+        }
+
+        
         [hud hide:YES];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
