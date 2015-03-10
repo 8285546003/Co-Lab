@@ -10,7 +10,7 @@
 #import "NoteView.h"
 #import "OverlayView.h"
 
-@interface CoLabListViewController : UIViewController<UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate, UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,OverlayViewDelegate>{
+@interface CoLabListViewController : UIViewController<UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,OverlayViewDelegate>{
     __weak IBOutlet UITableView *latestIdeaBrifTableView;
     UIImageView *attachmentImage;
     BOOL isAttachment;
@@ -19,5 +19,6 @@
 
 @property (nonatomic, strong) NoteView *note;
 @property (nonatomic, strong) UIImageView *attachmentImage;
-@property (nonatomic, weak) IBOutlet UITableView *allDataTableView;
+@property (nonatomic,   weak) IBOutlet UITableView *allDataTableView;
+
 @end

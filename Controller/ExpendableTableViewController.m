@@ -22,6 +22,7 @@
 
 
 @interface ExpendableTableViewController (){
+    //--------Models---------
     StatusModel  *statusModel;
     ExpenModel   *ibModel;
     
@@ -45,27 +46,28 @@
 -(void)getLatestIdeaBrief{
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
-    hud.labelText = @"Please wait...";
+    hud.labelText = PLEASE_WAIT;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    manager.responseSerializer.acceptableContentTypes = CONTENT_TYPE_HTML;
     
-    NSDictionary *parameters = @{@"apicall":@"Detail",@"id":[PPUtilts sharedInstance].LatestIDId,@"color_code":[PPUtilts sharedInstance].colorCode};
+    NSDictionary *parameters = @{kApiCall:kApiCallDetail,kid:[PPUtilts sharedInstance].LatestIDId,kColorCode:[PPUtilts sharedInstance].colorCode};
     
     [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
     ibModel = [[ExpenModel alloc] initWithDictionary:responseObject error:nil];
     statusModel = [[StatusModel alloc] initWithDictionary:responseObject error:nil];
     StatusModelDetails* status = statusModel.StatusArr[0];
-    NSLog(@"%@ %@",status.Message,status.Error);
+        
+    //NSLog(@"%@ %@",status.Message,status.Error);
         
          if ([status.Error isEqualToString:kResultError]) {
             [self.table reloadData];
             [self.table setHidden:NO];
         }
         else{
-             kCustomAlert(@"Error", @"Someting went wrong please connect to your WiFi/3G",@"Ok");
-         }
+            kCustomErrorAlert;
+        }
 
         [self settingBarButton];
         [hud hide:YES];
@@ -73,7 +75,7 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [self settingBarButton];
         if (PPNoInternetConnection) {
-            kCustomAlert(@"Error", @"Someting went wrong please connect to your WiFi/3G",@"Ok");
+            kCustomErrorAlert;
         }
     }];
     
@@ -189,13 +191,13 @@
     
     typedef void (^CaseBlockForColor)();
     NSDictionary *colorType = @{
-                                @"R":
+                                R:
                                     ^{[cell setBackgroundColor:[UIColor    PPRedColor]];
                                         imgIdea.hidden=NO;
                                         if (isHot) {imgHot.hidden =NO;imgIdea.frame=imgBrief.frame;}
                                         else{imgIdea.frame=imgHot.frame;}
                                     },
-                                @"Y":
+                                Y:
                                     ^{[cell setBackgroundColor:[UIColor    PPYellowColor]];
                                         imgIdea.hidden=NO;
                                         imgBrief.hidden=NO;
@@ -203,14 +205,14 @@
                                         else{imgIdea.frame=imgBrief.frame;imgBrief.frame=imgHot.frame;}
                                         
                                     },
-                                @"G":
+                                G:
                                     ^{ [cell setBackgroundColor:[UIColor    PPGreenColor]];
                                         imgIdea.hidden=NO;
                                         imgBrief.hidden=NO;
                                         if (isHot) {imgHot.hidden =NO;}
                                         else{imgIdea.frame=imgBrief.frame;imgBrief.frame=imgHot.frame;}
                                     },
-                                @"B":
+                                B:
                                     ^{ [cell setBackgroundColor:[UIColor    PPBlueColor]];
                                         imgBrief.hidden=NO;
                                         if (isHot) {imgHot.hidden =NO;}

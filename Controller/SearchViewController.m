@@ -135,19 +135,16 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    NSLog(@"%@",tag);
-    NSDictionary *parameters=@{@"apicall":@"SearchAuto",@"tag":tag};
+    manager.responseSerializer.acceptableContentTypes = CONTENT_TYPE_HTML;
+    NSDictionary *parameters=@{kApiCall:kApiCallSearchAuto,kTag:tag};
     
     [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"JSON: %@", responseObject);
- //           if ([[responseObject valueForKey:@"Error"] isEqualToString:@"false"]&&[[responseObject valueForKey:@"Message"] isEqualToString:@"Success"]) {
-        
+       // NSLog(@"JSON: %@", responseObject);
         ibModel = [[SearchModel alloc] initWithDictionary:responseObject error:nil];
         statusModel = [[StatusModel alloc] initWithDictionary:responseObject error:nil];
         StatusModelDetails* status = statusModel.StatusArr[0];
         
-        NSLog(@"%@ %@",status.Message,status.Error);
+       // NSLog(@"%@ %@",status.Message,status.Error);
         
         
         if ([status.Error isEqualToString:kResultError]) {
@@ -155,14 +152,14 @@
             [self.allDataTableView setHidden:NO];
         }
         else{
-            kCustomAlert(@"Error", @"Someting went wrong please connect to your WiFi/3G",@"Ok");
- 
+            kCustomErrorAlert;
         }
 
             [self settingBarButton];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self settingBarButton];
+        kCustomErrorAlert;
         
     }];
 
@@ -182,6 +179,7 @@
     [self.view addSubview:cancelButton];
     [cancelButton bringSubviewToFront:self.view];
 }
+
 - (void)settingBarMethod:(UIButton *)settingBtn{
     switch (settingBtn.tag) {
         case PPkCancel:
@@ -208,7 +206,6 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     const char * _char = [string cStringUsingEncoding:NSUTF8StringEncoding];
     int isBackSpace = strcmp(_char, "\b");
-    
     if (isBackSpace == -8) {
          string = [txtSearch.text substringToIndex:[txtSearch.text length] - 1];
         [self getDataFromTag:string];

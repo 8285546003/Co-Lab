@@ -27,8 +27,8 @@
     BOOL isAttachment;
     CGFloat height;
     
-__weak  IBOutlet UILabel     *lbltitle;
-__weak  IBOutlet UIImageView *headerImage;
+   __weak  IBOutlet UILabel     *lbltitle;
+   __weak  IBOutlet UIImageView *headerImage;
 
     BOOL isIdeaSubmitScreen;
 }

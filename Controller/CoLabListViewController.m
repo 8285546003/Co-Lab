@@ -22,11 +22,8 @@
 #import "MyIdeaModel.h"
 #import "MyBriefModel.h"
 
-#define KEYBOARD_HEIGHT 216
-
-
-
 @interface CoLabListViewController (){
+    
     //------------Models-----------------
     StatusModel    *statusModel;
     IBModel        *ibModel;
@@ -38,6 +35,7 @@
     
     NSString *isHot;
     NSString *strColorType;
+    
 }
 @end
 
@@ -46,11 +44,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"%f",self.view.frame.size.height);
-
     isAttachment = NO;
-    self.allDataTableView.frame=CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-    self.attachmentImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 200)];
+    self.attachmentImage = [[UIImageView alloc] initWithFrame:ATTACHED_IMAGE_FRAME];
     [self getLatestIdeaBrief];
 }
 
@@ -61,29 +56,29 @@
 -(void)getLatestIdeaBrief{
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
-    hud.labelText = @"Please wait...";
+    hud.labelText = PLEASE_WAIT;
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    manager.responseSerializer.acceptableContentTypes = CONTENT_TYPE_HTML;
     NSDictionary *parameters;
     
     if (![PPUtilts sharedInstance].userID) {
-        [PPUtilts sharedInstance].userID=[[NSUserDefaults standardUserDefaults] valueForKey:@"USERID"];
+        [PPUtilts sharedInstance].userID=GET_USERID;
     }
 
     if ([PPUtilts sharedInstance].apiCall==kApiCallLatestIdeaBrief) {
-           parameters = @{@"apicall":kApiCallLatestIdeaBrief};
+           parameters = @{kApiCall:kApiCallLatestIdeaBrief};
     }
     else if ([PPUtilts sharedInstance].apiCall==kApiCallTagSearch){
-          parameters = @{@"apicall":kApiCallTagSearch,@"tag":[PPUtilts sharedInstance].tagSearch};
+           parameters = @{kApiCall:kApiCallTagSearch,kTag:[PPUtilts sharedInstance].tagSearch};
     }
     else if ([PPUtilts sharedInstance].apiCall==kApiCallMyIdea){
-        parameters = @{@"apicall":kApiCallMyIdea,@"user_id":[PPUtilts sharedInstance].userID};
+           parameters = @{kApiCall:kApiCallMyIdea,kUserid:[PPUtilts sharedInstance].userID};
     }
     else if ([PPUtilts sharedInstance].apiCall==kApiCallMyBrief){
-        parameters = @{@"apicall":kApiCallMyBrief,@"user_id":[PPUtilts sharedInstance].userID};
+           parameters = @{kApiCall:kApiCallMyBrief,kUserid:[PPUtilts sharedInstance].userID};
     }
     else{
         
@@ -99,25 +94,23 @@
         statusModel = [[StatusModel alloc] initWithDictionary:responseObject error:nil];
         StatusModelDetails* status = statusModel.StatusArr[0];
         
-        
-        NSLog(@"%@ %@",status.Message,status.Error);
-        NSLog(@"JSON: %@", responseObject);
+       // NSLog(@"%@ %@",status.Message,status.Error);
+       // NSLog(@"JSON: %@", responseObject);
         
         if ([status.Error isEqualToString:kResultError]) {
             [allDataTableView setHidden:NO];
             [allDataTableView reloadData];
         }
         else{
-            kCustomAlert(@"Error", @"Someting went wrong please connect to your WiFi/3G",@"Ok");
+            kCustomErrorAlert;
         }
-
             [self settingBarButton];
             [hud hide:YES];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self settingBarButton];
         if (PPNoInternetConnection) {
-            kCustomAlert(@"Error", @"Someting went wrong please connect to your WiFi/3G",@"Ok");
+            kCustomErrorAlert;
         }
         [hud hide:YES];
         
@@ -172,13 +165,13 @@
     typedef void (^CaseBlockForColor)();
     NSDictionary *colorType = @{
                                 
-                                @"R":
+                                R:
                                     ^{[cell setBackgroundColor:[UIColor    PPRedColor]];
                                         imgIdea.hidden=NO;
                                         if (isHot) {imgHot.hidden =NO;imgIdea.frame=imgBrief.frame;}
                                         else{imgIdea.frame=imgHot.frame;}
                                     },
-                                @"Y":
+                                Y:
                                     ^{[cell setBackgroundColor:[UIColor    PPYellowColor]];
                                         imgIdea.hidden=NO;
                                         imgBrief.hidden=NO;
@@ -186,14 +179,14 @@
                                         else{imgIdea.frame=imgBrief.frame;imgBrief.frame=imgHot.frame;}
 
                                     },
-                                @"G":
+                                G:
                                     ^{ [cell setBackgroundColor:[UIColor    PPGreenColor]];
                                         imgIdea.hidden=NO;
                                         imgBrief.hidden=NO;
                                         if (isHot) {imgHot.hidden =NO;}
                                         else{imgIdea.frame=imgBrief.frame;imgBrief.frame=imgHot.frame;}
                                     },
-                                @"B":
+                                B:
                                     ^{ [cell setBackgroundColor:[UIColor    PPBlueColor]];
                                         imgBrief.hidden=NO;
                                         if (isHot) {imgHot.hidden =NO;}
@@ -208,7 +201,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 250.0f;
+    return kheightForRowAtIndexPath;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     

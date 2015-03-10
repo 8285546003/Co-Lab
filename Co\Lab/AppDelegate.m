@@ -18,25 +18,53 @@ static NSString * const kClientID = @"1043369017986-eatg764omdvlrp4jb8tcge2uf6nk
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+   // [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
+    // (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+    
+    //-- Set Notification
+    if ([application respondsToSelector:@selector(isRegisteredForRemoteNotifications)])
+    {
+        // iOS 8 Notifications
+        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+        
+        [application registerForRemoteNotifications];
+    }
+    else
+    {
+        // iOS < 8 Notifications
+        [application registerForRemoteNotificationTypes:
+         (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
+    }
+    
     // Set app's client ID for |GPPSignIn| and |GPPShare|.
     [GPPSignIn sharedInstance].clientID = kClientID;
     
     // Override point for customization after application launch.
     LoginViewController *loginCont = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
-   navCont = [[UINavigationController alloc] initWithRootViewController:loginCont];
+    navCont = [[UINavigationController alloc] initWithRootViewController:loginCont];
     navCont.navigationBar.hidden = YES;
     self.window.rootViewController = navCont;
     // Read Google+ deep-link data.
     [GPPDeepLink setDelegate:self];
     [GPPDeepLink readDeepLinkAfterInstall];
+
     return YES;
 }
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
+    NSLog(@"My token is: %@", deviceToken);
+
     NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
     [PPUtilts sharedInstance].deviceTocken=token;
+    
     NSLog(@"content---%@", token);
+}
+- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
+{
+    NSLog(@"Failed to get token, error: %@", error);
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

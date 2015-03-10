@@ -464,7 +464,6 @@
     
     
     if([[self.mainDataDictionary valueForKey:@"HEADER"] isEqualToString:@""]){
-        
         kCustomAlert(@"", @"Please enter header.",@"Ok");
         return;
     }
@@ -484,12 +483,12 @@
     NSDictionary *parameters;
     
     if (![PPUtilts sharedInstance].userID) {
-        [PPUtilts sharedInstance].userID=[[NSUserDefaults standardUserDefaults] valueForKey:@"USERID"];
+        [PPUtilts sharedInstance].userID=GET_USERID;
     }
     if (isIdeaSubmitScreen) {
-        parameters = @{@"apicall":@"CreateNewIdeaBrief",@"tag":[self.mainDataDictionary valueForKey:@"TAGS"],@"headline":[self.mainDataDictionary valueForKey:@"HEADER"],@"description_idea_brief": [self.mainDataDictionary valueForKey:@"DESCRIPTION"],@"image":imageString,@"brief_id":@"0",@"is_brief":@"No",@"user_id":[PPUtilts sharedInstance].userID};
+        parameters = @{kApiCall:kApiCallCreateNewIdeaBrief,kTag:[self.mainDataDictionary valueForKey:@"TAGS"],@"headline":[self.mainDataDictionary valueForKey:@"HEADER"],@"description_idea_brief": [self.mainDataDictionary valueForKey:@"DESCRIPTION"],@"image":imageString,@"brief_id":@"0",@"is_brief":@"No",kUserid:[PPUtilts sharedInstance].userID};
     }else{
-        parameters = @{@"apicall":@"CreateNewIdeaBrief",@"tag":[self.mainDataDictionary valueForKey:@"TAGS"],@"headline":[self.mainDataDictionary valueForKey:@"HEADER"],@"description_idea_brief": [self.mainDataDictionary valueForKey:@"DESCRIPTION"],@"image":imageString,@"brief_id":@"0",@"is_brief":@"Yes",@"user_id":[PPUtilts sharedInstance].userID};
+        parameters = @{kApiCall:kApiCallCreateNewIdeaBrief,kTag:[self.mainDataDictionary valueForKey:@"TAGS"],@"headline":[self.mainDataDictionary valueForKey:@"HEADER"],@"description_idea_brief": [self.mainDataDictionary valueForKey:@"DESCRIPTION"],@"image":imageString,@"brief_id":@"0",@"is_brief":@"Yes",kUserid:[PPUtilts sharedInstance].userID};
     }
     [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         

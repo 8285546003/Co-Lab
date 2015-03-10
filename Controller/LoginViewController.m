@@ -45,8 +45,8 @@
     }
 }
 - (IBAction)signIn:(id)sender{
-    hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
-    hud.labelText = @"Please wait...";
+    //hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
+   // hud.labelText = PLEASE_WAIT;
     [self connectWithGoogle];
 //[PPUtilts sharedInstance].connected?[self connectWithGoogle]:kCustomAlert(@"No NetWork", @"Something went wrong please check your WIFI connection");
 }
@@ -110,34 +110,32 @@
                         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
                         manager.requestSerializer = [AFJSONRequestSerializer serializer];
                         manager.responseSerializer = [AFJSONResponseSerializer serializer];
-                        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+                        manager.responseSerializer.acceptableContentTypes = CONTENT_TYPE_HTML;
                         
                         NSString *strDeviceTocken=[PPUtilts sharedInstance].deviceTocken;;
                         if (!strDeviceTocken) {
                             strDeviceTocken=@"";
                         }
                         
-                        NSDictionary *parameters = @{@"apicall":@"UserLogin",@"display_name":[person.name.givenName stringByAppendingFormat:@" %@",person.name.familyName],@"user_email":[GPPSignIn sharedInstance].authentication.userEmail,@"device_token":strDeviceTocken ,@"os_type": @"1"};
+                        NSDictionary *parameters = @{kApiCall:@"UserLogin",@"display_name":[person.name.givenName stringByAppendingFormat:@" %@",person.name.familyName],@"user_email":[GPPSignIn sharedInstance].authentication.userEmail,@"device_token":strDeviceTocken ,@"os_type": @"1"};
                         [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
                             
                             if ([[responseObject valueForKey:@"Error"] isEqualToString:@"false"]&&[[responseObject valueForKey:@"Message"] isEqualToString:@"Success"]) {
-                                
-                            
                             [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"AUTH"];
-                            [[NSUserDefaults standardUserDefaults] setValue:[responseObject valueForKey:@"user_id"] forKey:@"USERID"];
-                            [PPUtilts sharedInstance].userID=[responseObject valueForKey:@"user_id"];
+                            [[NSUserDefaults standardUserDefaults] setValue:[responseObject valueForKey:kUserid] forKey:@"USERID"];
+                            [PPUtilts sharedInstance].userID=[responseObject valueForKey:kUserid];
                             HomeViewController *homeCont = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
                             [self.navigationController pushViewController:homeCont animated:NO];
                             }
                             else{
-                                
-                                kCustomAlert(@"Error", @"Somthing went wrong", @"Ok");
+                                kCustomErrorAlert;
                             }
-                            [hud hide:YES];
+                            //[hud hide:YES];
 
                         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                            [hud hide:YES];
+                            //[hud hide:YES];
                             NSLog(@"Error: %@", error);
+                            kCustomErrorAlert;
                             
                         }];
                         

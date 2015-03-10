@@ -13,13 +13,6 @@
 #import "NotificationViewController.h"
 #import "PPUtilts.h"
 
-#define kCellHeaderHeight 100
-#define kCellHeight       75
-
-
-
-
-
 @interface HomeViewController (){
     NSArray *imageArray;
     NSArray *cellTitleText;
@@ -42,7 +35,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //notificationView.hidden = YES;
     imageArray=ImageArray ;
     cellTitleText = CellTitleText;
     notificationView.hidden=YES;
@@ -57,17 +49,17 @@
 }
 
 - (void)settingBarButton{
-    UIButton *closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [closeButton setFrame:CANCEL_BUTTON_FRAME];
-    [closeButton setImage:[UIImage imageNamed:@"Close_Image.png"] forState:UIControlStateNormal];
-    [closeButton setImage:[UIImage imageNamed:@"Close_Image.png"] forState:UIControlStateSelected];
-    [closeButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
-    closeButton.tag =PPkCancel;
-    [notificationView addSubview:closeButton];
-    [closeButton bringSubviewToFront:self.view];
+    UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [cancelButton setFrame:CANCEL_BUTTON_FRAME];
+    [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateNormal];
+    [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateSelected];
+    [cancelButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
+    cancelButton.tag =PPkCancel;
+    [notificationView addSubview:cancelButton];
+    [cancelButton bringSubviewToFront:self.view];
 }
 - (void)settingBarMethod:(UIButton *)settingBtn{
-    NSLog(@"Button tag == %ld",(long)settingBtn.tag);
+    
     switch (settingBtn.tag) {
         case PPkCancel:[self goToNotificationViewController];
             break;
@@ -107,7 +99,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"CellIdentifier";
+    NSString *CellIdentifier = kStaticIdentifier;
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
@@ -138,11 +130,12 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     if (indexPath.row==0){
-        return kCellHeaderHeight;
+        return kCellHeightAtIndexZero;
     }
     else if (indexPath.row==5){
-        return 125;
+        return kCellHeightAtIndexfive;
     }
     else{
         return kCellHeight;
@@ -172,6 +165,7 @@
     }
     
 }
+
 -(void)goToProfile{
     ProfileViewController *objProfile = [ProfileViewController new];
     [self.navigationController pushViewController:objProfile animated:YES];
