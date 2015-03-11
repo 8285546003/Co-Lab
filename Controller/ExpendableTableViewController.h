@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "HVTableView.h"
-@interface ExpendableTableViewController : UIViewController<HVTableViewDelegate, HVTableViewDataSource>
+#import "OverlayView.h"
+
+@interface ExpendableTableViewController : UIViewController<HVTableViewDelegate, HVTableViewDataSource,OverlayViewDelegate>
 @property (weak, nonatomic) IBOutlet HVTableView *table;
+@property (retain, nonatomic) OverlayView *tmpOverlayObj;
 @end

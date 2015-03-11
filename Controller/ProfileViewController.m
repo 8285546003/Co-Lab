@@ -10,6 +10,7 @@
 #import "CoLabListViewController.h"
 #import <GooglePlus/GooglePlus.h>
 #import "PPUtilts.h"
+#import "UIColor+PPColor.h"
 
 @interface ProfileViewController (){
 NSArray *imageArray;
@@ -22,7 +23,7 @@ NSArray *cellTitleText;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
    // [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:193 green:6 blue:4 alpha:1.0]];
     imageArray    = imageArrayProfile;
     cellTitleText = cellTitleProfile;
@@ -30,6 +31,10 @@ NSArray *cellTitleText;
     self.profileTableView.delegate   = self ;
     self.profileTableView.dataSource = self;
     [self settingBarButton];
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    [self.view setBackgroundColor:[UIColor PPProfileBackGroundColor]];
 }
 - (BOOL)prefersStatusBarHidden {
     return YES;
@@ -43,7 +48,6 @@ NSArray *cellTitleText;
     cancelButton.tag = PPkCancel;
     [self.view addSubview:cancelButton];
 }
-
 - (void)settingBarMethod:(UIButton *)settingBtn{
     switch (settingBtn.tag) {
         case PPkCancel:

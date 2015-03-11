@@ -73,6 +73,26 @@
     }
     // Do any additional setup after loading the view from its nib.
 }
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    [self.view setBackgroundColor:[UIColor PPBackGroundColor]];
+    [self updateFrame];
+}
+-(void)updateFrame{
+    if ([PPUtilts isiPhone5]) {
+        self.homeTableView.frame=CGRectMake(0, 40, self.view.frame.size.width, self.view.frame.size.height);
+    }
+    else if ([PPUtilts isiPhone6]){
+        self.homeTableView.frame=CGRectMake(0, 140, self.view.frame.size.width, self.view.frame.size.height);
+    }
+    else if ([PPUtilts isiPhone6Plus]){
+        self.homeTableView.frame=CGRectMake(0, 200, self.view.frame.size.width, self.view.frame.size.height);
+    }
+    else{
+        self.homeTableView.frame=CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    }
+}
+
 
 - (void)settingBarButton{
     UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];

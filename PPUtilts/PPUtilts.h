@@ -16,18 +16,19 @@
 
 #define kCustomErrorAlert [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Someting went wrong please connect to your WiFi/3G" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show]
 
-//kCustomAlert(@"Error", @"Someting went wrong please connect to your WiFi/3G",@"Ok");
 
 
-#define CANCEL_BUTTON_FRAME      CGRectMake(40, self.view.bounds.size.height - 60, 50, 50)
+#define CANCEL_BUTTON_FRAME      CGRectMake(10, self.view.bounds.size.height - 40, 50, 50)
 #define CANCEL_BUTTON_NAME       @"Close_Image.png"
 #define CANCEL_BUTTON_NAME_WHITE @"white_arrow.png"
+#define BACK_BUTTON_NAME         @"Pre_Image.png"
 
-#define ATTACHMENT_BUTTON_FRAME CGRectMake(self.view.frame.size.width-140, self.view.frame.size.height - 60, 50, 50)
+#define ATTACHMENT_BUTTON_FRAME CGRectMake(self.view.frame.size.width-110, self.view.frame.size.height - 40, 50, 50)
 #define ATTACHMENT_BUTTON_NAME  @"Attachment_Image.png"
 
-#define ADD_BUTTON_FRAME        CGRectMake(self.view.frame.size.width - 90, self.view.frame.size.height - 60, 50, 50)
+#define ADD_BUTTON_FRAME        CGRectMake(self.view.frame.size.width - 60, self.view.frame.size.height - 40, 50, 50)
 #define ADD_BUTTON_NAME         @"plus.png"
+
 
 #define ATTACHED_IMAGE_FRAME    CGRectMake(0, 0, self.view.frame.size.width, 200)
 
@@ -52,7 +53,7 @@
 #define ImageArray @[@"CoAppImage.png",@"Create_New_Idea_Image.png",@"Create_New_Brief_Image.png",@"Search_Image.png",@"Profile_Image.png",@"Latest_Idea_And_Briefs.png"]
 #define  CellTitleText  @[@" CO\\Lab",@"  Create New Idea",@"  Create New Briefs",@"  Search",@"  Profile",@"  Latest Idea & Brifes"]
 
-#define imageArrayProfile @[@"Profile_Image.png",@"Create_New_Idea_Image.png",@"Create_New_Brief_Image.png",@"Search_Image.png",@"Profile_Image.png"]
+#define imageArrayProfile @[@"profile.png",@"my_ideas.png",@"my_brief.png",@"Notification.png",@"logout.png"]
 #define cellTitleProfile  @[@"Profile",@"My Ideas",@"My Briefs",@"Notifications",@"Log out"]
 
 

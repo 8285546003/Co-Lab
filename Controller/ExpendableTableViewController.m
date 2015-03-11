@@ -19,6 +19,7 @@
 #import "StatusModel.h"
 #import "ExpenModel.h"
 #import "AFNInjector.h"
+#import "CreateIdea_BriefViewController.h"
 
 
 
@@ -29,6 +30,7 @@
     
     IBModelDetails* ibModelDetails;
     StatusModelDetails* status;
+    BOOL isAnswerTheBriefs;
 }
 
 @end
@@ -41,6 +43,10 @@
     [self getLatestIdeaBrief];
     self.table.HVTableViewDataSource = self;
     self.table.HVTableViewDelegate = self;
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    [self.view setBackgroundColor:[UIColor PPBackGroundColor]];
 }
 - (BOOL)prefersStatusBarHidden {
     return YES;
@@ -89,11 +95,25 @@
 - (void)settingBarButton{
     UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [cancelButton setFrame:CANCEL_BUTTON_FRAME];
-    [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateNormal];
-    [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateSelected];
+    if ([PPUtilts sharedInstance].apiCall==kApiCallLatestIdeaBrief) {
+        [cancelButton setImage:[UIImage imageNamed:BACK_BUTTON_NAME] forState:UIControlStateNormal];
+        [cancelButton setImage:[UIImage imageNamed:BACK_BUTTON_NAME] forState:UIControlStateSelected];
+    }
+    else{
+        [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateNormal];
+        [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateSelected];
+    }
     [cancelButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
     cancelButton.tag = PPkCancel;
     [self.view addSubview:cancelButton];
+    
+    UIButton *addButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [addButton setFrame:ADD_BUTTON_FRAME];
+    [addButton setImage:[UIImage imageNamed:ADD_BUTTON_NAME] forState:UIControlStateNormal];
+    [addButton setImage:[UIImage imageNamed:ADD_BUTTON_NAME] forState:UIControlStateSelected];
+    [addButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
+    addButton.tag = PPkAddOrNext;
+    [self.view addSubview:addButton];
 }
 - (void)settingBarMethod:(UIButton *)settingBtn{
     switch (settingBtn.tag) {
@@ -102,17 +122,52 @@
             break;
         case PPkAttachment:
             break;
-        case PPkAddOrNext:
+        case PPkAddOrNext:[self addOverLay];
             break;
         default:
             break;
     }
 }
+//-----------------------------------------OVERLAY---------------------------------------------
 
-
+-(void)addOverLay{
+    _tmpOverlayObj = [[OverlayView alloc] initOverlayView];
+    [_tmpOverlayObj setDelegate:self];
+    [self.view addSubview:_tmpOverlayObj];
+    [_tmpOverlayObj createOrAnswerIB:isAnswerTheBriefs];
+}
+- (void)createIdea{
+    CreateIdea_BriefViewController *objCreateIdea = [CreateIdea_BriefViewController new];
+    [objCreateIdea setIsIdeaSubmitScreen:YES];
+    [objCreateIdea setIsCurrentControllerPresented:YES];
+    [objCreateIdea setIsAnswerTheBriefs:NO];
+    [_tmpOverlayObj closeIBView:nil];
+    [self presentViewController:objCreateIdea animated:YES completion:nil];
+}
+- (void)createBrief{
+    CreateIdea_BriefViewController *objCreateIdea = [CreateIdea_BriefViewController new];
+    [objCreateIdea setIsIdeaSubmitScreen:NO];
+    [objCreateIdea setIsCurrentControllerPresented:YES];
+    [_tmpOverlayObj closeIBView:nil];
+    [self presentViewController:objCreateIdea animated:YES completion:nil];
+}
+- (void)answerIB{
+    CreateIdea_BriefViewController *objCreateIdea = [CreateIdea_BriefViewController new];
+    [objCreateIdea setIsIdeaSubmitScreen:YES];
+    [objCreateIdea setIsCurrentControllerPresented:YES];
+    [objCreateIdea setIsAnswerTheBriefs:YES];
+    [_tmpOverlayObj closeIBView:nil];
+    [self presentViewController:objCreateIdea animated:YES completion:nil];
+}
 -(void)tableView:(UITableView *)tableView expandCell:(UITableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath
 {
-
+//    UITableViewCell cell = (UITableViewCell )button.superview.superview;
+//    UITableView tableView = (UITableView )cell.superview;
+//    UITextField firstName=(UITextField )[[[tableView subviews] objectAtIndex:0] viewWithTag:103];
+//    
+//    UITextField emaill=(UITextField )[[[tableView subviews] objectAtIndex:0] viewWithTag:104];
+//    
+    
 }
 
 -(void)tableView:(UITableView *)tableView collapseCell:(UITableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath
@@ -169,6 +224,7 @@
                             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                 if (image) {
                                     cell.imgMain.image = image;
+                                   // cell.imageView.hidden=YES;
                     }
             }];
     }
@@ -186,11 +242,12 @@
     }
     
     NSString *strColorType=ibModelDetails.color_code;
-    
+    isAnswerTheBriefs=YES;
     typedef void (^CaseBlockForColor)();
     NSDictionary *colorType = @{
                                 R:
                                     ^{[cell setBackgroundColor:[UIColor    PPRedColor]];
+                                        isAnswerTheBriefs=NO;
                                         imgIdea.hidden=NO;
                                         if (isHot) {imgHot.hidden =NO;imgIdea.frame=imgBrief.frame;}
                                         else{imgIdea.frame=imgHot.frame;}
@@ -222,7 +279,6 @@
     
     return cell;
 }
-
 -(BOOL)isImageExist:(NSString*)path{return (![[path stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]length] == 0);}
 
 @end

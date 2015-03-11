@@ -9,6 +9,7 @@
 #import "NotificationViewController.h"
 #import "NotificationViewCell.h"
 #import "PPUtilts.h"
+#import "UIColor+PPColor.h"
 
 @interface NotificationViewController ()
 
@@ -20,6 +21,10 @@
     [super viewDidLoad];
     [self settingBarButton];
     // Do any additional setup after loading the view from its nib.
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    [self.view setBackgroundColor:[UIColor PPBackGroundColor]];
 }
 - (BOOL)prefersStatusBarHidden {
     return YES;

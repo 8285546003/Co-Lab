@@ -18,7 +18,7 @@
 
 @implementation CreateIdea_BriefViewController
 @synthesize baseScrollView;
-@synthesize attachmentImage,mainDataDictionary,isIdeaSubmitScreen,isCurrentControllerPresented;
+@synthesize attachmentImage,mainDataDictionary,isIdeaSubmitScreen,isCurrentControllerPresented,isAnswerTheBriefs;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -34,7 +34,14 @@
 
     self.baseScrollView.frame=CGRectMake(0, 65, self.view.frame.size.width, self.view.frame.size.height);
     if (self.isIdeaSubmitScreen) {
-        lbltitle.text=@"Create New Idea";
+        if (isAnswerTheBriefs) {
+            lbltitle.text=@"Answer The Briefs";
+
+        }
+        else{
+            lbltitle.text=@"Create New Idea";
+
+        }
         headerImage.image=[UIImage imageNamed:@"Create_New_Idea_Image.png"];
         self.view.backgroundColor=[UIColor PPYellowColor];
         self.baseScrollView.backgroundColor = [UIColor PPYellowColor];
@@ -46,9 +53,9 @@
     }
     
     
-    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
-    gestureRecognizer.cancelsTouchesInView = NO;
-    [self.baseScrollView addGestureRecognizer:gestureRecognizer];
+//    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+//    gestureRecognizer.cancelsTouchesInView = NO;
+//    [self.baseScrollView addGestureRecognizer:gestureRecognizer];
     self.baseScrollView.scrollEnabled = YES;
     self.baseScrollView.scrollsToTop  = YES;
     [self rearrengeScrollView:isAttachment];
@@ -61,6 +68,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [self settingBarButton];
+  //  [self.view setBackgroundColor:[UIColor clearColor]];
     [super viewWillAppear:animated];
     
 }
@@ -95,6 +103,12 @@
 - (BOOL)prefersStatusBarHidden {
     return YES;
 }
+
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
+
 
 - (void) hideKeyboard {
     [self.view endEditing:YES];
@@ -510,19 +524,24 @@
         [PPUtilts sharedInstance].userID=GET_USERID;
     }
     if (isIdeaSubmitScreen) {
-        parameters = @{kApiCall:kApiCallCreateNewIdeaBrief,kTag:[self.mainDataDictionary valueForKey:@"TAGS"],@"headline":[self.mainDataDictionary valueForKey:@"HEADER"],@"description_idea_brief": [self.mainDataDictionary valueForKey:@"DESCRIPTION"],@"image":imageString,@"brief_id":@"0",@"is_brief":@"No",kUserid:[PPUtilts sharedInstance].userID};
+        NSString *strBriefId=@"0";
+        if (isAnswerTheBriefs) {
+            strBriefId=[PPUtilts sharedInstance].LatestIDId;
+        }
+        parameters = @{kApiCall:kApiCallCreateNewIdeaBrief,kTag:[self.mainDataDictionary valueForKey:@"TAGS"],@"headline":[self.mainDataDictionary valueForKey:@"HEADER"],@"description_idea_brief": [self.mainDataDictionary valueForKey:@"DESCRIPTION"],@"image":imageString,@"brief_id":strBriefId,@"is_brief":@"No",kUserid:[PPUtilts sharedInstance].userID};
     }else{
         parameters = @{kApiCall:kApiCallCreateNewIdeaBrief,kTag:[self.mainDataDictionary valueForKey:@"TAGS"],@"headline":[self.mainDataDictionary valueForKey:@"HEADER"],@"description_idea_brief": [self.mainDataDictionary valueForKey:@"DESCRIPTION"],@"image":imageString,@"brief_id":@"0",@"is_brief":@"Yes",kUserid:[PPUtilts sharedInstance].userID};
     }
     [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSLog(@"JSON: %hhd", [[responseObject valueForKey:@"Error"]  isEqualToString:@"Request fail please try again"]);
+       // NSLog(@"JSON: %hhd", [[responseObject valueForKey:@"Error"]  isEqualToString:@"Request fail please try again"]);
        // [self.navigationController popViewControllerAnimated:NO];
         if ([[responseObject valueForKey:@"Error"]  isEqualToString:@"Request fail please try again"]) {
             [self.navigationController popViewControllerAnimated:YES];
         }
         else{
             [PPUtilts sharedInstance].apiCall=kApiCallLatestIdeaBrief;
+           // [self saveDataToServer];
             CoLabListViewController *objLatestIB = [CoLabListViewController new];
             [self.navigationController pushViewController:objLatestIB animated:YES];
         }

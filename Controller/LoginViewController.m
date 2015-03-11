@@ -43,6 +43,10 @@
         [self.navigationController pushViewController:homeCont animated:NO];
     }
 }
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    [self.view setBackgroundColor:[UIColor PPBackGroundColor]];
+}
 - (IBAction)signIn:(id)sender{
     hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
     hud.labelText = PLEASE_WAIT;

@@ -27,24 +27,24 @@
     [self setFrame:CGRectMake(0, 0, screenWidth, screenHeight+100)];
     
     [UIView animateWithDuration:1.0 animations:^{
-        [self setAlpha:0.9f];
+        [self setAlpha:0.8f];
     } completion:^(BOOL finished) {
         takePhotoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [takePhotoBtn setFrame:CGRectMake( 40, screenHeight - 180, 150, 40)];
+        [takePhotoBtn setFrame:CGRectMake( 40, screenHeight - 180, 200, 40)];
         [takePhotoBtn setImage:[UIImage imageNamed:@"TakeAPhoto.png"] forState:UIControlStateNormal];
         [takePhotoBtn addTarget:self.delegate action:@selector(takePhoto) forControlEvents:UIControlEventTouchUpInside];
         takePhotoBtn.alpha = 1.0f;
         [self addSubview:takePhotoBtn];
         
         galaryPhotoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [galaryPhotoBtn setFrame:CGRectMake( 40, screenHeight - 230, 150, 40)];
+        [galaryPhotoBtn setFrame:CGRectMake( 40, screenHeight - 230, 200, 40)];
         [galaryPhotoBtn setImage:[UIImage imageNamed:@"ChooseAPhoto.png"] forState:UIControlStateNormal];
         [galaryPhotoBtn addTarget:self.delegate action:@selector(selectPhoto) forControlEvents:UIControlEventTouchUpInside];
         galaryPhotoBtn.alpha = 1.0f;
         [self addSubview:galaryPhotoBtn];
         
         closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [closeBtn setFrame:CGRectMake( screenWidth - 80, screenHeight - 180, 40, 40)];
+        [closeBtn setFrame:CGRectMake( screenWidth - 70, screenHeight - 180, 40, 40)];
         [closeBtn setImage:[UIImage imageNamed:@"Close.png"] forState:UIControlStateNormal];
         [closeBtn addTarget:self action:@selector(closeMethod:) forControlEvents:UIControlEventTouchUpInside];
         closeBtn.alpha = 1.0f;
@@ -65,30 +65,23 @@
     }];
     
 }
-- (void)takePhoto{
-    NSLog(@"take photo");
-    
-}
-- (void)selectPhoto{
-    NSLog(@"select photo");
-}
-- (void)answerBrief{
-    NSLog(@"answer brief");
-}
-- (void)createIdea{
-    
-}
-- (void)createBrief{
-    
-    
-}
-
-
-
-
-
-
-
+//- (void)takePhoto{
+//    NSLog(@"take photo");
+//    
+//}
+//- (void)selectPhoto{
+//    NSLog(@"select photo");
+//}
+//- (void)answerBrief{
+//    NSLog(@"answer brief");
+//}
+//- (void)createIdea{
+//    
+//}
+//- (void)createBrief{
+//    
+//    
+//}
 - (void)createOrAnswerIB:(BOOL)Answer{
     
     [self setAlpha:0.0f];
@@ -99,25 +92,33 @@
     [self setFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
     
     [UIView animateWithDuration:1.0 animations:^{
-        [self setAlpha:0.9f];
+        [self setAlpha:0.8f];
     } completion:^(BOOL finished) {
         
+        if (Answer) {
+            answerBriefBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            [answerBriefBtn setFrame:CGRectMake( 40, screenHeight - 210, 200, 40)];
+            [answerBriefBtn setImage:[UIImage imageNamed:@"answer_brief.png"] forState:UIControlStateNormal];
+            [answerBriefBtn addTarget:self.delegate action:@selector(answerIB) forControlEvents:UIControlEventTouchUpInside];
+            answerBriefBtn.alpha = 1.0f;
+            [self addSubview:answerBriefBtn];
+        }
         createIdeaBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [createIdeaBtn setFrame:CGRectMake( 40, screenHeight - 110, 150, 40)];
+        [createIdeaBtn setFrame:CGRectMake( 40, screenHeight - 110, 200, 40)];
         [createIdeaBtn setImage:[UIImage imageNamed:@"createnewidea.png"] forState:UIControlStateNormal];
         [createIdeaBtn addTarget:self.delegate action:@selector(createIdea) forControlEvents:UIControlEventTouchUpInside];
         createIdeaBtn.alpha = 1.0f;
         [self addSubview:createIdeaBtn];
         
         createBriefBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [createBriefBtn setFrame:CGRectMake( 40, screenHeight - 160, 150, 40)];
+        [createBriefBtn setFrame:CGRectMake( 40, screenHeight - 160, 200, 40)];
         [createBriefBtn setImage:[UIImage imageNamed:@"newbreif.png"] forState:UIControlStateNormal];
         [createBriefBtn addTarget:self.delegate action:@selector(createBrief) forControlEvents:UIControlEventTouchUpInside];
-        galaryPhotoBtn.alpha = 1.0f;
+        createIdeaBtn.alpha = 1.0f;
         [self addSubview:createBriefBtn];
         
         closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [closeBtn setFrame:CGRectMake( screenWidth - 80, screenHeight - 110, 40, 40)];
+        [closeBtn setFrame:CGRectMake( screenWidth - 70, screenHeight - 110, 40, 40)];
         [closeBtn setImage:[UIImage imageNamed:@"Close.png"] forState:UIControlStateNormal];
         [closeBtn addTarget:self action:@selector(closeIBView:) forControlEvents:UIControlEventTouchUpInside];
         closeBtn.alpha = 1.0f;
@@ -131,6 +132,7 @@
     
     [createIdeaBtn removeFromSuperview];
     [createBriefBtn removeFromSuperview];
+    [answerBriefBtn removeFromSuperview];
     [closeBtn removeFromSuperview];
     [UIView animateWithDuration:1.0 animations:^{
         [self setAlpha:0.0];

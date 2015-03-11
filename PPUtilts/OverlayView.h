@@ -10,6 +10,13 @@
 
 
 @protocol OverlayViewDelegate <NSObject>
+@optional
+- (void)takePhoto;
+- (void)selectPhoto;
+
+- (void)createIdea;
+- (void)createBrief;
+- (void)answerIB;
 
 //- (void) photoFromCamraOrGalary;
 
@@ -34,10 +41,10 @@
 - (void)closeIBView:(UIButton *)sender;
 
 - (void)closeMethod:(UIButton *)sender;
-- (void)takePhoto;
-- (void)selectPhoto;
-
-- (void)createIdea;
-- (void)createBrief;
-- (void)answerBrief;
+//- (void)takePhoto;
+//- (void)selectPhoto;
+//
+//- (void)createIdea;
+//- (void)createBrief;
+//- (void)answerIB;
 @end

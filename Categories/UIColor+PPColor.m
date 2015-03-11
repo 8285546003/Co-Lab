@@ -26,5 +26,12 @@
 + (UIColor*) PPBlueColor {
     return [UIColor colorWithRed:21.0f/255.0f     green:156.0f/255.0f blue:157.0f/255.0f alpha:1];
 }
++ (UIColor*) PPBackGroundColor{
+    return [UIColor colorWithRed:227.0f/255.0f     green:219.0f/255.0f blue:212.0f/255.0f alpha:1];
+}
++ (UIColor*) PPProfileBackGroundColor{
+    return [UIColor colorWithRed:34.0f/255.0f     green:34.0f/255.0f blue:34.0f/255.0f alpha:1];
+}
+
 
 @end

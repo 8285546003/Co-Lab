@@ -15,6 +15,7 @@
 #import "StatusModelDetails.h"
 #import "SearchModel.h"
 #import "SearchModelDetails.h"
+#import "UIColor+PPColor.h"
 
 
 @interface SearchViewController (){
@@ -29,7 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
     imageView.image = [UIImage imageNamed:@"s1"];
     self.txtSearch.leftView = imageView;
     self.txtSearch.leftViewMode=UITextFieldViewModeAlways;\
@@ -48,7 +49,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [self settingBarButton];
-
+    [self.view setBackgroundColor:[UIColor PPBackGroundColor]];
     [super viewWillAppear:YES];
 }
 - (void) hideKeyboard {
