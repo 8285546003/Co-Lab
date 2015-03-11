@@ -20,5 +20,4 @@
 @property (nonatomic, strong) NoteView *note;
 @property (nonatomic, strong) UIImageView *attachmentImage;
 @property (nonatomic,   weak) IBOutlet UITableView *allDataTableView;
-
 @end

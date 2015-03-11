@@ -21,6 +21,7 @@
 #import "TagSearchModel.h"
 #import "MyIdeaModel.h"
 #import "MyBriefModel.h"
+#import "AFNInjector.h"
 
 @interface CoLabListViewController (){
     
@@ -32,6 +33,7 @@
     MyBriefModel   *myBriefModel;
     
     IBModelDetails* ibModelDetails;
+    StatusModelDetails* status;
     
     NSString *isHot;
     NSString *strColorType;
@@ -46,76 +48,63 @@
     [super viewDidLoad];
     isAttachment = NO;
     self.attachmentImage = [[UIImageView alloc] initWithFrame:ATTACHED_IMAGE_FRAME];
-    [self getLatestIdeaBrief];
+    [self callWebServices];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
 }
+//----------------------------------------------Get Parameters for the respective web services-------------------------------------------------------
+-(NSDictionary*)getParameters{
+    NSDictionary *parameters;
+    if (![PPUtilts sharedInstance].userID) {[PPUtilts sharedInstance].userID=GET_USERID;}
+    if ([PPUtilts sharedInstance].apiCall==kApiCallLatestIdeaBrief) {parameters = @{kApiCall:kApiCallLatestIdeaBrief};}
+    else if ([PPUtilts sharedInstance].apiCall==kApiCallTagSearch){parameters = @{kApiCall:kApiCallTagSearch,kTag:[PPUtilts sharedInstance].tagSearch};}
+    else if ([PPUtilts sharedInstance].apiCall==kApiCallMyIdea){parameters = @{kApiCall:kApiCallMyIdea,kUserid:[PPUtilts sharedInstance].userID};}
+    else if ([PPUtilts sharedInstance].apiCall==kApiCallMyBrief){parameters = @{kApiCall:kApiCallMyBrief,kUserid:[PPUtilts sharedInstance].userID};}
+    else{}
+    return parameters;
+}
 
--(void)getLatestIdeaBrief{
+//----------------------------------------------Set data to models-----------------------------------------------------------------------------------
+-(void)setModels:(id)responseObject{
+    if ([PPUtilts sharedInstance].apiCall==kApiCallLatestIdeaBrief) {ibModel = [[IBModel alloc] initWithDictionary:responseObject error:nil];}
+    else if ([PPUtilts sharedInstance].apiCall==kApiCallMyIdea){myIdeaModel = [[MyIdeaModel alloc] initWithDictionary:responseObject error:nil];}
+    else if ([PPUtilts sharedInstance].apiCall==kApiCallMyBrief){myBriefModel = [[MyBriefModel alloc] initWithDictionary:responseObject error:nil];}
+    else{tagModel = [[TagSearchModel alloc] initWithDictionary:responseObject error:nil];}
+    statusModel = [[StatusModel alloc] initWithDictionary:responseObject error:nil];
+    status = statusModel.StatusArr[0];
+}
+-(void)callWebServices{
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
     hud.labelText = PLEASE_WAIT;
-    
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    manager.responseSerializer.acceptableContentTypes = CONTENT_TYPE_HTML;
-    NSDictionary *parameters;
-    
-    if (![PPUtilts sharedInstance].userID) {
-        [PPUtilts sharedInstance].userID=GET_USERID;
-    }
-
-    if ([PPUtilts sharedInstance].apiCall==kApiCallLatestIdeaBrief) {
-           parameters = @{kApiCall:kApiCallLatestIdeaBrief};
-    }
-    else if ([PPUtilts sharedInstance].apiCall==kApiCallTagSearch){
-           parameters = @{kApiCall:kApiCallTagSearch,kTag:[PPUtilts sharedInstance].tagSearch};
-    }
-    else if ([PPUtilts sharedInstance].apiCall==kApiCallMyIdea){
-           parameters = @{kApiCall:kApiCallMyIdea,kUserid:[PPUtilts sharedInstance].userID};
-    }
-    else if ([PPUtilts sharedInstance].apiCall==kApiCallMyBrief){
-           parameters = @{kApiCall:kApiCallMyBrief,kUserid:[PPUtilts sharedInstance].userID};
-    }
-    else{
-        
-        
-    }
-    [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-        if ([PPUtilts sharedInstance].apiCall==kApiCallLatestIdeaBrief) {ibModel = [[IBModel alloc] initWithDictionary:responseObject error:nil];}
-        else if ([PPUtilts sharedInstance].apiCall==kApiCallMyIdea){myIdeaModel = [[MyIdeaModel alloc] initWithDictionary:responseObject error:nil];}
-        else if ([PPUtilts sharedInstance].apiCall==kApiCallMyBrief){myBriefModel = [[MyBriefModel alloc] initWithDictionary:responseObject error:nil];}
-        else{tagModel = [[TagSearchModel alloc] initWithDictionary:responseObject error:nil];}
-        
-        statusModel = [[StatusModel alloc] initWithDictionary:responseObject error:nil];
-        StatusModelDetails* status = statusModel.StatusArr[0];
-        
-       // NSLog(@"%@ %@",status.Message,status.Error);
-       // NSLog(@"JSON: %@", responseObject);
-        
-        if ([status.Error isEqualToString:kResultError]) {
-            [allDataTableView setHidden:NO];
-            [allDataTableView reloadData];
-        }
-        else{
-            kCustomErrorAlert;
-        }
+    NSDictionary *parameters=[self getParameters];
+    AFNInjector *objAFN = [AFNInjector new];
+    [objAFN parameters:parameters completionBlock:^(NSArray *data, NSError *error) {
+        if(!error) {
+            [self setModels:data];
+            if ([status.Error isEqualToString:kResultError]) {
+                [allDataTableView setHidden:NO];
+                [allDataTableView reloadData];
+            }
+            else{
+                kCustomErrorAlert;
+            }
             [self settingBarButton];
             [hud hide:YES];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [self settingBarButton];
-        if (PPNoInternetConnection) {
-            kCustomErrorAlert;
+            NSLog(@"%@",data);
+        } else {
+            [self settingBarButton];
+            if (PPNoInternetConnection) {
+                kCustomErrorAlert;
+            }
+            [hud hide:YES];
+
+            NSLog(@"error %@", error);
         }
-        [hud hide:YES];
-        
     }];
-    
+
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
 }

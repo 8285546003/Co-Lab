@@ -33,6 +33,7 @@
 		68C03A8E1A95B25600555891 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 68C03A7D1A95B25600555891 /* InfoPlist.strings */; };
 		68C03A901A95B25600555891 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68C03A7F1A95B25600555891 /* Images.xcassets */; };
 		68C03A921A95B25600555891 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C03A801A95B25600555891 /* main.m */; };
+		68C89AE71AB0110F00F5C4B3 /* AFNInjector.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C89AE61AB0110F00F5C4B3 /* AFNInjector.m */; };
 		68CC908E1AA5A8C300F3CB48 /* UIColor+PPColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CC904E1AA5A8C300F3CB48 /* UIColor+PPColor.m */; };
 		68CC908F1AA5A8C300F3CB48 /* CoLabListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CC90511AA5A8C300F3CB48 /* CoLabListViewController.m */; };
 		68CC90901AA5A8C300F3CB48 /* CreateIdea_BriefViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CC90531AA5A8C300F3CB48 /* CreateIdea_BriefViewController.m */; };
@@ -150,6 +151,8 @@
 		68C03AA71A95C18400555891 /* libPods-AFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-AFNetworking.a"; path = "Pods/build/Debug-iphoneos/libPods-AFNetworking.a"; sourceTree = "<group>"; };
 		68C03AA81A95C18400555891 /* libPods-google-plus-ios-sdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-google-plus-ios-sdk.a"; path = "Pods/build/Debug-iphoneos/libPods-google-plus-ios-sdk.a"; sourceTree = "<group>"; };
 		68C03AA91A95C18400555891 /* libPods-MBProgressHUD.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-MBProgressHUD.a"; path = "Pods/build/Debug-iphoneos/libPods-MBProgressHUD.a"; sourceTree = "<group>"; };
+		68C89AE51AB0110F00F5C4B3 /* AFNInjector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNInjector.h; sourceTree = "<group>"; };
+		68C89AE61AB0110F00F5C4B3 /* AFNInjector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNInjector.m; sourceTree = "<group>"; };
 		68CC904D1AA5A8C300F3CB48 /* UIColor+PPColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+PPColor.h"; sourceTree = "<group>"; };
 		68CC904E1AA5A8C300F3CB48 /* UIColor+PPColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+PPColor.m"; sourceTree = "<group>"; };
 		68CC90501AA5A8C300F3CB48 /* CoLabListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoLabListViewController.h; sourceTree = "<group>"; };
@@ -383,6 +386,8 @@
 		68CC90C21AA5A8E300F3CB48 /* PPUtilts */ = {
 			isa = PBXGroup;
 			children = (
+				68C89AE51AB0110F00F5C4B3 /* AFNInjector.h */,
+				68C89AE61AB0110F00F5C4B3 /* AFNInjector.m */,
 				68CFE2701AA5E1300082D3A8 /* NotificationViewCell.h */,
 				68CFE2711AA5E1300082D3A8 /* NotificationViewCell.m */,
 				68CC90C31AA5A8E300F3CB48 /* HVTableView.h */,
@@ -692,6 +697,7 @@
 				68C03A921A95B25600555891 /* main.m in Sources */,
 				685447841AAD6DA20044E3C7 /* SearchModelDetails.m in Sources */,
 				6854478D1AAD9A710044E3C7 /* MyIdeaModel.m in Sources */,
+				68C89AE71AB0110F00F5C4B3 /* AFNInjector.m in Sources */,
 				68CC90D91AA5A8E300F3CB48 /* OverlayView.m in Sources */,
 				68CC90911AA5A8C300F3CB48 /* ExpendableTableViewController.m in Sources */,
 				68CC90901AA5A8C300F3CB48 /* CreateIdea_BriefViewController.m in Sources */,

@@ -18,6 +18,7 @@
 #import "UIColor+PPColor.h"
 #import "StatusModel.h"
 #import "ExpenModel.h"
+#import "AFNInjector.h"
 
 
 
@@ -27,12 +28,14 @@
     ExpenModel   *ibModel;
     
     IBModelDetails* ibModelDetails;
+    StatusModelDetails* status;
 }
 
 @end
-
 @implementation ExpendableTableViewController
+
 @synthesize table;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self getLatestIdeaBrief];
@@ -47,39 +50,37 @@
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
     hud.labelText = PLEASE_WAIT;
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    manager.responseSerializer.acceptableContentTypes = CONTENT_TYPE_HTML;
     
     NSDictionary *parameters = @{kApiCall:kApiCallDetail,kid:[PPUtilts sharedInstance].LatestIDId,kColorCode:[PPUtilts sharedInstance].colorCode};
-    
-    [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-    ibModel = [[ExpenModel alloc] initWithDictionary:responseObject error:nil];
-    statusModel = [[StatusModel alloc] initWithDictionary:responseObject error:nil];
-    StatusModelDetails* status = statusModel.StatusArr[0];
-        
-    //NSLog(@"%@ %@",status.Message,status.Error);
-        
-         if ([status.Error isEqualToString:kResultError]) {
-            [self.table reloadData];
-            [self.table setHidden:NO];
-        }
-        else{
-            kCustomErrorAlert;
-        }
-
-        [self settingBarButton];
-        [hud hide:YES];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    AFNInjector *objAFN = [AFNInjector new];
+    [objAFN parameters:parameters completionBlock:^(id data, NSError *error) {
+        ibModel = [[ExpenModel alloc] initWithDictionary:data error:nil];
+        statusModel = [[StatusModel alloc] initWithDictionary:data error:nil];
+        status = statusModel.StatusArr[0];
+        if(!error) {
+            if ([status.Error isEqualToString:kResultError]) {
+                [self.table reloadData];
+                [self.table setHidden:NO];
+            }
+            else{
+                kCustomErrorAlert;
+            }
             [self settingBarButton];
             [hud hide:YES];
-        if (PPNoInternetConnection) {
-            kCustomErrorAlert;
+            NSLog(@"%@",data);
+        } else {
+            [self settingBarButton];
+            if (PPNoInternetConnection) {
+                kCustomErrorAlert;
+            }
+            [self settingBarButton];
+            [hud hide:YES];
+            if (PPNoInternetConnection) {
+                kCustomErrorAlert;
+            }
+            NSLog(@"error %@", error);
         }
     }];
-    
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
@@ -150,11 +151,6 @@
         cell = [[[NSBundle mainBundle]loadNibNamed:kStaticIdentifier owner:self options:nil]lastObject];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-//    cell.selectedBackgroundView.backgroundColor=[UIColor clearColor];
-//    UIView *cellBackgroundClearColor = [[UIView alloc] initWithFrame:cell.frame];
-//    cellBackgroundClearColor.backgroundColor = [UIColor clearColor];
-//    cell.selectedBackgroundView = cellBackgroundClearColor;
     
     ibModelDetails = ibModel.Detail[indexPath.row];
     
