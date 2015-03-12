@@ -27,7 +27,7 @@
     [self setFrame:CGRectMake(0, 0, screenWidth, screenHeight+100)];
     
     [UIView animateWithDuration:1.0 animations:^{
-        [self setAlpha:0.8f];
+        [self setAlpha:0.9f];
     } completion:^(BOOL finished) {
         takePhotoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [takePhotoBtn setFrame:CGRectMake( 40, screenHeight - 160, 150, 40)];
@@ -75,7 +75,7 @@
     [self setFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
     
     [UIView animateWithDuration:1.0 animations:^{
-        [self setAlpha:0.8f];
+        [self setAlpha:0.9f];
     } completion:^(BOOL finished) {
         
         if (Answer) {
@@ -87,21 +87,21 @@
             [self addSubview:answerBriefBtn];
         }
         createIdeaBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [createIdeaBtn setFrame:CGRectMake( 40, screenHeight - 110, 150, 40)];
-        [createIdeaBtn setImage:[UIImage imageNamed:@"newbreif.png"] forState:UIControlStateNormal];
+        [createIdeaBtn setFrame:CGRectMake( 40, screenHeight - 160, 150, 40)];
+        [createIdeaBtn setImage:[UIImage imageNamed:@"createnewidea.png"] forState:UIControlStateNormal];
         [createIdeaBtn addTarget:self.delegate action:@selector(createIdea) forControlEvents:UIControlEventTouchUpInside];
         createIdeaBtn.alpha = 1.0f;
         [self addSubview:createIdeaBtn];
         
         createBriefBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [createBriefBtn setFrame:CGRectMake( 40, screenHeight - 160, 150, 40)];
-        [createBriefBtn setImage:[UIImage imageNamed:@"createnewidea.png"] forState:UIControlStateNormal];
+        [createBriefBtn setFrame:CGRectMake( 40, screenHeight - 110, 150, 40)];
+        [createBriefBtn setImage:[UIImage imageNamed:@"newbreif.png"] forState:UIControlStateNormal];
         [createBriefBtn addTarget:self.delegate action:@selector(createBrief) forControlEvents:UIControlEventTouchUpInside];
         createIdeaBtn.alpha = 1.0f;
         [self addSubview:createBriefBtn];
         
         closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [closeBtn setFrame:CGRectMake( screenWidth - 110, screenHeight - 110, 40, 40)];
+        [closeBtn setFrame:CGRectMake( screenWidth - 70, screenHeight - 110, 40, 40)];
         [closeBtn setImage:[UIImage imageNamed:@"Close.png"] forState:UIControlStateNormal];
         [closeBtn addTarget:self action:@selector(closeIBView:) forControlEvents:UIControlEventTouchUpInside];
         closeBtn.alpha = 1.0f;

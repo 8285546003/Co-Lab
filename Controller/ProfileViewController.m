@@ -11,6 +11,7 @@
 #import <GooglePlus/GooglePlus.h>
 #import "PPUtilts.h"
 #import "UIColor+PPColor.h"
+#import "NotificationViewController.h"
 
 @interface ProfileViewController (){
 NSArray *imageArray;
@@ -128,7 +129,7 @@ NSArray *cellTitleText;
             break;
         case PPkMyBriefs:[self goToWithApiCall:kApiCallMyBrief];
             break;
-        case PPkMyNotifications://[self goToWithApiCall:kApiCallNotifications];
+        case PPkMyNotifications:[self gotoNavigationController];
             break;
         case PPkLogOut:[self goToWithApiCall:kApiCallLogOut];
             break;
@@ -136,6 +137,10 @@ NSArray *cellTitleText;
             break;
             
     }
+}
+-(void)gotoNavigationController{
+    NotificationViewController *obj = [NotificationViewController new];
+    [self.navigationController pushViewController:obj animated:YES];
 }
 
 -(void)goToWithApiCall:(NSString*)apiCall{
