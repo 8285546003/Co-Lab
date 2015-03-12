@@ -518,39 +518,34 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
     hud.labelText = @"Please wait...";
     
-    NSDictionary *parameters;
     
     if (![PPUtilts sharedInstance].userID) {
         [PPUtilts sharedInstance].userID=GET_USERID;
     }
+    
+    NSString *strBriefId=@"0";
+    NSString *strIsBrief=@"Yes";
     if (isIdeaSubmitScreen) {
-        NSString *strBriefId=@"0";
+        strIsBrief=@"No";
         if (isAnswerTheBriefs) {
             strBriefId=[PPUtilts sharedInstance].LatestIDId;
         }
-        parameters = @{kApiCall:kApiCallCreateNewIdeaBrief,kTag:[self.mainDataDictionary valueForKey:@"TAGS"],@"headline":[self.mainDataDictionary valueForKey:@"HEADER"],@"description_idea_brief": [self.mainDataDictionary valueForKey:@"DESCRIPTION"],@"image":imageString,@"brief_id":strBriefId,@"is_brief":@"No",kUserid:[PPUtilts sharedInstance].userID};
-    }else{
-        parameters = @{kApiCall:kApiCallCreateNewIdeaBrief,kTag:[self.mainDataDictionary valueForKey:@"TAGS"],@"headline":[self.mainDataDictionary valueForKey:@"HEADER"],@"description_idea_brief": [self.mainDataDictionary valueForKey:@"DESCRIPTION"],@"image":imageString,@"brief_id":@"0",@"is_brief":@"Yes",kUserid:[PPUtilts sharedInstance].userID};
     }
+    NSDictionary *parameters = @{kApiCall:kApiCallCreateNewIdeaBrief,kTag:[self.mainDataDictionary valueForKey:@"TAGS"],@"headline":[self.mainDataDictionary valueForKey:@"HEADER"],@"description_idea_brief": [self.mainDataDictionary valueForKey:@"DESCRIPTION"],@"image":imageString,@"brief_id":strBriefId,@"is_brief":strIsBrief,kUserid:[PPUtilts sharedInstance].userID};
+    
     [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-       // NSLog(@"JSON: %hhd", [[responseObject valueForKey:@"Error"]  isEqualToString:@"Request fail please try again"]);
-       // [self.navigationController popViewControllerAnimated:NO];
         if ([[responseObject valueForKey:@"Error"]  isEqualToString:@"Request fail please try again"]) {
             [self.navigationController popViewControllerAnimated:YES];
         }
         else{
             [PPUtilts sharedInstance].apiCall=kApiCallLatestIdeaBrief;
-           // [self saveDataToServer];
             CoLabListViewController *objLatestIB = [CoLabListViewController new];
             [self.navigationController pushViewController:objLatestIB animated:YES];
         }
-
-        
         [hud hide:YES];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
         NSLog(@"Error: %@", error);
         [hud hide:YES];
         

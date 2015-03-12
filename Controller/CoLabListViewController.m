@@ -55,7 +55,7 @@
     [self.view setBackgroundColor:[UIColor PPBackGroundColor]];
     [super viewWillAppear:YES];
 }
-//----------------------------------------------Get Parameters for the respective web services-------------------------------------------------------
+//-----------------------------------Get Parameters for the respective web services-------------------------------------------------------
 -(NSDictionary*)getParameters{
     NSDictionary *parameters;
     if (![PPUtilts sharedInstance].userID) {[PPUtilts sharedInstance].userID=GET_USERID;}
@@ -67,7 +67,7 @@
     return parameters;
 }
 
-//----------------------------------------------Set data to models-----------------------------------------------------------------------------------
+//------------------------------------Set data to models-----------------------------------------------------------------------------------
 -(void)setModels:(id)responseObject{
     if ([PPUtilts sharedInstance].apiCall==kApiCallLatestIdeaBrief) {ibModel = [[IBModel alloc] initWithDictionary:responseObject error:nil];}
     else if ([PPUtilts sharedInstance].apiCall==kApiCallMyIdea){myIdeaModel = [[MyIdeaModel alloc] initWithDictionary:responseObject error:nil];}
@@ -86,8 +86,13 @@
         if(!error) {
             [self setModels:data];
             if ([status.Error isEqualToString:kResultError]) {
-                [allDataTableView setHidden:NO];
-                [allDataTableView reloadData];
+                if ([status.Message isEqualToString:kResultMessage]) {
+                    [allDataTableView setHidden:NO];
+                    [allDataTableView reloadData];
+                }
+                else{
+                    kCustomAlert(@"", status.Message, @"Ok");
+                }
             }
             else{
                 kCustomErrorAlert;
