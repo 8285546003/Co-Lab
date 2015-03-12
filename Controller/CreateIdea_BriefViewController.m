@@ -52,20 +52,12 @@
         self.baseScrollView.backgroundColor = [UIColor PPBlueColor];
     }
     
-    
-//    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
-//    gestureRecognizer.cancelsTouchesInView = NO;
-//    [self.baseScrollView addGestureRecognizer:gestureRecognizer];
     self.baseScrollView.scrollEnabled = YES;
     self.baseScrollView.scrollsToTop  = YES;
     [self rearrengeScrollView:isAttachment];
 
 }
 
-//- (void)viewDidAppear:(BOOL)animated{
-//    [super viewDidAppear:YES];
-//
-//}
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:YES];
     
@@ -209,7 +201,6 @@
     noteView = [[NoteView alloc] initWithFrame:CGRectMake(40, 25, screenWidth - 80, 200)];
     [noteView setFontName:@"Helvetica" size:24];
     noteView.autocorrectionType = FALSE; // or use  UITextAutocorrectionTypeNo
-   // noteView.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
     [noteView setDelegate:self];
     NSString *hStr = [self.mainDataDictionary valueForKey:@"DESCRIPTION"];
     if (hStr.length) {
@@ -265,7 +256,6 @@
     noteView = [[NoteView alloc] initWithFrame:CGRectMake(40, 25, screenWidth - 80, 200)];
     [noteView setFontName:@"Helvetica" size:24];
     noteView.tag = PPkTags;
-   // noteView.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
     [noteView setDelegate:self];
     NSString *hStr = [self.mainDataDictionary valueForKey:@"TAGS"];
     if (hStr.length) {
@@ -304,9 +294,6 @@
 
 #pragma Setting bar button
 - (void)settingBarButton{
-
-   // [self removeSettingButtonFromSuperView];
-    
     UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [cancelButton setFrame:CANCEL_BUTTON_FRAME];
     [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateNormal];
@@ -353,24 +340,18 @@
     }
 }
 -(void)isValidUserId{
-    //if (![PPUtilts sharedInstance].userID) {
         if (GET_USERID) {
-            //[PPUtilts sharedInstance].userID=GET_USERID;
             [self saveDataToServer];
         }
         else{
             kCustomAlert(@"Failed to Login", @"Something went wrong please go to profile->Loout to re-login", @"Ok");
         }
-    //}
-   // else{
-       // [self saveDataToServer];
-  //  }
 }
 -(void)AddOverLay{
     tmpOverlayObj = [[OverlayView alloc] initOverlayView];
     tmpOverlayObj.tag=1000;
     [tmpOverlayObj setDelegate:(id)self];
-    [self.baseScrollView addSubview:tmpOverlayObj];
+    [self.view addSubview:tmpOverlayObj];
     [tmpOverlayObj renderingScreenAccordingToFrame];
 }
 
