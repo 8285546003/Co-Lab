@@ -12,4 +12,5 @@
 
 @interface LoginViewController : UIViewController 
 - (IBAction)signIn:(id)sender;
+@property (nonatomic, strong) NSTimer *timer;
 @end

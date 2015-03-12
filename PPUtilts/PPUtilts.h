@@ -13,6 +13,8 @@
 
 
 #define kCustomAlert(title,msg,ok) [[[UIAlertView alloc] initWithTitle:title message:msg delegate:self cancelButtonTitle:ok otherButtonTitles:nil, nil] show]
+#define kLoginAlert(title,msg,ok,retry) [[[UIAlertView alloc] initWithTitle:title message:msg delegate:self cancelButtonTitle:ok otherButtonTitles:retry, nil] show]
+
 
 #define kCustomErrorAlert [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Someting went wrong please connect to your WiFi/3G" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show]
 
@@ -141,7 +143,7 @@ typedef enum {
 
 @interface PPUtilts : NSObject
 @property (nonatomic,retain)  NSString *deviceTocken;
-@property (nonatomic,retain)  NSString *userID;
+//@property (nonatomic,retain)  NSString *userID;
 @property (nonatomic, strong) NSString *colorCode;
 @property (nonatomic, strong) NSString *LatestIDId;
 @property (nonatomic, strong) NSString *apiCall;
@@ -149,7 +151,7 @@ typedef enum {
 + (instancetype)sharedInstance;
 - (BOOL)connected;
 - (BOOL)isNotificationViewHidden;
-
++ (BOOL)isiPhone4;
 + (BOOL)isiPhone5;
 + (BOOL)isiPhone6;
 + (BOOL)isiPhone6Plus;

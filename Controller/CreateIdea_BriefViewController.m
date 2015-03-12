@@ -62,9 +62,27 @@
 
 }
 
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:YES];
+//- (void)viewDidAppear:(BOOL)animated{
+//    [super viewDidAppear:YES];
+//
+//}
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:YES];
+    
+    NoteView *n1=(NoteView *)[self.view viewWithTag:PPkHeader];
+    n1.text=nil;
+    n1.text=@"";
+    NoteView *n2=(NoteView *)[self.view viewWithTag:PPkDescription];
+    n2.text=nil;
+    n2.text=@"";
+    NoteView *n3=(NoteView *)[self.view viewWithTag:PPkTags];
+    n3.text=nil;
+    n3.text=@"";
+    [self.baseScrollView setContentSize:CGSizeMake([[UIScreen mainScreen] bounds].size.width, 0.0f)];
 
+    dicCharCountLbl.text=@"200";
+    titleCharCountLbl.text = @"80";
+    
 }
 - (void)viewWillAppear:(BOOL)animated{
     [self settingBarButton];
@@ -132,7 +150,7 @@
     UIView *headerBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, height, screenWidth, 225)];
     headerBaseView.backgroundColor = [UIColor clearColor];
     
-    NoteView *noteView = [[NoteView alloc] initWithFrame:CGRectMake(40, 25, screenWidth - 80, 200)];
+    noteView = [[NoteView alloc] initWithFrame:CGRectMake(40, 25, screenWidth - 80, 200)];
     [noteView setFontName:@"Helvetica" size:24];
     noteView.tag = PPkHeader;
      NSString *hStr = [self.mainDataDictionary valueForKey:@"HEADER"];
@@ -188,7 +206,7 @@
     UIView *headerBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, height, screenWidth, 225)];
     headerBaseView.backgroundColor = [UIColor clearColor];
     
-    NoteView *noteView = [[NoteView alloc] initWithFrame:CGRectMake(40, 25, screenWidth - 80, 200)];
+    noteView = [[NoteView alloc] initWithFrame:CGRectMake(40, 25, screenWidth - 80, 200)];
     [noteView setFontName:@"Helvetica" size:24];
     noteView.autocorrectionType = FALSE; // or use  UITextAutocorrectionTypeNo
    // noteView.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
@@ -244,7 +262,7 @@
     UIView *headerBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, height, screenWidth, 225)];
     headerBaseView.backgroundColor = [UIColor clearColor];
     
-    NoteView *noteView = [[NoteView alloc] initWithFrame:CGRectMake(40, 25, screenWidth - 80, 200)];
+    noteView = [[NoteView alloc] initWithFrame:CGRectMake(40, 25, screenWidth - 80, 200)];
     [noteView setFontName:@"Helvetica" size:24];
     noteView.tag = PPkTags;
    // noteView.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
@@ -324,15 +342,29 @@
     NSLog(@"Button tag == %ld",(long)settingBtn.tag);
     switch (settingBtn.tag) {
         case PPkCancel:
-            isCurrentControllerPresented?[[self presentingViewController] dismissViewControllerAnimated:NO completion:nil]:[self.navigationController popViewControllerAnimated:YES];
+            isCurrentControllerPresented?[[self presentingViewController] dismissViewControllerAnimated:YES completion:nil]:[self.navigationController popViewControllerAnimated:YES];
              break;
         case PPkAttachment:[self AddOverLay];
             break;
-        case PPkAddOrNext:[self saveDataToServer];
+        case PPkAddOrNext:[self isValidUserId];
             break;
         default:
             break;
     }
+}
+-(void)isValidUserId{
+    //if (![PPUtilts sharedInstance].userID) {
+        if (GET_USERID) {
+            //[PPUtilts sharedInstance].userID=GET_USERID;
+            [self saveDataToServer];
+        }
+        else{
+            kCustomAlert(@"Failed to Login", @"Something went wrong please go to profile->Loout to re-login", @"Ok");
+        }
+    //}
+   // else{
+       // [self saveDataToServer];
+  //  }
 }
 -(void)AddOverLay{
     tmpOverlayObj = [[OverlayView alloc] initOverlayView];
@@ -399,19 +431,12 @@
 #pragma UITextViewDalegate
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
-    switch (textView.tag) {
-        case PPkHeader: //[self.baseScrollView setContentOffset:CGPointMake(0,50) animated:YES];
-            break;
-        case PPkDescription:[self.baseScrollView setContentOffset:CGPointMake(0,250) animated:YES];
-            break;
-        case PPkTags:[self.baseScrollView setContentOffset:CGPointMake(0,300) animated:YES];
-            break;
-        default:
-            break;
-    }
     return YES;
 }
 
+-(void)textViewDidBeginEditing:(UITextView *)textView{
+    [self.baseScrollView setContentSize:CGSizeMake(self.view.frame.size.width, self.baseScrollView.frame.size.height+400)];
+}
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range  replacementText:(NSString *)text{
     if (textView.tag == PPkHeader) {
         int finalCOunt = 80 - (int)[textView.text length];
@@ -519,10 +544,6 @@
     hud.labelText = @"Please wait...";
     
     
-    if (![PPUtilts sharedInstance].userID) {
-        [PPUtilts sharedInstance].userID=GET_USERID;
-    }
-    
     NSString *strBriefId=@"0";
     NSString *strIsBrief=@"Yes";
     if (isIdeaSubmitScreen) {
@@ -531,7 +552,7 @@
             strBriefId=[PPUtilts sharedInstance].LatestIDId;
         }
     }
-    NSDictionary *parameters = @{kApiCall:kApiCallCreateNewIdeaBrief,kTag:[self.mainDataDictionary valueForKey:@"TAGS"],@"headline":[self.mainDataDictionary valueForKey:@"HEADER"],@"description_idea_brief": [self.mainDataDictionary valueForKey:@"DESCRIPTION"],@"image":imageString,@"brief_id":strBriefId,@"is_brief":strIsBrief,kUserid:[PPUtilts sharedInstance].userID};
+    NSDictionary *parameters = @{kApiCall:kApiCallCreateNewIdeaBrief,kTag:[self.mainDataDictionary valueForKey:@"TAGS"],@"headline":[self.mainDataDictionary valueForKey:@"HEADER"],@"description_idea_brief": [self.mainDataDictionary valueForKey:@"DESCRIPTION"],@"image":imageString,@"brief_id":strBriefId,@"is_brief":strIsBrief,kUserid:GET_USERID};
     
     [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -539,9 +560,17 @@
             [self.navigationController popViewControllerAnimated:YES];
         }
         else{
-            [PPUtilts sharedInstance].apiCall=kApiCallLatestIdeaBrief;
-            CoLabListViewController *objLatestIB = [CoLabListViewController new];
-            [self.navigationController pushViewController:objLatestIB animated:YES];
+            if (!isAnswerTheBriefs) {
+                [PPUtilts sharedInstance].apiCall=kApiCallLatestIdeaBrief;
+                CoLabListViewController *objLatestIB = [CoLabListViewController new];
+                [self.navigationController pushViewController:objLatestIB animated:YES];
+            }
+            else{
+                if (isCurrentControllerPresented) {
+                    [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+                }
+            }
+
         }
         [hud hide:YES];
         

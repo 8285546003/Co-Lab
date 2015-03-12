@@ -11,7 +11,6 @@
 #import "OverlayView.h"
 
 @interface CoLabListViewController : UIViewController<UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,OverlayViewDelegate>{
-    __weak IBOutlet UITableView *latestIdeaBrifTableView;
     UIImageView *attachmentImage;
     BOOL isAttachment;
     OverlayView *tmpOverlayObj;

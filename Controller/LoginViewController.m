@@ -17,6 +17,7 @@
 @interface LoginViewController ()<GPPSignInDelegate>
 {
     MBProgressHUD *hud;
+    int i;
 }
 @end
 
@@ -37,7 +38,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"AUTH"]) {
         HomeViewController *homeCont = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
         [self.navigationController pushViewController:homeCont animated:NO];
@@ -45,17 +45,38 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
+
     [self.view setBackgroundColor:[UIColor PPBackGroundColor]];
 }
+-(void)timerFired{
+    i++;
+    if (i==60) {
+        [hud hide:YES];
+        kLoginAlert(@"Network Error", @"Something went wrong please try again.", @"Cancel",@"Retry");
+        [_timer invalidate];
+    }
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex==1) {
+        [self connectWithGoogle];
+    }
+}
 - (IBAction)signIn:(id)sender{
-    hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
-    hud.labelText = PLEASE_WAIT;
     [self connectWithGoogle];
-   
-//[PPUtilts sharedInstance].connected?[self connectWithGoogle]:kCustomAlert(@"No NetWork", @"Something went wrong please check your WIFI connection");
 }
 
 -(void)connectWithGoogle{
+    hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
+    hud.labelText = PLEASE_WAIT;
+    _timer=[NSTimer new];
+    
+    i=0;
+    _timer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                              target:self
+                                            selector:@selector(timerFired)
+                                            userInfo:nil
+                                             repeats:YES];
+    
     GPPSignIn *signIn = [GPPSignIn sharedInstance];
     signIn.shouldFetchGooglePlusUser = YES;
     signIn.shouldFetchGoogleUserEmail = YES;
@@ -122,21 +143,15 @@
                             if ([[responseObject valueForKey:@"Error"] isEqualToString:@"false"]&&[[responseObject valueForKey:@"Message"] isEqualToString:@"Success"]) {
                             [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"AUTH"];
                             [[NSUserDefaults standardUserDefaults] setValue:[responseObject valueForKey:kUserid] forKey:@"USERID"];
-                            [PPUtilts sharedInstance].userID=[responseObject valueForKey:kUserid];
+                           // [PPUtilts sharedInstance].userID=[responseObject valueForKey:kUserid];
                             HomeViewController *homeCont = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
-                               // NSMutableArray *viewControllers = [NSMutableArray arrayWithArray: self.navigationController.viewControllers];
-                                //[viewControllers removeObjectIdenticalTo:self];
-                               // self.navigationController.viewControllers = viewControllers;
+                                [_timer invalidate];
                                 [self.navigationController pushViewController:homeCont animated:NO];
-
-
-                                [hud hide:YES];
-
                             }
                             else{
                                 kCustomErrorAlert;
                             }
-                            //[hud hide:YES];
+                            [hud hide:YES];
 
                         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                             [hud hide:YES];

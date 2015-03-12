@@ -68,4 +68,18 @@
         return NO;
     }
 }
++ (BOOL)isiPhone4{
+    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+    if( screenHeight < screenWidth ){
+        screenHeight = screenWidth;
+    }
+    if ( screenHeight== 480){
+        return YES;
+    }
+    else{
+        return NO;
+    }
+}
+
 @end

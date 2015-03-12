@@ -214,7 +214,6 @@
     cell.lblDescription.text=ibModelDetails.description_idea_brief;
     
     NSString *imageName=ibModelDetails.image;
-
     
     if ([self isImageExist:imageName]) {
         cell.lblDescription.frame=CGRectMake(40,410, 230,162);
@@ -224,15 +223,11 @@
                             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                 if (image) {
                                     cell.imgMain.image = image;
-                                   // cell.imageView.hidden=YES;
                     }
             }];
     }
     
-    
     BOOL isHot=[ibModelDetails.is_hot isEqualToString:@"No"]?NO:YES;
-
-    
     UIImageView *imgIdea=(UIImageView *) [cell.contentView viewWithTag:PP101];
     UIImageView *imgBrief=(UIImageView *)[cell.contentView viewWithTag:PP102];
     UIImageView *imgHot=(UIImageView *)  [cell.contentView viewWithTag:PP103];

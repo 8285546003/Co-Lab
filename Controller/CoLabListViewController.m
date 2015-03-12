@@ -58,11 +58,10 @@
 //-----------------------------------Get Parameters for the respective web services-------------------------------------------------------
 -(NSDictionary*)getParameters{
     NSDictionary *parameters;
-    if (![PPUtilts sharedInstance].userID) {[PPUtilts sharedInstance].userID=GET_USERID;}
     if ([PPUtilts sharedInstance].apiCall==kApiCallLatestIdeaBrief) {parameters = @{kApiCall:kApiCallLatestIdeaBrief};}
     else if ([PPUtilts sharedInstance].apiCall==kApiCallTagSearch){parameters = @{kApiCall:kApiCallTagSearch,kTag:[PPUtilts sharedInstance].tagSearch};}
-    else if ([PPUtilts sharedInstance].apiCall==kApiCallMyIdea){parameters = @{kApiCall:kApiCallMyIdea,kUserid:[PPUtilts sharedInstance].userID};}
-    else if ([PPUtilts sharedInstance].apiCall==kApiCallMyBrief){parameters = @{kApiCall:kApiCallMyBrief,kUserid:[PPUtilts sharedInstance].userID};}
+    else if ([PPUtilts sharedInstance].apiCall==kApiCallMyIdea){parameters = @{kApiCall:kApiCallMyIdea,kUserid:GET_USERID};}
+    else if ([PPUtilts sharedInstance].apiCall==kApiCallMyBrief){parameters = @{kApiCall:kApiCallMyBrief,kUserid:GET_USERID};}
     else{}
     return parameters;
 }
@@ -156,9 +155,11 @@
     UIView *cellBackgroundClearColor = [[UIView alloc] initWithFrame:cell.frame];
     cellBackgroundClearColor.backgroundColor = [UIColor clearColor];
     cell.selectedBackgroundView = cellBackgroundClearColor;
+    
     UIImageView *imgIdea=(UIImageView *)[cell.contentView viewWithTag:101];
     UIImageView *imgBrief=(UIImageView *)[cell.contentView viewWithTag:102];
     UIImageView *imgHot=(UIImageView *)[cell.contentView viewWithTag:103];
+    
     typedef void (^CaseBlockForColor)();
     NSDictionary *colorType = @{
                                 

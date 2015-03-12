@@ -30,12 +30,19 @@ NSArray *cellTitleText;
     
     self.profileTableView.delegate   = self ;
     self.profileTableView.dataSource = self;
-    [self settingBarButton];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
+    [self settingBarButton];
+    [self updateFrame];
     [self.view setBackgroundColor:[UIColor PPProfileBackGroundColor]];
 }
+-(void)updateFrame{
+     if ([PPUtilts isiPhone4]){
+         self.profileTableView.frame=CGRectMake(0, 40, self.view.frame.size.width, self.view.frame.size.height);
+    }
+}
+
 - (BOOL)prefersStatusBarHidden {
     return YES;
 }
@@ -132,17 +139,23 @@ NSArray *cellTitleText;
 }
 
 -(void)goToWithApiCall:(NSString*)apiCall{
-    if (apiCall==kApiCallLogOut||!GET_USERID) {
+    if (apiCall==kApiCallLogOut) {
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"AUTH"];
         [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"USERID"];
         [[GPPSignIn sharedInstance]signOut];
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
     else{
-        [PPUtilts sharedInstance].userID=GET_USERID;
-        [PPUtilts sharedInstance].apiCall=apiCall;
-        CoLabListViewController *objProfile = [CoLabListViewController new];
-        [self.navigationController pushViewController:objProfile animated:NO];
+        if (GET_USERID) {
+           // [PPUtilts sharedInstance].userID=GET_USERID;
+            [PPUtilts sharedInstance].apiCall=apiCall;
+            CoLabListViewController *objProfile = [CoLabListViewController new];
+            [self.navigationController pushViewController:objProfile animated:NO];
+        }
+        else{
+            kCustomAlert(@"Failed to Login", @"Something went wrong please go to (profile->Loout) for re-login", @"Ok");
+        }
+
     }
 
 }

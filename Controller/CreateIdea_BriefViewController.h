@@ -29,7 +29,7 @@
     
    __weak  IBOutlet UILabel     *lbltitle;
    __weak  IBOutlet UIImageView *headerImage;
-
+    NoteView *noteView;
     BOOL isIdeaSubmitScreen;
     
 }
