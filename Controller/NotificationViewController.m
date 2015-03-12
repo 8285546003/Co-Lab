@@ -19,11 +19,11 @@
 @synthesize notificationTableView;
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self settingBarButton];
     // Do any additional setup after loading the view from its nib.
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
+    [self settingBarButton];
     [self.view setBackgroundColor:[UIColor PPBackGroundColor]];
 }
 - (BOOL)prefersStatusBarHidden {
@@ -46,7 +46,7 @@
         cell = [[[NSBundle mainBundle]loadNibNamed:@"NotificationViewCell" owner:self options:nil]lastObject];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.lblNotificationDescription.text=@"nlmsndfl;sdnflk;jsdhknsdALCJDOSW;FHIadjklFNSLKASDFNlkAJSDFHA;Lndflk;asFHL;Andlj;aSDHL;ANSdlh;dna'LFH;AKSLfhl;sdfJKG";
+    cell.lblNotificationDescription.text=@"Notification testing Notification testingNotification testingNotification testingNotification testingNotification testingNotification testingNotification testingNotification testingNotification testingNotification testingNotification testingNotification testingNotification testingNotification testingNotification testingNotification testingNotification testingNotification testingNotification testing";
 //    cell.lblHeading.text=[[[self.allData  valueForKey:[PPUtilts sharedInstance].apiCall] valueForKey:@"headline"] objectAtIndex:indexPath.row];
 //    cell.lblTag.text=[[[self.allData valueForKey:[PPUtilts sharedInstance].apiCall] valueForKey:@"tag"] objectAtIndex:indexPath.row];
 //    
