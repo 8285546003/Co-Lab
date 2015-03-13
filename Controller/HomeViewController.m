@@ -12,6 +12,8 @@
 #import "CoLabListViewController.h"
 #import "NotificationViewController.h"
 #import "PPUtilts.h"
+#import "CustomBadge.h"
+
 
 @interface HomeViewController (){
     NSArray *imageArray;
@@ -160,7 +162,7 @@
     cell.textLabel.textColor=[UIColor blackColor];
     [cell.imageView setImage:[UIImage imageNamed:[imageArray objectAtIndex:indexPath.row]]];
     cell.textLabel.text = [cellTitleText objectAtIndex:indexPath.row];
-    
+
     if (indexPath.row == 0) {
         cell.textLabel.font = [UIFont boldSystemFontOfSize:17];
     }
@@ -170,6 +172,12 @@
             cell.textLabel.numberOfLines=0;
             NSString *str = [NSString stringWithFormat:@"%@\n\n\n\n",[cellTitleText objectAtIndex:indexPath.row]];
             cell.textLabel.text=str;
+        }
+        else if (indexPath.row==4){
+            CustomBadge *badge = [CustomBadge customBadgeWithString:@"37"];
+            badge.frame=CGRectMake(70, -4, 25, 25);
+            [badge bringSubviewToFront:cell.contentView];
+            [cell.contentView  addSubview:badge];
         }
     }
 

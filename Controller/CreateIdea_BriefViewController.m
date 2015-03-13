@@ -78,9 +78,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [self settingBarButton];
-  //  [self.view setBackgroundColor:[UIColor clearColor]];
     [super viewWillAppear:animated];
-    
 }
 
 - (void)rearrengeScrollView:(BOOL)isAttached{
@@ -88,28 +86,11 @@
     CGFloat screenWidth = screenRect.size.width;
     height = 0.0f;
     [self removeAllObjectsFromScrollview];
-//    [self.baseScrollView addSubview:[self addHeader]];
-//    [self.baseScrollView addSubview:[self addDisc]];
-//    [self.baseScrollView addSubview:[self addTags]];
-//    [self.baseScrollView setContentSize:CGSizeMake(screenWidth, height)];
-    
-
-    if (isAttached) {
-        [self.baseScrollView addSubview:[self addHeader]];
-        [self.baseScrollView addSubview:[self addDisc]];
-        [self.baseScrollView addSubview:[self addTags]];
-        [self.baseScrollView setContentSize:CGSizeMake(screenWidth, height)];
-        //[self settingBarButton];
-
-    }else{
-        [self.baseScrollView addSubview:[self addHeader]];
-        [self.baseScrollView addSubview:[self addDisc]];
-        [self.baseScrollView addSubview:[self addTags]];
-        [self.baseScrollView setContentSize:CGSizeMake(screenWidth, height)];
-       // [self settingBarButton];
-
-    }
-}
+    [self.baseScrollView addSubview:[self addHeader]];
+    [self.baseScrollView addSubview:[self addDisc]];
+    [self.baseScrollView addSubview:[self addTags]];
+    [self.baseScrollView setContentSize:CGSizeMake(screenWidth, height)];
+ }
 - (BOOL)prefersStatusBarHidden {
     return YES;
 }
@@ -525,10 +506,10 @@
     hud.labelText = @"Please wait...";
     
     
-    NSString *strBriefId=@"0";
-    NSString *strIsBrief=@"Yes";
+    NSString *strBriefId=ZERO;
+    NSString *strIsBrief=BOOL_YES;
     if (isIdeaSubmitScreen) {
-        strIsBrief=@"No";
+        strIsBrief=BOOL_NO;
         if (isAnswerTheBriefs) {
             strBriefId=[PPUtilts sharedInstance].LatestIDId;
         }

@@ -12,6 +12,7 @@
 #import "PPUtilts.h"
 #import "UIColor+PPColor.h"
 #import "NotificationViewController.h"
+#import "CustomBadge.h"
 
 @interface ProfileViewController (){
 NSArray *imageArray;
@@ -25,7 +26,6 @@ NSArray *cellTitleText;
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-   // [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:193 green:6 blue:4 alpha:1.0]];
     imageArray    = imageArrayProfile;
     cellTitleText = cellTitleProfile;
     
@@ -39,9 +39,23 @@ NSArray *cellTitleText;
     [self.view setBackgroundColor:[UIColor PPProfileBackGroundColor]];
 }
 -(void)updateFrame{
-     if ([PPUtilts isiPhone4]){
-         self.profileTableView.frame=CGRectMake(0, 40, self.view.frame.size.width, self.view.frame.size.height);
+    
+    if ([PPUtilts isiPhone5]) {
+        self.profileTableView.frame=CGRectMake(0, 120, self.view.frame.size.width, self.view.frame.size.height);
     }
+    else if ([PPUtilts isiPhone6]){
+        self.profileTableView.frame=CGRectMake(0, 220, self.view.frame.size.width, self.view.frame.size.height);
+    }
+    else if ([PPUtilts isiPhone6Plus]){
+        self.profileTableView.frame=CGRectMake(0, 290, self.view.frame.size.width, self.view.frame.size.height);
+    }
+    if ([PPUtilts isiPhone4]){
+        self.profileTableView.frame=CGRectMake(0, 40, self.view.frame.size.width, self.view.frame.size.height);
+    }
+    else{
+    }
+    
+
 }
 
 - (BOOL)prefersStatusBarHidden {
@@ -72,11 +86,6 @@ NSArray *cellTitleText;
 
 
 #pragma UITableViewDelegate
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-//{
-//    return 1;    //count of section
-//}
-
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
@@ -102,6 +111,13 @@ NSArray *cellTitleText;
     if (indexPath.row == 0) {
         cell.textLabel.font = [UIFont boldSystemFontOfSize:17];
     }
+    else if (indexPath.row==3){
+        CustomBadge *badge = [CustomBadge customBadgeWithString:@"37"];
+        badge.frame=CGRectMake(70, -4, 25, 25);
+        [badge bringSubviewToFront:cell.contentView];
+        [cell.contentView  addSubview:badge];
+    }
+    
     else{
          cell.textLabel.font = [UIFont systemFontOfSize:15];
     }
@@ -152,7 +168,6 @@ NSArray *cellTitleText;
     }
     else{
         if (GET_USERID) {
-           // [PPUtilts sharedInstance].userID=GET_USERID;
             [PPUtilts sharedInstance].apiCall=apiCall;
             CoLabListViewController *objProfile = [CoLabListViewController new];
             [self.navigationController pushViewController:objProfile animated:NO];

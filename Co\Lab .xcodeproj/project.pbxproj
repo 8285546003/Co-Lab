@@ -13,6 +13,10 @@
 		685447871AAD74540044E3C7 /* TagSearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 685447861AAD74540044E3C7 /* TagSearchModel.m */; };
 		6854478D1AAD9A710044E3C7 /* MyIdeaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6854478C1AAD9A710044E3C7 /* MyIdeaModel.m */; };
 		685447931AAD9E700044E3C7 /* MyBriefModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 685447921AAD9E700044E3C7 /* MyBriefModel.m */; };
+		685D8B751AB2C88100132C38 /* NotificatioListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 685D8B741AB2C88100132C38 /* NotificatioListModel.m */; };
+		685D8B781AB2C89300132C38 /* NotificatioListModelDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 685D8B771AB2C89300132C38 /* NotificatioListModelDetails.m */; };
+		685D8B8A1AB3082C00132C38 /* BadgeStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 685D8B871AB3082C00132C38 /* BadgeStyle.m */; };
+		685D8B8B1AB3082C00132C38 /* CustomBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = 685D8B891AB3082C00132C38 /* CustomBadge.m */; };
 		687EAA741AB03F4C00CF0169 /* Profile_Image1.png in Resources */ = {isa = PBXBuildFile; fileRef = 687EAA731AB03F4C00CF0169 /* Profile_Image1.png */; };
 		687EAA761AB040C700CF0169 /* Pre_Image.png in Resources */ = {isa = PBXBuildFile; fileRef = 687EAA751AB040C700CF0169 /* Pre_Image.png */; };
 		687EAEBD1AB06E4400CF0169 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 687EAEB11AB06E4400CF0169 /* back.png */; };
@@ -137,6 +141,14 @@
 		6854478C1AAD9A710044E3C7 /* MyIdeaModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyIdeaModel.m; sourceTree = "<group>"; };
 		685447911AAD9E700044E3C7 /* MyBriefModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBriefModel.h; sourceTree = "<group>"; };
 		685447921AAD9E700044E3C7 /* MyBriefModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBriefModel.m; sourceTree = "<group>"; };
+		685D8B731AB2C88100132C38 /* NotificatioListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificatioListModel.h; sourceTree = "<group>"; };
+		685D8B741AB2C88100132C38 /* NotificatioListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificatioListModel.m; sourceTree = "<group>"; };
+		685D8B761AB2C89300132C38 /* NotificatioListModelDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificatioListModelDetails.h; sourceTree = "<group>"; };
+		685D8B771AB2C89300132C38 /* NotificatioListModelDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificatioListModelDetails.m; sourceTree = "<group>"; };
+		685D8B861AB3082C00132C38 /* BadgeStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadgeStyle.h; sourceTree = "<group>"; };
+		685D8B871AB3082C00132C38 /* BadgeStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BadgeStyle.m; sourceTree = "<group>"; };
+		685D8B881AB3082C00132C38 /* CustomBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomBadge.h; sourceTree = "<group>"; };
+		685D8B891AB3082C00132C38 /* CustomBadge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomBadge.m; sourceTree = "<group>"; };
 		687EAA731AB03F4C00CF0169 /* Profile_Image1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Profile_Image1.png; sourceTree = "<group>"; };
 		687EAA751AB040C700CF0169 /* Pre_Image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pre_Image.png; sourceTree = "<group>"; };
 		687EAEB11AB06E4400CF0169 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
@@ -313,6 +325,25 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		685D8B841AB3082C00132C38 /* Third Party */ = {
+			isa = PBXGroup;
+			children = (
+				685D8B851AB3082C00132C38 /* Badge */,
+			);
+			path = "Third Party";
+			sourceTree = "<group>";
+		};
+		685D8B851AB3082C00132C38 /* Badge */ = {
+			isa = PBXGroup;
+			children = (
+				685D8B861AB3082C00132C38 /* BadgeStyle.h */,
+				685D8B871AB3082C00132C38 /* BadgeStyle.m */,
+				685D8B881AB3082C00132C38 /* CustomBadge.h */,
+				685D8B891AB3082C00132C38 /* CustomBadge.m */,
+			);
+			path = Badge;
+			sourceTree = "<group>";
+		};
 		687EAEB01AB06E4400CF0169 /* image_profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -335,6 +366,7 @@
 		68A9CCEF1A65015F003D09E4 = {
 			isa = PBXGroup;
 			children = (
+				685D8B841AB3082C00132C38 /* Third Party */,
 				68D340501AA70F0500B7D9A2 /* Models */,
 				68CC90E31AA5AA3100F3CB48 /* Images */,
 				68CC90C21AA5A8E300F3CB48 /* PPUtilts */,
@@ -569,6 +601,10 @@
 				6854478C1AAD9A710044E3C7 /* MyIdeaModel.m */,
 				685447911AAD9E700044E3C7 /* MyBriefModel.h */,
 				685447921AAD9E700044E3C7 /* MyBriefModel.m */,
+				685D8B731AB2C88100132C38 /* NotificatioListModel.h */,
+				685D8B741AB2C88100132C38 /* NotificatioListModel.m */,
+				685D8B761AB2C89300132C38 /* NotificatioListModelDetails.h */,
+				685D8B771AB2C89300132C38 /* NotificatioListModelDetails.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -748,10 +784,13 @@
 				68D340631AA7161F00B7D9A2 /* IBModelDetails.m in Sources */,
 				68CC90951AA5A8C300F3CB48 /* SearchViewController.m in Sources */,
 				68CC90DA1AA5A8E300F3CB48 /* PPUtilts.m in Sources */,
+				685D8B781AB2C89300132C38 /* NotificatioListModelDetails.m in Sources */,
 				685447781AAD628D0044E3C7 /* ExpenModel.m in Sources */,
+				685D8B8B1AB3082C00132C38 /* CustomBadge.m in Sources */,
 				68D340571AA70F0500B7D9A2 /* IBModel.m in Sources */,
 				68CC90D61AA5A8E300F3CB48 /* HVTableView.m in Sources */,
 				68CC908F1AA5A8C300F3CB48 /* CoLabListViewController.m in Sources */,
+				685D8B8A1AB3082C00132C38 /* BadgeStyle.m in Sources */,
 				685447871AAD74540044E3C7 /* TagSearchModel.m in Sources */,
 				68CFE2721AA5E1300082D3A8 /* NotificationViewCell.m in Sources */,
 				68CC90D71AA5A8E300F3CB48 /* LatestIBCell.m in Sources */,
@@ -766,6 +805,7 @@
 				68CC90911AA5A8C300F3CB48 /* ExpendableTableViewController.m in Sources */,
 				68CC90901AA5A8C300F3CB48 /* CreateIdea_BriefViewController.m in Sources */,
 				68CFE2671AA5E00A0082D3A8 /* NotificationViewController.m in Sources */,
+				685D8B751AB2C88100132C38 /* NotificatioListModel.m in Sources */,
 				68CC90921AA5A8C300F3CB48 /* HomeViewController.m in Sources */,
 				685447931AAD9E700044E3C7 /* MyBriefModel.m in Sources */,
 				68CC908E1AA5A8C300F3CB48 /* UIColor+PPColor.m in Sources */,

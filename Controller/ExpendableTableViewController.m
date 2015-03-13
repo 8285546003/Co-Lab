@@ -62,7 +62,7 @@
     [objAFN parameters:parameters completionBlock:^(id data, NSError *error) {
         ibModel = [[ExpenModel alloc] initWithDictionary:data error:nil];
         statusModel = [[StatusModel alloc] initWithDictionary:data error:nil];
-        status = statusModel.StatusArr[0];
+        status = statusModel.StatusArr[[ZERO intValue]];
         if(!error) {
             if ([status.Error isEqualToString:kResultError]) {
                 [self.table reloadData];
@@ -182,12 +182,12 @@
 {
     NSString *imageName=ibModelDetails.image;
 
-    if (indexPath.row==0){
-        if ([self isImageExist:imageName]) {return 700;}
-        else{return 600;}
+    if (indexPath.row==[ZERO intValue]){
+        if ([self isImageExist:imageName]) {return kCellHeightWithImage;}
+        else{return kCellHeightWithoutImage;}
     }
-    if (isexpanded){return 600;}
-    else{return 175;}
+    if (isexpanded){return kCellHeightWithoutImage;}
+    else{return kCellHeightNormal;}
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath isExpanded:(BOOL)isExpanded
@@ -210,22 +210,20 @@
 
     
     if ([self isImageExist:imageName]) {
-        cell.lblDescription.frame=CGRectMake(40,410, 230,162);
+        cell.lblDescription.frame=DETAIL_LABLE_FRAME;
         [cell.imgMain sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",BASE_URL_IMAGE,imageName]]
                      placeholderImage:nil
                               options:SDWebImageProgressiveDownload
                             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                 if (image) {
                                     cell.imgMain.image = image;
-                                   // cell.imageView.hidden=YES;
                     }
             }];
     }
     
     
-    BOOL isHot=[ibModelDetails.is_hot isEqualToString:@"No"]?NO:YES;
+    BOOL isHot=[ibModelDetails.is_hot isEqualToString:BOOL_YES];
 
-    
     UIImageView *imgIdea=(UIImageView *) [cell.contentView viewWithTag:PP101];
     UIImageView *imgBrief=(UIImageView *)[cell.contentView viewWithTag:PP102];
     UIImageView *imgHot=(UIImageView *)  [cell.contentView viewWithTag:PP103];

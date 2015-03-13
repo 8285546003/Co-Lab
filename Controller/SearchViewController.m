@@ -60,16 +60,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
-    
-  //  if ([[self.allData valueForKey:@"Message"] isEqualToString:@"No record found."]) {
-        
-  //      return 1;
-        
-  //  }
-//else{
     return ibModel.SearchAuto.count;
-  //  }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -94,32 +85,16 @@
         cell.textLabel.text=ibModelDetails.tag;
 
     }
-   // if ([[self.allData valueForKey:@"Message"] isEqualToString:@"No record found."]) {
-        //cell.imageView.image=[UIImage imageNamed:@"found"];
-  //  }
- //   else{
-   // cell.textLabel.text=[[[self.allData valueForKey:@"SearchAuto"] valueForKey:@"tag"] objectAtIndex:indexPath.row];
-
-       // cell.imageView.image=nil;
-  //  }
-    
-
-    
     return cell;
     
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     StatusModelDetails* status = statusModel.StatusArr[0];
-    
     if (status.Message==kResultNoRecord) {
         return 200;
-
     }
-    
-  
     else{
-
         return 44;
     }
 }
@@ -140,14 +115,9 @@
     NSDictionary *parameters=@{kApiCall:kApiCallSearchAuto,kTag:tag};
     
     [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-       // NSLog(@"JSON: %@", responseObject);
         ibModel = [[SearchModel alloc] initWithDictionary:responseObject error:nil];
         statusModel = [[StatusModel alloc] initWithDictionary:responseObject error:nil];
         StatusModelDetails* status = statusModel.StatusArr[0];
-        
-       // NSLog(@"%@ %@",status.Message,status.Error);
-        
-        
         if ([status.Error isEqualToString:kResultError]) {
             [self.allDataTableView reloadData];
             [self.allDataTableView setHidden:NO];
@@ -155,8 +125,7 @@
         else{
             kCustomErrorAlert;
         }
-
-            [self settingBarButton];
+        [self settingBarButton];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self settingBarButton];

@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface NotificationViewCell : UITableViewCell
-@property(nonatomic,retain)IBOutlet UILabel     *lblNotificationDescription;
+@property(nonatomic,weak)IBOutlet UILabel     *lblNotificationDescription;
+@property(nonatomic,weak)IBOutlet UILabel     *lblTime;
 @end

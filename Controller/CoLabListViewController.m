@@ -35,7 +35,7 @@
     IBModelDetails* ibModelDetails;
     StatusModelDetails* status;
     
-    NSString *isHot;
+    BOOL isHot;
     NSString *strColorType;
     
 }
@@ -73,7 +73,7 @@
     else if ([PPUtilts sharedInstance].apiCall==kApiCallMyBrief){myBriefModel = [[MyBriefModel alloc] initWithDictionary:responseObject error:nil];}
     else{tagModel = [[TagSearchModel alloc] initWithDictionary:responseObject error:nil];}
     statusModel = [[StatusModel alloc] initWithDictionary:responseObject error:nil];
-    status = statusModel.StatusArr[0];
+    status = statusModel.StatusArr[[ZERO integerValue]];
 }
 -(void)callWebServices{
     
@@ -126,7 +126,7 @@
     else if ([PPUtilts sharedInstance].apiCall==kApiCallMyIdea){return myIdeaModel.MyIdea.count;}
     else if ([PPUtilts sharedInstance].apiCall==kApiCallMyBrief){return myBriefModel.MyBrief.count;}
     else{return tagModel.TagSearch.count;}
-    return 0;
+    return [ZERO integerValue];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -148,17 +148,16 @@
     
     cell.lblHeading.text=ibModelDetails.headline;
     cell.lblTag.text=ibModelDetails.tag;
-    isHot=ibModelDetails.is_hot;
+    isHot=[ibModelDetails.is_hot isEqualToString:BOOL_YES];
     strColorType=ibModelDetails.color_code;
-    
     cell.selectedBackgroundView.backgroundColor=[UIColor clearColor];
     UIView *cellBackgroundClearColor = [[UIView alloc] initWithFrame:cell.frame];
     cellBackgroundClearColor.backgroundColor = [UIColor clearColor];
     cell.selectedBackgroundView = cellBackgroundClearColor;
     
-    UIImageView *imgIdea=(UIImageView *)[cell.contentView viewWithTag:101];
-    UIImageView *imgBrief=(UIImageView *)[cell.contentView viewWithTag:102];
-    UIImageView *imgHot=(UIImageView *)[cell.contentView viewWithTag:103];
+    UIImageView *imgIdea=(UIImageView *)[cell.contentView viewWithTag:PP101];
+    UIImageView *imgBrief=(UIImageView *)[cell.contentView viewWithTag:PP102];
+    UIImageView *imgHot=(UIImageView *)[cell.contentView viewWithTag:PP103];
     
     typedef void (^CaseBlockForColor)();
     NSDictionary *colorType = @{

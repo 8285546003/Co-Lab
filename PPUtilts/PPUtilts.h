@@ -34,11 +34,18 @@
 
 #define ATTACHED_IMAGE_FRAME    CGRectMake(0, 0, self.view.frame.size.width, 200)
 
+#define DETAIL_LABLE_FRAME      CGRectMake(40,410, 230,162)
+
 
 #define kheightForRowAtIndexPath 210.0f
 #define kCellHeightAtIndexZero   100
 #define kCellHeightAtIndexfive   125
 #define kCellHeight              75
+
+#define kCellHeightWithImage     700
+#define kCellHeightWithoutImage  600
+#define kCellHeightNormal        175
+
 
 
 
@@ -59,6 +66,9 @@
 #define cellTitleProfile  @[@"Profile",@"My Ideas",@"My Briefs",@"Notifications",@"Log out"]
 
 
+static NSString  *BOOL_NO                     =@"No";
+static NSString  *BOOL_YES                    =@"Yes";
+static NSString  *ZERO                        =@"0";
 
 static NSString *kApiCall                    =@"apicall";
 
@@ -76,7 +86,7 @@ static NSString *kApiCallMyIdea              =@"MyIdea";
 static NSString *kApiCallSearchAuto          =@"SearchAuto";
 static NSString *kApiCallDetail              =@"Detail";
 static NSString *kApiCallLogOut              =@"LogOut";
-static NSString *kApiCallNotifications       =@"Notifications";
+static NSString *kApiCallNotifications       =@"NotificatioList";
 
 
 static NSString *kResultMessage             =@"Success";

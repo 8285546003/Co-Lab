@@ -10,8 +10,24 @@
 #import "NotificationViewCell.h"
 #import "PPUtilts.h"
 #import "UIColor+PPColor.h"
+#import "CoLabListViewController.h"
+#import "PPUtilts.h"
+#import "UIColor+PPColor.h"
+#import "MBProgressHUD.h"
+#import "AFNInjector.h"
+#import "NotificatioListModelDetails.h"
+#import "StatusModelDetails.h"
+#import "StatusModel.h"
+#import "NotificatioListModel.h"
+#import "CustomBadge.h"
 
-@interface NotificationViewController ()
+@interface NotificationViewController (){
+    StatusModel    *statusModel;
+    NotificatioListModel*notificationModel;
+    
+    NotificatioListModelDetails* ibModelDetails;
+    StatusModelDetails* status;
+}
 
 @end
 
@@ -19,13 +35,61 @@
 @synthesize notificationTableView;
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+
+    CustomBadge *badge = [CustomBadge customBadgeWithString:@"37"];
+    badge.frame=CGRectMake(50, 0, 20, 20);
+    [self.view addSubview:badge];
 }
+
+// Do any additional setup after loading the view from its nib.
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
+    [self callWebServices];
     [self settingBarButton];
     [self.view setBackgroundColor:[UIColor PPBackGroundColor]];
+
 }
+-(void)callWebServices{
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
+    hud.labelText = PLEASE_WAIT;
+    NSDictionary *parameters= @{kApiCall:kApiCallNotifications,kUserid:GET_USERID};
+    AFNInjector *objAFN = [AFNInjector new];
+    [objAFN parameters:parameters completionBlock:^(id data, NSError *error) {
+        if(!error) {
+            notificationModel = [[NotificatioListModel alloc] initWithDictionary:data error:nil];
+            statusModel = [[StatusModel alloc] initWithDictionary:data error:nil];
+            status = statusModel.StatusArr[0];
+            if ([status.Error isEqualToString:kResultError]) {
+                if ([status.Message isEqualToString:kResultMessage]) {
+                    [self.notificationTableView  setHidden:NO];
+                    [self.notificationTableView reloadData];
+                }
+                else{
+                    kCustomAlert(@"", status.Message, @"Ok");
+                }
+            }
+            else{
+                kCustomErrorAlert;
+            }
+
+            [self settingBarButton];
+            [hud hide:YES];
+            NSLog(@"%@",data);
+        } else {
+            [self settingBarButton];
+            if (PPNoInternetConnection) {
+                kCustomErrorAlert;
+            }
+            [hud hide:YES];
+            
+            NSLog(@"error %@", error);
+        }
+    }];
+    
+}
+
+
 - (BOOL)prefersStatusBarHidden {
     return YES;
 }
@@ -33,7 +97,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 50;
+    return notificationModel.NotificatioList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -45,34 +109,27 @@
     if (cell == nil) {
         cell = [[[NSBundle mainBundle]loadNibNamed:@"NotificationViewCell" owner:self options:nil]lastObject];
     }
+    
+    ibModelDetails = notificationModel.NotificatioList[indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.lblNotificationDescription.text=@"Notification testing Notification testingNotification testingNotification testingNotification testingNotification testingNotification testingNotification testingNotification testingNotification testingNotification testingNotification testingNotification testingNotification testingNotification testingNotification testingNotification testingNotification testingNotification testingNotification testing";
-//    cell.lblHeading.text=[[[self.allData  valueForKey:[PPUtilts sharedInstance].apiCall] valueForKey:@"headline"] objectAtIndex:indexPath.row];
-//    cell.lblTag.text=[[[self.allData valueForKey:[PPUtilts sharedInstance].apiCall] valueForKey:@"tag"] objectAtIndex:indexPath.row];
-//    
-//    cell.selectedBackgroundView.backgroundColor=[UIColor clearColor];
-//    UIView *cellBackgroundClearColor = [[UIView alloc] initWithFrame:cell.frame];
-//    cellBackgroundClearColor.backgroundColor = [UIColor clearColor];
-//    cell.selectedBackgroundView = cellBackgroundClearColor;
-//    
-//    BOOL isHot=[[[[self.allData valueForKey:[PPUtilts sharedInstance].apiCall] valueForKey:@"is_hot"] objectAtIndex:indexPath.row] isEqualToString:@"No"]?NO:YES;
-
+    cell.lblNotificationDescription.text=ibModelDetails.msg;
+    cell.lblTime.text=ibModelDetails.send_time;
     
-//    
-//    NSString *strColorType=[[[self.allData valueForKey:[PPUtilts sharedInstance].apiCall] valueForKey:@"color_code"] objectAtIndex:indexPath.row];
-    
+    BOOL isMessageRead=[ibModelDetails.read_status isEqualToString:BOOL_YES];
+    if (isMessageRead) {
+        cell.contentView.alpha=0.3;
+    }
     return cell;
     
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 120.0f;
+    return 80.0f;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    ExpendableTableViewController *obj=[ExpendableTableViewController new];
-//    [PPUtilts sharedInstance].colorCode=[[[self.allData valueForKey:[PPUtilts sharedInstance].apiCall] valueForKey:@"color_code"] objectAtIndex:indexPath.row];
-//    [PPUtilts sharedInstance].LatestIDId=[[[self.allData valueForKey:[PPUtilts sharedInstance].apiCall] valueForKey:@"id"] objectAtIndex:indexPath.row];
-//    [self.navigationController pushViewController:obj animated:YES];
+    [PPUtilts sharedInstance].apiCall=kApiCallNotifications;
+    CoLabListViewController *objLatestIB = [CoLabListViewController new];
+    [self.navigationController pushViewController:objLatestIB animated:YES];
 }
 
 
@@ -98,6 +155,4 @@
             break;
     }
 }
-
-
 @end

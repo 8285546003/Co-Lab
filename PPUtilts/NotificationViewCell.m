@@ -7,10 +7,12 @@
 //
 
 #import "NotificationViewCell.h"
+#import "UIColor+PPColor.h"
 
 @implementation NotificationViewCell
 
 - (void)awakeFromNib {
+
     // Initialization code
 }
 
