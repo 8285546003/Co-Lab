@@ -18,10 +18,6 @@ static NSString * const kClientID = @"1043369017986-eatg764omdvlrp4jb8tcge2uf6nk
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
-   // [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
-    // (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
-    
     //-- Set Notification
     if ([application respondsToSelector:@selector(isRegisteredForRemoteNotifications)])
     {
@@ -53,8 +49,6 @@ static NSString * const kClientID = @"1043369017986-eatg764omdvlrp4jb8tcge2uf6nk
 }
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    NSLog(@"My token is: %@", deviceToken);
-
     NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
     

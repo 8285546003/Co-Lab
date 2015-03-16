@@ -14,6 +14,9 @@
 @property (nonatomic, strong) NSString *msg;
 @property (nonatomic, strong) NSString *read_status;
 @property (nonatomic, strong) NSString *send_time;
+@property (nonatomic, strong) NSString *n_parent_id;
+@property (nonatomic, strong) NSString *n_notification_send_time;
+
 @end
 
 

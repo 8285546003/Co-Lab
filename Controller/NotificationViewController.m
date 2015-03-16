@@ -10,7 +10,7 @@
 #import "NotificationViewCell.h"
 #import "PPUtilts.h"
 #import "UIColor+PPColor.h"
-#import "CoLabListViewController.h"
+#import "ExpendableTableViewController.h"
 #import "PPUtilts.h"
 #import "UIColor+PPColor.h"
 #import "MBProgressHUD.h"
@@ -127,8 +127,11 @@
     return 80.0f;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+     ibModelDetails = notificationModel.NotificatioList[indexPath.row];
     [PPUtilts sharedInstance].apiCall=kApiCallNotifications;
-    CoLabListViewController *objLatestIB = [CoLabListViewController new];
+    [PPUtilts sharedInstance].parent_id=ibModelDetails.n_parent_id;
+    [PPUtilts sharedInstance].notification_send_time=ibModelDetails.n_notification_send_time;
+     ExpendableTableViewController *objLatestIB = [ExpendableTableViewController new];
     [self.navigationController pushViewController:objLatestIB animated:YES];
 }
 

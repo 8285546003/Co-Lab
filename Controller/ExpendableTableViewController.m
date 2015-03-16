@@ -57,16 +57,30 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
     hud.labelText = PLEASE_WAIT;
     
-    NSDictionary *parameters = @{kApiCall:kApiCallDetail,kid:[PPUtilts sharedInstance].LatestIDId,kColorCode:[PPUtilts sharedInstance].colorCode};
+    NSDictionary *parameters;
+    
+    if ([PPUtilts sharedInstance].apiCall==kApiCallDetail) {
+        parameters = @{kApiCall:kApiCallDetail,kid:[PPUtilts sharedInstance].LatestIDId,kColorCode:[PPUtilts sharedInstance].colorCode};
+    }
+    else{
+       parameters = @{kApiCall:@"NotificationDetail",kUserid:GET_USERID,@"n_parent_id":[PPUtilts sharedInstance].parent_id,@"n_notification_send_time":[PPUtilts sharedInstance].notification_send_time};
+    }
+    
+    
     AFNInjector *objAFN = [AFNInjector new];
     [objAFN parameters:parameters completionBlock:^(id data, NSError *error) {
         ibModel = [[ExpenModel alloc] initWithDictionary:data error:nil];
         statusModel = [[StatusModel alloc] initWithDictionary:data error:nil];
-        status = statusModel.StatusArr[[ZERO intValue]];
+        status = statusModel.StatusArr[[ZERO integerValue]];
         if(!error) {
             if ([status.Error isEqualToString:kResultError]) {
-                [self.table reloadData];
-                [self.table setHidden:NO];
+                if ([status.Message isEqualToString:kResultMessage]) {
+                    [self.table reloadData];
+                    [self.table setHidden:NO];
+                }
+                else{
+                    kCustomAlert(@"", status.Message, @"Ok");
+                }
             }
             else{
                 kCustomErrorAlert;
@@ -75,10 +89,6 @@
             [hud hide:YES];
             NSLog(@"%@",data);
         } else {
-            [self settingBarButton];
-            if (PPNoInternetConnection) {
-                kCustomErrorAlert;
-            }
             [self settingBarButton];
             [hud hide:YES];
             if (PPNoInternetConnection) {

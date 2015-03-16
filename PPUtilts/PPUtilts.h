@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define BASE_URL @"http://miprojects2.com.php53-6.ord1-1.websitetestlink.com/colab/api/version1"
+#define BASE_URL @"http://miprojects2.com.php53-6.ord1-1.websitetestlink.com/colab/api/version2"
 #define BASE_URL_IMAGE @"http://miprojects2.com.php53-6.ord1-1.websitetestlink.com/colab/"
 
 
@@ -92,6 +92,7 @@ static NSString *kApiCallNotifications       =@"NotificatioList";
 static NSString *kResultMessage             =@"Success";
 static NSString *kResultError               =@"false";
 static NSString *kResultNoRecord            =@"No record found.";
+static NSString *kResultRequestFailed       =@"Request fail please try again";
 
 static NSString *kStaticIdentifier          =@"LatestIBCell";
 
@@ -153,11 +154,13 @@ typedef enum {
 
 @interface PPUtilts : NSObject
 @property (nonatomic,retain)  NSString *deviceTocken;
-//@property (nonatomic,retain)  NSString *userID;
 @property (nonatomic, strong) NSString *colorCode;
 @property (nonatomic, strong) NSString *LatestIDId;
 @property (nonatomic, strong) NSString *apiCall;
 @property (nonatomic, strong) NSString *tagSearch;
+@property (nonatomic, strong) NSString *parent_id;
+@property (nonatomic, strong) NSString *notification_send_time;
+
 + (instancetype)sharedInstance;
 - (BOOL)connected;
 - (BOOL)isNotificationViewHidden;

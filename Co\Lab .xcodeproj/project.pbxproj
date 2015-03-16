@@ -125,6 +125,8 @@
 		68D340591AA70F0500B7D9A2 /* StatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D340561AA70F0500B7D9A2 /* StatusModel.m */; };
 		68D340601AA7153D00B7D9A2 /* StatusModelDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D3405F1AA7153D00B7D9A2 /* StatusModelDetails.m */; };
 		68D340631AA7161F00B7D9A2 /* IBModelDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D340621AA7161F00B7D9A2 /* IBModelDetails.m */; };
+		68D6214A1AB6A67300887C05 /* UserDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D621491AB6A67300887C05 /* UserDetails.m */; };
+		68D6214D1AB6A6C100887C05 /* UserDetailsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D6214C1AB6A6C100887C05 /* UserDetailsModel.m */; };
 		C7DBB8057AB49057AB7C06EF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3E4C55BDE693B1621293BE5 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -285,6 +287,10 @@
 		68D3405F1AA7153D00B7D9A2 /* StatusModelDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusModelDetails.m; sourceTree = "<group>"; };
 		68D340611AA7161F00B7D9A2 /* IBModelDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBModelDetails.h; sourceTree = "<group>"; };
 		68D340621AA7161F00B7D9A2 /* IBModelDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBModelDetails.m; sourceTree = "<group>"; };
+		68D621481AB6A67300887C05 /* UserDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDetails.h; sourceTree = "<group>"; };
+		68D621491AB6A67300887C05 /* UserDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDetails.m; sourceTree = "<group>"; };
+		68D6214B1AB6A6C100887C05 /* UserDetailsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDetailsModel.h; sourceTree = "<group>"; };
+		68D6214C1AB6A6C100887C05 /* UserDetailsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDetailsModel.m; sourceTree = "<group>"; };
 		A3E4C55BDE693B1621293BE5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A739DB4F0CFEB3728BAA7FCF /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C581BD758B19368361C3647D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -605,6 +611,10 @@
 				685D8B741AB2C88100132C38 /* NotificatioListModel.m */,
 				685D8B761AB2C89300132C38 /* NotificatioListModelDetails.h */,
 				685D8B771AB2C89300132C38 /* NotificatioListModelDetails.m */,
+				68D621481AB6A67300887C05 /* UserDetails.h */,
+				68D621491AB6A67300887C05 /* UserDetails.m */,
+				68D6214B1AB6A6C100887C05 /* UserDetailsModel.h */,
+				68D6214C1AB6A6C100887C05 /* UserDetailsModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -787,9 +797,11 @@
 				685D8B781AB2C89300132C38 /* NotificatioListModelDetails.m in Sources */,
 				685447781AAD628D0044E3C7 /* ExpenModel.m in Sources */,
 				685D8B8B1AB3082C00132C38 /* CustomBadge.m in Sources */,
+				68D6214D1AB6A6C100887C05 /* UserDetailsModel.m in Sources */,
 				68D340571AA70F0500B7D9A2 /* IBModel.m in Sources */,
 				68CC90D61AA5A8E300F3CB48 /* HVTableView.m in Sources */,
 				68CC908F1AA5A8C300F3CB48 /* CoLabListViewController.m in Sources */,
+				68D6214A1AB6A67300887C05 /* UserDetails.m in Sources */,
 				685D8B8A1AB3082C00132C38 /* BadgeStyle.m in Sources */,
 				685447871AAD74540044E3C7 /* TagSearchModel.m in Sources */,
 				68CFE2721AA5E1300082D3A8 /* NotificationViewCell.m in Sources */,

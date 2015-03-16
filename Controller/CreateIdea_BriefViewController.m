@@ -8,11 +8,16 @@
 
 #import "CreateIdea_BriefViewController.h"
 #import "MBProgressHUD.h"
-#import "AFNetworking.h"
 #import "CoLabListViewController.h"
+#import "AFNInjector.h"
+#import "StatusModel.h"
+#import "StatusModelDetails.h"
 
 
-@interface CreateIdea_BriefViewController ()
+@interface CreateIdea_BriefViewController (){
+    StatusModel    *statusModel;
+    StatusModelDetails* status;
+}
 
 @end
 
@@ -307,7 +312,6 @@
     [[self.view viewWithTag:PPkAddOrNext] removeFromSuperview];
 }
 - (void)settingBarMethod:(UIButton *)settingBtn{
-    NSLog(@"Button tag == %ld",(long)settingBtn.tag);
     switch (settingBtn.tag) {
         case PPkCancel:
             isCurrentControllerPresented?[[self presentingViewController] dismissViewControllerAnimated:YES completion:nil]:[self.navigationController popViewControllerAnimated:YES];
@@ -402,7 +406,6 @@
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range  replacementText:(NSString *)text{
     if (textView.tag == PPkHeader) {
         int finalCOunt = 80 - (int)[textView.text length];
-        NSLog(@"Textfield %d and text is == %lu",finalCOunt,(unsigned long)textView.text.length);
         titleCharCountLbl.text = [NSString stringWithFormat:@"%d",finalCOunt];
         NSString *tmpSTring = [textView.text uppercaseString];
         textView.text = tmpSTring;
@@ -475,11 +478,6 @@
 }
 
 - (void)saveDataToServer{
-    
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    manager.responseSerializer.acceptableContentTypes = CONTENT_TYPE_HTML;
     NSString *imageString = [UIImagePNGRepresentation(self.attachmentImage.image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     
     if (!imageString.length) {
@@ -516,31 +514,45 @@
     }
     NSDictionary *parameters = @{kApiCall:kApiCallCreateNewIdeaBrief,kTag:[self.mainDataDictionary valueForKey:@"TAGS"],@"headline":[self.mainDataDictionary valueForKey:@"HEADER"],@"description_idea_brief": [self.mainDataDictionary valueForKey:@"DESCRIPTION"],@"image":imageString,@"brief_id":strBriefId,@"is_brief":strIsBrief,kUserid:GET_USERID};
     
-    [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        if ([[responseObject valueForKey:@"Error"]  isEqualToString:@"Request fail please try again"]) {
-            [self.navigationController popViewControllerAnimated:YES];
-        }
-        else{
-            if (!isAnswerTheBriefs) {
-                [PPUtilts sharedInstance].apiCall=kApiCallLatestIdeaBrief;
-                CoLabListViewController *objLatestIB = [CoLabListViewController new];
-                [self.navigationController pushViewController:objLatestIB animated:YES];
-            }
-            else{
-                if (isCurrentControllerPresented) {
-                    [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+    AFNInjector *objAFN = [AFNInjector new];
+    [objAFN parameters:parameters completionBlock:^(id data, NSError *error) {
+        if(!error) {
+            statusModel = [[StatusModel alloc] initWithDictionary:data error:nil];
+            status = statusModel.StatusArr[[ZERO integerValue]];
+            if ([status.Error isEqualToString:kResultError]) {
+                if ([status.Message isEqualToString:kResultMessage]) {
+                    if (!isAnswerTheBriefs) {
+                        [PPUtilts sharedInstance].apiCall=kApiCallLatestIdeaBrief;
+                        CoLabListViewController *objLatestIB = [CoLabListViewController new];
+                        [self.navigationController pushViewController:objLatestIB animated:YES];
+                    }
+                    else{
+                        if (isCurrentControllerPresented) {
+                            [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+                        }
+                    }
+                    
+                }
+                else{
+                    kCustomAlert(@"", status.Message, @"Ok");
                 }
             }
-
+            else{
+                kCustomAlert(@"", status.Message, @"Ok");
+            }
+            [self settingBarButton];
+            [hud hide:YES];
+            NSLog(@"%@",data);
+        } else {
+            [self settingBarButton];
+            if (PPNoInternetConnection) {
+                kCustomErrorAlert;
+            }
+            [hud hide:YES];
+            NSLog(@"error %@", error);
         }
-        [hud hide:YES];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-        [hud hide:YES];
-        
     }];
+    
 }
 
 @end

@@ -13,10 +13,21 @@
 #import "AFNetworking.h"
 #import "PPUtilts.h"
 #import "MBProgressHUD.h"
+#import "StatusModel.h"
+#import "StatusModelDetails.h"
+#import "AFNInjector.h"
+#import "UserDetails.h"
+#import "UserDetailsModel.h"
 
 @interface LoginViewController ()<GPPSignInDelegate>
 {
-    MBProgressHUD *hud;
+    StatusModel         *statusModel;
+    StatusModelDetails  *status;
+    
+    UserDetails         *userDetail;
+    UserDetailsModel    *userModel;
+    
+    MBProgressHUD       *hud;
     int i;
 }
 @end
@@ -38,7 +49,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"AUTH"]) {
+    if (GET_USERID) {
         HomeViewController *homeCont = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
         [self.navigationController pushViewController:homeCont animated:NO];
     }
@@ -120,50 +131,52 @@
                                     NSError *error) {
                     if (error) {
                         
-                        
-                        
                         //Handle Error
                         
                     } else
                     {
-
-                        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-                        manager.requestSerializer = [AFJSONRequestSerializer serializer];
-                        manager.responseSerializer = [AFJSONResponseSerializer serializer];
-                        manager.responseSerializer.acceptableContentTypes = CONTENT_TYPE_HTML;
                         
                         NSString *strDeviceTocken=[PPUtilts sharedInstance].deviceTocken;;
                         if (!strDeviceTocken) {
                             strDeviceTocken=@"";
                         }
                         
-                        NSDictionary *parameters = @{kApiCall:@"UserLogin",@"display_name":[person.name.givenName stringByAppendingFormat:@" %@",person.name.familyName],@"user_email":[GPPSignIn sharedInstance].authentication.userEmail,@"device_token":strDeviceTocken ,@"os_type":@"1"};
-                        [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                            
-                            if ([[responseObject valueForKey:@"Error"] isEqualToString:@"false"]&&[[responseObject valueForKey:@"Message"] isEqualToString:@"Success"]) {
-                            [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"AUTH"];
-                            [[NSUserDefaults standardUserDefaults] setValue:[responseObject valueForKey:kUserid] forKey:@"USERID"];
-                           // [PPUtilts sharedInstance].userID=[responseObject valueForKey:kUserid];
-                            HomeViewController *homeCont = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
-                                [_timer invalidate];
-                                [self.navigationController pushViewController:homeCont animated:NO];
+                        NSDictionary *parameters = @{kApiCall:kApiCallLogin,@"display_name":[person.name.givenName stringByAppendingFormat:@" %@",person.name.familyName],@"user_email":[GPPSignIn sharedInstance].authentication.userEmail,@"device_token":strDeviceTocken ,@"os_type":@"1"};
+                        
+                        AFNInjector *objAFN = [AFNInjector new];
+                        [objAFN parameters:parameters completionBlock:^(id data, NSError *error) {
+                            if(!error) {
+                                statusModel = [[StatusModel alloc] initWithDictionary:data error:nil];
+                                status = statusModel.StatusArr[[ZERO integerValue]];
+                                userModel= [[UserDetailsModel alloc] initWithDictionary:data error:nil];
+                                userDetail=userModel.UserDetails[[ZERO integerValue]];
+                                if ([status.Error isEqualToString:kResultError]) {
+                                    if ([status.Message isEqualToString:kResultMessage]) {
+                                        [[NSUserDefaults standardUserDefaults] setValue:userDetail.user_id forKey:@"USERID"];
+                                        HomeViewController *homeCont = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
+                                        [_timer invalidate];
+                                        [self.navigationController pushViewController:homeCont animated:NO];
+                                    }
+                                    else{
+                                        kCustomAlert(@"", status.Message, @"Ok");
+                                    }
+                                }
+                                else{
+                                    kCustomAlert(@"", status.Message, @"Ok");
+                                }
+                                [hud hide:YES];
+                                NSLog(@"%@",data);
+                            } else {
+                                if (PPNoInternetConnection) {
+                                    kCustomErrorAlert;
+                                }
+                                [hud hide:YES];
+                                NSLog(@"error %@", error);
                             }
-                            else{
-                                kCustomErrorAlert;
-                            }
-                            [hud hide:YES];
-
-                        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                            [hud hide:YES];
-                            NSLog(@"Error: %@", error);
-                            kCustomErrorAlert;
-                            
                         }];
-                        
-                        
                     }
                 }];
 
-}
+        }
 }
 @end
