@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "HVTableView.h"
 #import "OverlayView.h"
+#import <MessageUI/MessageUI.h>
 
-@interface ExpendableTableViewController : UIViewController<HVTableViewDelegate, HVTableViewDataSource,OverlayViewDelegate>
+@interface ExpendableTableViewController : UIViewController<HVTableViewDelegate, HVTableViewDataSource,OverlayViewDelegate,MFMailComposeViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet HVTableView *table;
 @property (retain, nonatomic) OverlayView *tmpOverlayObj;
 @end

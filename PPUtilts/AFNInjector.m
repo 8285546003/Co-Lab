@@ -26,13 +26,12 @@
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         manager.requestSerializer = [AFJSONRequestSerializer serializer];
         manager.responseSerializer = [AFJSONResponseSerializer serializer];
-        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+        manager.responseSerializer.acceptableContentTypes = CONTENT_TYPE_HTML;
         [manager POST:BASE_URL parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
             block(responseObject, nil);
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             block(nil, error);
         }];
-        
     });
 }
 @end

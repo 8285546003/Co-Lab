@@ -161,7 +161,6 @@ NSArray *cellTitleText;
 
 -(void)goToWithApiCall:(NSString*)apiCall{
     if (apiCall==kApiCallLogOut) {
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"AUTH"];
         [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"USERID"];
         [[GPPSignIn sharedInstance]signOut];
         [self.navigationController popToRootViewControllerAnimated:YES];

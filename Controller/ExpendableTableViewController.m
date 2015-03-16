@@ -63,7 +63,8 @@
         parameters = @{kApiCall:kApiCallDetail,kid:[PPUtilts sharedInstance].LatestIDId,kColorCode:[PPUtilts sharedInstance].colorCode};
     }
     else{
-       parameters = @{kApiCall:@"NotificationDetail",kUserid:GET_USERID,@"n_parent_id":[PPUtilts sharedInstance].parent_id,@"n_notification_send_time":[PPUtilts sharedInstance].notification_send_time};
+         parameters = @{kApiCall:kApiCallDetail,kid:[PPUtilts sharedInstance].LatestIDId,kColorCode:[PPUtilts sharedInstance].colorCode};
+      // parameters = @{kApiCall:@"NotificationDetail",kUserid:GET_USERID,@"n_parent_id":[PPUtilts sharedInstance].parent_id,@"n_notification_send_time":[PPUtilts sharedInstance].notification_send_time};
     }
     
     
@@ -171,8 +172,8 @@
 }
 -(void)tableView:(UITableView *)tableView expandCell:(UITableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath
 {
-}
 
+}
 -(void)tableView:(UITableView *)tableView collapseCell:(UITableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath
 {
 
@@ -207,11 +208,12 @@
     [cell setTag:3];
     if (cell == nil) {
         cell = [[[NSBundle mainBundle]loadNibNamed:kStaticIdentifier owner:self options:nil]lastObject];
+        [cell.btnEmail setHidden:NO];
+        [cell.btnEmail addTarget:self action:@selector(buttonPressedAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     ibModelDetails = ibModel.Detail[indexPath.row];
-    
     cell.lblHeading.text=ibModelDetails.headline;
     cell.lblTag.text=ibModelDetails.user_email;
     cell.lblDescription.text=ibModelDetails.description_idea_brief;
@@ -244,6 +246,7 @@
     
     NSString *strColorType=ibModelDetails.color_code;
     isAnswerTheBriefs=YES;
+    
     typedef void (^CaseBlockForColor)();
     NSDictionary *colorType = @{
                                 R:
@@ -279,6 +282,51 @@
     ((CaseBlockForColor)colorType[strColorType])(); // invoke the correct block of code
     
     return cell;
+}
+- (void)buttonPressedAction:(id)sender
+{
+    CGPoint buttonOriginInTableView = [sender convertPoint:CGPointZero toView:self.table];
+    NSIndexPath *indexPath = [self.table indexPathForRowAtPoint:buttonOriginInTableView];
+    ibModelDetails = ibModel.Detail[indexPath.row];
+     NSLog(@"kjshfk   %@",ibModelDetails.user_email);
+    if ([MFMailComposeViewController canSendMail])
+    {
+        MFMailComposeViewController *mail = [[MFMailComposeViewController alloc] init];
+        mail.mailComposeDelegate = self;
+        //[mail setSubject:@"Sample Subject"];
+        //[mail setMessageBody:@"Here is some main text in the email!" isHTML:NO];
+       // NSArray *usersTo = [NSArray arrayWithObject: @"nobody@stackoverflow.com"];
+       // [mail setToRecipients:usersTo];
+        [mail setToRecipients:@[ibModelDetails.user_email]];
+        [self presentViewController:mail animated:YES completion:NULL];
+    }
+    else
+    {
+        NSLog(@"This device cannot send email");
+    }
+    
+}
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    switch (result) {
+        case MFMailComposeResultSent:
+            NSLog(@"You sent the email.");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"You saved a draft of this email");
+            break;
+        case MFMailComposeResultCancelled:
+            NSLog(@"You cancelled sending this email.");
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail failed:  An error occurred when trying to compose this email");
+            break;
+        default:
+            NSLog(@"An error occurred when trying to compose this email");
+            break;
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 -(BOOL)isImageExist:(NSString*)path{return (![[path stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]length] == 0);}
 

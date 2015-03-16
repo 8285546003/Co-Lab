@@ -13,4 +13,5 @@
 @property(nonatomic,retain)IBOutlet UILabel     *lblHeading;
 @property(nonatomic,retain)IBOutlet UILabel     *lblDescription;
 @property(nonatomic,retain)IBOutlet UIImageView *imgMain;
+@property(nonatomic,retain)IBOutlet UIButton    *btnEmail;
 @end
