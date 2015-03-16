@@ -18,6 +18,8 @@
 #import "AFNInjector.h"
 #import "UserDetails.h"
 #import "UserDetailsModel.h"
+#import "NotificationCount.h"
+#import "NotificationCountModel.h"
 
 @interface LoginViewController ()<GPPSignInDelegate>
 {
@@ -26,6 +28,11 @@
     
     UserDetails         *userDetail;
     UserDetailsModel    *userModel;
+    
+    NotificationCount  *notificationCount;
+    NotificationCountModel*notificationModel;
+    
+    
     
     MBProgressHUD       *hud;
     int i;
@@ -150,9 +157,14 @@
                                 status = statusModel.StatusArr[[ZERO integerValue]];
                                 userModel= [[UserDetailsModel alloc] initWithDictionary:data error:nil];
                                 userDetail=userModel.UserDetails[[ZERO integerValue]];
+                                notificationModel= [[NotificationCountModel alloc] initWithDictionary:data error:nil];
+                                notificationCount=notificationModel.NotificatioTotal[[ZERO integerValue]];
+                                
                                 if ([status.Error isEqualToString:kResultError]) {
                                     if ([status.Message isEqualToString:kResultMessage]) {
                                         [[NSUserDefaults standardUserDefaults] setValue:userDetail.user_id forKey:@"USERID"];
+                                        [[NSUserDefaults standardUserDefaults] setValue:notificationCount.totalnotification forKey:@"NOTIFICATION"];
+                                        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"FIRSTLOGIN"];
                                         HomeViewController *homeCont = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
                                         [_timer invalidate];
                                         [self.navigationController pushViewController:homeCont animated:NO];

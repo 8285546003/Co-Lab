@@ -522,9 +522,15 @@
             if ([status.Error isEqualToString:kResultError]) {
                 if ([status.Message isEqualToString:kResultMessage]) {
                     if (!isAnswerTheBriefs) {
-                        [PPUtilts sharedInstance].apiCall=kApiCallLatestIdeaBrief;
-                        CoLabListViewController *objLatestIB = [CoLabListViewController new];
-                        [self.navigationController pushViewController:objLatestIB animated:YES];
+                        if (isCurrentControllerPresented) {
+                            [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+                        }
+                        else{
+                            [PPUtilts sharedInstance].apiCall=kApiCallLatestIdeaBrief;
+                            CoLabListViewController *objLatestIB = [CoLabListViewController new];
+                            [self.navigationController pushViewController:objLatestIB animated:YES];
+                        }
+
                     }
                     else{
                         if (isCurrentControllerPresented) {

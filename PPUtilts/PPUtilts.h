@@ -87,7 +87,7 @@ static NSString *kApiCallSearchAuto          =@"SearchAuto";
 static NSString *kApiCallDetail              =@"Detail";
 static NSString *kApiCallLogOut              =@"LogOut";
 static NSString *kApiCallNotifications       =@"NotificatioList";
-
+static NSString *kApiCallNotificationsCount  =@"MyNotificationTotal";
 
 static NSString *kResultMessage             =@"Success";
 static NSString *kResultError               =@"false";
@@ -160,6 +160,8 @@ typedef enum {
 @property (nonatomic, strong) NSString *tagSearch;
 @property (nonatomic, strong) NSString *parent_id;
 @property (nonatomic, strong) NSString *notification_send_time;
+@property (nonatomic, strong) NSString *notificationCount;
+
 
 + (instancetype)sharedInstance;
 - (BOOL)connected;

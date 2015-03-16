@@ -112,7 +112,7 @@ NSArray *cellTitleText;
         cell.textLabel.font = [UIFont boldSystemFontOfSize:17];
     }
     else if (indexPath.row==3){
-        CustomBadge *badge = [CustomBadge customBadgeWithString:@"37"];
+        CustomBadge *badge = [CustomBadge customBadgeWithString:[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"]];
         badge.frame=CGRectMake(70, -4, 25, 25);
         [badge bringSubviewToFront:cell.contentView];
         [cell.contentView  addSubview:badge];

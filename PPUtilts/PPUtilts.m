@@ -8,6 +8,7 @@
 
 #import "PPUtilts.h"
 #import "AFNetworking.h"
+#import "MBProgressHUD.h"
 
 @implementation PPUtilts
 
@@ -80,6 +81,11 @@
     else{
         return NO;
     }
+}
+-(void)toast:(NSString*)message{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
+    hud.mode = MBProgressHUDModeCustomView;
+    hud.customView = [[UIImageView alloc] initWithImage: [UIImage imageNamed: @ "Checkmark"]];
 }
 
 @end

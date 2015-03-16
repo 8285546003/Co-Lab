@@ -127,6 +127,9 @@
 		68D340631AA7161F00B7D9A2 /* IBModelDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D340621AA7161F00B7D9A2 /* IBModelDetails.m */; };
 		68D6214A1AB6A67300887C05 /* UserDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D621491AB6A67300887C05 /* UserDetails.m */; };
 		68D6214D1AB6A6C100887C05 /* UserDetailsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D6214C1AB6A6C100887C05 /* UserDetailsModel.m */; };
+		68D621501AB6DCEC00887C05 /* NotificationCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D6214F1AB6DCEC00887C05 /* NotificationCount.m */; };
+		68D621531AB6DCFE00887C05 /* NotificationCountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D621521AB6DCFE00887C05 /* NotificationCountModel.m */; };
+		68D621561AB70FD400887C05 /* NotificatioDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D621551AB70FD400887C05 /* NotificatioDetail.m */; };
 		C7DBB8057AB49057AB7C06EF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3E4C55BDE693B1621293BE5 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -291,6 +294,12 @@
 		68D621491AB6A67300887C05 /* UserDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDetails.m; sourceTree = "<group>"; };
 		68D6214B1AB6A6C100887C05 /* UserDetailsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDetailsModel.h; sourceTree = "<group>"; };
 		68D6214C1AB6A6C100887C05 /* UserDetailsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDetailsModel.m; sourceTree = "<group>"; };
+		68D6214E1AB6DCEC00887C05 /* NotificationCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationCount.h; sourceTree = "<group>"; };
+		68D6214F1AB6DCEC00887C05 /* NotificationCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationCount.m; sourceTree = "<group>"; };
+		68D621511AB6DCFE00887C05 /* NotificationCountModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationCountModel.h; sourceTree = "<group>"; };
+		68D621521AB6DCFE00887C05 /* NotificationCountModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationCountModel.m; sourceTree = "<group>"; };
+		68D621541AB70FD400887C05 /* NotificatioDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificatioDetail.h; sourceTree = "<group>"; };
+		68D621551AB70FD400887C05 /* NotificatioDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificatioDetail.m; sourceTree = "<group>"; };
 		A3E4C55BDE693B1621293BE5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A739DB4F0CFEB3728BAA7FCF /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C581BD758B19368361C3647D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -615,6 +624,12 @@
 				68D621491AB6A67300887C05 /* UserDetails.m */,
 				68D6214B1AB6A6C100887C05 /* UserDetailsModel.h */,
 				68D6214C1AB6A6C100887C05 /* UserDetailsModel.m */,
+				68D6214E1AB6DCEC00887C05 /* NotificationCount.h */,
+				68D6214F1AB6DCEC00887C05 /* NotificationCount.m */,
+				68D621511AB6DCFE00887C05 /* NotificationCountModel.h */,
+				68D621521AB6DCFE00887C05 /* NotificationCountModel.m */,
+				68D621541AB70FD400887C05 /* NotificatioDetail.h */,
+				68D621551AB70FD400887C05 /* NotificatioDetail.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -811,9 +826,12 @@
 				68D340601AA7153D00B7D9A2 /* StatusModelDetails.m in Sources */,
 				68C03A921A95B25600555891 /* main.m in Sources */,
 				685447841AAD6DA20044E3C7 /* SearchModelDetails.m in Sources */,
+				68D621501AB6DCEC00887C05 /* NotificationCount.m in Sources */,
+				68D621531AB6DCFE00887C05 /* NotificationCountModel.m in Sources */,
 				6854478D1AAD9A710044E3C7 /* MyIdeaModel.m in Sources */,
 				68C89AE71AB0110F00F5C4B3 /* AFNInjector.m in Sources */,
 				68CC90D91AA5A8E300F3CB48 /* OverlayView.m in Sources */,
+				68D621561AB70FD400887C05 /* NotificatioDetail.m in Sources */,
 				68CC90911AA5A8C300F3CB48 /* ExpendableTableViewController.m in Sources */,
 				68CC90901AA5A8C300F3CB48 /* CreateIdea_BriefViewController.m in Sources */,
 				68CFE2671AA5E00A0082D3A8 /* NotificationViewController.m in Sources */,

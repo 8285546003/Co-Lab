@@ -20,6 +20,8 @@
 #import "StatusModel.h"
 #import "NotificatioListModel.h"
 #import "CustomBadge.h"
+#import "NotificationCount.h"
+#import "NotificationCountModel.h"
 
 @interface NotificationViewController (){
     StatusModel    *statusModel;
@@ -27,6 +29,10 @@
     
     NotificatioListModelDetails* ibModelDetails;
     StatusModelDetails* status;
+    
+    NotificationCount  *notificationCount;
+    NotificationCountModel*notificationCountModel;
+    
 }
 
 @end
@@ -34,16 +40,14 @@
 @implementation NotificationViewController
 @synthesize notificationTableView;
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
-
-    CustomBadge *badge = [CustomBadge customBadgeWithString:@"37"];
-    badge.frame=CGRectMake(50, 0, 20, 20);
-    [self.view addSubview:badge];
 }
 
 // Do any additional setup after loading the view from its nib.
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
+
     [self callWebServices];
     [self settingBarButton];
     [self.view setBackgroundColor:[UIColor PPBackGroundColor]];
@@ -59,9 +63,17 @@
         if(!error) {
             notificationModel = [[NotificatioListModel alloc] initWithDictionary:data error:nil];
             statusModel = [[StatusModel alloc] initWithDictionary:data error:nil];
-            status = statusModel.StatusArr[0];
+            status = statusModel.StatusArr[[ZERO integerValue]];
+            
+            notificationCountModel= [[NotificationCountModel alloc] initWithDictionary:data error:nil];
+            notificationCount=notificationCountModel.NotificatioTotal[[ZERO integerValue]];
+            
             if ([status.Error isEqualToString:kResultError]) {
                 if ([status.Message isEqualToString:kResultMessage]) {
+                  [[NSUserDefaults standardUserDefaults] setValue:notificationCount.totalnotification forKey:@"NOTIFICATION"];
+                    CustomBadge *badge = [CustomBadge customBadgeWithString:notificationCount.totalnotification];
+                    badge.frame=CGRectMake(50, 0, 20, 20);
+                    [self.view addSubview:badge];
                     [self.notificationTableView  setHidden:NO];
                     [self.notificationTableView reloadData];
                 }
@@ -82,7 +94,6 @@
                 kCustomErrorAlert;
             }
             [hud hide:YES];
-            
             NSLog(@"error %@", error);
         }
     }];

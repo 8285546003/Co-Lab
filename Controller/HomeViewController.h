@@ -10,5 +10,5 @@
 #import "CreateIdea_BriefViewController.h"
 
 @interface HomeViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate,UIGestureRecognizerDelegate>
-
+- (IBAction)btnCancel:(id)sender;
 @end
