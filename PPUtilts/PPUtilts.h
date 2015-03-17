@@ -38,9 +38,9 @@
 
 
 #define kheightForRowAtIndexPath 210.0f
-#define kCellHeightAtIndexZero   100
+#define kCellHeightAtIndexZero   110
 #define kCellHeightAtIndexfive   125
-#define kCellHeight              75
+#define kCellHeight              78
 
 #define kCellHeightWithImage     700
 #define kCellHeightWithoutImage  600
@@ -59,8 +59,8 @@
 #define     G                   @"G"
 #define     B                   @"B"
 
-#define ImageArray @[@"CoAppImage.png",@"Create_New_Idea_Image.png",@"Create_New_Brief_Image.png",@"Search_Image.png",@"Profile_Image.png",@"Latest_Idea_And_Briefs.png"]
-#define  CellTitleText  @[@" CO\\Lab",@"  Create New Idea",@"  Create New Briefs",@"  Search",@"  Profile",@"  Latest Idea & Brifes"]
+#define ImageArray @[@"colab.png",@"Create_New_Idea_Image.png",@"Create_New_Brief_Image.png",@"Search_Image.png",@"Profile_Image.png",@"Latest_Idea_And_Briefs.png"]
+#define  CellTitleText  @[@"  CO\\Lab",@"  Create New Idea",@"  Create New Briefs",@"  Search",@"  Profile",@"  Latest Idea & Brifes"]
 
 #define imageArrayProfile @[@"profile.png",@"my_ideas.png",@"my_brief.png",@"Notification.png",@"logout.png"]
 #define cellTitleProfile  @[@"Profile",@"My Ideas",@"My Briefs",@"Notifications",@"Log out"]
@@ -88,6 +88,8 @@ static NSString *kApiCallDetail              =@"Detail";
 static NSString *kApiCallLogOut              =@"LogOut";
 static NSString *kApiCallNotifications       =@"NotificatioList";
 static NSString *kApiCallNotificationsCount  =@"MyNotificationTotal";
+static NSString *kApiCallNotificationsDetail =@"NotificationDetail";
+
 
 static NSString *kResultMessage             =@"Success";
 static NSString *kResultError               =@"false";

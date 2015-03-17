@@ -12,15 +12,15 @@
 
 
 + (UIColor*) PPRedColor {
-    return [UIColor colorWithRed:196.0f/255.0f   green:34.0f/255.0f blue:42.0f/255.0f alpha:1];
+    return [UIColor colorWithRed:196.0f/255.0f    green:34.0f/255.0f blue:42.0f/255.0f alpha:1];
 }
 
 + (UIColor*) PPYellowColor {
-    return [UIColor colorWithRed:240.0f/255.0f   green:220.0f/255.0f blue:42.0f/255.0f alpha:1];
+    return [UIColor colorWithRed:240.0f/255.0f    green:220.0f/255.0f blue:42.0f/255.0f alpha:1];
 }
 
 + (UIColor*) PPGreenColor {
-    return [UIColor colorWithRed:103.0f/255.0f   green:181.0f/255.0f blue:71.0f/255.0f alpha:1];
+    return [UIColor colorWithRed:103.0f/255.0f    green:181.0f/255.0f blue:71.0f/255.0f alpha:1];
 }
 
 + (UIColor*) PPBlueColor {

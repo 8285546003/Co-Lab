@@ -149,7 +149,7 @@
                         }
                         
                         NSDictionary *parameters = @{kApiCall:kApiCallLogin,@"display_name":[person.name.givenName stringByAppendingFormat:@" %@",person.name.familyName],@"user_email":[GPPSignIn sharedInstance].authentication.userEmail,@"device_token":strDeviceTocken ,@"os_type":@"1"};
-                        
+                        [[NSUserDefaults standardUserDefaults] setValue:[person.name.givenName stringByAppendingFormat:@" %@",person.name.familyName] forKey:@"USERNAME"];
                         AFNInjector *objAFN = [AFNInjector new];
                         [objAFN parameters:parameters completionBlock:^(id data, NSError *error) {
                             if(!error) {

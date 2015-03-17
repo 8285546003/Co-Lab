@@ -89,7 +89,7 @@
             if ([status.Error isEqualToString:kResultError]) {
                 if ([status.Message isEqualToString:kResultMessage]) {
                 [[NSUserDefaults standardUserDefaults] setValue:notificationCount.totalnotification forKey:@"NOTIFICATION"];
-                NSString *str=[NSString stringWithFormat:@"SAMI.                          YOU HAVE                        4 NEW IDEAS                 TO YOUR                          %@ BRIEFS.",notificationCount.totalnotification];
+                NSString *str=[NSString stringWithFormat:@"%@.                          YOU HAVE                        4 NEW IDEAS                 TO YOUR                          %@ BRIEFS.",[[NSUserDefaults standardUserDefaults] valueForKey:@"USERNAME"],notificationCount.totalnotification];
                     lblNotificationCount.text=str;
                     [self.homeTableView reloadData];
                 }
@@ -231,7 +231,7 @@
     cell.textLabel.text = [cellTitleText objectAtIndex:indexPath.row];
 
     if (indexPath.row == 0) {
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:17];
+        cell.textLabel.font = [UIFont boldSystemFontOfSize:20];
     }
     else{
         cell.textLabel.font = [UIFont systemFontOfSize:15];
@@ -241,11 +241,15 @@
             cell.textLabel.text=str;
         }
         else if (indexPath.row==4){
-            //notificationCount=notificationCountModel.NotificatioTotal[[ZERO integerValue]];
-           CustomBadge *badge = [CustomBadge customBadgeWithString:[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"]];
-            badge.frame=CGRectMake(70, -4, 25, 25);
-            [badge bringSubviewToFront:cell.contentView];
-            [cell.contentView  addSubview:badge];
+            notificationCount=notificationCountModel.NotificatioTotal[[ZERO integerValue]];
+            if (notificationCount) {
+                //CustomBadge *badge = [CustomBadge customBadgeWithString:[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"]];
+                CustomBadge *badge = [CustomBadge customBadgeWithString:[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"] withStyle:[BadgeStyle oldStyle]];
+                badge.frame=CGRectMake(70, -4, 30, 30);
+                [badge bringSubviewToFront:cell.contentView];
+                [cell.contentView  addSubview:badge];
+            }
+
         }
     }
 

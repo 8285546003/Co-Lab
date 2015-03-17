@@ -401,7 +401,7 @@
 }
 
 -(void)textViewDidBeginEditing:(UITextView *)textView{
-    [self.baseScrollView setContentSize:CGSizeMake(self.view.frame.size.width, self.baseScrollView.frame.size.height+400)];
+    [self.baseScrollView setContentSize:CGSizeMake(self.view.frame.size.width, self.baseScrollView.frame.size.height+280)];
 }
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range  replacementText:(NSString *)text{
     if (textView.tag == PPkHeader) {

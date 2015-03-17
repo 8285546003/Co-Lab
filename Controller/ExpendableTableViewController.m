@@ -61,22 +61,23 @@
     
     NSDictionary *parameters;
     
-    if ([PPUtilts sharedInstance].apiCall==kApiCallDetail) {
-        parameters = @{kApiCall:kApiCallDetail,kid:[PPUtilts sharedInstance].LatestIDId,kColorCode:[PPUtilts sharedInstance].colorCode};
+    if ([PPUtilts sharedInstance].apiCall==kApiCallNotifications) {
+               parameters = @{kApiCall:@"NotificationDetail",kUserid:GET_USERID,@"n_parent_id":[PPUtilts sharedInstance].parent_id,@"n_notification_send_time":[PPUtilts sharedInstance].notification_send_time};
     }
     else{
-       //  parameters = @{kApiCall:kApiCallDetail,kid:[PPUtilts sharedInstance].LatestIDId,kColorCode:[PPUtilts sharedInstance].colorCode};
-       parameters = @{kApiCall:@"NotificationDetail",kUserid:GET_USERID,@"n_parent_id":[PPUtilts sharedInstance].parent_id,@"n_notification_send_time":[PPUtilts sharedInstance].notification_send_time};
+        parameters = @{kApiCall:kApiCallDetail,kid:[PPUtilts sharedInstance].LatestIDId,kColorCode:[PPUtilts sharedInstance].colorCode};
+
     }
     
     
     AFNInjector *objAFN = [AFNInjector new];
     [objAFN parameters:parameters completionBlock:^(id data, NSError *error) {
-        if ([PPUtilts sharedInstance].apiCall==kApiCallDetail) {
-        ibModel = [[ExpenModel alloc] initWithDictionary:data error:nil];
+        if ([PPUtilts sharedInstance].apiCall==kApiCallNotifications) {
+            notificationModel = [[NotificatioDetail alloc] initWithDictionary:data error:nil];
         }
         else{
-            notificationModel = [[NotificatioDetail alloc] initWithDictionary:data error:nil];
+            ibModel = [[ExpenModel alloc] initWithDictionary:data error:nil];
+
         }
         statusModel = [[StatusModel alloc] initWithDictionary:data error:nil];
         status = statusModel.StatusArr[[ZERO integerValue]];
@@ -193,11 +194,12 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if ([PPUtilts sharedInstance].apiCall==kApiCallDetail) {
-    return ibModel.Detail.count;
+    if ([PPUtilts sharedInstance].apiCall==kApiCallNotifications) {
+        return notificationModel.NotificatioDetail.count;
     }
   else{
-    return notificationModel.NotificatioDetail.count;
+      return ibModel.Detail.count;
+
     }
 }
 
@@ -224,11 +226,12 @@
         [cell.btnEmail addTarget:self action:@selector(buttonPressedAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-     if ([PPUtilts sharedInstance].apiCall==kApiCallDetail) {
-      ibModelDetails = ibModel.Detail[indexPath.row];
+       if ([PPUtilts sharedInstance].apiCall==kApiCallNotifications) {
+           ibModelDetails= notificationModel.NotificatioDetail[indexPath.row];
      }
      else{
-         ibModelDetails= notificationModel.NotificatioDetail[indexPath.row];
+         ibModelDetails = ibModel.Detail[indexPath.row];
+
      }
     cell.lblHeading.text=ibModelDetails.headline;
     cell.lblTag.text=ibModelDetails.user_email;
@@ -304,11 +307,12 @@
     CGPoint buttonOriginInTableView = [sender convertPoint:CGPointZero toView:self.table];
     NSIndexPath *indexPath = [self.table indexPathForRowAtPoint:buttonOriginInTableView];
     
-    if ([PPUtilts sharedInstance].apiCall==kApiCallDetail) {
-        ibModelDetails = ibModel.Detail[indexPath.row];
+    if ([PPUtilts sharedInstance].apiCall==kApiCallNotifications) {
+        ibModelDetails= notificationModel.NotificatioDetail[indexPath.row];
     }
     else{
-        ibModelDetails= notificationModel.NotificatioDetail[indexPath.row];
+        ibModelDetails = ibModel.Detail[indexPath.row];
+
     }
     
     if ([MFMailComposeViewController canSendMail])

@@ -71,8 +71,9 @@
             if ([status.Error isEqualToString:kResultError]) {
                 if ([status.Message isEqualToString:kResultMessage]) {
                   [[NSUserDefaults standardUserDefaults] setValue:notificationCount.totalnotification forKey:@"NOTIFICATION"];
-                    CustomBadge *badge = [CustomBadge customBadgeWithString:notificationCount.totalnotification];
-                    badge.frame=CGRectMake(50, 0, 20, 20);
+                    //CustomBadge *badge = [CustomBadge customBadgeWithString:notificationCount.totalnotification];
+                    CustomBadge *badge = [CustomBadge customBadgeWithString:notificationCount.totalnotification withStyle:[BadgeStyle oldStyle]];
+                    badge.frame=CGRectMake(50, 0, 30, 30);
                     [self.view addSubview:badge];
                     [self.notificationTableView  setHidden:NO];
                     [self.notificationTableView reloadData];

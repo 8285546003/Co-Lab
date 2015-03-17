@@ -26,7 +26,7 @@
                     <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </tableView>
-                <view alpha="0.84999999999999987" contentMode="scaleToFill" id="dSX-Au-GD5">
+                <view alpha="0.94999999999999996" contentMode="scaleToFill" id="dSX-Au-GD5">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
@@ -34,7 +34,7 @@
                             <rect key="frame" x="30" y="122" width="260" height="324"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="41"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="33"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Notification.png" id="HEM-Bb-2KD">
