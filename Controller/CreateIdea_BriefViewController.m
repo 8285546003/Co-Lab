@@ -37,7 +37,7 @@
     [self.mainDataDictionary setValue:@"" forKey:@"TAGS"];
     [self.mainDataDictionary setValue:@"" forKey:@"IMAGE"];
 
-    self.baseScrollView.frame=CGRectMake(0, 65, self.view.frame.size.width, self.view.frame.size.height);
+    self.baseScrollView.frame=CGRectMake(0, 55, self.view.frame.size.width, self.view.frame.size.height);
     if (self.isIdeaSubmitScreen) {
         if (isAnswerTheBriefs) {
             lbltitle.text=@"Answer The Briefs";
@@ -81,9 +81,9 @@
     titleCharCountLbl.text = @"80";
     
 }
-- (void)viewWillAppear:(BOOL)animated{
+-(void)viewDidAppear:(BOOL)animated{
     [self settingBarButton];
-    [super viewWillAppear:animated];
+    [super viewDidAppear:YES];
 }
 
 - (void)rearrengeScrollView:(BOOL)isAttached{
@@ -314,7 +314,7 @@
 - (void)settingBarMethod:(UIButton *)settingBtn{
     switch (settingBtn.tag) {
         case PPkCancel:
-            isCurrentControllerPresented?[[self presentingViewController] dismissViewControllerAnimated:YES completion:nil]:[self.navigationController popViewControllerAnimated:YES];
+            isCurrentControllerPresented?[self dismissViewControllerAnimated:YES completion:nil]:[self.navigationController popViewControllerAnimated:YES];
              break;
         case PPkAttachment:[self AddOverLay];
             break;
@@ -523,7 +523,7 @@
                 if ([status.Message isEqualToString:kResultMessage]) {
                     if (!isAnswerTheBriefs) {
                         if (isCurrentControllerPresented) {
-                            [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+                            [self dismissViewControllerAnimated:YES completion:nil];
                         }
                         else{
                             [PPUtilts sharedInstance].apiCall=kApiCallLatestIdeaBrief;
@@ -534,7 +534,7 @@
                     }
                     else{
                         if (isCurrentControllerPresented) {
-                            [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+                            [self  dismissViewControllerAnimated:YES completion:nil];
                         }
                     }
                     

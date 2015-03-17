@@ -80,21 +80,21 @@
         
         if (Answer) {
             answerBriefBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            [answerBriefBtn setFrame:CGRectMake( 40, screenHeight - 210, 150, 40)];
+            [answerBriefBtn setFrame:CGRectMake( 40, screenHeight - 80, 150, 40)];
             [answerBriefBtn setImage:[UIImage imageNamed:@"answer_brief.png"] forState:UIControlStateNormal];
             [answerBriefBtn addTarget:self.delegate action:@selector(answerIB) forControlEvents:UIControlEventTouchUpInside];
             answerBriefBtn.alpha = 1.0f;
             [self addSubview:answerBriefBtn];
         }
         createIdeaBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [createIdeaBtn setFrame:CGRectMake( 40, screenHeight - 160, 150, 40)];
+        [createIdeaBtn setFrame:CGRectMake( 40, screenHeight - 180, 150, 40)];
         [createIdeaBtn setImage:[UIImage imageNamed:@"createnewidea.png"] forState:UIControlStateNormal];
         [createIdeaBtn addTarget:self.delegate action:@selector(createIdea) forControlEvents:UIControlEventTouchUpInside];
         createIdeaBtn.alpha = 1.0f;
         [self addSubview:createIdeaBtn];
         
         createBriefBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [createBriefBtn setFrame:CGRectMake( 40, screenHeight - 110, 150, 40)];
+        [createBriefBtn setFrame:CGRectMake( 40, screenHeight - 130, 150, 40)];
         [createBriefBtn setImage:[UIImage imageNamed:@"newbreif.png"] forState:UIControlStateNormal];
         [createBriefBtn addTarget:self.delegate action:@selector(createBrief) forControlEvents:UIControlEventTouchUpInside];
         createIdeaBtn.alpha = 1.0f;

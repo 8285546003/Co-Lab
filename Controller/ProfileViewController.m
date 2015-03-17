@@ -41,7 +41,7 @@ NSArray *cellTitleText;
 -(void)updateFrame{
     
     if ([PPUtilts isiPhone5]) {
-        self.profileTableView.frame=CGRectMake(0, 75, self.view.frame.size.width, self.view.frame.size.height);
+        self.profileTableView.frame=CGRectMake(0, 150, self.view.frame.size.width, self.view.frame.size.height);
     }
     else if ([PPUtilts isiPhone6]){
         self.profileTableView.frame=CGRectMake(0, 200, self.view.frame.size.width, self.view.frame.size.height);
@@ -50,7 +50,7 @@ NSArray *cellTitleText;
         self.profileTableView.frame=CGRectMake(0, 270, self.view.frame.size.width, self.view.frame.size.height);
     }
     if ([PPUtilts isiPhone4]){
-        self.profileTableView.frame=CGRectMake(0, 10, self.view.frame.size.width, self.view.frame.size.height);
+        self.profileTableView.frame=CGRectMake(0, 60, self.view.frame.size.width, self.view.frame.size.height);
     }
     else{
     }
@@ -63,7 +63,8 @@ NSArray *cellTitleText;
 }
 - (void)settingBarButton{
     UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [cancelButton setFrame:CGRectMake(15, self.view.bounds.size.height - 68, 73, 73)];
+    
+    [cancelButton setFrame:CGRectMake(15, self.view.bounds.size.height - 50, 60, 60)];
     [cancelButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
     [cancelButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateSelected];
     [cancelButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
@@ -109,13 +110,12 @@ NSArray *cellTitleText;
     [cell.imageView setImage:[UIImage imageNamed:[imageArray objectAtIndex:indexPath.row]]];
     cell.textLabel.text = [cellTitleText objectAtIndex:indexPath.row];
     if (indexPath.row == 0) {
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:20];
+        cell.textLabel.font = [UIFont boldSystemFontOfSize:15];
     }
     else if (indexPath.row==3){
-
     //CustomBadge *badge = [CustomBadge customBadgeWithString:[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"]];
     CustomBadge *badge = [CustomBadge customBadgeWithString:[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"] withStyle:[BadgeStyle oldStyle]];
-         badge.frame=CGRectMake(70, -4, 30, 30);
+         badge.frame=CGRectMake(60, -4, 30, 30);
         [badge bringSubviewToFront:cell.contentView];
         [cell.contentView  addSubview:badge];
     }

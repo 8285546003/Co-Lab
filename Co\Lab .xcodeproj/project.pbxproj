@@ -90,7 +90,6 @@
 		68CC911E1AA5AA3100F3CB48 /* 72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = 68CC90F01AA5AA3100F3CB48 /* 72x72.png */; };
 		68CC911F1AA5AA3100F3CB48 /* 76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = 68CC90F11AA5AA3100F3CB48 /* 76x76.png */; };
 		68CC91201AA5AA3100F3CB48 /* 80x80.png in Resources */ = {isa = PBXBuildFile; fileRef = 68CC90F21AA5AA3100F3CB48 /* 80x80.png */; };
-		68CC91211AA5AA3100F3CB48 /* 87*87.png in Resources */ = {isa = PBXBuildFile; fileRef = 68CC90F31AA5AA3100F3CB48 /* 87*87.png */; };
 		68CC91221AA5AA3100F3CB48 /* CoAppImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 68CC90F41AA5AA3100F3CB48 /* CoAppImage.png */; };
 		68CC91231AA5AA3100F3CB48 /* CoAppImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68CC90F51AA5AA3100F3CB48 /* CoAppImage@2x.png */; };
 		68CC91241AA5AA3100F3CB48 /* CoAppImage@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68CC90F61AA5AA3100F3CB48 /* CoAppImage@3x.png */; };
@@ -134,6 +133,7 @@
 		68DD47E81AB7ED1B008832D7 /* 37x-Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68DD47E61AB7ED1B008832D7 /* 37x-Checkmark@2x.png */; };
 		68DD47EB1AB822FC008832D7 /* colab.png in Resources */ = {isa = PBXBuildFile; fileRef = 68DD47E91AB822FC008832D7 /* colab.png */; };
 		68DD47EC1AB822FC008832D7 /* colab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68DD47EA1AB822FC008832D7 /* colab@2x.png */; };
+		68DD47EE1AB85DE9008832D7 /* 87x87.png in Resources */ = {isa = PBXBuildFile; fileRef = 68DD47ED1AB85DE9008832D7 /* 87x87.png */; };
 		C7DBB8057AB49057AB7C06EF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3E4C55BDE693B1621293BE5 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -253,7 +253,6 @@
 		68CC90F01AA5AA3100F3CB48 /* 72x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 72x72.png; sourceTree = "<group>"; };
 		68CC90F11AA5AA3100F3CB48 /* 76x76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 76x76.png; sourceTree = "<group>"; };
 		68CC90F21AA5AA3100F3CB48 /* 80x80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 80x80.png; sourceTree = "<group>"; };
-		68CC90F31AA5AA3100F3CB48 /* 87*87.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "87*87.png"; sourceTree = "<group>"; };
 		68CC90F41AA5AA3100F3CB48 /* CoAppImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoAppImage.png; sourceTree = "<group>"; };
 		68CC90F51AA5AA3100F3CB48 /* CoAppImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CoAppImage@2x.png"; sourceTree = "<group>"; };
 		68CC90F61AA5AA3100F3CB48 /* CoAppImage@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CoAppImage@3x.png"; sourceTree = "<group>"; };
@@ -308,6 +307,7 @@
 		68DD47E61AB7ED1B008832D7 /* 37x-Checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark@2x.png"; sourceTree = "<group>"; };
 		68DD47E91AB822FC008832D7 /* colab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = colab.png; sourceTree = "<group>"; };
 		68DD47EA1AB822FC008832D7 /* colab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "colab@2x.png"; sourceTree = "<group>"; };
+		68DD47ED1AB85DE9008832D7 /* 87x87.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 87x87.png; sourceTree = "<group>"; };
 		A3E4C55BDE693B1621293BE5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A739DB4F0CFEB3728BAA7FCF /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C581BD758B19368361C3647D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -538,6 +538,7 @@
 		68CC90E41AA5AA3100F3CB48 /* AppIcon */ = {
 			isa = PBXGroup;
 			children = (
+				68DD47ED1AB85DE9008832D7 /* 87x87.png */,
 				68CC90E51AA5AA3100F3CB48 /* 100x100.png */,
 				68CC90E61AA5AA3100F3CB48 /* 114x114.png */,
 				68CC90E71AA5AA3100F3CB48 /* 120x120.png */,
@@ -552,7 +553,6 @@
 				68CC90F01AA5AA3100F3CB48 /* 72x72.png */,
 				68CC90F11AA5AA3100F3CB48 /* 76x76.png */,
 				68CC90F21AA5AA3100F3CB48 /* 80x80.png */,
-				68CC90F31AA5AA3100F3CB48 /* 87*87.png */,
 				68CC90F41AA5AA3100F3CB48 /* CoAppImage.png */,
 				68CC90F51AA5AA3100F3CB48 /* CoAppImage@2x.png */,
 				68CC90F61AA5AA3100F3CB48 /* CoAppImage@3x.png */,
@@ -758,11 +758,11 @@
 				68CC91171AA5AA3100F3CB48 /* 152x152.png in Resources */,
 				68CFE2741AA5E13E0082D3A8 /* NotificationViewCell.xib in Resources */,
 				68CC911F1AA5AA3100F3CB48 /* 76x76.png in Resources */,
-				68CC91211AA5AA3100F3CB48 /* 87*87.png in Resources */,
 				68CC911A1AA5AA3100F3CB48 /* 40x40.png in Resources */,
 				68CC91241AA5AA3100F3CB48 /* CoAppImage@3x.png in Resources */,
 				68CC91331AA5AA3100F3CB48 /* Next_Image.png in Resources */,
 				687EAEC51AB06E4400CF0169 /* Notification.png in Resources */,
+				68DD47EE1AB85DE9008832D7 /* 87x87.png in Resources */,
 				687EAEBF1AB06E4400CF0169 /* logout.png in Resources */,
 				687EAECE1AB06FB300CF0169 /* Create_New_Idea_Image.png in Resources */,
 				68CC90DD1AA5A8E300F3CB48 /* ExpendableTableViewController.xib in Resources */,

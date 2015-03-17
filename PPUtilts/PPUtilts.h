@@ -20,15 +20,15 @@
 
 
 
-#define CANCEL_BUTTON_FRAME      CGRectMake(10, self.view.bounds.size.height - 40, 50, 50)
+#define CANCEL_BUTTON_FRAME      CGRectMake(10, self.view.bounds.size.height - 50, 45, 45)
 #define CANCEL_BUTTON_NAME       @"Close_Image.png"
 #define CANCEL_BUTTON_NAME_WHITE @"white_arrow.png"
 #define BACK_BUTTON_NAME         @"Pre_Image.png"
 
-#define ATTACHMENT_BUTTON_FRAME CGRectMake(self.view.frame.size.width-110, self.view.frame.size.height - 40, 50, 50)
+#define ATTACHMENT_BUTTON_FRAME CGRectMake(self.view.frame.size.width-110, self.view.frame.size.height - 50, 45, 45)
 #define ATTACHMENT_BUTTON_NAME  @"Attachment_Image.png"
 
-#define ADD_BUTTON_FRAME        CGRectMake(self.view.frame.size.width - 60, self.view.frame.size.height - 40, 50, 50)
+#define ADD_BUTTON_FRAME        CGRectMake(self.view.frame.size.width - 55, self.view.frame.size.height - 50, 45, 45)
 #define ADD_BUTTON_NAME         @"plus.png"
 
 
@@ -40,7 +40,7 @@
 #define kheightForRowAtIndexPath 210.0f
 #define kCellHeightAtIndexZero   110
 #define kCellHeightAtIndexfive   125
-#define kCellHeight              78
+#define kCellHeight              63
 
 #define kCellHeightWithImage     700
 #define kCellHeightWithoutImage  600
