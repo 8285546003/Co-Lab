@@ -270,6 +270,7 @@
     NSDictionary *colorType = @{
                                 R:
                                     ^{[cell setBackgroundColor:[UIColor    PPRedColor]];
+                                        [self.table setBackgroundColor:[UIColor    PPRedColor]];
                                         isAnswerTheBriefs=NO;
                                         imgIdea.hidden=NO;
                                         if (isHot) {imgHot.hidden =NO;imgIdea.frame=imgBrief.frame;}
@@ -277,6 +278,7 @@
                                     },
                                 Y:
                                     ^{[cell setBackgroundColor:[UIColor    PPYellowColor]];
+                                        [self.table setBackgroundColor:[UIColor    PPYellowColor]];
                                         imgIdea.hidden=NO;
                                         imgBrief.hidden=NO;
                                         if (isHot){imgHot.hidden =NO;}
@@ -285,6 +287,7 @@
                                     },
                                 G:
                                     ^{ [cell setBackgroundColor:[UIColor    PPGreenColor]];
+                                         [self.table setBackgroundColor:[UIColor    PPGreenColor]];
                                         imgIdea.hidden=NO;
                                         imgBrief.hidden=NO;
                                         if (isHot) {imgHot.hidden =NO;}
@@ -292,6 +295,7 @@
                                     },
                                 B:
                                     ^{ [cell setBackgroundColor:[UIColor    PPBlueColor]];
+                                         [self.table setBackgroundColor:[UIColor    PPBlueColor]];
                                         imgBrief.hidden=NO;
                                         if (isHot) {imgHot.hidden =NO;}
                                         else{imgBrief.frame=imgHot.frame;}

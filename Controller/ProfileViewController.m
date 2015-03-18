@@ -113,11 +113,12 @@ NSArray *cellTitleText;
         cell.textLabel.font = [UIFont boldSystemFontOfSize:15];
     }
     else if (indexPath.row==3){
-    //CustomBadge *badge = [CustomBadge customBadgeWithString:[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"]];
-    CustomBadge *badge = [CustomBadge customBadgeWithString:[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"] withStyle:[BadgeStyle oldStyle]];
-         badge.frame=CGRectMake(60, -4, 30, 30);
-        [badge bringSubviewToFront:cell.contentView];
-        [cell.contentView  addSubview:badge];
+        if (![[PPUtilts sharedInstance].notificationCount isEqualToString:ZERO]) {
+            CustomBadge *badge = [CustomBadge customBadgeWithString:[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"] withStyle:[BadgeStyle oldStyle]];
+            badge.frame=CGRectMake(60, -4, 30, 30);
+            [badge bringSubviewToFront:cell.contentView];
+            [cell.contentView  addSubview:badge];
+        }
     }
     
     else{
@@ -147,7 +148,7 @@ NSArray *cellTitleText;
             break;
         case PPkMyBriefs:[self goToWithApiCall:kApiCallMyBrief];
             break;
-        case PPkMyNotifications:[self gotoNavigationController];
+        case PPkMyNotifications:[self gotoNotificationController];
             break;
         case PPkLogOut:[self goToWithApiCall:kApiCallLogOut];
             break;
@@ -156,9 +157,15 @@ NSArray *cellTitleText;
             
     }
 }
--(void)gotoNavigationController{
-    NotificationViewController *obj = [NotificationViewController new];
-    [self.navigationController pushViewController:obj animated:YES];
+-(void)gotoNotificationController{
+   // if (![[PPUtilts sharedInstance].notificationCount isEqualToString:ZERO]) {
+        NotificationViewController *obj = [NotificationViewController new];
+        [self.navigationController pushViewController:obj animated:YES];
+    //}
+   // else{
+   //     kCustomAlert(@"Notification", @"You don't have any notification yet", @"OK");
+  //  }
+
 }
 
 -(void)goToWithApiCall:(NSString*)apiCall{

@@ -83,7 +83,11 @@
 }
 -(void)viewDidAppear:(BOOL)animated{
     [self settingBarButton];
-    [super viewDidAppear:NO];
+    [super viewDidAppear:YES];
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [self settingBarButton];
+    [super viewWillAppear:YES];
 }
 
 - (void)rearrengeScrollView:(BOOL)isAttached{

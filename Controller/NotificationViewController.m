@@ -66,12 +66,13 @@
             status = statusModel.StatusArr[[ZERO integerValue]];
             
             notificationCountModel= [[NotificationCountModel alloc] initWithDictionary:data error:nil];
-            notificationCount=notificationCountModel.NotificatioTotal[[ZERO integerValue]];
+            if (notificationCountModel.NotificatioTotal.count>0) {
+                notificationCount=notificationCountModel.NotificatioTotal[[ZERO integerValue]];
+            }
             
             if ([status.Error isEqualToString:kResultError]) {
                 if ([status.Message isEqualToString:kResultMessage]) {
                   [[NSUserDefaults standardUserDefaults] setValue:notificationCount.totalnotification forKey:@"NOTIFICATION"];
-                    //CustomBadge *badge = [CustomBadge customBadgeWithString:notificationCount.totalnotification];
                     CustomBadge *badge = [CustomBadge customBadgeWithString:notificationCount.totalnotification withStyle:[BadgeStyle oldStyle]];
                     badge.frame=CGRectMake(45, 0, 30, 30);
                     [self.view addSubview:badge];

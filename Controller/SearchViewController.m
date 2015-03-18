@@ -21,6 +21,9 @@
 @interface SearchViewController (){
     StatusModel  *statusModel;
     SearchModel      *ibModel;
+    
+    StatusModelDetails* status;
+    SearchModelDetails* ibModelDetails;
 }
 
 @end
@@ -75,8 +78,8 @@
     
      cell.selectionStyle = UITableViewCellSelectionStyleNone;
      cell.backgroundColor=[UIColor clearColor];
-     SearchModelDetails* ibModelDetails = ibModel.SearchAuto[indexPath.row];
-     StatusModelDetails* status = statusModel.StatusArr[0];
+       ibModelDetails= ibModel.SearchAuto[indexPath.row];
+       status = statusModel.StatusArr[[ZERO integerValue]];
     
     if (status.Message==kResultNoRecord){
         cell.textLabel.text=kResultNoRecord;
@@ -90,7 +93,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    StatusModelDetails* status = statusModel.StatusArr[0];
+        status = statusModel.StatusArr[[ZERO integerValue]];
     if (status.Message==kResultNoRecord) {
         return 200;
     }
@@ -99,8 +102,7 @@
     }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    SearchModelDetails* ibModelDetails = ibModel.SearchAuto[indexPath.row];
-    
+    ibModelDetails = ibModel.SearchAuto[indexPath.row];
     [PPUtilts sharedInstance].tagSearch=ibModelDetails.tag;
     [self goToLatestIdeaBriefs];
 }
@@ -117,7 +119,7 @@
     [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         ibModel = [[SearchModel alloc] initWithDictionary:responseObject error:nil];
         statusModel = [[StatusModel alloc] initWithDictionary:responseObject error:nil];
-        StatusModelDetails* status = statusModel.StatusArr[0];
+        status = statusModel.StatusArr[[ZERO integerValue]];
         if ([status.Error isEqualToString:kResultError]) {
             [self.allDataTableView reloadData];
             [self.allDataTableView setHidden:NO];

@@ -163,8 +163,11 @@
                                 if ([status.Error isEqualToString:kResultError]) {
                                     if ([status.Message isEqualToString:kResultMessage]) {
                                         [[NSUserDefaults standardUserDefaults] setValue:userDetail.user_id forKey:@"USERID"];
-                                        [[NSUserDefaults standardUserDefaults] setValue:notificationCount.totalnotification forKey:@"NOTIFICATION"];
-                                        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"FIRSTLOGIN"];
+                                        if (![notificationCount.totalnotification isEqualToString:ZERO]) {
+                                            [[NSUserDefaults standardUserDefaults] setValue:notificationCount.totalnotification forKey:@"NOTIFICATION"];
+                                            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"FIRSTLOGIN"];
+                                        }
+
                                         HomeViewController *homeCont = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
                                         [_timer invalidate];
                                         [self.navigationController pushViewController:homeCont animated:NO];

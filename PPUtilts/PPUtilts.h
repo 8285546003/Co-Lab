@@ -140,15 +140,6 @@ typedef enum{
     PP103
 } ViewTagType;
 
-
-
-//typedef enum{
-//    R,
-//    Y,
-//    G,
-//    B
-//} CardType;
-
 typedef enum {
     PPNoInternetConnection=-1005,
 }ErrorCodeType;

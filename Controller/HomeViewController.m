@@ -241,17 +241,22 @@
             cell.textLabel.text=str;
         }
         else if (indexPath.row==4){
-            notificationCount=notificationCountModel.NotificatioTotal[[ZERO integerValue]];
-            if (notificationCount) {
-                //CustomBadge *badge = [CustomBadge customBadgeWithString:[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"]];
-                CustomBadge *badge = [CustomBadge customBadgeWithString:[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"] withStyle:[BadgeStyle oldStyle]];
-                badge.frame=CGRectMake(60, -4, 30, 30);
-                [badge bringSubviewToFront:cell.contentView];
-                [cell.contentView  addSubview:badge];
+            if ([status.Error isEqualToString:kResultError]) {
+                if ([status.Message isEqualToString:kResultMessage]) {
+                    notificationCount=notificationCountModel.NotificatioTotal[[ZERO integerValue]];
+                    [PPUtilts sharedInstance].notificationCount=notificationCount.totalnotification;
+                    if ([notificationCount.totalnotification integerValue]>0) {
+                        CustomBadge *badge = [CustomBadge customBadgeWithString:[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"] withStyle:[BadgeStyle oldStyle]];
+                        badge.frame=CGRectMake(60, -4, 30, 30);
+                        [badge bringSubviewToFront:cell.contentView];
+                        [cell.contentView  addSubview:badge];
+                }
             }
-
+            
         }
+            
     }
+}
 
   return cell;
 }
@@ -312,11 +317,6 @@
     CoLabListViewController *objLatestIB = [CoLabListViewController new];
     [self.navigationController pushViewController:objLatestIB animated:YES];
 }
-//-(void)goToNotificationViewController{
-//     NotificationViewController *objNotification = [NotificationViewController new];
-//    [self.navigationController pushViewController:objNotification animated:YES];
-//}
-
 - (IBAction)btnCancel:(id)sender {
     NotificationViewController *objNotification = [NotificationViewController new];
     [self.navigationController pushViewController:objNotification animated:YES];
