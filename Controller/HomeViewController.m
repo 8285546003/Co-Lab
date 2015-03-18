@@ -152,10 +152,10 @@
         self.homeTableView.frame=CGRectMake(0, 90, self.view.frame.size.width, self.view.frame.size.height);
     }
     else if ([PPUtilts isiPhone6]){
-        self.homeTableView.frame=CGRectMake(0, 140, self.view.frame.size.width, self.view.frame.size.height);
+        self.homeTableView.frame=CGRectMake(0, 190, self.view.frame.size.width, self.view.frame.size.height);
     }
     else if ([PPUtilts isiPhone6Plus]){
-        self.homeTableView.frame=CGRectMake(0, 200, self.view.frame.size.width, self.view.frame.size.height);
+        self.homeTableView.frame=CGRectMake(0, 260, self.view.frame.size.width, self.view.frame.size.height);
     }
     else{
         self.homeTableView.frame=CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);

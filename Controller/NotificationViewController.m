@@ -73,7 +73,7 @@
                   [[NSUserDefaults standardUserDefaults] setValue:notificationCount.totalnotification forKey:@"NOTIFICATION"];
                     //CustomBadge *badge = [CustomBadge customBadgeWithString:notificationCount.totalnotification];
                     CustomBadge *badge = [CustomBadge customBadgeWithString:notificationCount.totalnotification withStyle:[BadgeStyle oldStyle]];
-                    badge.frame=CGRectMake(50, 0, 30, 30);
+                    badge.frame=CGRectMake(45, 0, 30, 30);
                     [self.view addSubview:badge];
                     [self.notificationTableView  setHidden:NO];
                     [self.notificationTableView reloadData];

@@ -41,16 +41,16 @@ NSArray *cellTitleText;
 -(void)updateFrame{
     
     if ([PPUtilts isiPhone5]) {
-        self.profileTableView.frame=CGRectMake(0, 150, self.view.frame.size.width, self.view.frame.size.height);
+        self.profileTableView.frame=CGRectMake(0, 130, self.view.frame.size.width, self.view.frame.size.height);
     }
     else if ([PPUtilts isiPhone6]){
-        self.profileTableView.frame=CGRectMake(0, 200, self.view.frame.size.width, self.view.frame.size.height);
+        self.profileTableView.frame=CGRectMake(0, 240, self.view.frame.size.width, self.view.frame.size.height);
     }
     else if ([PPUtilts isiPhone6Plus]){
-        self.profileTableView.frame=CGRectMake(0, 270, self.view.frame.size.width, self.view.frame.size.height);
+        self.profileTableView.frame=CGRectMake(0, 300, self.view.frame.size.width, self.view.frame.size.height);
     }
     if ([PPUtilts isiPhone4]){
-        self.profileTableView.frame=CGRectMake(0, 60, self.view.frame.size.width, self.view.frame.size.height);
+        self.profileTableView.frame=CGRectMake(0, 55, self.view.frame.size.width, self.view.frame.size.height);
     }
     else{
     }
@@ -64,7 +64,7 @@ NSArray *cellTitleText;
 - (void)settingBarButton{
     UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
-    [cancelButton setFrame:CGRectMake(15, self.view.bounds.size.height - 50, 60, 60)];
+    [cancelButton setFrame:CGRectMake(15, self.view.bounds.size.height - 55, 60, 60)];
     [cancelButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
     [cancelButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateSelected];
     [cancelButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
@@ -171,7 +171,7 @@ NSArray *cellTitleText;
         if (GET_USERID) {
             [PPUtilts sharedInstance].apiCall=apiCall;
             CoLabListViewController *objProfile = [CoLabListViewController new];
-            [self.navigationController pushViewController:objProfile animated:NO];
+            [self.navigationController pushViewController:objProfile animated:YES];
         }
         else{
             kCustomAlert(@"Failed to Login", @"Something went wrong please go to (profile->Loout) for re-login", @"Ok");
