@@ -34,7 +34,7 @@
                             <rect key="frame" x="30" y="122" width="260" height="324"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="33"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Notification.png" id="HEM-Bb-2KD">

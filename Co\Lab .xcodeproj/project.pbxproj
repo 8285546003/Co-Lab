@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		684410C61ABAA6F60063C4C2 /* NotificationIdeaCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 684410C51ABAA6F60063C4C2 /* NotificationIdeaCount.m */; };
+		684410C91ABAA7660063C4C2 /* NotificationIdeaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 684410C81ABAA7660063C4C2 /* NotificationIdeaModel.m */; };
 		685447781AAD628D0044E3C7 /* ExpenModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 685447771AAD628D0044E3C7 /* ExpenModel.m */; };
 		6854477E1AAD675B0044E3C7 /* SearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6854477D1AAD675B0044E3C7 /* SearchModel.m */; };
 		685447841AAD6DA20044E3C7 /* SearchModelDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 685447831AAD6DA20044E3C7 /* SearchModelDetails.m */; };
@@ -138,6 +140,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		684410C41ABAA6F60063C4C2 /* NotificationIdeaCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationIdeaCount.h; sourceTree = "<group>"; };
+		684410C51ABAA6F60063C4C2 /* NotificationIdeaCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationIdeaCount.m; sourceTree = "<group>"; };
+		684410C71ABAA7660063C4C2 /* NotificationIdeaModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationIdeaModel.h; sourceTree = "<group>"; };
+		684410C81ABAA7660063C4C2 /* NotificationIdeaModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationIdeaModel.m; sourceTree = "<group>"; };
 		685447761AAD628D0044E3C7 /* ExpenModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpenModel.h; sourceTree = "<group>"; };
 		685447771AAD628D0044E3C7 /* ExpenModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpenModel.m; sourceTree = "<group>"; };
 		6854477C1AAD675B0044E3C7 /* SearchModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchModel.h; sourceTree = "<group>"; };
@@ -642,6 +648,10 @@
 				68D621521AB6DCFE00887C05 /* NotificationCountModel.m */,
 				68D621541AB70FD400887C05 /* NotificatioDetail.h */,
 				68D621551AB70FD400887C05 /* NotificatioDetail.m */,
+				684410C41ABAA6F60063C4C2 /* NotificationIdeaCount.h */,
+				684410C51ABAA6F60063C4C2 /* NotificationIdeaCount.m */,
+				684410C71ABAA7660063C4C2 /* NotificationIdeaModel.h */,
+				684410C81ABAA7660063C4C2 /* NotificationIdeaModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -820,6 +830,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				68CC90931AA5A8C300F3CB48 /* LoginViewController.m in Sources */,
+				684410C61ABAA6F60063C4C2 /* NotificationIdeaCount.m in Sources */,
 				68D340591AA70F0500B7D9A2 /* StatusModel.m in Sources */,
 				68CC90941AA5A8C300F3CB48 /* ProfileViewController.m in Sources */,
 				68D340631AA7161F00B7D9A2 /* IBModelDetails.m in Sources */,
@@ -854,6 +865,7 @@
 				685D8B751AB2C88100132C38 /* NotificatioListModel.m in Sources */,
 				68CC90921AA5A8C300F3CB48 /* HomeViewController.m in Sources */,
 				685447931AAD9E700044E3C7 /* MyBriefModel.m in Sources */,
+				684410C91ABAA7660063C4C2 /* NotificationIdeaModel.m in Sources */,
 				68CC908E1AA5A8C300F3CB48 /* UIColor+PPColor.m in Sources */,
 				6854477E1AAD675B0044E3C7 /* SearchModel.m in Sources */,
 			);

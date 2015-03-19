@@ -11,5 +11,4 @@
 @interface NotificationViewController : UIViewController
 @property (nonatomic, weak) IBOutlet UITableView *notificationTableView;
 @property (nonatomic, weak) IBOutlet UIView *badgeView;
-
 @end

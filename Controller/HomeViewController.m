@@ -88,8 +88,7 @@
             notificationCount=notificationCountModel.NotificatioTotal[[ZERO integerValue]];
             if ([status.Error isEqualToString:kResultError]) {
                 if ([status.Message isEqualToString:kResultMessage]) {
-                [[NSUserDefaults standardUserDefaults] setValue:notificationCount.totalnotification forKey:@"NOTIFICATION"];
-                NSString *str=[NSString stringWithFormat:@"%@.                          YOU HAVE                        4 NEW IDEAS                 TO YOUR                          %@ BRIEFS.",[[NSUserDefaults standardUserDefaults] valueForKey:@"USERNAME"],notificationCount.totalnotification];
+                NSString *str=[NSString stringWithFormat:@"%@.                          YOU HAVE                        %@ NEW IDEAS                 TO YOUR                          %@ BRIEFS.",[[NSUserDefaults standardUserDefaults] valueForKey:@"USERNAME"],[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATIONIDEA"],notificationCount.totalnotification];
                     lblNotificationCount.text=str;
                     [self.homeTableView reloadData];
                 }
@@ -131,10 +130,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
      [self.view  setAlpha:1.0f];
-
     notificationView.hidden=YES;
-
-    
     if (GET_USERID) {
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"FIRSTLOGIN"]) {
             [self.view  setAlpha:0.85f];
@@ -161,31 +157,6 @@
         self.homeTableView.frame=CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     }
 }
-
-
-//- (void)settingBarButton{
-//    UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [cancelButton setFrame:CANCEL_BUTTON_FRAME];
-//    [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateNormal];
-//    [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateSelected];
-//    [cancelButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
-//    cancelButton.tag =PPkCancel;
-//    [cancelButton bringSubviewToFront:notificationView];
-//    [notificationView addSubview:cancelButton];
-//}
-//- (void)settingBarMethod:(UIButton *)settingBtn{
-//    
-//    switch (settingBtn.tag) {
-//        case PPkCancel:[self goToNotificationViewController];
-//            break;
-//        case PPkAttachment:
-//           break;
-//        case PPkAddOrNext:
-//            break;
-//        default:
-//            break;
-//    }
-//}
 
 - (BOOL)prefersStatusBarHidden {
     return YES;

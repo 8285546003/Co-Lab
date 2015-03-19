@@ -18,8 +18,8 @@
 #import "AFNInjector.h"
 #import "UserDetails.h"
 #import "UserDetailsModel.h"
-#import "NotificationCount.h"
-#import "NotificationCountModel.h"
+#import "NotificationIdeaCount.h"
+#import "NotificationIdeaModel.h"
 
 @interface LoginViewController ()<GPPSignInDelegate>
 {
@@ -29,8 +29,8 @@
     UserDetails         *userDetail;
     UserDetailsModel    *userModel;
     
-    NotificationCount  *notificationCount;
-    NotificationCountModel*notificationModel;
+    NotificationIdeaCount  *notificationCount;
+    NotificationIdeaModel  *notificationModel;
     
     
     
@@ -157,7 +157,7 @@
                                 status = statusModel.StatusArr[[ZERO integerValue]];
                                 userModel= [[UserDetailsModel alloc] initWithDictionary:data error:nil];
                                 userDetail=userModel.UserDetails[[ZERO integerValue]];
-                                notificationModel= [[NotificationCountModel alloc] initWithDictionary:data error:nil];
+                                notificationModel= [[NotificationIdeaModel alloc] initWithDictionary:data error:nil];
                                 notificationCount=notificationModel.NotificatioTotal[[ZERO integerValue]];
                                 
                                 if ([status.Error isEqualToString:kResultError]) {
@@ -165,6 +165,7 @@
                                         [[NSUserDefaults standardUserDefaults] setValue:userDetail.user_id forKey:@"USERID"];
                                         if (![notificationCount.totalnotification isEqualToString:ZERO]) {
                                             [[NSUserDefaults standardUserDefaults] setValue:notificationCount.totalnotification forKey:@"NOTIFICATION"];
+                                            [[NSUserDefaults standardUserDefaults] setValue:notificationCount.totalidea         forKey:@"NOTIFICATIONIDEA"];
                                             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"FIRSTLOGIN"];
                                         }
 

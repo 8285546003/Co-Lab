@@ -16,6 +16,7 @@
 #import "SearchModel.h"
 #import "SearchModelDetails.h"
 #import "UIColor+PPColor.h"
+#import "AFNInjector.h"
 
 
 @interface SearchViewController (){
@@ -55,6 +56,12 @@
     [self.view setBackgroundColor:[UIColor PPBackGroundColor]];
     [super viewWillAppear:YES];
 }
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:YES];
+    ibModel.SearchAuto=nil;
+    txtSearch.text=nil;
+    self.allDataTableView.hidden=YES;
+}
 - (void) hideKeyboard {
     [self.view endEditing:YES];
 }
@@ -93,7 +100,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-        status = statusModel.StatusArr[[ZERO integerValue]];
+    status = statusModel.StatusArr[[ZERO integerValue]];
     if (status.Message==kResultNoRecord) {
         return 200;
     }
@@ -110,31 +117,38 @@
 
 -(void)getDataFromTag:(NSString*)tag{
 
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    manager.responseSerializer.acceptableContentTypes = CONTENT_TYPE_HTML;
     NSDictionary *parameters=@{kApiCall:kApiCallSearchAuto,kTag:tag};
     
-    [manager POST:BASE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        ibModel = [[SearchModel alloc] initWithDictionary:responseObject error:nil];
-        statusModel = [[StatusModel alloc] initWithDictionary:responseObject error:nil];
-        status = statusModel.StatusArr[[ZERO integerValue]];
-        if ([status.Error isEqualToString:kResultError]) {
-            [self.allDataTableView reloadData];
-            [self.allDataTableView setHidden:NO];
+    AFNInjector *objAFN = [AFNInjector new];
+    [objAFN parameters:parameters completionBlock:^(id data, NSError *error) {
+        if(!error) {
+            statusModel = [[StatusModel alloc] initWithDictionary:data error:nil];
+            status = statusModel.StatusArr[[ZERO integerValue]];
+            ibModel = [[SearchModel alloc] initWithDictionary:data error:nil];
+            if ([status.Error isEqualToString:kResultError]) {
+                if ([status.Message isEqualToString:kResultMessage]) {
+                    [self.allDataTableView reloadData];
+                    [self.allDataTableView setHidden:NO];
+                }
+                else{
+                    kCustomAlert(@"", status.Message, @"Ok");
+                }
+            }
+            else{
+                kCustomAlert(@"", status.Message, @"Ok");
+            }
+             [self settingBarButton];
+            //[hud hide:YES];
+            NSLog(@"%@",data);
+        } else {
+            [self settingBarButton];
+            if (PPNoInternetConnection) {
+                kCustomErrorAlert;
+            }
+            // [hud hide:YES];
+            NSLog(@"error %@", error);
         }
-        else{
-            kCustomErrorAlert;
-        }
-        [self settingBarButton];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [self settingBarButton];
-        kCustomErrorAlert;
-        
     }];
-
 }
 - (BOOL)prefersStatusBarHidden {
     return YES;

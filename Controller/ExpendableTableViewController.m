@@ -231,10 +231,11 @@
      }
      else{
          ibModelDetails = ibModel.Detail[indexPath.row];
-
      }
     cell.lblHeading.text=ibModelDetails.headline;
     cell.lblTag.text=ibModelDetails.user_email;
+    cell.lblTag.backgroundColor=[UIColor PPEmailBackGroundColor];
+    cell.lblTag.textColor=[UIColor whiteColor];
     cell.lblDescription.text=ibModelDetails.description_idea_brief;
     
     NSString *imageName=ibModelDetails.image;

@@ -54,8 +54,6 @@ NSArray *cellTitleText;
     }
     else{
     }
-    
-
 }
 
 - (BOOL)prefersStatusBarHidden {
@@ -158,14 +156,8 @@ NSArray *cellTitleText;
     }
 }
 -(void)gotoNotificationController{
-   // if (![[PPUtilts sharedInstance].notificationCount isEqualToString:ZERO]) {
-        NotificationViewController *obj = [NotificationViewController new];
-        [self.navigationController pushViewController:obj animated:YES];
-    //}
-   // else{
-   //     kCustomAlert(@"Notification", @"You don't have any notification yet", @"OK");
-  //  }
-
+    NotificationViewController *obj = [NotificationViewController new];
+    [self.navigationController pushViewController:obj animated:YES];
 }
 
 -(void)goToWithApiCall:(NSString*)apiCall{
