@@ -98,15 +98,12 @@
             }
             [self settingBarButton];
             [hud hide:YES];
-            NSLog(@"%@",data);
         } else {
             [self settingBarButton];
             if (PPNoInternetConnection) {
                 kCustomErrorAlert;
             }
             [hud hide:YES];
-
-            NSLog(@"error %@", error);
         }
     }];
 

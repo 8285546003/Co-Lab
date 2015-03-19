@@ -32,8 +32,4 @@
 + (UIColor*) PPProfileBackGroundColor{
     return [UIColor colorWithRed:34.0f/255.0f     green:34.0f/255.0f blue:34.0f/255.0f alpha:1];
 }
-+ (UIColor*) PPEmailBackGroundColor{
-    return [UIColor colorWithRed:103.0f/255.0f     green:94.0f/255.0f blue:20.0f/255.0f alpha:1];
-}
-
 @end

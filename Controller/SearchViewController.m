@@ -35,7 +35,7 @@
     [super viewDidLoad];
 
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
-    imageView.image = [UIImage imageNamed:@"s1"];
+    imageView.image = [UIImage imageNamed:@"Search_Image"];
     self.txtSearch.leftView = imageView;
     self.txtSearch.leftViewMode=UITextFieldViewModeAlways;\
     self.txtSearch.delegate=self;
@@ -76,37 +76,23 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    NSString *CellIdentifier = kStaticIdentifier;
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+     NSString *CellIdentifier = kStaticIdentifier;
+     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
      cell.selectionStyle = UITableViewCellSelectionStyleNone;
      cell.backgroundColor=[UIColor clearColor];
-       ibModelDetails= ibModel.SearchAuto[indexPath.row];
-       status = statusModel.StatusArr[[ZERO integerValue]];
+     ibModelDetails= ibModel.SearchAuto[indexPath.row];
+     status = statusModel.StatusArr[[ZERO integerValue]];
     
-    if (status.Message==kResultNoRecord){
-        cell.textLabel.text=kResultNoRecord;
-    }
-    else{
-        cell.textLabel.text=ibModelDetails.tag;
-
-    }
-    return cell;
+     if (status.Message==kResultNoRecord){cell.textLabel.text=kResultNoRecord;}
+     else{cell.textLabel.text=ibModelDetails.tag;}
     
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    status = statusModel.StatusArr[[ZERO integerValue]];
-    if (status.Message==kResultNoRecord) {
-        return 200;
-    }
-    else{
-        return 44;
-    }
+     return cell;
+    
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     ibModelDetails = ibModel.SearchAuto[indexPath.row];
@@ -131,6 +117,8 @@
                     [self.allDataTableView setHidden:NO];
                 }
                 else{
+                    ibModel.SearchAuto=nil;
+                    self.allDataTableView.hidden=YES;
                     kCustomAlert(@"", status.Message, @"Ok");
                 }
             }
@@ -138,15 +126,11 @@
                 kCustomAlert(@"", status.Message, @"Ok");
             }
              [self settingBarButton];
-            //[hud hide:YES];
-            NSLog(@"%@",data);
         } else {
             [self settingBarButton];
             if (PPNoInternetConnection) {
                 kCustomErrorAlert;
             }
-            // [hud hide:YES];
-            NSLog(@"error %@", error);
         }
     }];
 }

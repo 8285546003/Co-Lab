@@ -32,7 +32,7 @@
                     </connections>
                 </tableView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="line.png" id="aAN-lA-keP">
-                    <rect key="frame" x="33" y="283" width="264" height="30"/>
+                    <rect key="frame" x="33" y="291" width="264" height="15"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                 </imageView>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search" minimumFontSize="17" id="Lrc-rs-c7j">

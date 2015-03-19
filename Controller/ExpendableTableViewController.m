@@ -96,14 +96,12 @@
             }
             [self settingBarButton];
             [hud hide:YES];
-            NSLog(@"%@",data);
         } else {
             [self settingBarButton];
             [hud hide:YES];
             if (PPNoInternetConnection) {
                 kCustomErrorAlert;
             }
-            NSLog(@"error %@", error);
         }
     }];
 }
@@ -208,10 +206,16 @@
     NSString *imageName=ibModelDetails.image;
 
     if (indexPath.row==[ZERO intValue]){
-        if ([self isImageExist:imageName]) {return kCellHeightWithImage;}
-        else{return kCellHeightWithoutImage;}
+        if ([self isImageExist:imageName]) {
+            return kCellHeightWithImage;
+        }
+        else{
+            return kCellHeightWithoutImage;
+        }
     }
-    if (isexpanded){return kCellHeightWithoutImage;}
+    if (isexpanded){
+        return kCellHeightWithoutImage;
+    }
     else{return kCellHeightNormal;}
 }
 
@@ -234,7 +238,8 @@
      }
     cell.lblHeading.text=ibModelDetails.headline;
     cell.lblTag.text=ibModelDetails.user_email;
-    cell.lblTag.backgroundColor=[UIColor PPEmailBackGroundColor];
+    cell.lblTag.backgroundColor=[UIColor blackColor];
+    cell.lblTag.alpha=0.5f;
     cell.lblTag.textColor=[UIColor whiteColor];
     cell.lblDescription.text=ibModelDetails.description_idea_brief;
     
@@ -324,16 +329,12 @@
     {
         MFMailComposeViewController *mail = [[MFMailComposeViewController alloc] init];
         mail.mailComposeDelegate = self;
-        //[mail setSubject:@"Sample Subject"];
-        //[mail setMessageBody:@"Here is some main text in the email!" isHTML:NO];
-       // NSArray *usersTo = [NSArray arrayWithObject: @"nobody@stackoverflow.com"];
-       // [mail setToRecipients:usersTo];
         [mail setToRecipients:@[ibModelDetails.user_email]];
         [self presentViewController:mail animated:YES completion:NULL];
     }
     else
     {
-        NSLog(@"This device cannot send email");
+        
     }
     
 }
@@ -341,22 +342,16 @@
 {
     switch (result) {
         case MFMailComposeResultSent:
-            NSLog(@"You sent the email.");
             break;
         case MFMailComposeResultSaved:
-            NSLog(@"You saved a draft of this email");
             break;
         case MFMailComposeResultCancelled:
-            NSLog(@"You cancelled sending this email.");
             break;
         case MFMailComposeResultFailed:
-            NSLog(@"Mail failed:  An error occurred when trying to compose this email");
             break;
         default:
-            NSLog(@"An error occurred when trying to compose this email");
             break;
     }
-    
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 -(BOOL)isImageExist:(NSString*)path{return (![[path stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]length] == 0);}

@@ -181,13 +181,11 @@
                                     kCustomAlert(@"", status.Message, @"Ok");
                                 }
                                 [hud hide:YES];
-                                NSLog(@"%@",data);
                             } else {
                                 if (PPNoInternetConnection) {
                                     kCustomErrorAlert;
                                 }
                                 [hud hide:YES];
-                                NSLog(@"error %@", error);
                             }
                         }];
                     }

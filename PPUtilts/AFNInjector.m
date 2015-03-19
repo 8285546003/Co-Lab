@@ -28,8 +28,10 @@
         manager.responseSerializer = [AFJSONResponseSerializer serializer];
         manager.responseSerializer.acceptableContentTypes = CONTENT_TYPE_HTML;
         [manager POST:BASE_URL parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"%@",responseObject);
             block(responseObject, nil);
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"%@",error.description);
             block(nil, error);
         }];
     });

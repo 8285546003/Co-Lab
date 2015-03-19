@@ -389,7 +389,7 @@
     isAttachment = YES;
     
     [self rearrengeScrollView:isAttachment];
-    self.attachmentImage.image = [self imageWithImage:chosenImage convertToSize:CGSizeMake(150, 150)];
+    self.attachmentImage.image = [self imageWithImage:chosenImage convertToSize:CGSizeMake(285, 180)];
     [tmpOverlayObj closeMethod:nil];
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
@@ -552,14 +552,12 @@
             }
             [self settingBarButton];
             [hud hide:YES];
-            NSLog(@"%@",data);
         } else {
             [self settingBarButton];
             if (PPNoInternetConnection) {
                 kCustomErrorAlert;
             }
             [hud hide:YES];
-            NSLog(@"error %@", error);
         }
     }];
     
