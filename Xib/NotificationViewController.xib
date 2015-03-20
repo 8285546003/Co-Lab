@@ -33,7 +33,7 @@
                     </state>
                 </button>
                 <view contentMode="scaleToFill" id="5pc-HS-c6W">
-                    <rect key="frame" x="10" y="12" width="45" height="45"/>
+                    <rect key="frame" x="15" y="12" width="45" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>

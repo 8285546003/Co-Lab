@@ -144,6 +144,9 @@
     else{ibModelDetails = tagModel.TagSearch[indexPath.row];}
     
     cell.lblHeading.text=ibModelDetails.headline;
+    cell.lblHeading.numberOfLines=5;
+    cell.lblHeading.lineBreakMode=NSLineBreakByCharWrapping;
+    [cell.lblHeading sizeToFit];
     cell.lblTag.text=ibModelDetails.tag;
     isHot=[ibModelDetails.is_hot isEqualToString:BOOL_YES];
     strColorType=ibModelDetails.color_code;

@@ -47,12 +47,12 @@
             lbltitle.text=@"Create New Idea";
 
         }
-        headerImage.image=[UIImage imageNamed:@"Create_New_Idea_Image.png"];
+        headerImage.image=[UIImage imageNamed:@"my_ideas.png"];
         self.view.backgroundColor=[UIColor PPYellowColor];
         self.baseScrollView.backgroundColor = [UIColor PPYellowColor];
     }else{
         lbltitle.text=@"Create New Brief";
-        headerImage.image=[UIImage imageNamed:@"Create_New_Brief_Image.png"];
+        headerImage.image=[UIImage imageNamed:@"my_brief.png"];
         self.view.backgroundColor=[UIColor PPBlueColor];
         self.baseScrollView.backgroundColor = [UIColor PPBlueColor];
     }

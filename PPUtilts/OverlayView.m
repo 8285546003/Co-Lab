@@ -101,7 +101,7 @@
         [self addSubview:createBriefBtn];
         
         closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [closeBtn setFrame:CGRectMake( screenWidth - 70, screenHeight - 110, 40, 40)];
+        [closeBtn setFrame:CGRectMake( screenWidth - 110, screenHeight - 80, 40, 40)];
         [closeBtn setImage:[UIImage imageNamed:@"Close.png"] forState:UIControlStateNormal];
         [closeBtn addTarget:self action:@selector(closeIBView:) forControlEvents:UIControlEventTouchUpInside];
         closeBtn.alpha = 1.0f;

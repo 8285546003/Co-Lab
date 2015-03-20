@@ -34,17 +34,16 @@
 
 #define ATTACHED_IMAGE_FRAME    CGRectMake(0, 0, self.view.frame.size.width, 200)
 
-#define DETAIL_LABLE_FRAME      CGRectMake(40,410, 230,162)
+#define DETAIL_LABLE_FRAME      CGRectMake(40,470, 244,200)
 
 
-#define kheightForRowAtIndexPath 210.0f
+#define kheightForRowAtIndexPath 200.0f
 #define kCellHeightAtIndexZero   110
 #define kCellHeightAtIndexfive   125
 #define kCellHeight              63
 
-#define kCellHeightWithImage     700
+#define kCellHeightWithImage     750
 #define kCellHeightWithoutImage  600
-#define kCellHeightNormal        175
 
 
 
@@ -59,7 +58,7 @@
 #define     G                   @"G"
 #define     B                   @"B"
 
-#define ImageArray @[@"colab.png",@"Create_New_Idea_Image.png",@"Create_New_Brief_Image.png",@"Search_Image.png",@"Profile_Image.png",@"Latest_Idea_And_Briefs.png"]
+#define ImageArray @[@"colab.png",@"my_ideas.png",@"my_brief.png",@"Search_Image.png",@"profile_black.png",@"Latest_Idea_And_Briefs.png"]
 #define  CellTitleText  @[@"  CO\\Lab",@"  Create New Idea",@"  Create New Briefs",@"  Search",@"  Profile",@"  Latest Idea & Brifes"]
 
 #define imageArrayProfile @[@"profile.png",@"my_ideas.png",@"my_brief.png",@"Notification.png",@"logout.png"]
@@ -154,6 +153,7 @@ typedef enum {
 @property (nonatomic, strong) NSString *parent_id;
 @property (nonatomic, strong) NSString *notification_send_time;
 @property (nonatomic, strong) NSString *notificationCount;
+
 
 
 + (instancetype)sharedInstance;

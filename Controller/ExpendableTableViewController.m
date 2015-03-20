@@ -214,9 +214,15 @@
         }
     }
     if (isexpanded){
-        return kCellHeightWithoutImage;
+        if ([self isImageExist:imageName]) {
+            return kCellHeightWithImage;
+        }
+        else{
+            return kCellHeightWithoutImage;
+        }    }
+    else{
+        return kheightForRowAtIndexPath;
     }
-    else{return kCellHeightNormal;}
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath isExpanded:(BOOL)isExpanded
@@ -237,13 +243,17 @@
          ibModelDetails = ibModel.Detail[indexPath.row];
      }
     cell.lblHeading.text=ibModelDetails.headline;
+    [cell.lblHeading sizeToFit];
     cell.lblTag.text=ibModelDetails.user_email;
     cell.lblTag.backgroundColor=[UIColor blackColor];
     cell.lblTag.alpha=0.5f;
     cell.lblTag.textColor=[UIColor whiteColor];
+    [cell.lblDescription sizeToFit];
     cell.lblDescription.text=ibModelDetails.description_idea_brief;
     
     NSString *imageName=ibModelDetails.image;
+    
+    cell.lblDescription.frame=CGRectMake(40,300, 244,200);
 
     
     if ([self isImageExist:imageName]) {
