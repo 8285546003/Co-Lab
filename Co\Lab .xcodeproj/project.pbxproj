@@ -73,6 +73,8 @@
 		68C03A901A95B25600555891 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68C03A7F1A95B25600555891 /* Images.xcassets */; };
 		68C03A921A95B25600555891 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C03A801A95B25600555891 /* main.m */; };
 		68C89AE71AB0110F00F5C4B3 /* AFNInjector.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C89AE61AB0110F00F5C4B3 /* AFNInjector.m */; };
+		68C9D8E11ABC4B5100E77252 /* border.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C9D8DF1ABC4B5100E77252 /* border.png */; };
+		68C9D8E21ABC4B5100E77252 /* border@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C9D8E01ABC4B5100E77252 /* border@2x.png */; };
 		68CC908E1AA5A8C300F3CB48 /* UIColor+PPColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CC904E1AA5A8C300F3CB48 /* UIColor+PPColor.m */; };
 		68CC908F1AA5A8C300F3CB48 /* CoLabListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CC90511AA5A8C300F3CB48 /* CoLabListViewController.m */; };
 		68CC90901AA5A8C300F3CB48 /* CreateIdea_BriefViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CC90531AA5A8C300F3CB48 /* CreateIdea_BriefViewController.m */; };
@@ -239,6 +241,8 @@
 		68C03AA91A95C18400555891 /* libPods-MBProgressHUD.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-MBProgressHUD.a"; path = "Pods/build/Debug-iphoneos/libPods-MBProgressHUD.a"; sourceTree = "<group>"; };
 		68C89AE51AB0110F00F5C4B3 /* AFNInjector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNInjector.h; sourceTree = "<group>"; };
 		68C89AE61AB0110F00F5C4B3 /* AFNInjector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNInjector.m; sourceTree = "<group>"; };
+		68C9D8DF1ABC4B5100E77252 /* border.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = border.png; sourceTree = "<group>"; };
+		68C9D8E01ABC4B5100E77252 /* border@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "border@2x.png"; sourceTree = "<group>"; };
 		68CC904D1AA5A8C300F3CB48 /* UIColor+PPColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+PPColor.h"; sourceTree = "<group>"; };
 		68CC904E1AA5A8C300F3CB48 /* UIColor+PPColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+PPColor.m"; sourceTree = "<group>"; };
 		68CC90501AA5A8C300F3CB48 /* CoLabListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoLabListViewController.h; sourceTree = "<group>"; };
@@ -572,6 +576,8 @@
 		68CC90F71AA5AA3100F3CB48 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				68C9D8DF1ABC4B5100E77252 /* border.png */,
+				68C9D8E01ABC4B5100E77252 /* border@2x.png */,
 				68039DB61ABC037C0007B8D7 /* answer_brief@2x.png */,
 				68039DB71ABC037D0007B8D7 /* ChooseAPhoto@2x.png */,
 				68039DB81ABC037D0007B8D7 /* createnewidea@2x.png */,
@@ -738,6 +744,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68C9D8E21ABC4B5100E77252 /* border@2x.png in Resources */,
 				68CC91281AA5AA3100F3CB48 /* Close.png in Resources */,
 				68C03A8E1A95B25600555891 /* InfoPlist.strings in Resources */,
 				68CC912E1AA5AA3100F3CB48 /* Google_Login_ButtonImage.png in Resources */,
@@ -808,6 +815,7 @@
 				684410DF1ABAF7E30063C4C2 /* Close_Image@2x.png in Resources */,
 				68CC911F1AA5AA3100F3CB48 /* 76x76.png in Resources */,
 				68CC911A1AA5AA3100F3CB48 /* 40x40.png in Resources */,
+				68C9D8E11ABC4B5100E77252 /* border.png in Resources */,
 				68CC91241AA5AA3100F3CB48 /* CoAppImage@3x.png in Resources */,
 				684410E81ABAF7E30063C4C2 /* my_ideas.png in Resources */,
 				68CC91331AA5AA3100F3CB48 /* Next_Image.png in Resources */,

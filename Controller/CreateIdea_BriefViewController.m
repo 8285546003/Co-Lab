@@ -27,7 +27,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self update];
+}
+-(void)update{
     
     isAttachment = NO;
     height = 0.0f;
@@ -36,16 +38,16 @@
     [self.mainDataDictionary setValue:@"" forKey:@"DESCRIPTION"];
     [self.mainDataDictionary setValue:@"" forKey:@"TAGS"];
     [self.mainDataDictionary setValue:@"" forKey:@"IMAGE"];
-
+    
     self.baseScrollView.frame=CGRectMake(0, 55, self.view.frame.size.width, self.view.frame.size.height);
     if (self.isIdeaSubmitScreen) {
         if (isAnswerTheBriefs) {
             lbltitle.text=@"Answer The Briefs";
-
+            
         }
         else{
             lbltitle.text=@"Create New Idea";
-
+            
         }
         headerImage.image=[UIImage imageNamed:@"my_ideas.png"];
         self.view.backgroundColor=[UIColor PPYellowColor];
@@ -65,21 +67,25 @@
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:YES];
-    
-    NoteView *n1=(NoteView *)[self.view viewWithTag:PPkHeader];
-    n1.text=nil;
-    n1.text=@"";
-    NoteView *n2=(NoteView *)[self.view viewWithTag:PPkDescription];
-    n2.text=nil;
-    n2.text=@"";
-    NoteView *n3=(NoteView *)[self.view viewWithTag:PPkTags];
-    n3.text=nil;
-    n3.text=@"";
-    [self.baseScrollView setContentSize:CGSizeMake([[UIScreen mainScreen] bounds].size.width, 0.0f)];
+    if (!isCurrentControllerPresented) {
+        NoteView *n1=(NoteView *)[self.view viewWithTag:PPkHeader];
+        n1.text=nil;
+        n1.text=@"";
+        NoteView *n2=(NoteView *)[self.view viewWithTag:PPkDescription];
+        n2.text=nil;
+        n2.text=@"";
+        NoteView *n3=(NoteView *)[self.view viewWithTag:PPkTags];
+        n3.text=nil;
+        n3.text=@"";
+        [self.baseScrollView setContentSize:CGSizeMake([[UIScreen mainScreen] bounds].size.width, 0.0f)];
+        
+        dicCharCountLbl.text=@"200";
+        titleCharCountLbl.text = @"80";
+         self.attachmentImage=nil;
+         [self update];
+    }
 
-    dicCharCountLbl.text=@"200";
-    titleCharCountLbl.text = @"80";
-    
+   
 }
 -(void)viewDidAppear:(BOOL)animated{
     [self settingBarButton];
@@ -133,11 +139,18 @@
     headerBaseView.backgroundColor = [UIColor clearColor];
     
     noteView = [[NoteView alloc] initWithFrame:CGRectMake(40, 25, screenWidth - 80, 200)];
-    [noteView setFontName:@"Helvetica" size:24];
+    [noteView setFontName:@"Helvetica" size:28];
+    noteView.text = @"ADD HEADLINE";
+    noteView.textColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.1f];
     noteView.tag = PPkHeader;
      NSString *hStr = [self.mainDataDictionary valueForKey:@"HEADER"];
     if (hStr.length) {
         noteView.text = hStr;
+    }
+    if ([noteView.text isEqualToString:@"ADD HEADLINE"]) {
+        noteView.textColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.1f];
+    }else{
+        noteView.textColor = [UIColor blackColor];
     }
     noteView.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
     [noteView setDelegate:self];
@@ -170,12 +183,17 @@
     
     titleCharCountLbl = [[UILabel alloc] initWithFrame:CGRectMake(view.bounds.size.width-32, 2, 30, 20)];
     titleCharCountLbl.text = @"80";
+    titleCharCountLbl.textColor = [UIColor darkGrayColor];
     titleCharCountLbl.textAlignment = NSTextAlignmentRight;
+    titleCharCountLbl.font = [UIFont systemFontOfSize:11.0f];
     [view addSubview:titleCharCountLbl];
         
         
-     UILabel *titleLbl = [[UILabel alloc] initWithFrame:CGRectMake(2, 2, 200, 20)];
+    UILabel *titleLbl = [[UILabel alloc] initWithFrame:CGRectMake(2, 2, 200, 20)];
     titleLbl.text = @"1. Add headline";
+    titleLbl.textColor = [UIColor darkGrayColor];
+
+    titleLbl.font = [UIFont systemFontOfSize:11.0f];
     [view addSubview:titleLbl];
     
     return view;
@@ -189,14 +207,20 @@
     headerBaseView.backgroundColor = [UIColor clearColor];
     
     noteView = [[NoteView alloc] initWithFrame:CGRectMake(40, 25, screenWidth - 80, 200)];
-    [noteView setFontName:@"Helvetica" size:24];
+    [noteView setFontName:@"Helvetica" size:20];
+    noteView.text = @"Add Description";
+    noteView.textColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.1f];
     noteView.autocorrectionType = FALSE; // or use  UITextAutocorrectionTypeNo
     [noteView setDelegate:self];
     NSString *hStr = [self.mainDataDictionary valueForKey:@"DESCRIPTION"];
     if (hStr.length) {
         noteView.text = hStr;
     }
-    
+    if ([noteView.text isEqualToString:@"Add Description"]) {
+        noteView.textColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.1f];
+    }else{
+        noteView.textColor = [UIColor blackColor];
+    }
     noteView.tag = PPkDescription;
     [headerBaseView addSubview:noteView];
     [headerBaseView addSubview:[self addDiscTitle]];
@@ -224,12 +248,19 @@
     
     dicCharCountLbl = [[UILabel alloc] initWithFrame:CGRectMake(view.bounds.size.width-32, 2, 30, 20)];
     dicCharCountLbl.text = @"200";
+    dicCharCountLbl.textColor = [UIColor darkGrayColor];
+
+    dicCharCountLbl.font = [UIFont systemFontOfSize:11.0f];
+
     dicCharCountLbl.textAlignment = NSTextAlignmentRight;
     [view addSubview:dicCharCountLbl];
     
     
     UILabel *titleLbl = [[UILabel alloc] initWithFrame:CGRectMake(2, 2, 200, 20)];
     titleLbl.text = @"2. Add description";
+    titleLbl.textColor = [UIColor grayColor];
+
+    titleLbl.font = [UIFont systemFontOfSize:11.0f];
     [view addSubview:titleLbl];
     
     return view;
@@ -275,6 +306,9 @@
     [view addGestureRecognizer:gestureRecognizer];
     UILabel *titleLbl = [[UILabel alloc] initWithFrame:CGRectMake(2, 2, 200, 20)];
     titleLbl.text = @"3. Add tags";
+    titleLbl.textColor = [UIColor darkGrayColor];
+    titleLbl.font = [UIFont systemFontOfSize:11.0f];
+
     [view addSubview:titleLbl];
     
     return view;
@@ -318,7 +352,13 @@
 - (void)settingBarMethod:(UIButton *)settingBtn{
     switch (settingBtn.tag) {
         case PPkCancel:
-            isCurrentControllerPresented?[self dismissViewControllerAnimated:YES completion:nil]:[self.navigationController popViewControllerAnimated:YES];
+            if (isCurrentControllerPresented) {
+                [[self presentedViewController]dismissViewControllerAnimated:YES completion:nil];
+            }
+            else{
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+            //isCurrentControllerPresented?[[self presentedViewController]dismissViewControllerAnimated:YES completion:nil]:[self.navigationController popViewControllerAnimated:YES];
              break;
         case PPkAttachment:[self AddOverLay];
             break;
@@ -345,6 +385,7 @@
 }
 
 - (void)takePhoto {
+    isCurrentControllerPresented=YES;
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         
         UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
@@ -366,7 +407,7 @@
 }
 
 - (void)selectPhoto {
-    
+    isCurrentControllerPresented=YES;
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = YES;
@@ -389,8 +430,9 @@
     isAttachment = YES;
     
     [self rearrengeScrollView:isAttachment];
-    self.attachmentImage.image = [self imageWithImage:chosenImage convertToSize:CGSizeMake(285, 180)];
+    self.attachmentImage.image = [self imageWithImage:chosenImage convertToSize:CGSizeMake(150, 150)];
     [tmpOverlayObj closeMethod:nil];
+    isCurrentControllerPresented=NO;
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
@@ -401,6 +443,17 @@
 #pragma UITextViewDalegate
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
+    if (textView.tag == 101) {
+        if ([textView.text isEqualToString:@"ADD HEADLINE"]) {
+            textView.text = @"";
+            textView.textColor = [UIColor blackColor];
+        }
+    }else if(textView.tag == 102){
+        if ([textView.text isEqualToString:@"Add Description"]) {
+            textView.text = @"";
+            textView.textColor = [UIColor blackColor];
+        }
+    }
     return YES;
 }
 
@@ -462,9 +515,23 @@
     NSString *finalString = textView.text;
     
     switch (textView.tag) {
-        case PPkHeader:[self.mainDataDictionary setValue:finalString forKey:@"HEADER"];
+        case PPkHeader:{
+            [self.mainDataDictionary setValue:finalString forKey:@"HEADER"];
+            NSString *trimmedString = [textView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            if (![trimmedString length]) {
+                textView.text = @"ADD HEADLINE";
+                textView.textColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.1f];
+            }
+        }
         break;
-        case PPkDescription:[self.mainDataDictionary setValue:finalString forKey:@"DESCRIPTION"];
+        case PPkDescription:{
+            [self.mainDataDictionary setValue:finalString forKey:@"DESCRIPTION"];
+            NSString *trimmedString = [textView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            if (![trimmedString length]) {
+                textView.text = @"Add Description";
+                textView.textColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.1f];
+            }
+        }
             break;
         case PPkTags:[self.mainDataDictionary setValue:finalString forKey:@"TAGS"];
             break;
@@ -488,21 +555,21 @@
         imageString = @"";
     }
     
-    
-    
-    if([[self.mainDataDictionary valueForKey:@"HEADER"] isEqualToString:@""]){
+    UITextView *txtHeader=(UITextView *)[self.view viewWithTag:PP101];
+    UITextView *txtDescription=(UITextView *)[self.view viewWithTag:PP102];
+    UITextView *txtTag=(UITextView *)[self.view viewWithTag:PP103];
+
+    if ([txtHeader.text isEqualToString:@"ADD HEADLINE"]) {
         kCustomAlert(@"", @"Please enter header.",@"Ok");
-        return;
+                return;
     }
-    else if([[self.mainDataDictionary valueForKey:@"DESCRIPTION"] isEqualToString:@""]){
+    else if ([txtDescription.text isEqualToString:@"Add Description"]){
         kCustomAlert(@"", @"Please enter description.",@"Ok");
-        return;
-        
+                return;
     }
-    else if([[self.mainDataDictionary valueForKey:@"TAGS"] isEqualToString:@""]){
+    else if ([txtTag.text isEqualToString:@""]){
         kCustomAlert(@"", @"Please enter tags.",@"Ok");
-        return;
-        
+                return;
     }
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
     hud.labelText = @"Please wait...";
@@ -516,7 +583,7 @@
             strBriefId=[PPUtilts sharedInstance].LatestIDId;
         }
     }
-    NSDictionary *parameters = @{kApiCall:kApiCallCreateNewIdeaBrief,kTag:[self.mainDataDictionary valueForKey:@"TAGS"],@"headline":[self.mainDataDictionary valueForKey:@"HEADER"],@"description_idea_brief": [self.mainDataDictionary valueForKey:@"DESCRIPTION"],@"image":imageString,@"brief_id":strBriefId,@"is_brief":strIsBrief,kUserid:GET_USERID};
+    NSDictionary *parameters = @{kApiCall:kApiCallCreateNewIdeaBrief,kTag:txtTag.text,@"headline":txtHeader.text,@"description_idea_brief": txtDescription.text,@"image":imageString,@"brief_id":strBriefId,@"is_brief":strIsBrief,kUserid:GET_USERID};
     
     AFNInjector *objAFN = [AFNInjector new];
     [objAFN parameters:parameters completionBlock:^(id data, NSError *error) {
@@ -552,12 +619,14 @@
             }
             [self settingBarButton];
             [hud hide:YES];
+            NSLog(@"%@",data);
         } else {
             [self settingBarButton];
             if (PPNoInternetConnection) {
                 kCustomErrorAlert;
             }
             [hud hide:YES];
+            NSLog(@"error %@", error);
         }
     }];
     
