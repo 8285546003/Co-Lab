@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "68A9CCF71A65015F003D09E4"
-            BuildableName = "Co\Lab.app"
+            BuildableName = "Co Lab.app"
             BlueprintName = "Co\Lab"
             ReferencedContainer = "container:Co\Lab.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "68A9CCF71A65015F003D09E4"
-            BuildableName = "Co\Lab.app"
+            BuildableName = "Co Lab.app"
             BlueprintName = "Co\Lab"
             ReferencedContainer = "container:Co\Lab.xcodeproj">
          </BuildableReference>

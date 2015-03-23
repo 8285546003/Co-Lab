@@ -211,7 +211,7 @@
 		689406AF1ABAF85300A267A7 /* talk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = talk.png; sourceTree = "<group>"; };
 		689406B01ABAF85300A267A7 /* talk@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "talk@2x.png"; sourceTree = "<group>"; };
 		689406B11ABAF85300A267A7 /* testimonial@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "testimonial@2x.png"; sourceTree = "<group>"; };
-		68A9CCF81A65015F003D09E4 /* Co\Lab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Co\\Lab.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		68A9CCF81A65015F003D09E4 /* Co Lab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Co Lab.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		68A9CCFB1A65015F003D09E4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		68A9CCFD1A65015F003D09E4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		68A9CCFF1A65015F003D09E4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -421,7 +421,7 @@
 		68A9CCF91A65015F003D09E4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				68A9CCF81A65015F003D09E4 /* Co\Lab.app */,
+				68A9CCF81A65015F003D09E4 /* Co Lab.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -709,7 +709,7 @@
 			);
 			name = "Co\\Lab";
 			productName = iBrief;
-			productReference = 68A9CCF81A65015F003D09E4 /* Co\Lab.app */;
+			productReference = 68A9CCF81A65015F003D09E4 /* Co Lab.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
