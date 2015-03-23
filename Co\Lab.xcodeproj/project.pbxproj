@@ -970,8 +970,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Tequila Hong Kong Limited (YN6BBNB2M2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tequila Hong Kong Limited (YN6BBNB2M2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sudesh Kumar (R85GW2DH7U)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sudesh Kumar (R85GW2DH7U)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -989,7 +989,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "e3d3ed8d-7382-4a7b-baa6-7849b766f8b2";
+				PROVISIONING_PROFILE = "3f76b75b-5d61-4d72-953f-fb4ea5050ba0";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
@@ -1012,8 +1012,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Tequila Hong Kong Limited (YN6BBNB2M2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tequila Hong Kong Limited (YN6BBNB2M2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sudesh Kumar (R85GW2DH7U)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sudesh Kumar (R85GW2DH7U)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1024,7 +1024,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				PROVISIONING_PROFILE = "e3d3ed8d-7382-4a7b-baa6-7849b766f8b2";
+				PROVISIONING_PROFILE = "3f76b75b-5d61-4d72-953f-fb4ea5050ba0";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = NO;
@@ -1037,8 +1037,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Tequila Hong Kong Limited (YN6BBNB2M2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tequila Hong Kong Limited (YN6BBNB2M2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sudesh Kumar (R85GW2DH7U)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sudesh Kumar (R85GW2DH7U)";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
@@ -1047,7 +1047,7 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "Co Lab";
-				PROVISIONING_PROFILE = "e3d3ed8d-7382-4a7b-baa6-7849b766f8b2";
+				PROVISIONING_PROFILE = "3f76b75b-5d61-4d72-953f-fb4ea5050ba0";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1059,8 +1059,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Tequila Hong Kong Limited (YN6BBNB2M2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tequila Hong Kong Limited (YN6BBNB2M2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sudesh Kumar (R85GW2DH7U)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sudesh Kumar (R85GW2DH7U)";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
@@ -1069,7 +1069,7 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "Co Lab";
-				PROVISIONING_PROFILE = "e3d3ed8d-7382-4a7b-baa6-7849b766f8b2";
+				PROVISIONING_PROFILE = "3f76b75b-5d61-4d72-953f-fb4ea5050ba0";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
