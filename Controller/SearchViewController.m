@@ -68,23 +68,11 @@
 
 #pragma mark - Table view data source
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if ([status.Message isEqualToString:kResultNoRecord]){return 200;}
-    else{return 44;}
+    return [status.Message isEqualToString:kResultNoRecord] ? 200 : 44;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if ([status.Message isEqualToString:kResultNoRecord]){
-        return 1;
-    
-    
-    }
-    else{
-        
-        return ibModel.SearchAuto.count;
-    
-    
-    }
-    
+    return [status.Message isEqualToString:kResultNoRecord] ? 1 : ibModel.SearchAuto.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -102,18 +90,8 @@
      ibModelDetails= ibModel.SearchAuto[indexPath.row];
      status = statusModel.StatusArr[[ZERO integerValue]];
     
-     if ([status.Message isEqualToString:kResultNoRecord]){
-         
-         cell.textLabel.text=kResultNoRecord;
-     
-     }
-     else{
-         
-         cell.textLabel.text=ibModelDetails.tag;
-     
-     
-     }
-    
+     [status.Message isEqualToString:kResultNoRecord] ? [cell.textLabel setText:kResultNoRecord]:[cell.textLabel setText:ibModelDetails.tag];
+
      return cell;
     
 }
@@ -204,14 +182,7 @@
     
         if (isBackSpace == -8) {
             string = [txtSearch.text substringToIndex:[txtSearch.text length] - 1];
-            if (![string isEqualToString:@""]) {
-                [self getDataFromTag:string];
-            }
-            else{
-                //ibModel.SearchAuto=nil;
-                [self.allDataTableView setHidden:YES];
-               // [self.allDataTableView reloadData];
-            }
+            ![string isEqualToString:@""] ? [self getDataFromTag:string]:[self.allDataTableView setHidden:YES];
         }
         else{
             [self getDataFromTag:[txtSearch.text stringByAppendingString:string]];
