@@ -96,9 +96,13 @@
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    ibModelDetails = ibModel.SearchAuto[indexPath.row];
-    [PPUtilts sharedInstance].tagSearch=ibModelDetails.tag;
-    [self goToLatestIdeaBriefs];
+    status = statusModel.StatusArr[[ZERO integerValue]];
+    if (![status.Message isEqualToString:kResultNoRecord]) {
+        ibModelDetails = ibModel.SearchAuto[indexPath.row];
+        [PPUtilts sharedInstance].tagSearch=ibModelDetails.tag;
+        [self goToLatestIdeaBriefs];
+    }
+
 }
 
 
@@ -130,9 +134,6 @@
              [self settingBarButton];
         } else {
             [self settingBarButton];
-            if (PPNoInternetConnection) {
-                kCustomErrorAlert;
-            }
         }
     }];
 }
@@ -179,8 +180,6 @@
     const char * _char = [string cStringUsingEncoding:NSUTF8StringEncoding];
     int isBackSpace = strcmp(_char, "\b");
     
-    NSLog(@"%lu",(unsigned long)txtSearch.text.length);
-    
         if (isBackSpace == -8) {
             string = [txtSearch.text substringToIndex:[txtSearch.text length] - 1];
             ![string isEqualToString:@""] ? [self getDataFromTag:string]:[self.allDataTableView setHidden:YES];ibModel.SearchAuto=nil;[self.allDataTableView reloadData];
@@ -188,6 +187,10 @@
         else{
             [self getDataFromTag:[txtSearch.text stringByAppendingString:string]];
         }
+    return YES;
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
     return YES;
 }
 @end

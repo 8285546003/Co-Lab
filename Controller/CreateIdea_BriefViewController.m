@@ -43,11 +43,13 @@
     if (self.isIdeaSubmitScreen) {
         if (isAnswerTheBriefs) {
             lbltitle.text=@"Answer The Briefs";
-            
+           // self.view.backgroundColor=[UIColor PPYellowColor];
+          //  self.baseScrollView.backgroundColor = [UIColor PPYellowColor];
         }
         else{
+            //self.view.backgroundColor=[UIColor PPRedColor];
+            //self.baseScrollView.backgroundColor = [UIColor PPRedColor];
             lbltitle.text=@"Create New Idea";
-            
         }
         headerImage.image=[UIImage imageNamed:@"my_ideas.png"];
         self.view.backgroundColor=[UIColor PPYellowColor];
@@ -613,14 +615,9 @@
             }
             [self settingBarButton];
             [hud hide:YES];
-            NSLog(@"%@",data);
         } else {
             [self settingBarButton];
-            if (PPNoInternetConnection) {
-                kCustomErrorAlert;
-            }
             [hud hide:YES];
-            NSLog(@"error %@", error);
         }
     }];
     

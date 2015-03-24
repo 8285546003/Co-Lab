@@ -34,6 +34,7 @@ NSArray *cellTitleText;
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
+    [self.profileTableView reloadData];
     [self settingBarButton];
     [self updateFrame];
     [self.view setBackgroundColor:[UIColor PPProfileBackGroundColor]];
@@ -111,7 +112,8 @@ NSArray *cellTitleText;
         cell.textLabel.font = [UIFont boldSystemFontOfSize:15];
     }
     else if (indexPath.row==3){
-        if (![[PPUtilts sharedInstance].notificationCount isEqualToString:ZERO]) {
+        
+        if (![[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"] isEqualToString:ZERO]) {
             CustomBadge *badge = [CustomBadge customBadgeWithString:[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"] withStyle:[BadgeStyle oldStyle]];
             badge.frame=CGRectMake(60, -4, 30, 30);
             [badge bringSubviewToFront:cell.contentView];

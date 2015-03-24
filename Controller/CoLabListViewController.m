@@ -100,9 +100,6 @@
             [hud hide:YES];
         } else {
             [self settingBarButton];
-            if (PPNoInternetConnection) {
-                kCustomErrorAlert;
-            }
             [hud hide:YES];
         }
     }];

@@ -33,6 +33,8 @@
     NotificationCount  *notificationCount;
     NotificationCountModel*notificationCountModel;
     
+    CustomBadge *badge;
+    
 }
 
 @end
@@ -72,10 +74,15 @@
             
             if ([status.Error isEqualToString:kResultError]) {
                 if ([status.Message isEqualToString:kResultMessage]) {
-                  [[NSUserDefaults standardUserDefaults] setValue:notificationCount.totalnotification forKey:@"NOTIFICATION"];
-                    CustomBadge *badge = [CustomBadge customBadgeWithString:notificationCount.totalnotification withStyle:[BadgeStyle oldStyle]];
-                    badge.frame=CGRectMake(45, 0, 30, 30);
-                    [self.view addSubview:badge];
+                    if (![notificationCount.totalnotification integerValue] ==0) {
+                        [[NSUserDefaults standardUserDefaults] setValue:notificationCount.totalnotification forKey:@"NOTIFICATION"];
+                        badge = [CustomBadge customBadgeWithString:notificationCount.totalnotification withStyle:[BadgeStyle oldStyle]];
+                        badge.frame=CGRectMake(45, 0, 30, 30);
+                        [self.view addSubview:badge];
+                    }
+                    else{
+                        [badge removeFromSuperview];
+                    }
                     [self.notificationTableView  setHidden:NO];
                     [self.notificationTableView reloadData];
                 }
@@ -91,9 +98,6 @@
             [hud hide:YES];
         } else {
             [self settingBarButton];
-            if (PPNoInternetConnection) {
-                kCustomErrorAlert;
-            }
             [hud hide:YES];
         }
     }];

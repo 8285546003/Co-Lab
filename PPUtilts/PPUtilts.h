@@ -139,10 +139,6 @@ typedef enum{
     PP103
 } ViewTagType;
 
-typedef enum {
-    PPNoInternetConnection=-1005,
-}ErrorCodeType;
-
 
 @interface PPUtilts : NSObject
 @property (nonatomic,retain)  NSString *deviceTocken;
@@ -152,7 +148,6 @@ typedef enum {
 @property (nonatomic, strong) NSString *tagSearch;
 @property (nonatomic, strong) NSString *parent_id;
 @property (nonatomic, strong) NSString *notification_send_time;
-@property (nonatomic, strong) NSString *notificationCount;
 
 
 

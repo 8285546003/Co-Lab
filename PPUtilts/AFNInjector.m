@@ -31,7 +31,8 @@
            // NSLog(@"%@",responseObject);
             block(responseObject, nil);
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-           // NSLog(@"%@",error.description);
+            //NSLog(@"%@",[error.userInfo valueForKey:@"NSLocalizedDescription"]);
+            kCustomAlert(@"Error", [error.userInfo valueForKey:@"NSLocalizedDescription"], @"OK");
             block(nil, error);
         }];
     });

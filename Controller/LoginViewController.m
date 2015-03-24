@@ -182,9 +182,6 @@
                                 }
                                 [hud hide:YES];
                             } else {
-                                if (PPNoInternetConnection) {
-                                    kCustomErrorAlert;
-                                }
                                 [hud hide:YES];
                             }
                         }];
