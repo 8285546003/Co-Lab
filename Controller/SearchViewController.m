@@ -67,10 +67,24 @@
 }
 
 #pragma mark - Table view data source
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if ([status.Message isEqualToString:kResultNoRecord]){return 200;}
+    else{return 44;}
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return ibModel.SearchAuto.count;
+    if ([status.Message isEqualToString:kResultNoRecord]){
+        return 1;
+    
+    
+    }
+    else{
+        
+        return ibModel.SearchAuto.count;
+    
+    
+    }
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -88,8 +102,17 @@
      ibModelDetails= ibModel.SearchAuto[indexPath.row];
      status = statusModel.StatusArr[[ZERO integerValue]];
     
-     if (status.Message==kResultNoRecord){cell.textLabel.text=kResultNoRecord;}
-     else{cell.textLabel.text=ibModelDetails.tag;}
+     if ([status.Message isEqualToString:kResultNoRecord]){
+         
+         cell.textLabel.text=kResultNoRecord;
+     
+     }
+     else{
+         
+         cell.textLabel.text=ibModelDetails.tag;
+     
+     
+     }
     
      return cell;
     
@@ -111,15 +134,15 @@
             statusModel = [[StatusModel alloc] initWithDictionary:data error:nil];
             status = statusModel.StatusArr[[ZERO integerValue]];
             ibModel = [[SearchModel alloc] initWithDictionary:data error:nil];
+            [self.allDataTableView setHidden:NO];
+
             if ([status.Error isEqualToString:kResultError]) {
                 if ([status.Message isEqualToString:kResultMessage]) {
                     [self.allDataTableView reloadData];
-                    [self.allDataTableView setHidden:NO];
                 }
                 else{
                     ibModel.SearchAuto=nil;
-                    self.allDataTableView.hidden=YES;
-                    kCustomAlert(@"", status.Message, @"Ok");
+                    [self.allDataTableView reloadData];
                 }
             }
             else{
@@ -176,13 +199,23 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     const char * _char = [string cStringUsingEncoding:NSUTF8StringEncoding];
     int isBackSpace = strcmp(_char, "\b");
-    if (isBackSpace == -8) {
-         string = [txtSearch.text substringToIndex:[txtSearch.text length] - 1];
-        [self getDataFromTag:string];
-    }
-    else{
-         [self getDataFromTag:[txtSearch.text stringByAppendingString:string]];
-    }
+    
+    NSLog(@"%lu",(unsigned long)txtSearch.text.length);
+    
+        if (isBackSpace == -8) {
+            string = [txtSearch.text substringToIndex:[txtSearch.text length] - 1];
+            if (![string isEqualToString:@""]) {
+                [self getDataFromTag:string];
+            }
+            else{
+                //ibModel.SearchAuto=nil;
+                [self.allDataTableView setHidden:YES];
+               // [self.allDataTableView reloadData];
+            }
+        }
+        else{
+            [self getDataFromTag:[txtSearch.text stringByAppendingString:string]];
+        }
     return YES;
 }
 @end
