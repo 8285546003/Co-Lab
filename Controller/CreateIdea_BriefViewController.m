@@ -352,13 +352,7 @@
 - (void)settingBarMethod:(UIButton *)settingBtn{
     switch (settingBtn.tag) {
         case PPkCancel:
-            if (isCurrentControllerPresented) {
-                [[self presentedViewController]dismissViewControllerAnimated:YES completion:nil];
-            }
-            else{
-                [self.navigationController popViewControllerAnimated:YES];
-            }
-            //isCurrentControllerPresented?[[self presentedViewController]dismissViewControllerAnimated:YES completion:nil]:[self.navigationController popViewControllerAnimated:YES];
+            isCurrentControllerPresented?[self dismissViewControllerAnimated:YES completion:nil]:[self.navigationController popViewControllerAnimated:YES];
              break;
         case PPkAttachment:[self AddOverLay];
             break;

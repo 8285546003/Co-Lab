@@ -112,13 +112,14 @@
             statusModel = [[StatusModel alloc] initWithDictionary:data error:nil];
             status = statusModel.StatusArr[[ZERO integerValue]];
             ibModel = [[SearchModel alloc] initWithDictionary:data error:nil];
-            [self.allDataTableView setHidden:NO];
 
             if ([status.Error isEqualToString:kResultError]) {
                 if ([status.Message isEqualToString:kResultMessage]) {
+                    [self.allDataTableView setHidden:NO];
                     [self.allDataTableView reloadData];
                 }
                 else{
+                    [self.allDataTableView setHidden:NO];
                     ibModel.SearchAuto=nil;
                     [self.allDataTableView reloadData];
                 }
@@ -182,7 +183,7 @@
     
         if (isBackSpace == -8) {
             string = [txtSearch.text substringToIndex:[txtSearch.text length] - 1];
-            ![string isEqualToString:@""] ? [self getDataFromTag:string]:[self.allDataTableView setHidden:YES];
+            ![string isEqualToString:@""] ? [self getDataFromTag:string]:[self.allDataTableView setHidden:YES];ibModel.SearchAuto=nil;[self.allDataTableView reloadData];
         }
         else{
             [self getDataFromTag:[txtSearch.text stringByAppendingString:string]];
