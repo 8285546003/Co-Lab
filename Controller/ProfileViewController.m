@@ -113,7 +113,7 @@ NSArray *cellTitleText;
     }
     else if (indexPath.row==3){
         
-        if (![[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"] isEqualToString:ZERO]) {
+        if (![[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"] integerValue]==0) {
             CustomBadge *badge = [CustomBadge customBadgeWithString:[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"] withStyle:[BadgeStyle oldStyle]];
             badge.frame=CGRectMake(60, -4, 30, 30);
             [badge bringSubviewToFront:cell.contentView];
@@ -130,12 +130,7 @@ NSArray *cellTitleText;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row==0){
-        return kCellHeightAtIndexZero;;
-    }
-    else{
-        return kCellHeight;
-    }
+ return (indexPath.row==0) ?  kCellHeightAtIndexZero : kCellHeight;
 }
 
 
@@ -165,10 +160,8 @@ NSArray *cellTitleText;
 -(void)goToWithApiCall:(NSString*)apiCall{
     if (apiCall==kApiCallLogOut) {
         [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"USERID"];
-        //[[GPPSignIn sharedInstance]signOut];
         GPPSignIn *signIn = [GPPSignIn sharedInstance];
         [signIn signOut];
-
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
     else{
@@ -184,8 +177,6 @@ NSArray *cellTitleText;
     }
 
 }
-
-
 - (IBAction)btnBackClicked:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }

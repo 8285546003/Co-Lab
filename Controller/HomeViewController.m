@@ -226,16 +226,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    if (indexPath.row==0){
-        return kCellHeightAtIndexZero;
-    }
-    else if (indexPath.row==5){
-        return kCellHeightAtIndexfive;
-    }
-    else{
-        return kCellHeight;
-    }
+    return (indexPath.row==0)?kCellHeightAtIndexZero:(indexPath.row==5)?kCellHeightAtIndexfive:kCellHeight;
 }
 
 

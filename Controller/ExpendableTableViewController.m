@@ -189,19 +189,13 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if ([PPUtilts sharedInstance].apiCall==kApiCallNotifications) {
-        return notificationModel.NotificatioDetail.count;
-    }
-  else{
-      return ibModel.Detail.count;
-
-    }
+   return ([PPUtilts sharedInstance].apiCall==kApiCallNotifications)?notificationModel.NotificatioDetail.count:ibModel.Detail.count;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath isExpanded:(BOOL)isexpanded
 {
     NSString *imageName=ibModelDetails.image;
-
+    
     if (indexPath.row==[ZERO intValue]){
         if ([self isImageExist:imageName]) {
             return kCellHeightWithImage;
@@ -229,16 +223,13 @@
     [cell setTag:3];
     if (cell == nil) {
         cell = [[[NSBundle mainBundle]loadNibNamed:kStaticIdentifier owner:self options:nil]lastObject];
-        [cell.btnEmail setHidden:NO];
-        [cell.btnEmail addTarget:self action:@selector(buttonPressedAction:) forControlEvents:UIControlEventTouchUpInside];
     }
+    [cell.btnEmail setHidden:NO];
+    [cell.btnEmail addTarget:self action:@selector(buttonPressedAction:) forControlEvents:UIControlEventTouchUpInside];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-       if ([PPUtilts sharedInstance].apiCall==kApiCallNotifications) {
-           ibModelDetails= notificationModel.NotificatioDetail[indexPath.row];
-     }
-     else{
-         ibModelDetails = ibModel.Detail[indexPath.row];
-     }
+    
+    ([PPUtilts sharedInstance].apiCall==kApiCallNotifications)?(ibModelDetails= notificationModel.NotificatioDetail[indexPath.row]):(ibModelDetails = ibModel.Detail[indexPath.row]);
+
     cell.lblHeading.text=ibModelDetails.headline;
     [cell.lblHeading sizeToFit];
     cell.lblTag.text=ibModelDetails.user_email;
@@ -323,25 +314,15 @@
 {
     CGPoint buttonOriginInTableView = [sender convertPoint:CGPointZero toView:self.table];
     NSIndexPath *indexPath = [self.table indexPathForRowAtPoint:buttonOriginInTableView];
-    
-    if ([PPUtilts sharedInstance].apiCall==kApiCallNotifications) {
-        ibModelDetails= notificationModel.NotificatioDetail[indexPath.row];
-    }
-    else{
-        ibModelDetails = ibModel.Detail[indexPath.row];
 
-    }
-    
+  ([PPUtilts sharedInstance].apiCall==kApiCallNotifications)?(ibModelDetails= notificationModel.NotificatioDetail[indexPath.row]):(ibModelDetails = ibModel.Detail[indexPath.row]);
+
     if ([MFMailComposeViewController canSendMail])
     {
         MFMailComposeViewController *mail = [[MFMailComposeViewController alloc] init];
         mail.mailComposeDelegate = self;
         [mail setToRecipients:@[ibModelDetails.user_email]];
         [self presentViewController:mail animated:YES completion:NULL];
-    }
-    else
-    {
-        
     }
     
 }

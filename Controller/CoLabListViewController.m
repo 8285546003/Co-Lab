@@ -38,6 +38,8 @@
     BOOL isHot;
     NSString *strColorType;
     
+    NSDictionary *parameters;
+    
 }
 @end
 
@@ -57,21 +59,13 @@
 }
 //-----------------------------------Get Parameters for the respective web services-------------------------------------------------------
 -(NSDictionary*)getParameters{
-    NSDictionary *parameters;
-    if ([PPUtilts sharedInstance].apiCall==kApiCallLatestIdeaBrief) {parameters = @{kApiCall:kApiCallLatestIdeaBrief};}
-    else if ([PPUtilts sharedInstance].apiCall==kApiCallTagSearch){parameters = @{kApiCall:kApiCallTagSearch,kTag:[PPUtilts sharedInstance].tagSearch};}
-    else if ([PPUtilts sharedInstance].apiCall==kApiCallMyIdea){parameters = @{kApiCall:kApiCallMyIdea,kUserid:GET_USERID};}
-    else if ([PPUtilts sharedInstance].apiCall==kApiCallMyBrief){parameters = @{kApiCall:kApiCallMyBrief,kUserid:GET_USERID};}
-    else{}
-    return parameters;
+ return  ([PPUtilts sharedInstance].apiCall==kApiCallLatestIdeaBrief)?(parameters = @{kApiCall:kApiCallLatestIdeaBrief}):([PPUtilts sharedInstance].apiCall==kApiCallMyIdea)?(parameters = @{kApiCall:kApiCallMyIdea,kUserid:GET_USERID}):([PPUtilts sharedInstance].apiCall==kApiCallMyBrief)?(parameters = @{kApiCall:kApiCallMyBrief,kUserid:GET_USERID}):(parameters = @{kApiCall:kApiCallTagSearch,kTag:[PPUtilts sharedInstance].tagSearch});
 }
 
 //------------------------------------Set data to models-----------------------------------------------------------------------------------
 -(void)setModels:(id)responseObject{
-    if ([PPUtilts sharedInstance].apiCall==kApiCallLatestIdeaBrief) {ibModel = [[IBModel alloc] initWithDictionary:responseObject error:nil];}
-    else if ([PPUtilts sharedInstance].apiCall==kApiCallMyIdea){myIdeaModel = [[MyIdeaModel alloc] initWithDictionary:responseObject error:nil];}
-    else if ([PPUtilts sharedInstance].apiCall==kApiCallMyBrief){myBriefModel = [[MyBriefModel alloc] initWithDictionary:responseObject error:nil];}
-    else{tagModel = [[TagSearchModel alloc] initWithDictionary:responseObject error:nil];}
+    ([PPUtilts sharedInstance].apiCall==kApiCallLatestIdeaBrief)?(ibModel = [[IBModel alloc] initWithDictionary:responseObject error:nil]):([PPUtilts sharedInstance].apiCall==kApiCallMyIdea)?(myIdeaModel = [[MyIdeaModel alloc] initWithDictionary:responseObject error:nil]):([PPUtilts sharedInstance].apiCall==kApiCallMyBrief)?(myBriefModel = [[MyBriefModel alloc] initWithDictionary:responseObject error:nil]):(tagModel = [[TagSearchModel alloc] initWithDictionary:responseObject error:nil]);
+    
     statusModel = [[StatusModel alloc] initWithDictionary:responseObject error:nil];
     status = statusModel.StatusArr[[ZERO integerValue]];
 }
@@ -79,7 +73,7 @@
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
     hud.labelText = PLEASE_WAIT;
-    NSDictionary *parameters=[self getParameters];
+    parameters=[self getParameters];
     AFNInjector *objAFN = [AFNInjector new];
     [objAFN parameters:parameters completionBlock:^(NSArray *data, NSError *error) {
         if(!error) {
@@ -116,11 +110,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if ([PPUtilts sharedInstance].apiCall==kApiCallLatestIdeaBrief){return ibModel.LatestIdeaBrief.count;}
-    else if ([PPUtilts sharedInstance].apiCall==kApiCallMyIdea){return myIdeaModel.MyIdea.count;}
-    else if ([PPUtilts sharedInstance].apiCall==kApiCallMyBrief){return myBriefModel.MyBrief.count;}
-    else{return tagModel.TagSearch.count;}
-    return [ZERO integerValue];
+ return  ([PPUtilts sharedInstance].apiCall==kApiCallLatestIdeaBrief)?ibModel.LatestIdeaBrief.count:([PPUtilts sharedInstance].apiCall==kApiCallMyIdea)?myIdeaModel.MyIdea.count:([PPUtilts sharedInstance].apiCall==kApiCallMyBrief)?myBriefModel.MyBrief.count:tagModel.TagSearch.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -135,11 +125,8 @@
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    if ([PPUtilts sharedInstance].apiCall==kApiCallLatestIdeaBrief){ibModelDetails = ibModel.LatestIdeaBrief[indexPath.row];}
-    else if ([PPUtilts sharedInstance].apiCall==kApiCallMyIdea){ibModelDetails = myIdeaModel.MyIdea[indexPath.row];}
-    else if ([PPUtilts sharedInstance].apiCall==kApiCallMyBrief){ibModelDetails = myBriefModel.MyBrief[indexPath.row];}
-    else{ibModelDetails = tagModel.TagSearch[indexPath.row];}
-    
+    ([PPUtilts sharedInstance].apiCall==kApiCallLatestIdeaBrief)?(ibModelDetails = ibModel.LatestIdeaBrief[indexPath.row]):([PPUtilts sharedInstance].apiCall==kApiCallMyIdea)?(ibModelDetails = myIdeaModel.MyIdea[indexPath.row]):([PPUtilts sharedInstance].apiCall==kApiCallMyBrief)?(ibModelDetails = myBriefModel.MyBrief[indexPath.row]):(ibModelDetails = tagModel.TagSearch[indexPath.row]);
+
     cell.lblHeading.text=ibModelDetails.headline;
     cell.lblHeading.numberOfLines=5;
     cell.lblHeading.lineBreakMode=NSLineBreakByCharWrapping;
@@ -201,10 +188,7 @@
     
     ExpendableTableViewController *obj=[ExpendableTableViewController new];
     
-    if ([PPUtilts sharedInstance].apiCall==kApiCallLatestIdeaBrief) {ibModelDetails = ibModel.LatestIdeaBrief[indexPath.row];}
-    else if ([PPUtilts sharedInstance].apiCall==kApiCallMyIdea){ibModelDetails = myIdeaModel.MyIdea[indexPath.row];}
-    else if ([PPUtilts sharedInstance].apiCall==kApiCallMyBrief){ibModelDetails = myBriefModel.MyBrief[indexPath.row];}
-    else{ibModelDetails = tagModel.TagSearch[indexPath.row];}
+    ([PPUtilts sharedInstance].apiCall==kApiCallLatestIdeaBrief)?(ibModelDetails = ibModel.LatestIdeaBrief[indexPath.row]):([PPUtilts sharedInstance].apiCall==kApiCallMyIdea)?(ibModelDetails = myIdeaModel.MyIdea[indexPath.row]):([PPUtilts sharedInstance].apiCall==kApiCallMyBrief)?(ibModelDetails = myBriefModel.MyBrief[indexPath.row]):(ibModelDetails = tagModel.TagSearch[indexPath.row]);
     
     [PPUtilts sharedInstance].colorCode=ibModelDetails.color_code;
     [PPUtilts sharedInstance].LatestIDId=ibModelDetails.id;

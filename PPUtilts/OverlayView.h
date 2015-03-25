@@ -13,15 +13,10 @@
 @optional
 - (void)takePhoto;
 - (void)selectPhoto;
-
 - (void)createIdea;
 - (void)createBrief;
 - (void)answerIB;
-
-//- (void) photoFromCamraOrGalary;
-
 @end
-
 @interface OverlayView : UIView{
     NSInteger buttonType;
     UIButton *takePhotoBtn;
@@ -31,20 +26,10 @@
     UIButton *createBriefBtn;
     UIButton *answerBriefBtn;
 }
-
 @property (nonatomic, weak) id <OverlayViewDelegate>delegate;
-
 - (id)initOverlayView;
 - (void)renderingScreenAccordingToFrame;
-
 - (void)createOrAnswerIB:(BOOL)Answer;
 - (void)closeIBView:(UIButton *)sender;
-
 - (void)closeMethod:(UIButton *)sender;
-//- (void)takePhoto;
-//- (void)selectPhoto;
-//
-//- (void)createIdea;
-//- (void)createBrief;
-//- (void)answerIB;
 @end

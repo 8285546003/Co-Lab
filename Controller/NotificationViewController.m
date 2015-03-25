@@ -71,7 +71,6 @@
             if (notificationCountModel.NotificatioTotal.count>0) {
                 notificationCount=notificationCountModel.NotificatioTotal[[ZERO integerValue]];
             }
-            
             if ([status.Error isEqualToString:kResultError]) {
                 if ([status.Message isEqualToString:kResultMessage]) {
                     if (![notificationCount.totalnotification integerValue] ==0) {
@@ -93,7 +92,6 @@
             else{
                 kCustomErrorAlert;
             }
-
             [self settingBarButton];
             [hud hide:YES];
         } else {
