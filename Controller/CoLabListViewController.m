@@ -127,6 +127,7 @@
     
     ([PPUtilts sharedInstance].apiCall==kApiCallLatestIdeaBrief)?(ibModelDetails = ibModel.LatestIdeaBrief[indexPath.row]):([PPUtilts sharedInstance].apiCall==kApiCallMyIdea)?(ibModelDetails = myIdeaModel.MyIdea[indexPath.row]):([PPUtilts sharedInstance].apiCall==kApiCallMyBrief)?(ibModelDetails = myBriefModel.MyBrief[indexPath.row]):(ibModelDetails = tagModel.TagSearch[indexPath.row]);
 
+    
     cell.lblHeading.text=ibModelDetails.headline;
     cell.lblHeading.numberOfLines=5;
     cell.lblHeading.lineBreakMode=NSLineBreakByCharWrapping;
@@ -134,10 +135,8 @@
     cell.lblTag.text=ibModelDetails.tag;
     isHot=[ibModelDetails.is_hot isEqualToString:BOOL_YES];
     strColorType=ibModelDetails.color_code;
-    cell.selectedBackgroundView.backgroundColor=[UIColor clearColor];
-    UIView *cellBackgroundClearColor = [[UIView alloc] initWithFrame:cell.frame];
-    cellBackgroundClearColor.backgroundColor = [UIColor clearColor];
-    cell.selectedBackgroundView = cellBackgroundClearColor;
+
+    cell.selectedBackgroundView.backgroundColor=[UIColor PPBackGroundColor];
     
     UIImageView *imgIdea=(UIImageView *)[cell.contentView viewWithTag:PP101];
     UIImageView *imgBrief=(UIImageView *)[cell.contentView viewWithTag:PP102];

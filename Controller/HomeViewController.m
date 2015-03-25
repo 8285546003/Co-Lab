@@ -33,6 +33,7 @@
     NotificationCountModel*notificationCountModel;
     
         __weak IBOutlet UILabel       *lblNotificationCount;
+    CustomBadge *badge;
  
     
 }
@@ -209,11 +210,14 @@
                     notificationCount=notificationCountModel.NotificatioTotal[[ZERO integerValue]];
                     [[NSUserDefaults standardUserDefaults] setValue:notificationCount.totalnotification forKey:@"NOTIFICATION"];
                     if ([notificationCount.totalnotification integerValue]>0) {
-                        CustomBadge *badge = [CustomBadge customBadgeWithString:[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"] withStyle:[BadgeStyle oldStyle]];
+                        badge = [CustomBadge customBadgeWithString:[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"] withStyle:[BadgeStyle oldStyle]];
                         badge.frame=CGRectMake(60, -4, 30, 30);
                         [badge bringSubviewToFront:cell.contentView];
                         [cell.contentView  addSubview:badge];
                 }
+                    else{
+                        [badge removeFromSuperview];
+                    }
             }
             
         }
