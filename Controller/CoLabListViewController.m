@@ -140,17 +140,10 @@
 
     cell.selectedBackgroundView.backgroundColor=[UIColor PPBackGroundColor];
     
-    UIImageView *imgIdea=(UIImageView *)[cell.contentView viewWithTag:PP101];
-    UIImageView *imgBrief=(UIImageView *)[cell.contentView viewWithTag:PP102];
-    UIImageView *imgHot=(UIImageView *)[cell.contentView viewWithTag:PP103];
+    UIImageView *imgIdea=(UIImageView *)[cell.contentView viewWithTag:PP201];
+    UIImageView *imgBrief=(UIImageView *)[cell.contentView viewWithTag:PP202];
+    UIImageView *imgHot=(UIImageView *)[cell.contentView viewWithTag:PP203];
     
-    if (isBrief) {
-        [imgBrief setHidden:NO];
-    }
-    else{
-        [imgIdea setHidden:NO];
-    }
-
     typedef void (^CaseBlockForColor)();
     
     NSDictionary *colorType = @{
@@ -158,8 +151,13 @@
                                 R:
                                     ^{[cell setBackgroundColor:[UIColor    PPRedColor]];
                                         imgIdea.hidden=NO;
-                                        if (isHot) {imgHot.hidden =NO;imgIdea.frame=imgBrief.frame;}
-                                        else{imgIdea.frame=imgHot.frame;}
+                                        if (isHot) {
+                                            imgHot.hidden =NO;
+                                            imgIdea.frame=imgBrief.frame;
+                                        }
+                                        else{
+                                            imgIdea.frame=imgHot.frame;
+                                        }
                                     },
                                 Y:
                                     ^{[cell setBackgroundColor:[UIColor    PPYellowColor]];
@@ -174,7 +172,10 @@
                                         imgIdea.hidden=NO;
                                         imgBrief.hidden=NO;
                                         if (isHot) {imgHot.hidden =NO;}
-                                        else{imgIdea.frame=imgBrief.frame;imgBrief.frame=imgHot.frame;}
+                                        else{
+                                            imgIdea.frame=imgBrief.frame;
+                                            imgBrief.frame=imgHot.frame;
+                                        }
                                     },
                                 B:
                                     ^{ [cell setBackgroundColor:[UIColor    PPBlueColor]];

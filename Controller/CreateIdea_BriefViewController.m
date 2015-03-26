@@ -551,9 +551,9 @@
         imageString = @"";
     }
     
-    UITextView *txtHeader=(UITextView *)[self.view viewWithTag:PP101];
-    UITextView *txtDescription=(UITextView *)[self.view viewWithTag:PP102];
-    UITextView *txtTag=(UITextView *)[self.view viewWithTag:PP103];
+    UITextView *txtHeader=(UITextView *)[self.view viewWithTag:PPkHeader];
+    UITextView *txtDescription=(UITextView *)[self.view viewWithTag:PPkDescription];
+    UITextView *txtTag=(UITextView *)[self.view viewWithTag:PPkTags];
 
     if ([txtHeader.text isEqualToString:@"ADD HEADLINE"]) {
         kCustomAlert(@"", @"Please enter header.",@"Ok");

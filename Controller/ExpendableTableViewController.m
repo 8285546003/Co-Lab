@@ -260,9 +260,9 @@
     
     BOOL isHot=[ibModelDetails.is_hot isEqualToString:BOOL_YES];
 
-    UIImageView *imgIdea=(UIImageView *) [cell.contentView viewWithTag:PP101];
-    UIImageView *imgBrief=(UIImageView *)[cell.contentView viewWithTag:PP102];
-    UIImageView *imgHot=(UIImageView *)  [cell.contentView viewWithTag:PP103];
+    UIImageView *imgIdea=(UIImageView *) [cell.contentView viewWithTag:PP201];
+    UIImageView *imgBrief=(UIImageView *)[cell.contentView viewWithTag:PP202];
+    UIImageView *imgHot=(UIImageView *)  [cell.contentView viewWithTag:PP203];
 
     NSString *strColorType=ibModelDetails.color_code;
     isAnswerTheBriefs=YES;
