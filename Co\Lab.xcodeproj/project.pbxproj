@@ -18,8 +18,6 @@
 		684410DD1ABAF7E30063C4C2 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 684410CB1ABAF7E30063C4C2 /* back.png */; };
 		684410DE1ABAF7E30063C4C2 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 684410CC1ABAF7E30063C4C2 /* back@2x.png */; };
 		684410DF1ABAF7E30063C4C2 /* Close_Image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 684410CD1ABAF7E30063C4C2 /* Close_Image@2x.png */; };
-		684410E01ABAF7E30063C4C2 /* colab.png in Resources */ = {isa = PBXBuildFile; fileRef = 684410CE1ABAF7E30063C4C2 /* colab.png */; };
-		684410E11ABAF7E30063C4C2 /* colab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 684410CF1ABAF7E30063C4C2 /* colab@2x.png */; };
 		684410E21ABAF7E30063C4C2 /* hot_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 684410D01ABAF7E30063C4C2 /* hot_icon@2x.png */; };
 		684410E31ABAF7E30063C4C2 /* Latest_Idea_And_Briefs@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 684410D11ABAF7E30063C4C2 /* Latest_Idea_And_Briefs@2x.png */; };
 		684410E41ABAF7E30063C4C2 /* logout.png in Resources */ = {isa = PBXBuildFile; fileRef = 684410D21ABAF7E30063C4C2 /* logout.png */; };
@@ -167,8 +165,6 @@
 		684410CB1ABAF7E30063C4C2 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		684410CC1ABAF7E30063C4C2 /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
 		684410CD1ABAF7E30063C4C2 /* Close_Image@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Close_Image@2x.png"; sourceTree = "<group>"; };
-		684410CE1ABAF7E30063C4C2 /* colab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = colab.png; sourceTree = "<group>"; };
-		684410CF1ABAF7E30063C4C2 /* colab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "colab@2x.png"; sourceTree = "<group>"; };
 		684410D01ABAF7E30063C4C2 /* hot_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hot_icon@2x.png"; sourceTree = "<group>"; };
 		684410D11ABAF7E30063C4C2 /* Latest_Idea_And_Briefs@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Latest_Idea_And_Briefs@2x.png"; sourceTree = "<group>"; };
 		684410D21ABAF7E30063C4C2 /* logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logout.png; sourceTree = "<group>"; };
@@ -596,8 +592,6 @@
 				684410CB1ABAF7E30063C4C2 /* back.png */,
 				684410CC1ABAF7E30063C4C2 /* back@2x.png */,
 				684410CD1ABAF7E30063C4C2 /* Close_Image@2x.png */,
-				684410CE1ABAF7E30063C4C2 /* colab.png */,
-				684410CF1ABAF7E30063C4C2 /* colab@2x.png */,
 				684410D01ABAF7E30063C4C2 /* hot_icon@2x.png */,
 				684410D11ABAF7E30063C4C2 /* Latest_Idea_And_Briefs@2x.png */,
 				684410D21ABAF7E30063C4C2 /* logout.png */,
@@ -788,7 +782,6 @@
 				68CC913D1AA5AA3100F3CB48 /* 640x960.png in Resources */,
 				689406B21ABAF85300A267A7 /* profile_black.png in Resources */,
 				6869D2891ABB003300B641E4 /* Search_Image@2x.png in Resources */,
-				684410E01ABAF7E30063C4C2 /* colab.png in Resources */,
 				689406B41ABAF85300A267A7 /* profile.png in Resources */,
 				689406B71ABAF85300A267A7 /* talk@2x.png in Resources */,
 				68CC913A1AA5AA3100F3CB48 /* 1242x2208.png in Resources */,
@@ -812,7 +805,6 @@
 				68CC90DF1AA5A8E300F3CB48 /* LatestIBCell.xib in Resources */,
 				689406B61ABAF85300A267A7 /* talk.png in Resources */,
 				689406B81ABAF85300A267A7 /* testimonial@2x.png in Resources */,
-				684410E11ABAF7E30063C4C2 /* colab@2x.png in Resources */,
 				68CC911C1AA5AA3100F3CB48 /* 57x57.png in Resources */,
 				684410DC1ABAF7E30063C4C2 /* Attachment_Image@2x.png in Resources */,
 				68CC91171AA5AA3100F3CB48 /* 152x152.png in Resources */,
@@ -970,8 +962,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Sudesh Kumar (R85GW2DH7U)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sudesh Kumar (R85GW2DH7U)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Tequila Hong Kong Limited (YN6BBNB2M2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tequila Hong Kong Limited (YN6BBNB2M2)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -992,7 +984,7 @@
 				PROVISIONING_PROFILE = "c7e6b2fe-75a6-4192-bc52-47084a62a282";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
-				VALIDATE_PRODUCT = YES;
+				VALIDATE_PRODUCT = NO;
 			};
 			name = Debug;
 		};
@@ -1012,8 +1004,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Sudesh Kumar (R85GW2DH7U)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sudesh Kumar (R85GW2DH7U)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Tequila Hong Kong Limited (YN6BBNB2M2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tequila Hong Kong Limited (YN6BBNB2M2)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;

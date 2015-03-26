@@ -36,6 +36,7 @@
     StatusModelDetails* status;
     
     BOOL isHot;
+    BOOL isBrief;;
     NSString *strColorType;
     
     NSDictionary *parameters;
@@ -133,7 +134,8 @@
     cell.lblHeading.lineBreakMode=NSLineBreakByCharWrapping;
     [cell.lblHeading sizeToFit];
     cell.lblTag.text=ibModelDetails.tag;
-    isHot=[ibModelDetails.is_hot isEqualToString:BOOL_YES];
+    isHot  =[ibModelDetails.is_hot  isEqualToString:BOOL_YES];
+    isBrief=[ibModelDetails.is_brief isEqualToString:BOOL_YES];
     strColorType=ibModelDetails.color_code;
 
     cell.selectedBackgroundView.backgroundColor=[UIColor PPBackGroundColor];
@@ -141,8 +143,9 @@
     UIImageView *imgIdea=(UIImageView *)[cell.contentView viewWithTag:PP101];
     UIImageView *imgBrief=(UIImageView *)[cell.contentView viewWithTag:PP102];
     UIImageView *imgHot=(UIImageView *)[cell.contentView viewWithTag:PP103];
-    
+
     typedef void (^CaseBlockForColor)();
+    
     NSDictionary *colorType = @{
                                 
                                 R:

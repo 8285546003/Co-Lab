@@ -35,9 +35,14 @@
     [super viewDidLoad];
 
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
+    UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 32)];
+    
+   // self.txtSearch.leftView = paddingView;
+   // self.txtSearch.leftViewMode = UITextFieldViewModeAlways;
+    [paddingView addSubview:imageView];
     imageView.image = [UIImage imageNamed:@"Search_Image"];
-    self.txtSearch.leftView = imageView;
-    self.txtSearch.leftViewMode=UITextFieldViewModeAlways;\
+    self.txtSearch.leftView = paddingView;
+    self.txtSearch.leftViewMode=UITextFieldViewModeAlways;
     self.txtSearch.delegate=self;
     
     self.allDataTableView.backgroundColor=[UIColor clearColor];
@@ -91,6 +96,8 @@
      status = statusModel.StatusArr[[ZERO integerValue]];
     
      [status.Message isEqualToString:kResultNoRecord] ? [cell.textLabel setText:kResultNoRecord]:[cell.textLabel setText:ibModelDetails.tag];
+     [status.Message isEqualToString:kResultNoRecord] ? [self.allDataTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone]:[self.allDataTableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+
 
      return cell;
     
@@ -102,7 +109,6 @@
         [PPUtilts sharedInstance].tagSearch=ibModelDetails.tag;
         [self goToLatestIdeaBriefs];
     }
-
 }
 
 

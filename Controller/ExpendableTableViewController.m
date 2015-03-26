@@ -241,11 +241,18 @@
     
     NSString *imageName=ibModelDetails.image;
     
-    cell.lblDescription.frame=CGRectMake(40,300, 244,200);
+
+    CGSize size = [ibModelDetails.description_idea_brief sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:17.0f]}];
+    
+    // Values are fractional -- you should take the ceilf to get equivalent values
+    CGSize adjustedSize = CGSizeMake(ceilf(size.width), ceilf(size.height));
+    
+    
+    cell.lblDescription.frame=CGRectMake(40,300, 244,adjustedSize.height);
 
     
     if ([self isImageExist:imageName]) {
-        cell.lblDescription.frame=DETAIL_LABLE_FRAME;
+       // cell.lblDescription.frame=DETAIL_LABLE_FRAME;
         [cell.imgMain sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",BASE_URL_IMAGE,imageName]]
                      placeholderImage:nil
                               options:SDWebImageProgressiveDownload
@@ -262,11 +269,7 @@
     UIImageView *imgIdea=(UIImageView *) [cell.contentView viewWithTag:PP101];
     UIImageView *imgBrief=(UIImageView *)[cell.contentView viewWithTag:PP102];
     UIImageView *imgHot=(UIImageView *)  [cell.contentView viewWithTag:PP103];
-    
-    if (isHot) {
-        imgHot.hidden =NO;
-    }
-    
+
     NSString *strColorType=ibModelDetails.color_code;
     isAnswerTheBriefs=YES;
     

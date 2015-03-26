@@ -58,7 +58,7 @@
 #define     G                   @"G"
 #define     B                   @"B"
 
-#define ImageArray @[@"colab.png",@"my_ideas.png",@"my_brief.png",@"Search_Image.png",@"profile_black.png",@"Latest_Idea_And_Briefs.png"]
+#define ImageArray @[@"CoAppImage.png",@"my_ideas.png",@"my_brief.png",@"Search_Image.png",@"profile_black.png",@"Latest_Idea_And_Briefs.png"]
 #define  CellTitleText  @[@"  CO\\Lab",@"  Create New Idea",@"  Create New Briefs",@"  Search",@"  Profile",@"  Latest Idea & Brifes"]
 
 #define imageArrayProfile @[@"profile.png",@"my_ideas.png",@"my_brief.png",@"Notification.png",@"logout.png"]
