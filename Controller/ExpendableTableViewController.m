@@ -236,25 +236,37 @@
     cell.lblTag.backgroundColor=[UIColor blackColor];
     cell.lblTag.alpha=0.5f;
     cell.lblTag.textColor=[UIColor whiteColor];
-    [cell.lblDescription sizeToFit];
     cell.lblDescription.text=ibModelDetails.description_idea_brief;
-    
-    NSString *imageName=ibModelDetails.image;
-    
+    [cell.lblDescription sizeToFit];
 
-    cell.lblDescription.frame=CGRectMake(40,300, 244,200);
+    NSString *imageName=ibModelDetails.image;
+
+   // cell.lblDescription.frame=CGRectMake(40,300, 244,200);
 
     
     if ([self isImageExist:imageName]) {
-        cell.lblDescription.frame=DETAIL_LABLE_FRAME;
+       // cell.lblDescription.frame=DETAIL_LABLE_FRAME;
         [cell.imgMain sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",BASE_URL_IMAGE,imageName]]
                      placeholderImage:nil
                               options:SDWebImageProgressiveDownload
                             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                 if (image) {
                                     cell.imgMain.image = image;
-                    }
-            }];
+                                    CGRect frame = cell.imgMain.frame;
+                                    frame.origin.y = cell.lblDescription.frame.size.height+80;
+                                    cell.imgMain.frame = frame;
+                                    
+                                    CGRect frame1 = cell.imgMain.frame;
+                                    frame1.origin.y = cell.imgMain.frame.size.height+110;
+                                    cell.lblDescription.frame = frame1;
+                                     [cell.lblDescription sizeToFit];
+                         }
+                    }];
+    }
+    else{
+        CGRect frame = cell.lblDescription.frame;
+        frame.origin.y = cell.lblHeading.frame.size.height+65;
+        cell.lblDescription.frame = frame;
     }
     
     
