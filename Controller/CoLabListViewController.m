@@ -143,6 +143,13 @@
     UIImageView *imgIdea=(UIImageView *)[cell.contentView viewWithTag:PP101];
     UIImageView *imgBrief=(UIImageView *)[cell.contentView viewWithTag:PP102];
     UIImageView *imgHot=(UIImageView *)[cell.contentView viewWithTag:PP103];
+    
+    if (isBrief) {
+        [imgBrief setHidden:NO];
+    }
+    else{
+        [imgIdea setHidden:NO];
+    }
 
     typedef void (^CaseBlockForColor)();
     

@@ -17,6 +17,7 @@
 @interface ProfileViewController (){
 NSArray *imageArray;
 NSArray *cellTitleText;
+    CustomBadge *badge;
 }
 @property (nonatomic, strong) IBOutlet UITableView *profileTableView;
 @end
@@ -114,10 +115,13 @@ NSArray *cellTitleText;
     else if (indexPath.row==3){
         
         if (![[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"] integerValue]==0) {
-            CustomBadge *badge = [CustomBadge customBadgeWithString:[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"] withStyle:[BadgeStyle oldStyle]];
+           badge = [CustomBadge customBadgeWithString:[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"] withStyle:[BadgeStyle oldStyle]];
             badge.frame=CGRectMake(60, -4, 30, 30);
             [badge bringSubviewToFront:cell.contentView];
             [cell.contentView  addSubview:badge];
+        }
+        else{
+            [badge removeFromSuperview];
         }
     }
     
