@@ -179,8 +179,7 @@
 }
 -(void)tableView:(UITableView *)tableView collapseCell:(UITableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath
 {
-    LatestIBCell *cell1=(LatestIBCell *)[cell.contentView viewWithTag:1000];;
-    cell1.lblDescription.hidden=YES;
+
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -251,15 +250,15 @@
                                 if (image) {
                                     cell.imgMain.image = image;
                                     CGRect frame = cell.imgMain.frame;
-                                    frame.origin.y = cell.lblDescription.frame.size.height+80;
+                                    frame.origin.y = cell.lblHeading.frame.size.height+60;
                                     cell.imgMain.frame = frame;
                                     
                                      CGRect frame1 = cell.imgMain.frame;
-                                     frame1.origin.y = cell.imgMain.frame.size.height+110;
+                                     frame1.origin.y = cell.imgMain.frame.size.height+cell.lblHeading.frame.size.height+60;
                                      cell.lblDescription.frame = frame1;
                                      [cell.lblDescription sizeToFit];
-                         }
-                    }];
+                }
+        }];
     }
     else{
         CGRect frame = cell.lblDescription.frame;
