@@ -179,7 +179,8 @@
 }
 -(void)tableView:(UITableView *)tableView collapseCell:(UITableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath
 {
-
+    LatestIBCell *cell1=(LatestIBCell *)[cell.contentView viewWithTag:1000];;
+    cell1.lblDescription.hidden=YES;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -210,7 +211,8 @@
         }
         else{
             return kCellHeightWithoutImage;
-        }    }
+        }
+    }
     else{
         return kheightForRowAtIndexPath;
     }
@@ -241,11 +243,7 @@
 
     NSString *imageName=ibModelDetails.image;
 
-   // cell.lblDescription.frame=CGRectMake(40,300, 244,200);
-
-    
     if ([self isImageExist:imageName]) {
-       // cell.lblDescription.frame=DETAIL_LABLE_FRAME;
         [cell.imgMain sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",BASE_URL_IMAGE,imageName]]
                      placeholderImage:nil
                               options:SDWebImageProgressiveDownload
@@ -256,9 +254,9 @@
                                     frame.origin.y = cell.lblDescription.frame.size.height+80;
                                     cell.imgMain.frame = frame;
                                     
-                                    CGRect frame1 = cell.imgMain.frame;
-                                    frame1.origin.y = cell.imgMain.frame.size.height+110;
-                                    cell.lblDescription.frame = frame1;
+                                     CGRect frame1 = cell.imgMain.frame;
+                                     frame1.origin.y = cell.imgMain.frame.size.height+110;
+                                     cell.lblDescription.frame = frame1;
                                      [cell.lblDescription sizeToFit];
                          }
                     }];
