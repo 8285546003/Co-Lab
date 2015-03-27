@@ -17,6 +17,8 @@
 @interface CreateIdea_BriefViewController (){
     StatusModel    *statusModel;
     StatusModelDetails* status;
+    int value;
+    int valueForDesc;
 }
 
 @end
@@ -453,11 +455,33 @@
     }
     return YES;
 }
+- (void) slideUp {
+    [UIView beginAnimations:nil context:nil];
+    self.view.frame = CGRectMake(0.0, -200.0, self.view.frame.size.width, self.view.frame.size.height);
+    
+    [UIView commitAnimations];
+}
+
+
+- (void) slideDown {
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDelay: 0.01];
+    self.view.frame = CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height);
+    [UIView commitAnimations];
+}
 
 -(void)textViewDidBeginEditing:(UITextView *)textView{
-    [self.baseScrollView setContentSize:CGSizeMake(self.view.frame.size.width, self.baseScrollView.frame.size.height+280)];
+    if (textView.tag == 103 || textView.tag == 102) {
+        [self slideUp];
+    }
+    //self.baseScrollView.contentOffset = CGPointMake(0, textView.frame.origin.y);
+    //  [self.baseScrollView setContentSize:CGSizeMake(self.view.frame.size.width, self.baseScrollView.frame.size.height+280)];
 }
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range  replacementText:(NSString *)text{
+    if ([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
+    }
     if (textView.tag == PPkHeader) {
         int finalCOunt = 80 - (int)[textView.text length];
         titleCharCountLbl.text = [NSString stringWithFormat:@"%d",finalCOunt];
@@ -468,7 +492,7 @@
             return YES;
         }
         if (finalCOunt == 0) {
-           
+            
             if (!errorAlert.isVisible) {
                 errorAlert = [[UIAlertView alloc] initWithTitle:@"Char count error!"
                                                         message:@"You have exceeded maximum number of character"
@@ -485,30 +509,46 @@
         int finalCOunt = 200 - (int)[textView.text length];
         dicCharCountLbl.text = [NSString stringWithFormat:@"%d",finalCOunt];
         if (!text.length) {
+            
+            float nLine = [self numberOfLines:textView fontSize:24];
+            NSLog(@"Number of line == %f",nLine);
+            if (nLine > 3.0 && nLine != valueForDesc) {
+                valueForDesc = nLine;
+                self.baseScrollView.contentOffset = CGPointMake(0, self.baseScrollView.contentOffset.y + 24);
+            }
             return YES;
         }
         if (finalCOunt == 0) {
             if (!errorAlert.isVisible) {
+                [errorAlert show];
                 errorAlert = [[UIAlertView alloc] initWithTitle:@"Char count error!"
                                                         message:@"You have exceeded maximum number of character"
                                                        delegate:nil
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
-
-                [errorAlert show];
             }
             return NO;
         }
         
+    }else if (textView.tag == PPkTags){
+        float nLine = [self numberOfLines:textView fontSize:24];
+        NSLog(@"Number of line == %f",nLine);
+        if (nLine > 3.0 && nLine != value) {
+            value = nLine;
+            self.baseScrollView.contentOffset = CGPointMake(0, self.baseScrollView.contentOffset.y + 24);
+        }
     }
-    if ([text isEqualToString:@"\n"]) {
-        [textView resignFirstResponder];
-        return NO;
-    }
-    return YES;
+    
     return YES;
 }
-
+- (int)numberOfLines:(UITextView *)textView fontSize:(float)fSize{
+    UIFont *font = [UIFont boldSystemFontOfSize:fSize];
+    CGSize size = [textView.text sizeWithFont:font
+                            constrainedToSize:textView.frame.size
+                                lineBreakMode:UILineBreakModeWordWrap]; // default mode
+    int numberOfLines = size.height / font.lineHeight;
+    return  numberOfLines;
+}
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView{
     NSString *finalString = textView.text;
     
@@ -532,6 +572,7 @@
         }
             break;
         case PPkTags:[self.mainDataDictionary setValue:finalString forKey:@"TAGS"];
+                     [self slideDown];
             break;
         default:
             break;
