@@ -139,7 +139,8 @@
     strColorType=ibModelDetails.color_code;
 
     cell.selectedBackgroundView.backgroundColor=[UIColor PPBackGroundColor];
-    
+    [self.allDataTableView setBackgroundColor:[UIColor    PPBackGroundColor]];
+
     UIImageView *imgIdea=(UIImageView *)[cell.contentView viewWithTag:PP201];
     UIImageView *imgBrief=(UIImageView *)[cell.contentView viewWithTag:PP202];
     UIImageView *imgHot=(UIImageView *)[cell.contentView viewWithTag:PP203];
@@ -171,10 +172,15 @@
                                     ^{ [cell setBackgroundColor:[UIColor    PPGreenColor]];
                                         imgIdea.hidden=NO;
                                         imgBrief.hidden=NO;
+                                        
+                                        CGRect frame = imgBrief.frame;
+                                        imgBrief.frame=imgIdea.frame;
+                                        imgIdea.frame=frame;
+
                                         if (isHot) {imgHot.hidden =NO;}
                                         else{
-                                            imgIdea.frame=imgBrief.frame;
-                                            imgBrief.frame=imgHot.frame;
+                                            imgBrief.frame=imgIdea.frame;
+                                            imgIdea.frame=imgHot.frame;
                                         }
                                     },
                                 B:

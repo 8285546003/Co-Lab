@@ -128,7 +128,7 @@
 - (void)addImageAttachment{
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
-    self.attachmentImage = [[UIImageView alloc] initWithFrame:CGRectMake(40, height, screenWidth - 80, 200)];
+    self.attachmentImage = [[UIImageView alloc] initWithFrame:CGRectMake(40, height, screenWidth - 80, 170)];
     [self.baseScrollView addSubview:self.attachmentImage];
     height += 200;
 }
@@ -426,7 +426,8 @@
     isAttachment = YES;
     
     [self rearrengeScrollView:isAttachment];
-    self.attachmentImage.image = [self imageWithImage:chosenImage convertToSize:CGSizeMake(150, 150)];
+    //self.attachmentImage.image = chosenImage;
+    self.attachmentImage.image = [self imageWithImage:chosenImage convertToSize:CGSizeMake(276, 170)];
     [tmpOverlayObj closeMethod:nil];
     isCurrentControllerPresented=NO;
     [picker dismissViewControllerAnimated:YES completion:NULL];
@@ -467,12 +468,13 @@
             return YES;
         }
         if (finalCOunt == 0) {
-            errorAlert = [[UIAlertView alloc] initWithTitle:@"Char count error!"
-                                                    message:@"You have exceeded maximum number of character"
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
+           
             if (!errorAlert.isVisible) {
+                errorAlert = [[UIAlertView alloc] initWithTitle:@"Char count error!"
+                                                        message:@"You have exceeded maximum number of character"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
                 [errorAlert show];
             }
             
@@ -486,13 +488,13 @@
             return YES;
         }
         if (finalCOunt == 0) {
-            
-            errorAlert = [[UIAlertView alloc] initWithTitle:@"Char count error!"
-                                                    message:@"You have exceeded maximum number of character"
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
             if (!errorAlert.isVisible) {
+                errorAlert = [[UIAlertView alloc] initWithTitle:@"Char count error!"
+                                                        message:@"You have exceeded maximum number of character"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+
                 [errorAlert show];
             }
             return NO;

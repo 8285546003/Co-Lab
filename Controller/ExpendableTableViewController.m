@@ -243,20 +243,21 @@
     NSString *imageName=ibModelDetails.image;
 
     if ([self isImageExist:imageName]) {
+        CGRect frame = cell.imgMain.frame;
+        frame.origin.y = cell.lblHeading.frame.size.height+60;
+        cell.imgMain.frame = frame;
+        CGRect frame1 = cell.imgMain.frame;
+        frame1.origin.y = cell.imgMain.frame.size.height+cell.lblHeading.frame.size.height+60;
+        cell.lblDescription.frame = frame1;
+        [cell.lblDescription sizeToFit];
+        
         [cell.imgMain sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",BASE_URL_IMAGE,imageName]]
                      placeholderImage:nil
                               options:SDWebImageProgressiveDownload
                             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                 if (image) {
                                     cell.imgMain.image = image;
-                                    CGRect frame = cell.imgMain.frame;
-                                    frame.origin.y = cell.lblHeading.frame.size.height+60;
-                                    cell.imgMain.frame = frame;
-                                    
-                                     CGRect frame1 = cell.imgMain.frame;
-                                     frame1.origin.y = cell.imgMain.frame.size.height+cell.lblHeading.frame.size.height+60;
-                                     cell.lblDescription.frame = frame1;
-                                     [cell.lblDescription sizeToFit];
+
                 }
         }];
     }
@@ -300,8 +301,16 @@
                                          [self.table setBackgroundColor:[UIColor    PPGreenColor]];
                                         imgIdea.hidden=NO;
                                         imgBrief.hidden=NO;
+                                        
+                                        CGRect frame = imgBrief.frame;
+                                        imgBrief.frame=imgIdea.frame;
+                                        imgIdea.frame=frame;
+                                        
                                         if (isHot) {imgHot.hidden =NO;}
-                                        else{imgIdea.frame=imgBrief.frame;imgBrief.frame=imgHot.frame;}
+                                        else{
+                                            imgBrief.frame=imgIdea.frame;
+                                            imgIdea.frame=imgHot.frame;
+                                        }
                                     },
                                 B:
                                     ^{ [cell setBackgroundColor:[UIColor    PPBlueColor]];
