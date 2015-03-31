@@ -30,8 +30,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-   // [self registerForKeyboardNotifications];
+    [self update];
+}
+-(void)update{
     isAttachment = NO;
     height = 0.0f;
     self.mainDataDictionary = [[NSMutableDictionary alloc] init];
@@ -39,49 +40,50 @@
     [self.mainDataDictionary setValue:@"" forKey:@"DESCRIPTION"];
     [self.mainDataDictionary setValue:@"" forKey:@"TAGS"];
     [self.mainDataDictionary setValue:@"" forKey:@"IMAGE"];
-
     self.baseScrollView.frame=CGRectMake(0, 55, self.view.frame.size.width, self.view.frame.size.height);
     if (self.isIdeaSubmitScreen) {
         if (isAnswerTheBriefs) {
             lbltitle.text=@"Answer The Briefs";
-
+            // self.view.backgroundColor=[UIColor PPYellowColor];
+            // self.baseScrollView.backgroundColor = [UIColor PPYellowColor];
         }
         else{
+            //self.view.backgroundColor=[UIColor PPRedColor];
+            //self.baseScrollView.backgroundColor = [UIColor PPRedColor];
             lbltitle.text=@"Create New Idea";
-
         }
-        headerImage.image=[UIImage imageNamed:@"Create_New_Idea_Image.png"];
+        headerImage.image=[UIImage imageNamed:@"my_ideas.png"];
         self.view.backgroundColor=[UIColor PPYellowColor];
         self.baseScrollView.backgroundColor = [UIColor PPYellowColor];
     }else{
         lbltitle.text=@"Create New Brief";
-        headerImage.image=[UIImage imageNamed:@"Create_New_Brief_Image.png"];
+        headerImage.image=[UIImage imageNamed:@"my_brief.png"];
         self.view.backgroundColor=[UIColor PPBlueColor];
         self.baseScrollView.backgroundColor = [UIColor PPBlueColor];
     }
-    
     self.baseScrollView.scrollEnabled = YES;
-    self.baseScrollView.scrollsToTop  = YES;
+    self.baseScrollView.scrollsToTop = YES;
     [self rearrengeScrollView:isAttachment];
-
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:YES];
-    
-    NoteView *n1=(NoteView *)[self.view viewWithTag:PPkHeader];
-    n1.text=nil;
-    n1.text=@"";
-    NoteView *n2=(NoteView *)[self.view viewWithTag:PPkDescription];
-    n2.text=nil;
-    n2.text=@"";
-    NoteView *n3=(NoteView *)[self.view viewWithTag:PPkTags];
-    n3.text=nil;
-    n3.text=@"";
-    [self.baseScrollView setContentSize:CGSizeMake([[UIScreen mainScreen] bounds].size.width, 0.0f)];
-
-    dicCharCountLbl.text=@"200";
-    titleCharCountLbl.text = @"80";
+    if (!isCurrentControllerPresented) {
+        NoteView *n1=(NoteView *)[self.view viewWithTag:PPkHeader];
+        n1.text=nil;
+        n1.text=@"";
+        NoteView *n2=(NoteView *)[self.view viewWithTag:PPkDescription];
+        n2.text=nil;
+        n2.text=@"";
+        NoteView *n3=(NoteView *)[self.view viewWithTag:PPkTags];
+        n3.text=nil;
+        n3.text=@"";
+        [self.baseScrollView setContentSize:CGSizeMake([[UIScreen mainScreen] bounds].size.width, 0.0f)];
+        dicCharCountLbl.text=@"200";
+        titleCharCountLbl.text = @"80";
+        self.attachmentImage=nil;
+        [self update];
+    }
     
 }
 -(void)viewDidAppear:(BOOL)animated{
@@ -125,7 +127,7 @@
     CGFloat screenWidth = screenRect.size.width;
    // self.attachmentImage.frame=CGRectMake(40, textView.contentSize.height+25, 250, 200);
     self.attachmentImage.alpha=1.0f;
-    self.attachmentImage = [[UIImageView alloc] initWithFrame:CGRectMake(40, height, 200, 170)];
+    self.attachmentImage = [[UIImageView alloc] initWithFrame:CGRectMake(40, height, 240, 170)];
     [self.baseScrollView addSubview:self.attachmentImage];
     height += 200;
 }
@@ -360,13 +362,7 @@
 - (void)settingBarMethod:(UIButton *)settingBtn{
     switch (settingBtn.tag) {
         case PPkCancel:
-            if (isCurrentControllerPresented) {
-                [[self presentedViewController]dismissViewControllerAnimated:YES completion:nil];
-            }
-            else{
-                [self.navigationController popViewControllerAnimated:YES];
-            }
-            //isCurrentControllerPresented?[[self presentedViewController]dismissViewControllerAnimated:YES completion:nil]:[self.navigationController popViewControllerAnimated:YES];
+            isCurrentControllerPresented?[[self presentedViewController]dismissViewControllerAnimated:YES completion:nil]:[self.navigationController popViewControllerAnimated:YES];
              break;
         case PPkAttachment:[self AddOverLay];
             break;
@@ -393,6 +389,7 @@
 }
 
 - (void)takePhoto {
+    isCurrentControllerPresented=YES;
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         
         UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
@@ -414,7 +411,7 @@
 }
 
 - (void)selectPhoto {
-    
+    isCurrentControllerPresented=YES;
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = YES;
@@ -437,8 +434,11 @@
     isAttachment = YES;
     
     [self rearrengeScrollView:isAttachment];
-    self.attachmentImage.image = [self imageWithImage:chosenImage convertToSize:CGSizeMake(150, 150)];
+    self.attachmentImage.image = chosenImage;
+
+    //self.attachmentImage.image = [self imageWithImage:chosenImage convertToSize:CGSizeMake(150, 150)];
     [tmpOverlayObj closeMethod:nil];
+    isCurrentControllerPresented=NO;
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
