@@ -129,9 +129,12 @@
     ([PPUtilts sharedInstance].apiCall==kApiCallLatestIdeaBrief)?(ibModelDetails = ibModel.LatestIdeaBrief[indexPath.row]):([PPUtilts sharedInstance].apiCall==kApiCallMyIdea)?(ibModelDetails = myIdeaModel.MyIdea[indexPath.row]):([PPUtilts sharedInstance].apiCall==kApiCallMyBrief)?(ibModelDetails = myBriefModel.MyBrief[indexPath.row]):(ibModelDetails = tagModel.TagSearch[indexPath.row]);
 
     
-    cell.lblHeading.text=ibModelDetails.headline;
+    if ([PPUtilts isIPad]) {
+        cell.lblHeading.font=[UIFont boldSystemFontOfSize:70.0f];
+    }
     cell.lblHeading.numberOfLines=5;
     cell.lblHeading.lineBreakMode=NSLineBreakByCharWrapping;
+    cell.lblHeading.text=ibModelDetails.headline;
     [cell.lblHeading sizeToFit];
     cell.lblTag.text=ibModelDetails.tag;
     isHot  =[ibModelDetails.is_hot  isEqualToString:BOOL_YES];
@@ -198,7 +201,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return kheightForRowAtIndexPath;
+    return   [PPUtilts isIPad]?kheightForRowAtIndexPath*2:kheightForRowAtIndexPath;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     

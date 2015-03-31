@@ -30,6 +30,7 @@
 -(BOOL)isNotificationViewHidden{
     return YES;
 }
+
 + (BOOL)isiPhone6{
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
@@ -82,6 +83,21 @@
         return NO;
     }
 }
++ (BOOL)isIPad {
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    {
+        return YES; /* Device is iPad */
+    }
+    else{
+        return NO;
+    }
+}
+
++ (BOOL)isIPhone {
+    return ![PPUtilts isIPad];
+}
+
+
 -(void)toast:(NSString*)message{
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
     hud.mode = MBProgressHUDModeCustomView;

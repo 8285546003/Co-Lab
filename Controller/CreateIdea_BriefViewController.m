@@ -17,6 +17,7 @@
 @interface CreateIdea_BriefViewController (){
     StatusModel    *statusModel;
     StatusModelDetails* status;
+    UITextView *activeTextField;
     int value;
     int valueForDesc;
 }
@@ -29,10 +30,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self update];
-}
--(void)update{
     
+   // [self registerForKeyboardNotifications];
     isAttachment = NO;
     height = 0.0f;
     self.mainDataDictionary = [[NSMutableDictionary alloc] init];
@@ -40,25 +39,23 @@
     [self.mainDataDictionary setValue:@"" forKey:@"DESCRIPTION"];
     [self.mainDataDictionary setValue:@"" forKey:@"TAGS"];
     [self.mainDataDictionary setValue:@"" forKey:@"IMAGE"];
-    
+
     self.baseScrollView.frame=CGRectMake(0, 55, self.view.frame.size.width, self.view.frame.size.height);
     if (self.isIdeaSubmitScreen) {
         if (isAnswerTheBriefs) {
             lbltitle.text=@"Answer The Briefs";
-           // self.view.backgroundColor=[UIColor PPYellowColor];
-          //  self.baseScrollView.backgroundColor = [UIColor PPYellowColor];
+
         }
         else{
-            //self.view.backgroundColor=[UIColor PPRedColor];
-            //self.baseScrollView.backgroundColor = [UIColor PPRedColor];
             lbltitle.text=@"Create New Idea";
+
         }
-        headerImage.image=[UIImage imageNamed:@"my_ideas.png"];
+        headerImage.image=[UIImage imageNamed:@"Create_New_Idea_Image.png"];
         self.view.backgroundColor=[UIColor PPYellowColor];
         self.baseScrollView.backgroundColor = [UIColor PPYellowColor];
     }else{
         lbltitle.text=@"Create New Brief";
-        headerImage.image=[UIImage imageNamed:@"my_brief.png"];
+        headerImage.image=[UIImage imageNamed:@"Create_New_Brief_Image.png"];
         self.view.backgroundColor=[UIColor PPBlueColor];
         self.baseScrollView.backgroundColor = [UIColor PPBlueColor];
     }
@@ -71,25 +68,21 @@
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:YES];
-    if (!isCurrentControllerPresented) {
-        NoteView *n1=(NoteView *)[self.view viewWithTag:PPkHeader];
-        n1.text=nil;
-        n1.text=@"";
-        NoteView *n2=(NoteView *)[self.view viewWithTag:PPkDescription];
-        n2.text=nil;
-        n2.text=@"";
-        NoteView *n3=(NoteView *)[self.view viewWithTag:PPkTags];
-        n3.text=nil;
-        n3.text=@"";
-        [self.baseScrollView setContentSize:CGSizeMake([[UIScreen mainScreen] bounds].size.width, 0.0f)];
-        
-        dicCharCountLbl.text=@"200";
-        titleCharCountLbl.text = @"80";
-         self.attachmentImage=nil;
-         [self update];
-    }
+    
+    NoteView *n1=(NoteView *)[self.view viewWithTag:PPkHeader];
+    n1.text=nil;
+    n1.text=@"";
+    NoteView *n2=(NoteView *)[self.view viewWithTag:PPkDescription];
+    n2.text=nil;
+    n2.text=@"";
+    NoteView *n3=(NoteView *)[self.view viewWithTag:PPkTags];
+    n3.text=nil;
+    n3.text=@"";
+    [self.baseScrollView setContentSize:CGSizeMake([[UIScreen mainScreen] bounds].size.width, 0.0f)];
 
-   
+    dicCharCountLbl.text=@"200";
+    titleCharCountLbl.text = @"80";
+    
 }
 -(void)viewDidAppear:(BOOL)animated{
     [self settingBarButton];
@@ -103,7 +96,7 @@
 - (void)rearrengeScrollView:(BOOL)isAttached{
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
-    height = 0.0f;
+//    height = 0.0f;
     [self removeAllObjectsFromScrollview];
     [self.baseScrollView addSubview:[self addHeader]];
     [self.baseScrollView addSubview:[self addDisc]];
@@ -130,7 +123,9 @@
 - (void)addImageAttachment{
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
-    self.attachmentImage = [[UIImageView alloc] initWithFrame:CGRectMake(40, height, screenWidth - 80, 170)];
+   // self.attachmentImage.frame=CGRectMake(40, textView.contentSize.height+25, 250, 200);
+    self.attachmentImage.alpha=1.0f;
+    self.attachmentImage = [[UIImageView alloc] initWithFrame:CGRectMake(40, height, 200, 170)];
     [self.baseScrollView addSubview:self.attachmentImage];
     height += 200;
 }
@@ -145,9 +140,12 @@
     noteView = [[NoteView alloc] initWithFrame:CGRectMake(40, 25, screenWidth - 80, 200)];
     [noteView setFontName:@"Helvetica" size:28];
     noteView.text = @"ADD HEADLINE";
-    noteView.textColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.1f];
     noteView.tag = PPkHeader;
+    noteView.autocorrectionType = UITextAutocorrectionTypeNo;
+    noteView.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
+    
      NSString *hStr = [self.mainDataDictionary valueForKey:@"HEADER"];
+    
     if (hStr.length) {
         noteView.text = hStr;
     }
@@ -213,10 +211,14 @@
     noteView = [[NoteView alloc] initWithFrame:CGRectMake(40, 25, screenWidth - 80, 200)];
     [noteView setFontName:@"Helvetica" size:20];
     noteView.text = @"Add Description";
-    noteView.textColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.1f];
+    noteView.autocorrectionType = UITextAutocorrectionTypeNo;
+
+   // noteView.textColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.1f];
     noteView.autocorrectionType = FALSE; // or use  UITextAutocorrectionTypeNo
     [noteView setDelegate:self];
     NSString *hStr = [self.mainDataDictionary valueForKey:@"DESCRIPTION"];
+    
+    
     if (hStr.length) {
         noteView.text = hStr;
     }
@@ -225,6 +227,7 @@
     }else{
         noteView.textColor = [UIColor blackColor];
     }
+
     noteView.tag = PPkDescription;
     [headerBaseView addSubview:noteView];
     [headerBaseView addSubview:[self addDiscTitle]];
@@ -282,6 +285,7 @@
     [noteView setFontName:@"Helvetica" size:24];
     noteView.tag = PPkTags;
     [noteView setDelegate:self];
+    noteView.autocorrectionType = UITextAutocorrectionTypeNo;
     NSString *hStr = [self.mainDataDictionary valueForKey:@"TAGS"];
     if (hStr.length) {
         noteView.text = hStr;
@@ -356,7 +360,13 @@
 - (void)settingBarMethod:(UIButton *)settingBtn{
     switch (settingBtn.tag) {
         case PPkCancel:
-            isCurrentControllerPresented?[self dismissViewControllerAnimated:YES completion:nil]:[self.navigationController popViewControllerAnimated:YES];
+            if (isCurrentControllerPresented) {
+                [[self presentedViewController]dismissViewControllerAnimated:YES completion:nil];
+            }
+            else{
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+            //isCurrentControllerPresented?[[self presentedViewController]dismissViewControllerAnimated:YES completion:nil]:[self.navigationController popViewControllerAnimated:YES];
              break;
         case PPkAttachment:[self AddOverLay];
             break;
@@ -383,7 +393,6 @@
 }
 
 - (void)takePhoto {
-    isCurrentControllerPresented=YES;
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         
         UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
@@ -405,7 +414,7 @@
 }
 
 - (void)selectPhoto {
-    isCurrentControllerPresented=YES;
+    
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = YES;
@@ -428,10 +437,8 @@
     isAttachment = YES;
     
     [self rearrengeScrollView:isAttachment];
-    //self.attachmentImage.image = chosenImage;
-    self.attachmentImage.image = [self imageWithImage:chosenImage convertToSize:CGSizeMake(276, 170)];
+    self.attachmentImage.image = [self imageWithImage:chosenImage convertToSize:CGSizeMake(150, 150)];
     [tmpOverlayObj closeMethod:nil];
-    isCurrentControllerPresented=NO;
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
@@ -440,21 +447,6 @@
     
 }
 #pragma UITextViewDalegate
-
-- (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
-    if (textView.tag == 101) {
-        if ([textView.text isEqualToString:@"ADD HEADLINE"]) {
-            textView.text = @"";
-            textView.textColor = [UIColor blackColor];
-        }
-    }else if(textView.tag == 102){
-        if ([textView.text isEqualToString:@"Add Description"]) {
-            textView.text = @"";
-            textView.textColor = [UIColor blackColor];
-        }
-    }
-    return YES;
-}
 - (void) slideUp {
     [UIView beginAnimations:nil context:nil];
     self.view.frame = CGRectMake(0.0, -200.0, self.view.frame.size.width, self.view.frame.size.height);
@@ -470,29 +462,61 @@
     [UIView commitAnimations];
 }
 
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
+    activeTextField = textView;
+    if (textView.tag == 101) {
+        if ([textView.text isEqualToString:@"ADD HEADLINE"]) {
+            textView.text = @"";
+            textView.textColor = [UIColor blackColor];
+        }
+    }else if(textView.tag == 102){
+        if ([textView.text isEqualToString:@"Add Description"]) {
+            textView.text = @"";
+            textView.textColor = [UIColor blackColor];
+        }
+    }
+    return YES;
+}
+
 -(void)textViewDidBeginEditing:(UITextView *)textView{
     if (textView.tag == 103 || textView.tag == 102) {
         [self slideUp];
     }
-    //self.baseScrollView.contentOffset = CGPointMake(0, textView.frame.origin.y);
-    //  [self.baseScrollView setContentSize:CGSizeMake(self.view.frame.size.width, self.baseScrollView.frame.size.height+280)];
 }
+
+-(void)textViewDidChange:(UITextView *)textView
+{
+    int len = textView.text.length;
+    
+    if (textView.tag == PPkHeader) {
+        titleCharCountLbl.text=[NSString stringWithFormat:@"%i",80-len];
+    }else if (textView.tag == PPkDescription){
+        dicCharCountLbl.text=[NSString stringWithFormat:@"%i",200-len];
+    }else if (textView.tag == PPkTags){
+       
+    }
+
+}
+
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range  replacementText:(NSString *)text{
+    NSLog(@"======%@",text);
     if ([text isEqualToString:@"\n"]) {
         [textView resignFirstResponder];
         return NO;
     }
     if (textView.tag == PPkHeader) {
-        int finalCOunt = 80 - (int)[textView.text length];
-        titleCharCountLbl.text = [NSString stringWithFormat:@"%d",finalCOunt];
-        NSString *tmpSTring = [textView.text uppercaseString];
-        textView.text = tmpSTring;
-        
-        if (!text.length) {
-            return YES;
+        height=textView.contentSize.height;
+          self.attachmentImage.frame=CGRectMake(40, height+25, 250, 200);
+        if([text length] == 0)
+        {
+            if([textView.text length] != 0)
+            {
+                return YES;
+            }
         }
-        if (finalCOunt == 0) {
-            
+        else if([[textView text] length] >= 80)
+        {
             if (!errorAlert.isVisible) {
                 errorAlert = [[UIAlertView alloc] initWithTitle:@"Char count error!"
                                                         message:@"You have exceeded maximum number of character"
@@ -504,31 +528,29 @@
             
             return NO;
         }
+        return YES;
         
     }else if (textView.tag == PPkDescription){
-        int finalCOunt = 200 - (int)[textView.text length];
-        dicCharCountLbl.text = [NSString stringWithFormat:@"%d",finalCOunt];
-        if (!text.length) {
-            
-            float nLine = [self numberOfLines:textView fontSize:24];
-            NSLog(@"Number of line == %f",nLine);
-            if (nLine > 3.0 && nLine != valueForDesc) {
-                valueForDesc = nLine;
-                self.baseScrollView.contentOffset = CGPointMake(0, self.baseScrollView.contentOffset.y + 24);
+        if([text length] == 0)
+        {
+            if([textView.text length] != 0)
+            {
+                return YES;
             }
-            return YES;
         }
-        if (finalCOunt == 0) {
+        else if([[textView text] length] >= 200)
+        {
             if (!errorAlert.isVisible) {
-                [errorAlert show];
-                errorAlert = [[UIAlertView alloc] initWithTitle:@"Char count error!"
-                                                        message:@"You have exceeded maximum number of character"
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
+            errorAlert = [[UIAlertView alloc] initWithTitle:@"Char count error!"
+                                                    message:@"You have exceeded maximum number of character"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+            [errorAlert show];
             }
             return NO;
         }
+        return YES;
         
     }else if (textView.tag == PPkTags){
         float nLine = [self numberOfLines:textView fontSize:24];
@@ -540,15 +562,18 @@
     }
     
     return YES;
+   // return YES;
 }
+
 - (int)numberOfLines:(UITextView *)textView fontSize:(float)fSize{
     UIFont *font = [UIFont boldSystemFontOfSize:fSize];
     CGSize size = [textView.text sizeWithFont:font
-                            constrainedToSize:textView.frame.size
-                                lineBreakMode:UILineBreakModeWordWrap]; // default mode
+                     constrainedToSize:textView.frame.size
+                         lineBreakMode:UILineBreakModeWordWrap]; // default mode
     int numberOfLines = size.height / font.lineHeight;
     return  numberOfLines;
 }
+
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView{
     NSString *finalString = textView.text;
     
@@ -569,14 +594,17 @@
                 textView.text = @"Add Description";
                 textView.textColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.1f];
             }
+            [self slideDown];
+
         }
             break;
         case PPkTags:[self.mainDataDictionary setValue:finalString forKey:@"TAGS"];
-                     [self slideDown];
+            [self slideDown];
             break;
         default:
             break;
     }
+   
     return YES;
 }
 
@@ -594,21 +622,21 @@
         imageString = @"";
     }
     
-    UITextView *txtHeader=(UITextView *)[self.view viewWithTag:PPkHeader];
-    UITextView *txtDescription=(UITextView *)[self.view viewWithTag:PPkDescription];
-    UITextView *txtTag=(UITextView *)[self.view viewWithTag:PPkTags];
-
-    if ([txtHeader.text isEqualToString:@"ADD HEADLINE"]) {
+    
+    
+    if([[self.mainDataDictionary valueForKey:@"HEADER"] isEqualToString:@""]){
         kCustomAlert(@"", @"Please enter header.",@"Ok");
-                return;
+        return;
     }
-    else if ([txtDescription.text isEqualToString:@"Add Description"]){
+    else if([[self.mainDataDictionary valueForKey:@"DESCRIPTION"] isEqualToString:@""]){
         kCustomAlert(@"", @"Please enter description.",@"Ok");
-                return;
+        return;
+        
     }
-    else if ([txtTag.text isEqualToString:@""]){
+    else if([[self.mainDataDictionary valueForKey:@"TAGS"] isEqualToString:@""]){
         kCustomAlert(@"", @"Please enter tags.",@"Ok");
-                return;
+        return;
+        
     }
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
     hud.labelText = @"Please wait...";
@@ -622,7 +650,7 @@
             strBriefId=[PPUtilts sharedInstance].LatestIDId;
         }
     }
-    NSDictionary *parameters = @{kApiCall:kApiCallCreateNewIdeaBrief,kTag:txtTag.text,@"headline":txtHeader.text,@"description_idea_brief": txtDescription.text,@"image":imageString,@"brief_id":strBriefId,@"is_brief":strIsBrief,kUserid:GET_USERID};
+    NSDictionary *parameters = @{kApiCall:kApiCallCreateNewIdeaBrief,kTag:[self.mainDataDictionary valueForKey:@"TAGS"],@"headline":[self.mainDataDictionary valueForKey:@"HEADER"],@"description_idea_brief": [self.mainDataDictionary valueForKey:@"DESCRIPTION"],@"image":imageString,@"brief_id":strBriefId,@"is_brief":strIsBrief,kUserid:GET_USERID};
     
     AFNInjector *objAFN = [AFNInjector new];
     [objAFN parameters:parameters completionBlock:^(id data, NSError *error) {
@@ -658,12 +686,53 @@
             }
             [self settingBarButton];
             [hud hide:YES];
+            NSLog(@"%@",data);
         } else {
             [self settingBarButton];
             [hud hide:YES];
+            NSLog(@"error %@", error);
         }
     }];
     
 }
 
+
+// Call this method somewhere in your view controller setup code.
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+}
+
+// Called when the UIKeyboardDidShowNotification is sent.
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+    self.baseScrollView.contentInset = contentInsets;
+    self.baseScrollView.scrollIndicatorInsets = contentInsets;
+    
+    // If active text field is hidden by keyboard, scroll it so it's visible
+    // Your application might not need or want this behavior.
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.height;
+    if (!CGRectContainsPoint(aRect, activeTextField.frame.origin) ) {
+        CGPoint scrollPoint = CGPointMake(0.0, activeTextField.frame.origin.y-kbSize.height);
+        [self.baseScrollView setContentOffset:scrollPoint animated:YES];
+    }
+}
+
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    self.baseScrollView.contentInset = contentInsets;
+    self.baseScrollView.scrollIndicatorInsets = contentInsets;
+}
 @end

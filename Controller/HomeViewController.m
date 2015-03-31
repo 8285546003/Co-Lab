@@ -137,6 +137,10 @@
     [self updateFrame];
 }
 -(void)updateFrame{
+    if ([PPUtilts isIPad]) {
+        self.homeTableView.frame=CGRectMake(0, 540, self.view.frame.size.width, self.view.frame.size.height);
+    }
+    else{
     if ([PPUtilts isiPhone5]) {
         self.homeTableView.frame=CGRectMake(0, 90, self.view.frame.size.width, self.view.frame.size.height);
     }
@@ -149,6 +153,7 @@
     else{
         self.homeTableView.frame=CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     }
+ }
 }
 
 - (BOOL)prefersStatusBarHidden {

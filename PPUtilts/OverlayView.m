@@ -7,6 +7,7 @@
 //
 
 #import "OverlayView.h"
+#import "PPUtilts.h"
 
 
 @implementation OverlayView
@@ -75,7 +76,7 @@
     [self setFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
     
     [UIView animateWithDuration:1.0 animations:^{
-        [self setAlpha:0.9f];
+        [self setAlpha:1.0f];
     } completion:^(BOOL finished) {
         
         if (Answer) {
@@ -87,7 +88,12 @@
             [self addSubview:answerBriefBtn];
         }
         createIdeaBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [createIdeaBtn setFrame:CGRectMake( 40, screenHeight - 180, 150, 40)];
+      //  if ([PPUtilts isIPad]) {
+        //    [createIdeaBtn setFrame:CGRectMake( 40, screenHeight - 180, 500, 80)];
+//}
+       // else{
+            [createIdeaBtn setFrame:CGRectMake( 40, screenHeight - 180, 150, 40)];
+     //   }
         [createIdeaBtn setImage:[UIImage imageNamed:@"createnewidea.png"] forState:UIControlStateNormal];
         [createIdeaBtn addTarget:self.delegate action:@selector(createIdea) forControlEvents:UIControlEventTouchUpInside];
         createIdeaBtn.alpha = 1.0f;

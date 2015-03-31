@@ -70,6 +70,8 @@
 		68C03A8E1A95B25600555891 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 68C03A7D1A95B25600555891 /* InfoPlist.strings */; };
 		68C03A901A95B25600555891 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68C03A7F1A95B25600555891 /* Images.xcassets */; };
 		68C03A921A95B25600555891 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C03A801A95B25600555891 /* main.m */; };
+		68C7F79F1AC93630000034C8 /* 768x1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C7F79D1AC93630000034C8 /* 768x1024.png */; };
+		68C7F7A01AC93630000034C8 /* 1536x2048.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C7F79E1AC93630000034C8 /* 1536x2048.png */; };
 		68C89AE71AB0110F00F5C4B3 /* AFNInjector.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C89AE61AB0110F00F5C4B3 /* AFNInjector.m */; };
 		68C9D8E11ABC4B5100E77252 /* border.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C9D8DF1ABC4B5100E77252 /* border.png */; };
 		68C9D8E21ABC4B5100E77252 /* border@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C9D8E01ABC4B5100E77252 /* border@2x.png */; };
@@ -235,6 +237,8 @@
 		68C03AA71A95C18400555891 /* libPods-AFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-AFNetworking.a"; path = "Pods/build/Debug-iphoneos/libPods-AFNetworking.a"; sourceTree = "<group>"; };
 		68C03AA81A95C18400555891 /* libPods-google-plus-ios-sdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-google-plus-ios-sdk.a"; path = "Pods/build/Debug-iphoneos/libPods-google-plus-ios-sdk.a"; sourceTree = "<group>"; };
 		68C03AA91A95C18400555891 /* libPods-MBProgressHUD.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-MBProgressHUD.a"; path = "Pods/build/Debug-iphoneos/libPods-MBProgressHUD.a"; sourceTree = "<group>"; };
+		68C7F79D1AC93630000034C8 /* 768x1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 768x1024.png; sourceTree = "<group>"; };
+		68C7F79E1AC93630000034C8 /* 1536x2048.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1536x2048.png; sourceTree = "<group>"; };
 		68C89AE51AB0110F00F5C4B3 /* AFNInjector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNInjector.h; sourceTree = "<group>"; };
 		68C89AE61AB0110F00F5C4B3 /* AFNInjector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNInjector.m; sourceTree = "<group>"; };
 		68C9D8DF1ABC4B5100E77252 /* border.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = border.png; sourceTree = "<group>"; };
@@ -630,6 +634,8 @@
 		68CC910D1AA5AA3100F3CB48 /* SplashScreen */ = {
 			isa = PBXGroup;
 			children = (
+				68C7F79D1AC93630000034C8 /* 768x1024.png */,
+				68C7F79E1AC93630000034C8 /* 1536x2048.png */,
 				68CC910E1AA5AA3100F3CB48 /* 1242x2208.png */,
 				68CC910F1AA5AA3100F3CB48 /* 320*480.png */,
 				68CC91101AA5AA3100F3CB48 /* 640x1136.png */,
@@ -747,6 +753,7 @@
 				68CC91281AA5AA3100F3CB48 /* Close.png in Resources */,
 				68C03A8E1A95B25600555891 /* InfoPlist.strings in Resources */,
 				68CC912E1AA5AA3100F3CB48 /* Google_Login_ButtonImage.png in Resources */,
+				68C7F79F1AC93630000034C8 /* 768x1024.png in Resources */,
 				68CC90E21AA5A8E300F3CB48 /* SearchViewController.xib in Resources */,
 				684410EA1ABAF7E30063C4C2 /* Next_Image@2x.png in Resources */,
 				687EAA761AB040C700CF0169 /* Pre_Image.png in Resources */,
@@ -781,6 +788,7 @@
 				68CC91321AA5AA3100F3CB48 /* newbreif.png in Resources */,
 				68CC913D1AA5AA3100F3CB48 /* 640x960.png in Resources */,
 				689406B21ABAF85300A267A7 /* profile_black.png in Resources */,
+				68C7F7A01AC93630000034C8 /* 1536x2048.png in Resources */,
 				6869D2891ABB003300B641E4 /* Search_Image@2x.png in Resources */,
 				689406B41ABAF85300A267A7 /* profile.png in Resources */,
 				689406B71ABAF85300A267A7 /* talk@2x.png in Resources */,
@@ -981,7 +989,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "5ca51bfb-3381-4fcb-a7cb-650c2e91c186";
+				PROVISIONING_PROFILE = "d84d7625-33dc-47c3-97aa-02c38be9b7f0";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = NO;
@@ -1016,7 +1024,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				PROVISIONING_PROFILE = "5ca51bfb-3381-4fcb-a7cb-650c2e91c186";
+				PROVISIONING_PROFILE = "d84d7625-33dc-47c3-97aa-02c38be9b7f0";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = NO;
@@ -1039,7 +1047,7 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "Co Lab";
-				PROVISIONING_PROFILE = "5ca51bfb-3381-4fcb-a7cb-650c2e91c186";
+				PROVISIONING_PROFILE = "d84d7625-33dc-47c3-97aa-02c38be9b7f0";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1061,7 +1069,7 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "Co Lab";
-				PROVISIONING_PROFILE = "5ca51bfb-3381-4fcb-a7cb-650c2e91c186";
+				PROVISIONING_PROFILE = "d84d7625-33dc-47c3-97aa-02c38be9b7f0";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

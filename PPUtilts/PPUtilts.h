@@ -158,4 +158,7 @@ typedef enum{
 + (BOOL)isiPhone5;
 + (BOOL)isiPhone6;
 + (BOOL)isiPhone6Plus;
+
++ (BOOL)isIPad;
++ (BOOL)isIPhone;
 @end

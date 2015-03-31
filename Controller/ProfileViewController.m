@@ -42,6 +42,10 @@ NSArray *cellTitleText;
 }
 -(void)updateFrame{
     
+    if ([PPUtilts isIPad]) {
+        self.profileTableView.frame=CGRectMake(0, 600, self.view.frame.size.width, self.view.frame.size.height);
+    }
+    else{
     if ([PPUtilts isiPhone5]) {
         self.profileTableView.frame=CGRectMake(0, 130, self.view.frame.size.width, self.view.frame.size.height);
     }
@@ -56,6 +60,7 @@ NSArray *cellTitleText;
     }
     else{
     }
+ }
 }
 
 - (BOOL)prefersStatusBarHidden {
