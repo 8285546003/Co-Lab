@@ -154,6 +154,7 @@
                                 
                                 R:
                                     ^{[cell setBackgroundColor:[UIColor    PPRedColor]];
+                                        cell.lblHeading.textColor=[UIColor whiteColor];
                                         imgIdea.hidden=NO;
                                         if (isHot) {
                                             imgHot.hidden =NO;

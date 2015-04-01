@@ -39,7 +39,7 @@
     NSUInteger numberOfLines = (self.contentSize.height + self.bounds.size.height) / self.font.leading;
 
     //Set the line offset from the baseline. (I'm sure there's a concrete way to calculate this.)
-    CGFloat baselineOffset = 6.0f;
+    CGFloat baselineOffset = self.font.leading+10.0f;
 
     //iterate over numberOfLines and draw each line
     for (int x = 0; x < numberOfLines; x++) {

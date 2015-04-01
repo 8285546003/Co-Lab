@@ -133,7 +133,8 @@ typedef enum{
 typedef enum{
     PP201=201,
     PP202,
-    PP203
+    PP203,
+    PP204
 } ViewTagType;
 
 

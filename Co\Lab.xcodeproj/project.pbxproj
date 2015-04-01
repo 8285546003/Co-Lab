@@ -19,6 +19,7 @@
 		685D8B781AB2C89300132C38 /* NotificatioListModelDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 685D8B771AB2C89300132C38 /* NotificatioListModelDetails.m */; };
 		685D8B8A1AB3082C00132C38 /* BadgeStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 685D8B871AB3082C00132C38 /* BadgeStyle.m */; };
 		685D8B8B1AB3082C00132C38 /* CustomBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = 685D8B891AB3082C00132C38 /* CustomBadge.m */; };
+		689556FA1ACC19D9001A8865 /* google.png in Resources */ = {isa = PBXBuildFile; fileRef = 689556F91ACC19D9001A8865 /* google.png */; };
 		68A9CCFC1A65015F003D09E4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A9CCFB1A65015F003D09E4 /* Foundation.framework */; };
 		68A9CCFE1A65015F003D09E4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A9CCFD1A65015F003D09E4 /* CoreGraphics.framework */; };
 		68A9CD001A65015F003D09E4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A9CCFF1A65015F003D09E4 /* UIKit.framework */; };
@@ -178,6 +179,7 @@
 		685D8B871AB3082C00132C38 /* BadgeStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BadgeStyle.m; sourceTree = "<group>"; };
 		685D8B881AB3082C00132C38 /* CustomBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomBadge.h; sourceTree = "<group>"; };
 		685D8B891AB3082C00132C38 /* CustomBadge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomBadge.m; sourceTree = "<group>"; };
+		689556F91ACC19D9001A8865 /* google.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = google.png; sourceTree = "<group>"; };
 		68A9CCF81A65015F003D09E4 /* Co Lab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Co Lab.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		68A9CCFB1A65015F003D09E4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		68A9CCFD1A65015F003D09E4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -576,6 +578,7 @@
 		68D225691ACBE87C00E7DD11 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				689556F91ACC19D9001A8865 /* google.png */,
 				68D2256A1ACBE87C00E7DD11 /* 37x-Checkmark.png */,
 				68D2256B1ACBE87C00E7DD11 /* 37x-Checkmark@2x.png */,
 				68D2256C1ACBE87C00E7DD11 /* answer_brief.png */,
@@ -824,6 +827,7 @@
 				68D225C11ACBE87C00E7DD11 /* ChooseAPhoto.png in Resources */,
 				68CC90DD1AA5A8E300F3CB48 /* ExpendableTableViewController.xib in Resources */,
 				68D225A51ACBE87C00E7DD11 /* 100x100.png in Resources */,
+				689556FA1ACC19D9001A8865 /* google.png in Resources */,
 				68D225AA1ACBE87C00E7DD11 /* 180x180.png in Resources */,
 				68D225BD1ACBE87C00E7DD11 /* back.png in Resources */,
 				68D225EA1ACBE87C00E7DD11 /* 1242x2208.png in Resources */,

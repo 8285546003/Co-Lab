@@ -233,7 +233,8 @@
 
     cell.lblHeading.text=ibModelDetails.headline;
     [cell.lblHeading sizeToFit];
-    cell.lblTag.text=ibModelDetails.user_email;
+    [cell.lblTag setFont:[UIFont fontWithName:@"Helvetica Neue" size:12.0f]];
+    cell.lblTag.text=[NSString stringWithFormat:@"          %@",ibModelDetails.user_email];
     cell.lblTag.backgroundColor=[UIColor blackColor];
     cell.lblTag.alpha=0.5f;
     cell.lblTag.textColor=[UIColor whiteColor];
@@ -273,6 +274,8 @@
     UIImageView *imgIdea=(UIImageView *) [cell.contentView viewWithTag:PP201];
     UIImageView *imgBrief=(UIImageView *)[cell.contentView viewWithTag:PP202];
     UIImageView *imgHot=(UIImageView *)  [cell.contentView viewWithTag:PP203];
+    UIImageView *imgGoogle=(UIImageView *)  [cell.contentView viewWithTag:PP204];
+    [imgGoogle setHidden:NO];
 
     NSString *strColorType=ibModelDetails.color_code;
     isAnswerTheBriefs=YES;
@@ -284,16 +287,28 @@
                                         [self.table setBackgroundColor:[UIColor    PPRedColor]];
                                         isAnswerTheBriefs=NO;
                                         imgIdea.hidden=NO;
-                                        if (isHot) {imgHot.hidden =NO;imgIdea.frame=imgBrief.frame;}
-                                        else{imgIdea.frame=imgHot.frame;}
+                                        if (isHot) {
+                                            imgHot.hidden =NO;
+                                            imgGoogle.frame=imgIdea.frame;
+                                            imgIdea.frame=imgBrief.frame;
+                                        }
+                                        else{
+                                            imgGoogle.frame=imgIdea.frame;
+                                            imgIdea.frame=imgHot.frame;
+                                        }
                                     },
                                 Y:
                                     ^{[cell setBackgroundColor:[UIColor    PPYellowColor]];
                                         [self.table setBackgroundColor:[UIColor    PPYellowColor]];
                                         imgIdea.hidden=NO;
                                         imgBrief.hidden=NO;
-                                        if (isHot){imgHot.hidden =NO;}
-                                        else{imgIdea.frame=imgBrief.frame;imgBrief.frame=imgHot.frame;}
+                                        if (isHot){
+                                            imgHot.hidden =NO;
+                                        }
+                                        else{
+                                            imgIdea.frame=imgBrief.frame;
+                                            imgBrief.frame=imgHot.frame;
+                                        }
                                         
                                     },
                                 G:
@@ -306,7 +321,9 @@
                                         imgBrief.frame=imgIdea.frame;
                                         imgIdea.frame=frame;
                                         
-                                        if (isHot) {imgHot.hidden =NO;}
+                                        if (isHot) {
+                                            imgHot.hidden =NO;
+                                        }
                                         else{
                                             imgBrief.frame=imgIdea.frame;
                                             imgIdea.frame=imgHot.frame;
@@ -316,8 +333,14 @@
                                     ^{ [cell setBackgroundColor:[UIColor    PPBlueColor]];
                                          [self.table setBackgroundColor:[UIColor    PPBlueColor]];
                                         imgBrief.hidden=NO;
-                                        if (isHot) {imgHot.hidden =NO;}
-                                        else{imgBrief.frame=imgHot.frame;}
+                                        imgGoogle.frame=imgIdea.frame;
+
+                                        if (isHot) {
+                                            imgHot.hidden =NO;
+                                        }
+                                        else{
+                                            imgBrief.frame=imgHot.frame;
+                                        }
                                     }
                                 };
     

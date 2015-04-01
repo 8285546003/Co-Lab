@@ -93,7 +93,7 @@
     [super viewDidAppear:YES];
 }
 -(void)viewWillAppear:(BOOL)animated{
-    [self settingBarButton];
+    //[self settingBarButton];
     [super viewWillAppear:YES];
 }
 
@@ -138,11 +138,11 @@
 - (UIView *)addHeader{
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
-    UIView *headerBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, height, screenWidth, 225)];
+    UIView *headerBaseView = [[UIView alloc] initWithFrame:CGRectMake(0, height, screenWidth, 255)];
     headerBaseView.backgroundColor = [UIColor clearColor];
     
-    noteView = [[NoteView alloc] initWithFrame:CGRectMake(40, 25, screenWidth - 80, 200)];
-    [noteView setFontName:@"Helvetica" size:28];
+    noteView = [[NoteView alloc] initWithFrame:CGRectMake(40, 25, screenWidth - 80, 230)];
+    [noteView setFontName:@"Helvetica-Bold" size:30];
     noteView.text = @"ADD HEADLINE";
     noteView.tag = PPkHeader;
     noteView.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -162,7 +162,7 @@
     [noteView setDelegate:self];
     [headerBaseView addSubview:noteView];
     [headerBaseView addSubview:[self addHeaderTitle]];
-    height += 225;
+    height += 255;
     if (isAttachment) {
         [self addImageAttachment];
     }
