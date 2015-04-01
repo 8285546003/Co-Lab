@@ -34,13 +34,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
-    UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 32)];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+    UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 60, 50)];
     
    // self.txtSearch.leftView = paddingView;
    // self.txtSearch.leftViewMode = UITextFieldViewModeAlways;
     [paddingView addSubview:imageView];
     imageView.image = [UIImage imageNamed:@"Search_Image"];
+    
+    
+    CGRect frameRect = self.txtSearch.frame;
+    frameRect.size.height = 60;
+    self.txtSearch.frame = frameRect;
+    
+
+    
     self.txtSearch.leftView = paddingView;
     self.txtSearch.leftViewMode=UITextFieldViewModeAlways;
     self.txtSearch.delegate=self;

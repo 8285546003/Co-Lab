@@ -92,7 +92,7 @@
                 }
             }
             else{
-                kCustomErrorAlert;
+                kCustomAlert(@"", status.Message, @"Ok");
             }
             [self settingBarButton];
             [hud hide:YES];

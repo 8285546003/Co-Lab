@@ -16,7 +16,8 @@
 }
 
 + (UIColor*) PPYellowColor {
-    return [UIColor colorWithRed:240.0f/255.0f    green:220.0f/255.0f blue:42.0f/255.0f alpha:1];
+    return  [UIColor colorWithRed:0.957 green:0.878 blue:0.208 alpha:1]; /*#f4e035*/
+    //return [UIColor colorWithRed:240.0f/255.0f    green:220.0f/255.0f blue:42.0f/255.0f alpha:1];
 }
 
 + (UIColor*) PPGreenColor {
@@ -24,7 +25,8 @@
 }
 
 + (UIColor*) PPBlueColor {
-    return [UIColor colorWithRed:21.0f/255.0f     green:156.0f/255.0f blue:157.0f/255.0f alpha:1];
+    return  [UIColor colorWithRed:0 green:0.671 blue:0.678 alpha:1]; /*#00abad*/
+    //return [UIColor colorWithRed:21.0f/255.0f     green:156.0f/255.0f blue:157.0f/255.0f alpha:1];
 }
 + (UIColor*) PPBackGroundColor{
     return [UIColor colorWithRed:227.0f/255.0f     green:219.0f/255.0f blue:212.0f/255.0f alpha:1];

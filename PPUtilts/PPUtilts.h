@@ -16,19 +16,16 @@
 #define kLoginAlert(title,msg,ok,retry) [[[UIAlertView alloc] initWithTitle:title message:msg delegate:self cancelButtonTitle:ok otherButtonTitles:retry, nil] show]
 
 
-#define kCustomErrorAlert [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Someting went wrong please connect to your WiFi/3G" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show]
 
-
-
-#define CANCEL_BUTTON_FRAME      CGRectMake(10, self.view.bounds.size.height - 50, 45, 45)
+#define CANCEL_BUTTON_FRAME      CGRectMake(20, self.view.bounds.size.height - 60, 60, 60)
 #define CANCEL_BUTTON_NAME       @"Close_Image.png"
 #define CANCEL_BUTTON_NAME_WHITE @"white_arrow.png"
 #define BACK_BUTTON_NAME         @"Pre_Image.png"
 
-#define ATTACHMENT_BUTTON_FRAME CGRectMake(self.view.frame.size.width-110, self.view.frame.size.height - 50, 45, 45)
+#define ATTACHMENT_BUTTON_FRAME CGRectMake(self.view.frame.size.width-150, self.view.frame.size.height - 60, 60, 60)
 #define ATTACHMENT_BUTTON_NAME  @"Attachment_Image.png"
 
-#define ADD_BUTTON_FRAME        CGRectMake(self.view.frame.size.width - 55, self.view.frame.size.height - 50, 45, 45)
+#define ADD_BUTTON_FRAME        CGRectMake(self.view.frame.size.width -80, self.view.frame.size.height - 60, 60, 60)
 #define ADD_BUTTON_NAME         @"plus.png"
 
 

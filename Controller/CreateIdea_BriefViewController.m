@@ -40,10 +40,11 @@
     [self.mainDataDictionary setValue:@"" forKey:@"DESCRIPTION"];
     [self.mainDataDictionary setValue:@"" forKey:@"TAGS"];
     [self.mainDataDictionary setValue:@"" forKey:@"IMAGE"];
-    self.baseScrollView.frame=CGRectMake(0, 55, self.view.frame.size.width, self.view.frame.size.height);
+    self.baseScrollView.frame=CGRectMake(0, 100, self.view.frame.size.width, self.view.frame.size.height);
     if (self.isIdeaSubmitScreen) {
         if (isAnswerTheBriefs) {
             lbltitle.text=@"Answer The Briefs";
+            isCurrentControllerPresented=YES;
             // self.view.backgroundColor=[UIColor PPYellowColor];
             // self.baseScrollView.backgroundColor = [UIColor PPYellowColor];
         }
@@ -87,6 +88,7 @@
     
 }
 -(void)viewDidAppear:(BOOL)animated{
+    NSLog(@"%f",self.view.bounds.size.height);
     [self settingBarButton];
     [super viewDidAppear:YES];
 }
@@ -362,7 +364,7 @@
 - (void)settingBarMethod:(UIButton *)settingBtn{
     switch (settingBtn.tag) {
         case PPkCancel:
-            isCurrentControllerPresented?[[self presentedViewController]dismissViewControllerAnimated:YES completion:nil]:[self.navigationController popViewControllerAnimated:YES];
+            isCurrentControllerPresented?[self dismissViewControllerAnimated:YES completion:nil]:[self.navigationController popViewControllerAnimated:YES];
              break;
         case PPkAttachment:[self AddOverLay];
             break;
@@ -506,8 +508,8 @@
         return NO;
     }
     if (textView.tag == PPkHeader) {
-        height=textView.contentSize.height;
-          self.attachmentImage.frame=CGRectMake(40, height+25, 250, 200);
+           height=textView.contentSize.height;
+          self.attachmentImage.frame=CGRectMake(40, height+25, 240, 180);
         if([text length] == 0)
         {
             if([textView.text length] != 0)
