@@ -19,9 +19,10 @@
 #import "StatusModel.h"
 #import "NotificationCount.h"
 #import "NotificationCountModel.h"
+#import "MBProgressHUD.h"
 
 
-@interface HomeViewController (){
+@interface HomeViewController ()<MBProgressHUDDelegate>{
     NSArray *imageArray;
     NSArray *cellTitleText;
     __weak IBOutlet UIView *notificationView;
@@ -34,6 +35,7 @@
     
         __weak IBOutlet UILabel       *lblNotificationCount;
     CustomBadge *badge;
+    MBProgressHUD *HUD;
  
     
 }
@@ -205,6 +207,10 @@
     else{
         cell.textLabel.font = [UIFont systemFontOfSize:15];
         if (indexPath.row==5) {
+            UISwipeGestureRecognizer* recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+            [recognizer setDirection:UISwipeGestureRecognizerDirectionLeft+UISwipeGestureRecognizerDirectionRight];
+            [cell addGestureRecognizer:recognizer];
+            
             cell.textLabel.numberOfLines=0;
             NSString *str = [NSString stringWithFormat:@"%@\n\n\n\n",[cellTitleText objectAtIndex:indexPath.row]];
             cell.textLabel.text=str;
@@ -232,7 +238,40 @@
 
   return cell;
 }
+-(void)handleSwipe:(UISwipeGestureRecognizer *) sender
+{
+    [self goToLatestIdeaBriefs];
+//    if (sender.direction == UISwipeGestureRecognizerDirectionLeft)
+//    {
+//        //do something
+//    }
+//    else //if (sender.direction == UISwipeGestureRecognizerDirectionRight)
+//    {
+//        //do something
+//    }
+}
+- (void)showToast{
+    
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];
+    
+    // Set custom view mode
+    HUD.mode = MBProgressHUDModeCustomView;
+    HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"my_ideas.png"]];
+    HUD.delegate = self;
+    HUD.labelText = @"Please Swipe";
+    HUD.detailsLabelText=@"to get latest Idea/Brief";
+    
+    [HUD show:YES];
+    [HUD hide:YES afterDelay:3];
+}
+#pragma mark - MBProgressHUDDelegate
 
+- (void)hudWasHidden:(MBProgressHUD *)hud {
+    // Remove HUD from screen when the HUD was hidded
+    [HUD removeFromSuperview];
+    HUD = nil;
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return (indexPath.row==0)?kCellHeightAtIndexZero:(indexPath.row==5)?kCellHeightAtIndexfive:kCellHeight;
@@ -253,7 +292,7 @@
             break;
         case PPkProfileViewController:[self goToProfile];
             break;
-        case PPkLatestIdeasBrifes:[self goToLatestIdeaBriefs];
+        case PPkLatestIdeasBrifes:[self showToast];//[self goToLatestIdeaBriefs];
             break;
         default:
             break;

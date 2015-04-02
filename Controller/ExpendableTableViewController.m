@@ -233,8 +233,8 @@
 
     cell.lblHeading.text=ibModelDetails.headline;
     [cell.lblHeading sizeToFit];
-    [cell.lblTag setFont:[UIFont fontWithName:@"Helvetica Neue" size:12.0f]];
-    cell.lblTag.text=[NSString stringWithFormat:@"          %@",ibModelDetails.user_email];
+    [cell.lblTag setFont:[UIFont fontWithName:@"Helvetica Neue" size:9.0f]];
+    cell.lblTag.text=[NSString stringWithFormat:@"     %@",ibModelDetails.user_email];
     cell.lblTag.backgroundColor=[UIColor blackColor];
     cell.lblTag.alpha=0.5f;
     cell.lblTag.textColor=[UIColor whiteColor];
