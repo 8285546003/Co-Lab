@@ -35,6 +35,9 @@
 -(void)update{
     isAttachment = NO;
     height = 0.0f;
+    
+    lbltitle.font=[UIFont fontWithName:@"HelveticaNeue-Light" size:22];
+    
     self.mainDataDictionary = [[NSMutableDictionary alloc] init];
     [self.mainDataDictionary setValue:@"" forKey:@"HEADER"];
     [self.mainDataDictionary setValue:@"" forKey:@"DESCRIPTION"];
@@ -88,7 +91,6 @@
     
 }
 -(void)viewDidAppear:(BOOL)animated{
-    NSLog(@"%f",self.view.bounds.size.height);
     [self settingBarButton];
     [super viewDidAppear:YES];
 }
@@ -100,7 +102,6 @@
 - (void)rearrengeScrollView:(BOOL)isAttached{
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
-//    height = 0.0f;
     [self removeAllObjectsFromScrollview];
     [self.baseScrollView addSubview:[self addHeader]];
     [self.baseScrollView addSubview:[self addDisc]];
@@ -142,7 +143,7 @@
     headerBaseView.backgroundColor = [UIColor clearColor];
     
     noteView = [[NoteView alloc] initWithFrame:CGRectMake(40, 25, screenWidth - 80, 230)];
-    [noteView setFontName:@"Helvetica-Bold" size:30];
+    [noteView setFontName:@"HelveticaNeue-CondensedBold" size:22];
     noteView.text = @"ADD HEADLINE";
     noteView.tag = PPkHeader;
     noteView.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -191,7 +192,8 @@
     titleCharCountLbl.text = @"80";
     titleCharCountLbl.textColor = [UIColor darkGrayColor];
     titleCharCountLbl.textAlignment = NSTextAlignmentRight;
-    titleCharCountLbl.font = [UIFont systemFontOfSize:11.0f];
+  //  HelveticaNeue-CondensedBold
+    titleCharCountLbl.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:11];
     [view addSubview:titleCharCountLbl];
         
         
@@ -213,7 +215,7 @@
     headerBaseView.backgroundColor = [UIColor clearColor];
     
     noteView = [[NoteView alloc] initWithFrame:CGRectMake(40, 25, screenWidth - 80, 200)];
-    [noteView setFontName:@"Helvetica" size:20];
+    [noteView setFontName:@"HelveticaNeue-CondensedBold" size:20];
     noteView.text = @"Add Description";
     noteView.autocorrectionType = UITextAutocorrectionTypeNo;
 
@@ -261,7 +263,7 @@
     dicCharCountLbl.text = @"200";
     dicCharCountLbl.textColor = [UIColor darkGrayColor];
 
-    dicCharCountLbl.font = [UIFont systemFontOfSize:11.0f];
+    dicCharCountLbl.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:11];
 
     dicCharCountLbl.textAlignment = NSTextAlignmentRight;
     [view addSubview:dicCharCountLbl];
@@ -286,7 +288,7 @@
     headerBaseView.backgroundColor = [UIColor clearColor];
     
     noteView = [[NoteView alloc] initWithFrame:CGRectMake(40, 25, screenWidth - 80, 200)];
-    [noteView setFontName:@"Helvetica" size:24];
+    [noteView setFontName:@"HelveticaNeue-Light" size:24];
     noteView.tag = PPkTags;
     [noteView setDelegate:self];
     noteView.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -319,7 +321,7 @@
     UILabel *titleLbl = [[UILabel alloc] initWithFrame:CGRectMake(2, 2, 200, 20)];
     titleLbl.text = @"3. Add tags";
     titleLbl.textColor = [UIColor darkGrayColor];
-    titleLbl.font = [UIFont systemFontOfSize:11.0f];
+    titleLbl.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:11];
 
     [view addSubview:titleLbl];
     

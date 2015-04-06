@@ -112,6 +112,9 @@
 {
     [super viewDidLoad];
 
+    UIPanGestureRecognizer *gesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(btnSlideDown)];
+    [_viewLIB addGestureRecognizer:gesture];
+    
     imageArray=ImageArray ;
     cellTitleText = CellTitleText;
     
@@ -122,8 +125,30 @@
     
     // Do any additional setup after loading the view from its nib.
 }
+-(void)btnSlideDown{
+   // _viewLIB.adjustsImageWhenHighlighted = YES;
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
+    animation.duration = .2;
+    // animation.repeatCount = 5;
+    animation.fromValue = [NSValue valueWithCGPoint:_viewLIB.center];
+    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(_viewLIB.center.x, _viewLIB.center.y+40)];
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+    animation.autoreverses = YES;
+    animation.removedOnCompletion = NO;
+    [_viewLIB.layer addAnimation:animation forKey:@"position"];
+   
+    [self performSelector:@selector(goToLatestIdeaBriefs) withObject:nil afterDelay:0.2];
+    
+    
+   // dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        //[object method];
+        // [self goToLatestIdeaBriefs];
+  //  });
+    
+}
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
+    [self.homeTableView setContentOffset:self.homeTableView.contentOffset animated:NO];
      [self.view  setAlpha:1.0f];
     notificationView.hidden=YES;
     if (GET_USERID) {
@@ -139,6 +164,9 @@
     [self updateFrame];
 }
 -(void)updateFrame{
+    _viewLIB.frame=CGRectMake(15, self.view.frame.size.height-103, 320, 103);
+
+   // _btnLIB.frame=CGRectMake(15, self.view.frame.size.height-103, 60, 103);
     if ([PPUtilts isIPad]) {
         self.homeTableView.frame=CGRectMake(0, 540, self.view.frame.size.width, self.view.frame.size.height);
     }
@@ -207,10 +235,6 @@
     else{
         cell.textLabel.font = [UIFont systemFontOfSize:15];
         if (indexPath.row==5) {
-            UISwipeGestureRecognizer* recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
-            [recognizer setDirection:UISwipeGestureRecognizerDirectionLeft+UISwipeGestureRecognizerDirectionRight];
-            [cell addGestureRecognizer:recognizer];
-            
             cell.textLabel.numberOfLines=0;
             NSString *str = [NSString stringWithFormat:@"%@\n\n\n\n",[cellTitleText objectAtIndex:indexPath.row]];
             cell.textLabel.text=str;
@@ -238,18 +262,18 @@
 
   return cell;
 }
--(void)handleSwipe:(UISwipeGestureRecognizer *) sender
-{
-    [self goToLatestIdeaBriefs];
-//    if (sender.direction == UISwipeGestureRecognizerDirectionLeft)
-//    {
-//        //do something
-//    }
-//    else //if (sender.direction == UISwipeGestureRecognizerDirectionRight)
-//    {
-//        //do something
-//    }
-}
+//-(void)handleSwipe:(UISwipeGestureRecognizer *) sender
+//{
+//    [self goToLatestIdeaBriefs];
+////    if (sender.direction == UISwipeGestureRecognizerDirectionLeft)
+////    {
+////        //do something
+////    }
+////    else //if (sender.direction == UISwipeGestureRecognizerDirectionRight)
+////    {
+////        //do something
+////    }
+//}
 - (void)showToast{
     
     HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
@@ -292,7 +316,7 @@
             break;
         case PPkProfileViewController:[self goToProfile];
             break;
-        case PPkLatestIdeasBrifes:[self showToast];//[self goToLatestIdeaBriefs];
+        case PPkLatestIdeasBrifes://[self goToLatestIdeaBriefs];
             break;
         default:
             break;
@@ -317,7 +341,12 @@
 -(void)goToLatestIdeaBriefs{
     [PPUtilts sharedInstance].apiCall=kApiCallLatestIdeaBrief;
     CoLabListViewController *objLatestIB = [CoLabListViewController new];
-    [self.navigationController pushViewController:objLatestIB animated:YES];
+    objLatestIB.view.layer.speed = 0.3;
+    [objLatestIB setIsCurrentControllerPresented:YES];
+    UINavigationController *navC=[[UINavigationController alloc]initWithRootViewController:objLatestIB];
+    
+    [self presentViewController:navC animated:YES completion:^{}];
+    //[self presentViewController:objLatestIB animated:YES completion:nil];
 }
 - (IBAction)btnCancel:(id)sender {
     NotificationViewController *objNotification = [NotificationViewController new];

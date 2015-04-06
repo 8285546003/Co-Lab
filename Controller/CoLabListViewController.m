@@ -40,6 +40,7 @@
     NSString *strColorType;
     
     NSDictionary *parameters;
+    UILabel *lblHeight;
     
 }
 @end
@@ -51,10 +52,12 @@
     [super viewDidLoad];
     isAttachment = NO;
     self.attachmentImage = [[UIImageView alloc] initWithFrame:ATTACHED_IMAGE_FRAME];
-    [self callWebServices];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    [self.navigationController setNavigationBarHidden:YES];
+    [self callWebServices];
     [self.view setBackgroundColor:[UIColor PPBackGroundColor]];
     [super viewWillAppear:YES];
 }
@@ -134,19 +137,39 @@
     }
     cell.lblHeading.numberOfLines=5;
     cell.lblHeading.lineBreakMode=NSLineBreakByCharWrapping;
-    cell.lblHeading.text=ibModelDetails.headline;
+    
+    
+//    NSString *yourText = ibModelDetails.headline;
+//    
+//    
+//    NSMutableAttributedString *attributedString;
+//    
+//    attributedString = [[NSMutableAttributedString alloc] initWithString:yourText];
+//    
+//    [attributedString addAttribute:NSKernAttributeName
+//                             value:[NSNumber numberWithFloat:1.0f]
+//                             range:NSMakeRange(0, [yourText length])];
+//    
+//     cell.lblHeading.attributedText = attributedString;
+    
+    
+     cell.lblHeading.text=ibModelDetails.headline;//[NSString stringWithFormat:@"%@",attributedString];
+    
+    
     [cell.lblHeading sizeToFit];
     cell.lblTag.text=ibModelDetails.tag;
     isHot  =[ibModelDetails.is_hot  isEqualToString:BOOL_YES];
     isBrief=[ibModelDetails.is_brief isEqualToString:BOOL_YES];
     strColorType=ibModelDetails.color_code;
-
+    
     cell.selectedBackgroundView.backgroundColor=[UIColor PPBackGroundColor];
     [self.allDataTableView setBackgroundColor:[UIColor    PPBackGroundColor]];
-
+    
     UIImageView *imgIdea=(UIImageView *)[cell.contentView viewWithTag:PP201];
     UIImageView *imgBrief=(UIImageView *)[cell.contentView viewWithTag:PP202];
     UIImageView *imgHot=(UIImageView *)[cell.contentView viewWithTag:PP203];
+    
+     lblHeight=(UILabel *)[cell.contentView viewWithTag:1000];
     
     typedef void (^CaseBlockForColor)();
     
@@ -155,6 +178,7 @@
                                 R:
                                     ^{[cell setBackgroundColor:[UIColor    PPRedColor]];
                                         cell.lblHeading.textColor=[UIColor whiteColor];
+                                        cell.lblTag.textColor=[UIColor whiteColor];
                                         imgIdea.hidden=NO;
                                         if (isHot) {
                                             imgHot.hidden =NO;
@@ -202,7 +226,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return   [PPUtilts isIPad]?kheightForRowAtIndexPath*2:kheightForRowAtIndexPath;
+    return lblHeight.frame.size.height+60;
+    //return   [PPUtilts isIPad]?kheightForRowAtIndexPath*2:kheightForRowAtIndexPath;
+    [self.allDataTableView beginUpdates];
+    [self.allDataTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    [self.allDataTableView endUpdates];
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -212,7 +240,15 @@
     
     [PPUtilts sharedInstance].colorCode=ibModelDetails.color_code;
     [PPUtilts sharedInstance].LatestIDId=ibModelDetails.id;
+//    if (kApiCallLatestIdeaBrief) {
+//        [self presentViewController:obj animated:YES completion:^{
+//            obj.isCurrentControllerPresented=YES;
+//            [self.allDataTableView reloadData];
+//        }];
+//    }
+//    else{
     [self.navigationController pushViewController:obj animated:YES];
+//    }
 }
 
 //-----------------------------------BUTTON NAVIGATION BUTTONS---------------------------------------------------
@@ -245,8 +281,7 @@
 
 - (void)settingBarMethod:(UIButton *)settingBtn{
     switch (settingBtn.tag) {
-        case PPkCancel:
-            [self.navigationController popViewControllerAnimated:YES];
+        case PPkCancel:_isCurrentControllerPresented?[self dismissViewControllerAnimated:YES completion:nil]:[self.navigationController popViewControllerAnimated:YES];
             break;
         case PPkAttachment:
             break;

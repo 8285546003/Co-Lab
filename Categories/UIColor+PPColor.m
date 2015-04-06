@@ -12,6 +12,7 @@
 
 
 + (UIColor*) PPRedColor {
+   // return [UIColor colorWithRed:0.816 green:0.216 blue:0.216 alpha:1]; /*#d03737*/
     return [UIColor colorWithRed:196.0f/255.0f    green:34.0f/255.0f blue:42.0f/255.0f alpha:1];
 }
 
@@ -21,7 +22,8 @@
 }
 
 + (UIColor*) PPGreenColor {
-    return [UIColor colorWithRed:103.0f/255.0f    green:181.0f/255.0f blue:71.0f/255.0f alpha:1];
+    return  [UIColor colorWithRed:0.471 green:0.749 blue:0.345 alpha:1]; /*#78bf58*/
+   // return [UIColor colorWithRed:103.0f/255.0f    green:181.0f/255.0f blue:71.0f/255.0f alpha:1];
 }
 
 + (UIColor*) PPBlueColor {

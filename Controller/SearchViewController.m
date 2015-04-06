@@ -40,7 +40,7 @@
    // self.txtSearch.leftView = paddingView;
    // self.txtSearch.leftViewMode = UITextFieldViewModeAlways;
     [paddingView addSubview:imageView];
-    imageView.image = [UIImage imageNamed:@"Search_Image"];
+    imageView.image = [UIImage imageNamed:@"search"];
     
     
     CGRect frameRect = self.txtSearch.frame;

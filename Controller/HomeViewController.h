@@ -11,4 +11,7 @@
 
 @interface HomeViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate,UIGestureRecognizerDelegate>
 - (IBAction)btnCancel:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *btnLIB;
+@property (weak, nonatomic) IBOutlet UIView   *viewLIB;
+
 @end

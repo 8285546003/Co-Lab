@@ -47,6 +47,7 @@
     self.table.HVTableViewDelegate = self;
 }
 -(void)viewWillAppear:(BOOL)animated{
+    [self.navigationController setNavigationBarHidden:YES];
     [super viewWillAppear:YES];
     [self.view setBackgroundColor:[UIColor PPBackGroundColor]];
 }
@@ -131,7 +132,7 @@
 }
 - (void)settingBarMethod:(UIButton *)settingBtn{
     switch (settingBtn.tag) {
-        case PPkCancel:
+        case PPkCancel://_isCurrentControllerPresented?[self dismissViewControllerAnimated:YES completion:^{}]:
             [self.navigationController popViewControllerAnimated:YES];
             break;
         case PPkAttachment:

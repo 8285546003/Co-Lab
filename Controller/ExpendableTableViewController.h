@@ -14,4 +14,5 @@
 @interface ExpendableTableViewController : UIViewController<HVTableViewDelegate, HVTableViewDataSource,OverlayViewDelegate,MFMailComposeViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet HVTableView *table;
 @property (retain, nonatomic) OverlayView *tmpOverlayObj;
+//@property (nonatomic, assign) BOOL isCurrentControllerPresented;
 @end
