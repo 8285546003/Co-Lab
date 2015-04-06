@@ -102,7 +102,7 @@
      cell.backgroundColor=[UIColor clearColor];
      ibModelDetails= ibModel.SearchAuto[indexPath.row];
      status = statusModel.StatusArr[[ZERO integerValue]];
-    
+     cell.textLabel.font=[UIFont fontWithName:@"HelveticaNeue-Light" size:15];
      [status.Message isEqualToString:kResultNoRecord] ? [cell.textLabel setText:kResultNoRecord]:[cell.textLabel setText:ibModelDetails.tag];
      [status.Message isEqualToString:kResultNoRecord] ? [self.allDataTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone]:[self.allDataTableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
 

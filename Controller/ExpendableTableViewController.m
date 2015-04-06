@@ -33,6 +33,7 @@
     IBModelDetails* ibModelDetails;
     StatusModelDetails* status;
     BOOL isAnswerTheBriefs;
+    UILabel *lblHeight;
 }
 
 @end
@@ -214,7 +215,9 @@
         }
     }
     else{
-        return kheightForRowAtIndexPath;
+        return lblHeight.frame.size.height+60;
+
+       // return kheightForRowAtIndexPath;
     }
 }
 
@@ -278,6 +281,9 @@
     UIImageView *imgGoogle=(UIImageView *)  [cell.contentView viewWithTag:PP204];
     [imgGoogle setHidden:NO];
 
+    lblHeight=(UILabel *)[cell.contentView viewWithTag:1000];
+
+    
     NSString *strColorType=ibModelDetails.color_code;
     isAnswerTheBriefs=YES;
     

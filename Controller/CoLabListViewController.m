@@ -52,12 +52,12 @@
     [super viewDidLoad];
     isAttachment = NO;
     self.attachmentImage = [[UIImageView alloc] initWithFrame:ATTACHED_IMAGE_FRAME];
-    
+    [self callWebServices];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    [allDataTableView reloadData];
     [self.navigationController setNavigationBarHidden:YES];
-    [self callWebServices];
     [self.view setBackgroundColor:[UIColor PPBackGroundColor]];
     [super viewWillAppear:YES];
 }
@@ -154,8 +154,9 @@
     
     
      cell.lblHeading.text=ibModelDetails.headline;//[NSString stringWithFormat:@"%@",attributedString];
-    
-    
+//    if (indexPath.row==[[self.allDataTableView visibleCells] count]) {
+//        cell.contentView.alpha=0.5f;
+//    }
     [cell.lblHeading sizeToFit];
     cell.lblTag.text=ibModelDetails.tag;
     isHot  =[ibModelDetails.is_hot  isEqualToString:BOOL_YES];

@@ -46,7 +46,7 @@
     self.baseScrollView.frame=CGRectMake(0, 100, self.view.frame.size.width, self.view.frame.size.height);
     if (self.isIdeaSubmitScreen) {
         if (isAnswerTheBriefs) {
-            lbltitle.text=@"Answer The Briefs";
+            lbltitle.text=@"Answer The Brief";
             isCurrentControllerPresented=YES;
             // self.view.backgroundColor=[UIColor PPYellowColor];
             // self.baseScrollView.backgroundColor = [UIColor PPYellowColor];

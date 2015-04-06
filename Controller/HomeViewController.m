@@ -128,7 +128,7 @@
 -(void)btnSlideDown{
    // _viewLIB.adjustsImageWhenHighlighted = YES;
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
-    animation.duration = .2;
+    animation.duration = .3;
     // animation.repeatCount = 5;
     animation.fromValue = [NSValue valueWithCGPoint:_viewLIB.center];
     animation.toValue = [NSValue valueWithCGPoint:CGPointMake(_viewLIB.center.x, _viewLIB.center.y+40)];
@@ -137,13 +137,13 @@
     animation.removedOnCompletion = NO;
     [_viewLIB.layer addAnimation:animation forKey:@"position"];
    
-    [self performSelector:@selector(goToLatestIdeaBriefs) withObject:nil afterDelay:0.2];
+   // [self performSelector:@selector(goToLatestIdeaBriefs) withObject:nil afterDelay:0.2];
     
     
-   // dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         //[object method];
-        // [self goToLatestIdeaBriefs];
-  //  });
+         [self goToLatestIdeaBriefs];
+    });
     
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -230,10 +230,10 @@
     cell.textLabel.text = [cellTitleText objectAtIndex:indexPath.row];
 
     if (indexPath.row == 0) {
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:15];
+        cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:15];
     }
     else{
-        cell.textLabel.font = [UIFont systemFontOfSize:15];
+        cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15];
         if (indexPath.row==5) {
             cell.textLabel.numberOfLines=0;
             NSString *str = [NSString stringWithFormat:@"%@\n\n\n\n",[cellTitleText objectAtIndex:indexPath.row]];
@@ -341,10 +341,9 @@
 -(void)goToLatestIdeaBriefs{
     [PPUtilts sharedInstance].apiCall=kApiCallLatestIdeaBrief;
     CoLabListViewController *objLatestIB = [CoLabListViewController new];
-    objLatestIB.view.layer.speed = 0.3;
+   // objLatestIB.view.layer.speed = 0.8;
     [objLatestIB setIsCurrentControllerPresented:YES];
     UINavigationController *navC=[[UINavigationController alloc]initWithRootViewController:objLatestIB];
-    
     [self presentViewController:navC animated:YES completion:^{}];
     //[self presentViewController:objLatestIB animated:YES completion:nil];
 }

@@ -115,10 +115,10 @@ NSArray *cellTitleText;
     [cell.imageView setImage:[UIImage imageNamed:[imageArray objectAtIndex:indexPath.row]]];
     cell.textLabel.text = [cellTitleText objectAtIndex:indexPath.row];
     if (indexPath.row == 0) {
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:15];
+        cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:15];
     }
     else if (indexPath.row==3){
-        
+        cell.textLabel.font=[UIFont fontWithName:@"HelveticaNeue-Light" size:15];
         if (![[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"] integerValue]==0) {
            badge = [CustomBadge customBadgeWithString:[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"] withStyle:[BadgeStyle oldStyle]];
             badge.frame=CGRectMake(60, -4, 30, 30);
@@ -131,7 +131,7 @@ NSArray *cellTitleText;
     }
     
     else{
-         cell.textLabel.font = [UIFont systemFontOfSize:15];
+         cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
        return cell;
