@@ -351,8 +351,8 @@
     
     UIButton *nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [nextButton setFrame:ADD_BUTTON_FRAME];
-    [nextButton setImage:[UIImage imageNamed:@"Next_Image.png"] forState:UIControlStateNormal];
-    [nextButton setImage:[UIImage imageNamed:@"Next_Image.png"] forState:UIControlStateSelected];
+    [nextButton setImage:[UIImage imageNamed:@"right_arrow.png"] forState:UIControlStateNormal];
+    [nextButton setImage:[UIImage imageNamed:@"right_arrow.png"] forState:UIControlStateSelected];
     [nextButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
     nextButton.tag = PPkAddOrNext;
     [self.view addSubview:nextButton];

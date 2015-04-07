@@ -26,7 +26,7 @@
 #define ATTACHMENT_BUTTON_NAME  @"Attachment_Image.png"
 
 #define ADD_BUTTON_FRAME        CGRectMake(self.view.frame.size.width -80, self.view.frame.size.height - 60, 60, 60)
-#define ADD_BUTTON_NAME         @"plus.png"
+#define ADD_BUTTON_NAME         @"plus_trans.png"
 
 
 #define ATTACHED_IMAGE_FRAME    CGRectMake(0, 0, self.view.frame.size.width, 200)
