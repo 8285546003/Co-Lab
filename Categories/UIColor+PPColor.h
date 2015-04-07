@@ -14,5 +14,6 @@
 + (UIColor*) PPGreenColor;
 + (UIColor*) PPBlueColor;
 + (UIColor*) PPBackGroundColor;
++ (UIColor*) PPTextColor;
 + (UIColor*) PPProfileBackGroundColor;
 @end

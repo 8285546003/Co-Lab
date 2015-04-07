@@ -16,7 +16,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="CoAppImage.png" id="EeQ-gg-Ihn">
-                    <rect key="frame" x="20" y="20" width="60" height="60"/>
+                    <rect key="frame" x="20" y="20" width="45" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign in with your TBWA\ mail." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="z9K-C2-mcZ">
@@ -43,7 +43,7 @@
         </view>
     </objects>
     <resources>
-        <image name="CoAppImage.png" width="60" height="60"/>
+        <image name="CoAppImage.png" width="45" height="45"/>
         <image name="Google_Login_ButtonImage.png" width="524" height="104"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

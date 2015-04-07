@@ -143,7 +143,7 @@
     headerBaseView.backgroundColor = [UIColor clearColor];
     
     noteView = [[NoteView alloc] initWithFrame:CGRectMake(40, 25, screenWidth - 80, 230)];
-    [noteView setFontName:@"HelveticaNeue-CondensedBold" size:22];
+    [noteView setFontName:@"HelveticaNeue-CondensedBold" size:36];
     noteView.text = @"ADD HEADLINE";
     noteView.tag = PPkHeader;
     noteView.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -157,7 +157,7 @@
     if ([noteView.text isEqualToString:@"ADD HEADLINE"]) {
         noteView.textColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.1f];
     }else{
-        noteView.textColor = [UIColor blackColor];
+        noteView.textColor = [UIColor PPTextColor];
     }
     noteView.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
     [noteView setDelegate:self];
@@ -190,7 +190,7 @@
     
     titleCharCountLbl = [[UILabel alloc] initWithFrame:CGRectMake(view.bounds.size.width-32, 2, 30, 20)];
     titleCharCountLbl.text = @"80";
-    titleCharCountLbl.textColor = [UIColor darkGrayColor];
+    titleCharCountLbl.textColor = [UIColor PPTextColor];
     titleCharCountLbl.textAlignment = NSTextAlignmentRight;
   //  HelveticaNeue-CondensedBold
     titleCharCountLbl.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:11];
@@ -215,7 +215,7 @@
     headerBaseView.backgroundColor = [UIColor clearColor];
     
     noteView = [[NoteView alloc] initWithFrame:CGRectMake(40, 25, screenWidth - 80, 200)];
-    [noteView setFontName:@"HelveticaNeue-CondensedBold" size:20];
+    [noteView setFontName:@"HelveticaNeue-Light" size:15];
     noteView.text = @"Add Description";
     noteView.autocorrectionType = UITextAutocorrectionTypeNo;
 
@@ -230,8 +230,9 @@
     }
     if ([noteView.text isEqualToString:@"Add Description"]) {
         noteView.textColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.1f];
+
     }else{
-        noteView.textColor = [UIColor blackColor];
+        noteView.textColor = [UIColor PPTextColor];
     }
 
     noteView.tag = PPkDescription;
@@ -261,7 +262,7 @@
     
     dicCharCountLbl = [[UILabel alloc] initWithFrame:CGRectMake(view.bounds.size.width-32, 2, 30, 20)];
     dicCharCountLbl.text = @"200";
-    dicCharCountLbl.textColor = [UIColor darkGrayColor];
+    dicCharCountLbl.textColor = [UIColor PPTextColor];
 
     dicCharCountLbl.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:11];
 
@@ -288,7 +289,7 @@
     headerBaseView.backgroundColor = [UIColor clearColor];
     
     noteView = [[NoteView alloc] initWithFrame:CGRectMake(40, 25, screenWidth - 80, 200)];
-    [noteView setFontName:@"HelveticaNeue-Light" size:24];
+    [noteView setFontName:@"HelveticaNeue-Light" size:15];
     noteView.tag = PPkTags;
     [noteView setDelegate:self];
     noteView.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -558,7 +559,7 @@
         
     }else if (textView.tag == PPkTags){
         float nLine = [self numberOfLines:textView fontSize:24];
-        NSLog(@"Number of line == %f",nLine);
+        //NSLog(@"Number of line == %f",nLine);
         if (nLine > 3.0 && nLine != value) {
             value = nLine;
             self.baseScrollView.contentOffset = CGPointMake(0, self.baseScrollView.contentOffset.y + 24);

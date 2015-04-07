@@ -17,15 +17,15 @@
 
 
 
-#define CANCEL_BUTTON_FRAME      CGRectMake(20, self.view.bounds.size.height - 60, 60, 60)
+#define CANCEL_BUTTON_FRAME      CGRectMake(20, self.view.bounds.size.height - 45, 45, 45)
 #define CANCEL_BUTTON_NAME       @"Close_Image.png"
 #define CANCEL_BUTTON_NAME_WHITE @"white_arrow.png"
 #define BACK_BUTTON_NAME         @"Pre_Image.png"
 
-#define ATTACHMENT_BUTTON_FRAME CGRectMake(self.view.frame.size.width-150, self.view.frame.size.height - 60, 60, 60)
+#define ATTACHMENT_BUTTON_FRAME CGRectMake(self.view.frame.size.width-135, self.view.frame.size.height - 45, 45, 45)
 #define ATTACHMENT_BUTTON_NAME  @"Attachment_Image.png"
 
-#define ADD_BUTTON_FRAME        CGRectMake(self.view.frame.size.width -80, self.view.frame.size.height - 60, 60, 60)
+#define ADD_BUTTON_FRAME        CGRectMake(self.view.frame.size.width -65, self.view.frame.size.height - 45, 45, 45)
 #define ADD_BUTTON_NAME         @"plus_trans.png"
 
 
@@ -35,9 +35,9 @@
 
 
 #define kheightForRowAtIndexPath 200.0f
-#define kCellHeightAtIndexZero   110
+#define kCellHeightAtIndexZero   70
 #define kCellHeightAtIndexfive   125
-#define kCellHeight              63
+#define kCellHeight              50
 
 #define kCellHeightWithImage     750
 #define kCellHeightWithoutImage  600
@@ -56,9 +56,9 @@
 #define     B                   @"B"
 
 #define ImageArray @[@"CoAppImage.png",@"my_ideas.png",@"my_brief.png",@"search.png",@"profile_black.png"]
-#define  CellTitleText  @[@"  CO\\Lab",@"  Create New Idea",@"  Create New Briefs",@"  Search",@"  Profile"]
+#define  CellTitleText  @[@" CO\\Lab",@" Create New Idea",@" Create New Briefs",@" Search",@" Profile"]
 
-#define imageArrayProfile @[@"profile.png",@"my_ideas_p.png",@"my_brief_p.png",@"Notification.png",@"logout.png"]
+#define imageArrayProfile @[@"profile.png",@"my_ideas.png",@"my_brief.png",@"Notification.png",@"logout.png"]
 #define cellTitleProfile  @[@"Profile",@"My Ideas",@"My Briefs",@"Notifications",@"Log out"]
 
 

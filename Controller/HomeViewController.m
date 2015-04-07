@@ -159,20 +159,19 @@
         }
         [self getNotificationCount];
     }
-    
+    //[self.homeTableView setBackgroundColor:[UIColor redColor]];
     [self.view setBackgroundColor:[UIColor PPBackGroundColor]];
     [self updateFrame];
 }
 -(void)updateFrame{
-    _viewLIB.frame=CGRectMake(15, self.view.frame.size.height-103, 320, 103);
-
+    _viewLIB.frame=CGRectMake(25, self.view.frame.size.height-77, 320, 103);
    // _btnLIB.frame=CGRectMake(15, self.view.frame.size.height-103, 60, 103);
     if ([PPUtilts isIPad]) {
         self.homeTableView.frame=CGRectMake(0, 540, self.view.frame.size.width, self.view.frame.size.height);
     }
     else{
     if ([PPUtilts isiPhone5]) {
-        self.homeTableView.frame=CGRectMake(0, 90, self.view.frame.size.width, self.view.frame.size.height);
+        self.homeTableView.frame=CGRectMake(10, 220, self.view.frame.size.width, self.view.frame.size.height);
     }
     else if ([PPUtilts isiPhone6]){
         self.homeTableView.frame=CGRectMake(0, 190, self.view.frame.size.width, self.view.frame.size.height);
@@ -223,23 +222,16 @@
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    [cell setBackgroundColor:[UIColor clearColor]];
-    cell.textLabel.textColor=[UIColor blackColor];
+    [cell.contentView setBackgroundColor:[UIColor PPBackGroundColor]];
     [cell.imageView setImage:[UIImage imageNamed:[imageArray objectAtIndex:indexPath.row]]];
     cell.textLabel.text = [cellTitleText objectAtIndex:indexPath.row];
 
     if (indexPath.row == 0) {
-        cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:15];
+        cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:20];
     }
     else{
-        cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15];
-        if (indexPath.row==5) {
-            cell.textLabel.numberOfLines=0;
-            NSString *str = [NSString stringWithFormat:@"%@\n\n\n\n",[cellTitleText objectAtIndex:indexPath.row]];
-            cell.textLabel.text=str;
-        }
-        else if (indexPath.row==4){
+        cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:20];
+           if (indexPath.row==4){
             if ([status.Error isEqualToString:kResultError]) {
                 if ([status.Message isEqualToString:kResultMessage]) {
                     notificationCount=notificationCountModel.NotificatioTotal[[ZERO integerValue]];

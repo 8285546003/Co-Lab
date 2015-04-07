@@ -54,7 +54,7 @@
         </view>
     </objects>
     <resources>
-        <image name="Notification.png" width="60" height="60"/>
+        <image name="Notification.png" width="45" height="45"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

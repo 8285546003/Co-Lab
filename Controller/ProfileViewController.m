@@ -47,7 +47,7 @@ NSArray *cellTitleText;
     }
     else{
     if ([PPUtilts isiPhone5]) {
-        self.profileTableView.frame=CGRectMake(0, 130, self.view.frame.size.width, self.view.frame.size.height);
+        self.profileTableView.frame=CGRectMake(10, 242, self.view.frame.size.width, self.view.frame.size.height);
     }
     else if ([PPUtilts isiPhone6]){
         self.profileTableView.frame=CGRectMake(0, 240, self.view.frame.size.width, self.view.frame.size.height);
@@ -69,7 +69,7 @@ NSArray *cellTitleText;
 - (void)settingBarButton{
     UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
-    [cancelButton setFrame:CGRectMake(15, self.view.bounds.size.height - 55, 60, 60)];
+    [cancelButton setFrame:CGRectMake(25, self.view.bounds.size.height - 45, 45, 45)];
     [cancelButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
     [cancelButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateSelected];
     [cancelButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
@@ -115,10 +115,10 @@ NSArray *cellTitleText;
     [cell.imageView setImage:[UIImage imageNamed:[imageArray objectAtIndex:indexPath.row]]];
     cell.textLabel.text = [cellTitleText objectAtIndex:indexPath.row];
     if (indexPath.row == 0) {
-        cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:15];
+        cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:20];
     }
     else if (indexPath.row==3){
-        cell.textLabel.font=[UIFont fontWithName:@"HelveticaNeue-Light" size:15];
+        cell.textLabel.font=[UIFont fontWithName:@"HelveticaNeue-Light" size:20];
         if (![[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"] integerValue]==0) {
            badge = [CustomBadge customBadgeWithString:[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"] withStyle:[BadgeStyle oldStyle]];
             badge.frame=CGRectMake(60, -4, 30, 30);

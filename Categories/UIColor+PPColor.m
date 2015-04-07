@@ -12,8 +12,8 @@
 
 
 + (UIColor*) PPRedColor {
-   // return [UIColor colorWithRed:0.816 green:0.216 blue:0.216 alpha:1]; /*#d03737*/
-    return [UIColor colorWithRed:196.0f/255.0f    green:34.0f/255.0f blue:42.0f/255.0f alpha:1];
+    return [UIColor colorWithRed:0.816 green:0.216 blue:0.216 alpha:1]; /*#d03737*/
+  //return [UIColor colorWithRed:196.0f/255.0f    green:34.0f/255.0f blue:42.0f/255.0f alpha:1];
 }
 
 + (UIColor*) PPYellowColor {
@@ -31,9 +31,16 @@
     //return [UIColor colorWithRed:21.0f/255.0f     green:156.0f/255.0f blue:157.0f/255.0f alpha:1];
 }
 + (UIColor*) PPBackGroundColor{
-    return [UIColor colorWithRed:227.0f/255.0f     green:219.0f/255.0f blue:212.0f/255.0f alpha:1];
+    return [UIColor colorWithRed:0.91 green:0.886 blue:0.863 alpha:1]; /*#e8e2dc*/
+    //return [UIColor colorWithRed:227.0f/255.0f     green:219.0f/255.0f blue:212.0f/255.0f alpha:1];
 }
 + (UIColor*) PPProfileBackGroundColor{
-    return [UIColor colorWithRed:34.0f/255.0f     green:34.0f/255.0f blue:34.0f/255.0f alpha:1];
+    return [UIColor colorWithRed:0.176 green:0.176 blue:0.176 alpha:1]; /*#2d2d2d*/
+   // return [UIColor colorWithRed:34.0f/255.0f     green:34.0f/255.0f blue:34.0f/255.0f alpha:1];
 }
++ (UIColor*) PPTextColor{
+    return [UIColor colorWithRed:0.145 green:0.145 blue:0.145 alpha:1]; /*#252525*/
+    // return [UIColor colorWithRed:34.0f/255.0f     green:34.0f/255.0f blue:34.0f/255.0f alpha:1];
+}
+
 @end
