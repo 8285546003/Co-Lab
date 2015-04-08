@@ -46,7 +46,7 @@
     [self getLatestIdeaBrief];
     self.table.HVTableViewDataSource = self;
     self.table.HVTableViewDelegate = self;
-    self.table.frame=CGRectMake(0, 20, self.view.frame.size.width, self.view.frame.size.height);
+    self.table.frame=CGRectMake(0, 40, self.view.frame.size.width, self.view.frame.size.height);
 }
 -(void)viewWillAppear:(BOOL)animated{
     [self.navigationController setNavigationBarHidden:YES];
@@ -292,25 +292,34 @@
     NSDictionary *colorType = @{
                                 R:
                                     ^{[cell setBackgroundColor:[UIColor    PPRedColor]];
-                                        [self.table setBackgroundColor:[UIColor    PPRedColor]];
-                                        [self.view setBackgroundColor:[UIColor    PPRedColor]];
+                                        //[self.table setBackgroundColor:[UIColor    PPRedColor]];
+                                        if (indexPath.row==0) {
+                                            [self.view setBackgroundColor:[UIColor    PPRedColor]];
+                                        }
 
                                         isAnswerTheBriefs=NO;
                                         imgIdea.hidden=NO;
+
                                         if (isHot) {
                                             imgHot.hidden =NO;
                                             imgGoogle.frame=imgIdea.frame;
+
                                             imgIdea.frame=imgBrief.frame;
+
                                         }
                                         else{
-                                            imgGoogle.frame=imgIdea.frame;
+                                            imgGoogle.frame=imgBrief.frame;
                                             imgIdea.frame=imgHot.frame;
                                         }
                                     },
                                 Y:
                                     ^{[cell setBackgroundColor:[UIColor    PPYellowColor]];
-                                        [self.table setBackgroundColor:[UIColor    PPYellowColor]];
-                                        [self.view setBackgroundColor:[UIColor    PPYellowColor]];
+                                        //[self.table setBackgroundColor:[UIColor    PPYellowColor]];
+                                        if (indexPath.row==0) {
+                                            [self.view setBackgroundColor:[UIColor    PPYellowColor]];
+                                        }
+                                        //[self.view setBackgroundColor:[UIColor    PPYellowColor]];
+                                       // cell.lblTag.backgroundColor=[UIColor PPYellowColor];
 
                                         imgIdea.hidden=NO;
                                         imgBrief.hidden=NO;
@@ -319,6 +328,7 @@
                                         }
                                         else{
                                             imgGoogle.frame=imgIdea.frame;
+
                                             imgIdea.frame=imgBrief.frame;
                                             imgBrief.frame=imgHot.frame;
                                         }
@@ -326,37 +336,58 @@
                                     },
                                 G:
                                     ^{ [cell setBackgroundColor:[UIColor    PPGreenColor]];
-                                         [self.table setBackgroundColor:[UIColor    PPGreenColor]];
-                                        [self.view setBackgroundColor:[UIColor    PPGreenColor]];
+                                        // [self.table setBackgroundColor:[UIColor    PPGreenColor]];
+                                        if (indexPath.row==0) {
+                                            [self.view setBackgroundColor:[UIColor    PPGreenColor]];
+                                        }
+                                        //[self.view setBackgroundColor:[UIColor    PPGreenColor]];
 
                                         imgIdea.hidden=NO;
                                         imgBrief.hidden=NO;
                                         
-                                        CGRect frame = imgBrief.frame;
-                                        imgBrief.frame=imgIdea.frame;
-                                        imgIdea.frame=frame;
-                                        imgGoogle.frame=imgIdea.frame;
 
+                                        
+                                        CGRect frame = imgIdea.frame;
+                                        
+                                        
+                                        imgIdea.frame=imgBrief.frame;
+                        
+        
+                                        imgBrief.frame=frame;
+                                        
+   
                                         if (isHot) {
                                             imgHot.hidden =NO;
+
+
                                         }
                                         else{
+                                            imgGoogle.frame=imgBrief.frame;
                                             imgBrief.frame=imgIdea.frame;
-                                            imgIdea.frame=imgHot.frame;
+                                            imgIdea.frame =imgHot.frame;
+                                            
+                                            
+                                            
+                                           // imgIdea.frame=imgHot.frame;
+
                                         }
                                     },
                                 B:
                                     ^{ [cell setBackgroundColor:[UIColor    PPBlueColor]];
-                                         [self.table setBackgroundColor:[UIColor    PPBlueColor]];
-                                         [self.view setBackgroundColor:[UIColor    PPBlueColor]];
+                                        // [self.table setBackgroundColor:[UIColor    PPBlueColor]];
+                                        if (indexPath.row==0) {
+                                            [self.view setBackgroundColor:[UIColor    PPBlueColor]];
+                                        }
+                                        // [self.view setBackgroundColor:[UIColor    PPBlueColor]];
 
                                         imgBrief.hidden=NO;
-                                        imgGoogle.frame=imgIdea.frame;
 
                                         if (isHot) {
                                             imgHot.hidden =NO;
+                                            imgGoogle.frame=imgIdea.frame;
                                         }
                                         else{
+                                            imgGoogle.frame=imgBrief.frame;
                                             imgBrief.frame=imgHot.frame;
                                         }
                                     }
@@ -396,6 +427,7 @@
         default:
             break;
     }
+    [self.table reloadData];
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 -(BOOL)isImageExist:(NSString*)path{return (![[path stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]length] == 0);}

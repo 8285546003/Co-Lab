@@ -163,8 +163,8 @@
     isBrief=[ibModelDetails.is_brief isEqualToString:BOOL_YES];
     strColorType=ibModelDetails.color_code;
     
-    cell.selectedBackgroundView.backgroundColor=[UIColor PPBackGroundColor];
-    [self.allDataTableView setBackgroundColor:[UIColor    PPBackGroundColor]];
+    //cell.selectedBackgroundView.backgroundColor=[UIColor PPBackGroundColor];
+   // [self.allDataTableView setBackgroundColor:[UIColor    PPBackGroundColor]];
     
     UIImageView *imgIdea=(UIImageView *)[cell.contentView viewWithTag:PP201];
     UIImageView *imgBrief=(UIImageView *)[cell.contentView viewWithTag:PP202];
@@ -178,6 +178,9 @@
                                 
                                 R:
                                     ^{[cell setBackgroundColor:[UIColor    PPRedColor]];
+                                        if (indexPath.row==0) {
+                                            [self.allDataTableView setBackgroundColor:[UIColor    PPRedColor]];
+                                        }
                                         cell.lblHeading.textColor=[UIColor whiteColor];
                                         cell.lblTag.textColor=[UIColor whiteColor];
                                         imgIdea.hidden=NO;
@@ -191,6 +194,10 @@
                                     },
                                 Y:
                                     ^{[cell setBackgroundColor:[UIColor    PPYellowColor]];
+                                        if (indexPath.row==0) {
+                                            [self.allDataTableView setBackgroundColor:[UIColor    PPYellowColor]];
+
+                                        }
                                         imgIdea.hidden=NO;
                                         imgBrief.hidden=NO;
                                         if (isHot){imgHot.hidden =NO;}
@@ -199,6 +206,9 @@
                                     },
                                 G:
                                     ^{ [cell setBackgroundColor:[UIColor    PPGreenColor]];
+                                        if (indexPath.row==0) {
+                                            [self.allDataTableView setBackgroundColor:[UIColor    PPGreenColor]];
+                                        }
                                         imgIdea.hidden=NO;
                                         imgBrief.hidden=NO;
                                         
@@ -214,6 +224,9 @@
                                     },
                                 B:
                                     ^{ [cell setBackgroundColor:[UIColor    PPBlueColor]];
+                                        if (indexPath.row==0) {
+                                            [self.allDataTableView setBackgroundColor:[UIColor    PPBlueColor]];
+                                        }
                                         imgBrief.hidden=NO;
                                         if (isHot) {imgHot.hidden =NO;}
                                         else{imgBrief.frame=imgHot.frame;}
