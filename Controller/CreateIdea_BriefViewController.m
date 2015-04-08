@@ -43,7 +43,7 @@
     [self.mainDataDictionary setValue:@"" forKey:@"DESCRIPTION"];
     [self.mainDataDictionary setValue:@"" forKey:@"TAGS"];
     [self.mainDataDictionary setValue:@"" forKey:@"IMAGE"];
-    self.baseScrollView.frame=CGRectMake(0, 100, self.view.frame.size.width, self.view.frame.size.height);
+    self.baseScrollView.frame=CGRectMake(0, 85, self.view.frame.size.width, self.view.frame.size.height);
     if (self.isIdeaSubmitScreen) {
         if (isAnswerTheBriefs) {
             lbltitle.text=@"Answer The Brief";
@@ -56,12 +56,12 @@
             //self.baseScrollView.backgroundColor = [UIColor PPRedColor];
             lbltitle.text=@"Create New Idea";
         }
-        headerImage.image=[UIImage imageNamed:@"my_ideas.png"];
+        headerImage.image=[UIImage imageNamed:@"ideas.png"];
         self.view.backgroundColor=[UIColor PPYellowColor];
         self.baseScrollView.backgroundColor = [UIColor PPYellowColor];
     }else{
         lbltitle.text=@"Create New Brief";
-        headerImage.image=[UIImage imageNamed:@"my_brief.png"];
+        headerImage.image=[UIImage imageNamed:@"brief.png"];
         self.view.backgroundColor=[UIColor PPBlueColor];
         self.baseScrollView.backgroundColor = [UIColor PPBlueColor];
     }
@@ -201,7 +201,7 @@
     titleLbl.text = @"1. Add headline";
     titleLbl.textColor = [UIColor darkGrayColor];
 
-    titleLbl.font = [UIFont systemFontOfSize:11.0f];
+    titleLbl.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:11];
     [view addSubview:titleLbl];
     
     return view;
@@ -215,7 +215,7 @@
     headerBaseView.backgroundColor = [UIColor clearColor];
     
     noteView = [[NoteView alloc] initWithFrame:CGRectMake(40, 25, screenWidth - 80, 200)];
-    [noteView setFontName:@"HelveticaNeue-Light" size:15];
+    [noteView setFontName:@"HelveticaNeue-Light" size:20];
     noteView.text = @"Add Description";
     noteView.autocorrectionType = UITextAutocorrectionTypeNo;
 
@@ -272,9 +272,9 @@
     
     UILabel *titleLbl = [[UILabel alloc] initWithFrame:CGRectMake(2, 2, 200, 20)];
     titleLbl.text = @"2. Add description";
-    titleLbl.textColor = [UIColor grayColor];
+    titleLbl.textColor = [UIColor darkGrayColor];
 
-    titleLbl.font = [UIFont systemFontOfSize:11.0f];
+    titleLbl.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:11];
     [view addSubview:titleLbl];
     
     return view;
@@ -289,7 +289,7 @@
     headerBaseView.backgroundColor = [UIColor clearColor];
     
     noteView = [[NoteView alloc] initWithFrame:CGRectMake(40, 25, screenWidth - 80, 200)];
-    [noteView setFontName:@"HelveticaNeue-Light" size:15];
+    [noteView setFontName:@"HelveticaNeue-Light" size:20];
     noteView.tag = PPkTags;
     [noteView setDelegate:self];
     noteView.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -352,8 +352,8 @@
     
     UIButton *nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [nextButton setFrame:ADD_BUTTON_FRAME];
-    [nextButton setImage:[UIImage imageNamed:@"right_arrow.png"] forState:UIControlStateNormal];
-    [nextButton setImage:[UIImage imageNamed:@"right_arrow.png"] forState:UIControlStateSelected];
+    [nextButton setImage:[UIImage imageNamed:NEXT_BUTTON_NAME] forState:UIControlStateNormal];
+    [nextButton setImage:[UIImage imageNamed:NEXT_BUTTON_NAME] forState:UIControlStateSelected];
     [nextButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
     nextButton.tag = PPkAddOrNext;
     [self.view addSubview:nextButton];

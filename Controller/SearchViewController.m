@@ -34,27 +34,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-    UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 60, 50)];
+  //  UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+   // UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 60, 50)];
     
    // self.txtSearch.leftView = paddingView;
    // self.txtSearch.leftViewMode = UITextFieldViewModeAlways;
-    [paddingView addSubview:imageView];
-    imageView.image = [UIImage imageNamed:@"search"];
+  //  [paddingView addSubview:imageView];
+   // imageView.image = [UIImage imageNamed:@"search"];
     
     
-    CGRect frameRect = self.txtSearch.frame;
-    frameRect.size.height = 60;
-    self.txtSearch.frame = frameRect;
+   // CGRect frameRect = self.txtSearch.frame;
+    //frameRect.size.height = 60;
+   // self.txtSearch.frame = frameRect;
     
 
     
-    self.txtSearch.leftView = paddingView;
-    self.txtSearch.leftViewMode=UITextFieldViewModeAlways;
+    //self.txtSearch.leftView = paddingView;
+    //self.txtSearch.leftViewMode=UITextFieldViewModeAlways;
     self.txtSearch.delegate=self;
     
     self.allDataTableView.backgroundColor=[UIColor clearColor];
-    
+    [self.view setBackgroundColor:[UIColor PPBackGroundColor]];
     UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     gestureRecognizer.cancelsTouchesInView = NO;
     

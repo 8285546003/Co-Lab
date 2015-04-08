@@ -31,22 +31,22 @@
         [self setAlpha:0.9f];
     } completion:^(BOOL finished) {
         takePhotoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [takePhotoBtn setFrame:CGRectMake( 40, screenHeight - 160, 150, 40)];
-        [takePhotoBtn setImage:[UIImage imageNamed:@"TakeAPhoto.png"] forState:UIControlStateNormal];
+        [takePhotoBtn setFrame:CGRectMake( 40, screenHeight - 160, 165, 45)];
+        [takePhotoBtn setImage:[UIImage imageNamed:@"take_a_photo.png"] forState:UIControlStateNormal];
         [takePhotoBtn addTarget:self.delegate action:@selector(takePhoto) forControlEvents:UIControlEventTouchUpInside];
         takePhotoBtn.alpha = 1.0f;
         [self addSubview:takePhotoBtn];
         
         galaryPhotoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [galaryPhotoBtn setFrame:CGRectMake( 40, screenHeight - 110, 150, 40)];
-        [galaryPhotoBtn setImage:[UIImage imageNamed:@"ChooseAPhoto.png"] forState:UIControlStateNormal];
+        [galaryPhotoBtn setFrame:CGRectMake( 40, screenHeight - 110, 165, 45)];
+        [galaryPhotoBtn setImage:[UIImage imageNamed:@"choose_a_photo.png"] forState:UIControlStateNormal];
         [galaryPhotoBtn addTarget:self.delegate action:@selector(selectPhoto) forControlEvents:UIControlEventTouchUpInside];
         galaryPhotoBtn.alpha = 1.0f;
         [self addSubview:galaryPhotoBtn];
         
         closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [closeBtn setFrame:CGRectMake( screenWidth - 110, screenHeight - 110, 40, 40)];
-        [closeBtn setImage:[UIImage imageNamed:@"Close.png"] forState:UIControlStateNormal];
+        [closeBtn setFrame:CGRectMake( screenWidth - 110, screenHeight - 60, 45, 45)];
+        [closeBtn setImage:[UIImage imageNamed:@"cancel_white.png"] forState:UIControlStateNormal];
         [closeBtn addTarget:self action:@selector(closeMethod:) forControlEvents:UIControlEventTouchUpInside];
         closeBtn.alpha = 1.0f;
         [self addSubview:closeBtn];
@@ -79,39 +79,51 @@
         [self setAlpha:1.0f];
     } completion:^(BOOL finished) {
         
+        closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [closeBtn setImage:[UIImage imageNamed:@"cancel_white.png"] forState:UIControlStateNormal];
+        [closeBtn addTarget:self action:@selector(closeIBView:) forControlEvents:UIControlEventTouchUpInside];
+        closeBtn.alpha = 1.0f;
+        [self addSubview:closeBtn];
+        
+        
         if (Answer) {
             answerBriefBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            [answerBriefBtn setFrame:CGRectMake( 40, screenHeight - 80, 150, 40)];
-            [answerBriefBtn setImage:[UIImage imageNamed:@"answer_brief.png"] forState:UIControlStateNormal];
+            [answerBriefBtn setFrame:CGRectMake( 40, screenHeight - 80, 215, 45)];
+            [answerBriefBtn setImage:[UIImage imageNamed:@"answer_the_brief.png"] forState:UIControlStateNormal];
             [answerBriefBtn addTarget:self.delegate action:@selector(answerIB) forControlEvents:UIControlEventTouchUpInside];
             answerBriefBtn.alpha = 1.0f;
             [self addSubview:answerBriefBtn];
+            [closeBtn setFrame:CGRectMake( screenWidth - 60, screenHeight - 60, 45, 45)];
+
         }
+        else{
+            
+            [closeBtn setFrame:CGRectMake( screenWidth - 60, screenHeight - 90, 45, 45)];
+
+        }
+        
+        
+        
         createIdeaBtn = [UIButton buttonWithType:UIButtonTypeCustom];
       //  if ([PPUtilts isIPad]) {
         //    [createIdeaBtn setFrame:CGRectMake( 40, screenHeight - 180, 500, 80)];
 //}
        // else{
-            [createIdeaBtn setFrame:CGRectMake( 40, screenHeight - 180, 150, 40)];
+            [createIdeaBtn setFrame:CGRectMake( 40, screenHeight - 180, 215, 45)];
      //   }
-        [createIdeaBtn setImage:[UIImage imageNamed:@"createnewidea.png"] forState:UIControlStateNormal];
+        [createIdeaBtn setImage:[UIImage imageNamed:@"create_new_idea.png"] forState:UIControlStateNormal];
         [createIdeaBtn addTarget:self.delegate action:@selector(createIdea) forControlEvents:UIControlEventTouchUpInside];
         createIdeaBtn.alpha = 1.0f;
         [self addSubview:createIdeaBtn];
         
         createBriefBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [createBriefBtn setFrame:CGRectMake( 40, screenHeight - 130, 150, 40)];
-        [createBriefBtn setImage:[UIImage imageNamed:@"newbreif.png"] forState:UIControlStateNormal];
+        [createBriefBtn setFrame:CGRectMake( 40, screenHeight - 130, 215, 45)];
+        [createBriefBtn setImage:[UIImage imageNamed:@"create_new_brief.png"] forState:UIControlStateNormal];
         [createBriefBtn addTarget:self.delegate action:@selector(createBrief) forControlEvents:UIControlEventTouchUpInside];
         createIdeaBtn.alpha = 1.0f;
         [self addSubview:createBriefBtn];
         
-        closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [closeBtn setFrame:CGRectMake( screenWidth - 110, screenHeight - 80, 40, 40)];
-        [closeBtn setImage:[UIImage imageNamed:@"Close.png"] forState:UIControlStateNormal];
-        [closeBtn addTarget:self action:@selector(closeIBView:) forControlEvents:UIControlEventTouchUpInside];
-        closeBtn.alpha = 1.0f;
-        [self addSubview:closeBtn];
+
         
     }];
     

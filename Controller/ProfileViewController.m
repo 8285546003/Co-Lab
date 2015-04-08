@@ -43,20 +43,20 @@ NSArray *cellTitleText;
 -(void)updateFrame{
     
     if ([PPUtilts isIPad]) {
-        self.profileTableView.frame=CGRectMake(0, 600, self.view.frame.size.width, self.view.frame.size.height);
+        self.profileTableView.frame=CGRectMake(10, 600, self.view.frame.size.width, self.view.frame.size.height);
     }
     else{
     if ([PPUtilts isiPhone5]) {
-        self.profileTableView.frame=CGRectMake(10, 242, self.view.frame.size.width, self.view.frame.size.height);
+        self.profileTableView.frame=CGRectMake(10, 250, self.view.frame.size.width, self.view.frame.size.height);
     }
     else if ([PPUtilts isiPhone6]){
-        self.profileTableView.frame=CGRectMake(0, 240, self.view.frame.size.width, self.view.frame.size.height);
+        self.profileTableView.frame=CGRectMake(10, 348, self.view.frame.size.width, self.view.frame.size.height);
     }
     else if ([PPUtilts isiPhone6Plus]){
-        self.profileTableView.frame=CGRectMake(0, 300, self.view.frame.size.width, self.view.frame.size.height);
+        self.profileTableView.frame=CGRectMake(10, 420, self.view.frame.size.width, self.view.frame.size.height);
     }
     if ([PPUtilts isiPhone4]){
-        self.profileTableView.frame=CGRectMake(0, 55, self.view.frame.size.width, self.view.frame.size.height);
+        self.profileTableView.frame=CGRectMake(10, 160, self.view.frame.size.width, self.view.frame.size.height);
     }
     else{
     }
@@ -70,8 +70,8 @@ NSArray *cellTitleText;
     UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
     [cancelButton setFrame:CGRectMake(25, self.view.bounds.size.height - 45, 45, 45)];
-    [cancelButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
-    [cancelButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateSelected];
+    [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME_WHITE] forState:UIControlStateNormal];
+    [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME_WHITE] forState:UIControlStateSelected];
     [cancelButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
     cancelButton.tag = PPkCancel;
     [self.view addSubview:cancelButton];
@@ -121,7 +121,7 @@ NSArray *cellTitleText;
         cell.textLabel.font=[UIFont fontWithName:@"HelveticaNeue-Light" size:20];
         if (![[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"] integerValue]==0) {
            badge = [CustomBadge customBadgeWithString:[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"] withStyle:[BadgeStyle oldStyle]];
-            badge.frame=CGRectMake(60, -4, 30, 30);
+            badge.frame=CGRectMake(45, -4, 25, 25);
             [badge bringSubviewToFront:cell.contentView];
             [cell.contentView  addSubview:badge];
         }
@@ -131,7 +131,7 @@ NSArray *cellTitleText;
     }
     
     else{
-         cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15];
+         cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:20];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
        return cell;

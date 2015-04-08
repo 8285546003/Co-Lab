@@ -46,6 +46,7 @@
     [self getLatestIdeaBrief];
     self.table.HVTableViewDataSource = self;
     self.table.HVTableViewDelegate = self;
+    self.table.frame=CGRectMake(0, 20, self.view.frame.size.width, self.view.frame.size.height);
 }
 -(void)viewWillAppear:(BOOL)animated{
     [self.navigationController setNavigationBarHidden:YES];
@@ -292,6 +293,8 @@
                                 R:
                                     ^{[cell setBackgroundColor:[UIColor    PPRedColor]];
                                         [self.table setBackgroundColor:[UIColor    PPRedColor]];
+                                        [self.view setBackgroundColor:[UIColor    PPRedColor]];
+
                                         isAnswerTheBriefs=NO;
                                         imgIdea.hidden=NO;
                                         if (isHot) {
@@ -307,12 +310,15 @@
                                 Y:
                                     ^{[cell setBackgroundColor:[UIColor    PPYellowColor]];
                                         [self.table setBackgroundColor:[UIColor    PPYellowColor]];
+                                        [self.view setBackgroundColor:[UIColor    PPYellowColor]];
+
                                         imgIdea.hidden=NO;
                                         imgBrief.hidden=NO;
                                         if (isHot){
                                             imgHot.hidden =NO;
                                         }
                                         else{
+                                            imgGoogle.frame=imgIdea.frame;
                                             imgIdea.frame=imgBrief.frame;
                                             imgBrief.frame=imgHot.frame;
                                         }
@@ -321,13 +327,16 @@
                                 G:
                                     ^{ [cell setBackgroundColor:[UIColor    PPGreenColor]];
                                          [self.table setBackgroundColor:[UIColor    PPGreenColor]];
+                                        [self.view setBackgroundColor:[UIColor    PPGreenColor]];
+
                                         imgIdea.hidden=NO;
                                         imgBrief.hidden=NO;
                                         
                                         CGRect frame = imgBrief.frame;
                                         imgBrief.frame=imgIdea.frame;
                                         imgIdea.frame=frame;
-                                        
+                                        imgGoogle.frame=imgIdea.frame;
+
                                         if (isHot) {
                                             imgHot.hidden =NO;
                                         }
@@ -339,6 +348,8 @@
                                 B:
                                     ^{ [cell setBackgroundColor:[UIColor    PPBlueColor]];
                                          [self.table setBackgroundColor:[UIColor    PPBlueColor]];
+                                         [self.view setBackgroundColor:[UIColor    PPBlueColor]];
+
                                         imgBrief.hidden=NO;
                                         imgGoogle.frame=imgIdea.frame;
 

@@ -164,23 +164,24 @@
     [self updateFrame];
 }
 -(void)updateFrame{
-    _viewLIB.frame=CGRectMake(25, self.view.frame.size.height-77, 320, 103);
+    _viewLIB.frame=CGRectMake(25, self.view.frame.size.height-76, 320, 103);
    // _btnLIB.frame=CGRectMake(15, self.view.frame.size.height-103, 60, 103);
     if ([PPUtilts isIPad]) {
-        self.homeTableView.frame=CGRectMake(0, 540, self.view.frame.size.width, self.view.frame.size.height);
+        self.homeTableView.frame=CGRectMake(10, 540, self.view.frame.size.width, self.view.frame.size.height);
     }
     else{
     if ([PPUtilts isiPhone5]) {
         self.homeTableView.frame=CGRectMake(10, 220, self.view.frame.size.width, self.view.frame.size.height);
     }
     else if ([PPUtilts isiPhone6]){
-        self.homeTableView.frame=CGRectMake(0, 190, self.view.frame.size.width, self.view.frame.size.height);
+        self.homeTableView.frame=CGRectMake(10, 318, self.view.frame.size.width, self.view.frame.size.height);
     }
     else if ([PPUtilts isiPhone6Plus]){
-        self.homeTableView.frame=CGRectMake(0, 260, self.view.frame.size.width, self.view.frame.size.height);
+        _viewLIB.frame=CGRectMake(30, self.view.frame.size.height-77, 320, 103);
+        self.homeTableView.frame=CGRectMake(10, 385, self.view.frame.size.width, self.view.frame.size.height);
     }
     else{
-        self.homeTableView.frame=CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        self.homeTableView.frame=CGRectMake(10, 130, self.view.frame.size.width, self.view.frame.size.height);
     }
  }
 }
@@ -238,7 +239,7 @@
                     [[NSUserDefaults standardUserDefaults] setValue:notificationCount.totalnotification forKey:@"NOTIFICATION"];
                     if ([notificationCount.totalnotification integerValue]>0) {
                         badge = [CustomBadge customBadgeWithString:[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"] withStyle:[BadgeStyle oldStyle]];
-                        badge.frame=CGRectMake(60, -4, 30, 30);
+                        badge.frame=CGRectMake(45, -4, 25, 25);
                         [badge bringSubviewToFront:cell.contentView];
                         [cell.contentView  addSubview:badge];
                 }
