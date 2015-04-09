@@ -230,8 +230,10 @@
     if (cell == nil) {
         cell = [[[NSBundle mainBundle]loadNibNamed:kStaticIdentifier owner:self options:nil]lastObject];
     }
+    
     [cell.btnEmail setHidden:NO];
     [cell.btnEmail addTarget:self action:@selector(buttonPressedAction:) forControlEvents:UIControlEventTouchUpInside];
+     self.table.allowsSelection = NO;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     ([PPUtilts sharedInstance].apiCall==kApiCallNotifications)?(ibModelDetails= notificationModel.NotificatioDetail[indexPath.row]):(ibModelDetails = ibModel.Detail[indexPath.row]);
@@ -257,15 +259,32 @@
         cell.lblDescription.frame = frame1;
         [cell.lblDescription sizeToFit];
         
+        
+        UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        activityIndicator.hidesWhenStopped = YES;
+        activityIndicator.hidden = NO;
+        [activityIndicator startAnimating];
+        activityIndicator.center = CGPointMake(cell.imgMain.frame.size.width /2, cell.imgMain.frame.size.height/2);
+
+        
         [cell.imgMain sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",BASE_URL_IMAGE,imageName]]
                      placeholderImage:nil
                               options:SDWebImageProgressiveDownload
                             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                if (image) {
-                                    cell.imgMain.image = image;
-
-                }
+                                if (!error) {
+                                    if (image) {
+                                        cell.imgMain.image = image;
+                                        [activityIndicator stopAnimating];
+                                        [activityIndicator removeFromSuperview];
+                                    }
+                                }
+                                else{
+                                    [activityIndicator stopAnimating];
+                                    [activityIndicator removeFromSuperview];
+                                }
         }];
+        [cell.imgMain addSubview:activityIndicator];
+
     }
     else{
         CGRect frame = cell.lblDescription.frame;

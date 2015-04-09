@@ -559,11 +559,23 @@
         
     }else if (textView.tag == PPkTags){
         float nLine = [self numberOfLines:textView fontSize:24];
-        //NSLog(@"Number of line == %f",nLine);
         if (nLine > 3.0 && nLine != value) {
             value = nLine;
             self.baseScrollView.contentOffset = CGPointMake(0, self.baseScrollView.contentOffset.y + 24);
         }
+        else if([[textView text] length] >= 50)
+        {
+            if (!errorAlert.isVisible) {
+                errorAlert = [[UIAlertView alloc] initWithTitle:@"Char count error!"
+                                                        message:@"You have exceeded maximum number of character"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+                [errorAlert show];
+            }
+            return NO;
+        }
+
     }
     
     return YES;

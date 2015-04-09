@@ -334,11 +334,12 @@
 -(void)goToLatestIdeaBriefs{
     [PPUtilts sharedInstance].apiCall=kApiCallLatestIdeaBrief;
     CoLabListViewController *objLatestIB = [CoLabListViewController new];
-   // objLatestIB.view.layer.speed = 0.8;
     [objLatestIB setIsCurrentControllerPresented:YES];
     UINavigationController *navC=[[UINavigationController alloc]initWithRootViewController:objLatestIB];
-    [self presentViewController:navC animated:YES completion:^{}];
-    //[self presentViewController:objLatestIB animated:YES completion:nil];
+    navC.view.layer.speed=0.1;
+    [self presentViewController:navC animated:YES completion:^{
+     navC.view.layer.speed=1.0;
+    }];
 }
 - (IBAction)btnCancel:(id)sender {
     NotificationViewController *objNotification = [NotificationViewController new];
