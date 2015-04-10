@@ -80,6 +80,7 @@
                         [self.view addSubview:badge];
                     }
                     else{
+                        [[NSUserDefaults standardUserDefaults] setValue:ZERO forKey:@"NOTIFICATION"];
                         [badge removeFromSuperview];
                     }
                     [self.notificationTableView  setHidden:NO];
