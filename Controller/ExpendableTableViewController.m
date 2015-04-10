@@ -237,8 +237,6 @@
     
     [cell.btnEmail setHidden:NO];
     [cell.btnEmail addTarget:self action:@selector(buttonPressedAction:) forControlEvents:UIControlEventTouchUpInside];
-     self.table.allowsSelection = NO;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     ([PPUtilts sharedInstance].apiCall==kApiCallNotifications)?(ibModelDetails= notificationModel.NotificatioDetail[indexPath.row]):(ibModelDetails = ibModel.Detail[indexPath.row]);
 
@@ -268,7 +266,8 @@
         activityIndicator.hidesWhenStopped = YES;
         activityIndicator.hidden = NO;
         [activityIndicator startAnimating];
-        activityIndicator.center = CGPointMake(cell.imgMain.frame.size.width /2, cell.imgMain.frame.size.height/2);
+        activityIndicator.center = CGPointMake(cell.imgMain.frame.size.width/2, cell.imgMain.frame.size.height/2);
+        [cell.imgMain addSubview:activityIndicator];
 
         
         [cell.imgMain sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",BASE_URL_IMAGE,imageName]]
@@ -287,7 +286,6 @@
                                     [activityIndicator removeFromSuperview];
                                 }
         }];
-        [cell.imgMain addSubview:activityIndicator];
 
     }
     else{
