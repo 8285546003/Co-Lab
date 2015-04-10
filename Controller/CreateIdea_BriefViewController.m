@@ -492,7 +492,7 @@
 
 -(void)textViewDidChange:(UITextView *)textView
 {
-    int len = textView.text.length;
+    int len = (int)textView.text.length;
     
     if (textView.tag == PPkHeader) {
         titleCharCountLbl.text=[NSString stringWithFormat:@"%i",80-len];
@@ -505,7 +505,6 @@
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range  replacementText:(NSString *)text{
-    NSLog(@"======%@",text);
     if ([text isEqualToString:@"\n"]) {
         [textView resignFirstResponder];
         return NO;
@@ -550,7 +549,7 @@
                                                     message:@"You have exceeded maximum number of character"
                                                    delegate:nil
                                           cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
+                                        otherButtonTitles:nil];
             [errorAlert show];
             }
             return NO;
@@ -563,7 +562,14 @@
             value = nLine;
             self.baseScrollView.contentOffset = CGPointMake(0, self.baseScrollView.contentOffset.y + 24);
         }
-        else if([[textView text] length] >= 50)
+        if([text length] == 0)
+        {
+            if([textView.text length] != 0)
+            {
+                return YES;
+            }
+        }
+       else if([[textView text] length] == 50)
         {
             if (!errorAlert.isVisible) {
                 errorAlert = [[UIAlertView alloc] initWithTitle:@"Char count error!"
@@ -662,13 +668,16 @@
     
     NSString *strBriefId=ZERO;
     NSString *strIsBrief=BOOL_YES;
+    NSString *strColorCode=@"B";
     if (isIdeaSubmitScreen) {
         strIsBrief=BOOL_NO;
+        strColorCode=@"R";
         if (isAnswerTheBriefs) {
             strBriefId=[PPUtilts sharedInstance].LatestIDId;
+            strColorCode=[PPUtilts sharedInstance].colorCode;
         }
     }
-    NSDictionary *parameters = @{kApiCall:kApiCallCreateNewIdeaBrief,kTag:[self.mainDataDictionary valueForKey:@"TAGS"],@"headline":[self.mainDataDictionary valueForKey:@"HEADER"],@"description_idea_brief": [self.mainDataDictionary valueForKey:@"DESCRIPTION"],@"image":imageString,@"brief_id":strBriefId,@"is_brief":strIsBrief,kUserid:GET_USERID};
+    NSDictionary *parameters = @{kApiCall:kApiCallCreateNewIdeaBrief,kTag:[self.mainDataDictionary valueForKey:@"TAGS"],@"headline":[self.mainDataDictionary valueForKey:@"HEADER"],@"description_idea_brief": [self.mainDataDictionary valueForKey:@"DESCRIPTION"],@"image":imageString,@"brief_id":strBriefId,@"is_brief":strIsBrief,kUserid:GET_USERID,@"color_code":strColorCode};
     
     AFNInjector *objAFN = [AFNInjector new];
     [objAFN parameters:parameters completionBlock:^(id data, NSError *error) {

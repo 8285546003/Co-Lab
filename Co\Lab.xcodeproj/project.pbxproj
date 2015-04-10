@@ -83,7 +83,6 @@
 		6870D5051AD4EE2F002DFF26 /* searchT@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6870D4D81AD4EE2F002DFF26 /* searchT@2x.png */; };
 		6870D5061AD4EE2F002DFF26 /* take_a_photo.png in Resources */ = {isa = PBXBuildFile; fileRef = 6870D4D91AD4EE2F002DFF26 /* take_a_photo.png */; };
 		6870D5071AD4EE2F002DFF26 /* take_a_photo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6870D4DA1AD4EE2F002DFF26 /* take_a_photo@2x.png */; };
-		6870D5091AD4F143002DFF26 /* Google_Login_ButtonImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 6870D5081AD4F143002DFF26 /* Google_Login_ButtonImage.png */; };
 		6870D5101AD4FD1C002DFF26 /* preWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 6870D50E1AD4FD1C002DFF26 /* preWhite.png */; };
 		6870D5111AD4FD1C002DFF26 /* preWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6870D50F1AD4FD1C002DFF26 /* preWhite@2x.png */; };
 		6870D5141AD4FFF1002DFF26 /* cancel_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 6870D5121AD4FFF1002DFF26 /* cancel_white.png */; };
@@ -104,6 +103,9 @@
 		68714DED1AD518490028259B /* search-box@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68714DDF1AD518490028259B /* search-box@2x.png */; };
 		68714DF01AD51FF50028259B /* talk.png in Resources */ = {isa = PBXBuildFile; fileRef = 68714DEE1AD51FF50028259B /* talk.png */; };
 		68714DF11AD51FF50028259B /* talk@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68714DEF1AD51FF50028259B /* talk@2x.png */; };
+		68A2DD121AD79DAE00C918FF /* GL.png in Resources */ = {isa = PBXBuildFile; fileRef = 68A2DD0F1AD79DAE00C918FF /* GL.png */; };
+		68A2DD131AD79DAE00C918FF /* GL@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68A2DD101AD79DAE00C918FF /* GL@2x.png */; };
+		68A2DD141AD79DAE00C918FF /* GL@3X.png in Resources */ = {isa = PBXBuildFile; fileRef = 68A2DD111AD79DAE00C918FF /* GL@3X.png */; };
 		68A9CCFC1A65015F003D09E4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A9CCFB1A65015F003D09E4 /* Foundation.framework */; };
 		68A9CCFE1A65015F003D09E4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A9CCFD1A65015F003D09E4 /* CoreGraphics.framework */; };
 		68A9CD001A65015F003D09E4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A9CCFF1A65015F003D09E4 /* UIKit.framework */; };
@@ -257,7 +259,6 @@
 		6870D4D81AD4EE2F002DFF26 /* searchT@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchT@2x.png"; sourceTree = "<group>"; };
 		6870D4D91AD4EE2F002DFF26 /* take_a_photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = take_a_photo.png; sourceTree = "<group>"; };
 		6870D4DA1AD4EE2F002DFF26 /* take_a_photo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "take_a_photo@2x.png"; sourceTree = "<group>"; };
-		6870D5081AD4F143002DFF26 /* Google_Login_ButtonImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Google_Login_ButtonImage.png; sourceTree = "<group>"; };
 		6870D50E1AD4FD1C002DFF26 /* preWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = preWhite.png; sourceTree = "<group>"; };
 		6870D50F1AD4FD1C002DFF26 /* preWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "preWhite@2x.png"; sourceTree = "<group>"; };
 		6870D5121AD4FFF1002DFF26 /* cancel_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel_white.png; sourceTree = "<group>"; };
@@ -278,6 +279,9 @@
 		68714DDF1AD518490028259B /* search-box@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search-box@2x.png"; sourceTree = "<group>"; };
 		68714DEE1AD51FF50028259B /* talk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = talk.png; sourceTree = "<group>"; };
 		68714DEF1AD51FF50028259B /* talk@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "talk@2x.png"; sourceTree = "<group>"; };
+		68A2DD0F1AD79DAE00C918FF /* GL.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GL.png; sourceTree = "<group>"; };
+		68A2DD101AD79DAE00C918FF /* GL@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GL@2x.png"; sourceTree = "<group>"; };
+		68A2DD111AD79DAE00C918FF /* GL@3X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GL@3X.png"; sourceTree = "<group>"; };
 		68A9CCF81A65015F003D09E4 /* Co Lab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Co Lab.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		68A9CCFB1A65015F003D09E4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		68A9CCFD1A65015F003D09E4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -480,6 +484,9 @@
 		6870D4AD1AD4EE2F002DFF26 /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				68A2DD0F1AD79DAE00C918FF /* GL.png */,
+				68A2DD101AD79DAE00C918FF /* GL@2x.png */,
+				68A2DD111AD79DAE00C918FF /* GL@3X.png */,
 				68BB39D21AD559AE00003EE3 /* gp.png */,
 				68BB39D31AD559AE00003EE3 /* gp@2x.png */,
 				68BB39C61AD5586A00003EE3 /* briefL@2x.png */,
@@ -506,7 +513,6 @@
 				6870D5131AD4FFF1002DFF26 /* cancel_white@2x.png */,
 				6870D50E1AD4FD1C002DFF26 /* preWhite.png */,
 				6870D50F1AD4FD1C002DFF26 /* preWhite@2x.png */,
-				6870D5081AD4F143002DFF26 /* Google_Login_ButtonImage.png */,
 				6870D4AE1AD4EE2F002DFF26 /* answer_the_brief.png */,
 				6870D4AF1AD4EE2F002DFF26 /* answer_the_brief@2x.png */,
 				6870D4B01AD4EE2F002DFF26 /* app_icon.png */,
@@ -800,6 +806,7 @@
 				68CC90E21AA5A8E300F3CB48 /* SearchViewController.xib in Resources */,
 				6870D4EB1AD4EE2F002DFF26 /* create_new_brief@2x.png in Resources */,
 				68714DE61AD518490028259B /* lines.png in Resources */,
+				68A2DD141AD79DAE00C918FF /* GL@3X.png in Resources */,
 				6825027B1ACD3FA200E4A4FE /* 50x50.png in Resources */,
 				682502741ACD3FA200E4A4FE /* 114x114.png in Resources */,
 				682502BD1ACD3FA200E4A4FE /* 1536x2048.png in Resources */,
@@ -829,6 +836,7 @@
 				68CC90DC1AA5A8E300F3CB48 /* CreateIdea_BriefViewController.xib in Resources */,
 				6825027E1ACD3FA200E4A4FE /* 72x72.png in Resources */,
 				68CFE26A1AA5E03A0082D3A8 /* NotificationViewController.xib in Resources */,
+				68A2DD121AD79DAE00C918FF /* GL.png in Resources */,
 				6870D4EF1AD4EE2F002DFF26 /* ideaL.png in Resources */,
 				682502C11ACD3FA200E4A4FE /* 750x1334.png in Resources */,
 				6870D5141AD4FFF1002DFF26 /* cancel_white.png in Resources */,
@@ -854,7 +862,6 @@
 				68BB39CF1AD5586A00003EE3 /* hot.png in Resources */,
 				6870D5061AD4EE2F002DFF26 /* take_a_photo.png in Resources */,
 				6870D4EC1AD4EE2F002DFF26 /* create_new_idea.png in Resources */,
-				6870D5091AD4F143002DFF26 /* Google_Login_ButtonImage.png in Resources */,
 				6870D4E01AD4EE2F002DFF26 /* attachment@2x.png in Resources */,
 				6870D4DE1AD4EE2F002DFF26 /* app_icon@2x.png in Resources */,
 				6870D4F01AD4EE2F002DFF26 /* ideas.png in Resources */,
@@ -869,6 +876,7 @@
 				6870D5111AD4FD1C002DFF26 /* preWhite@2x.png in Resources */,
 				6870D51C1AD504D0002DFF26 /* notification.png in Resources */,
 				68714DED1AD518490028259B /* search-box@2x.png in Resources */,
+				68A2DD131AD79DAE00C918FF /* GL@2x.png in Resources */,
 				6870D4FB1AD4EE2F002DFF26 /* nextWhite@2x.png in Resources */,
 				6825027D1ACD3FA200E4A4FE /* 58x58.png in Resources */,
 				68CFE2741AA5E13E0082D3A8 /* NotificationViewCell.xib in Resources */,
