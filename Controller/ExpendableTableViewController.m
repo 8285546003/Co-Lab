@@ -46,15 +46,19 @@
     [self getLatestIdeaBrief];
     self.table.HVTableViewDataSource = self;
     self.table.HVTableViewDelegate = self;
-    self.table.frame=CGRectMake(0, 40, self.view.frame.size.width, self.view.frame.size.height);
 }
 -(void)viewWillAppear:(BOOL)animated{
+    self.table.frame=CGRectMake(0, 40, self.view.frame.size.width, self.view.frame.size.height);
+    [self.table reloadData];
     [self.navigationController setNavigationBarHidden:YES];
     [super viewWillAppear:YES];
     [self.view setBackgroundColor:[UIColor PPBackGroundColor]];
 }
 - (BOOL)prefersStatusBarHidden {
     return YES;
+}
+-(void)viewDidAppear:(BOOL)animated{
+    
 }
 
 -(void)getLatestIdeaBrief{

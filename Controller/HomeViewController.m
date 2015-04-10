@@ -336,9 +336,9 @@
     CoLabListViewController *objLatestIB = [CoLabListViewController new];
     [objLatestIB setIsCurrentControllerPresented:YES];
     UINavigationController *navC=[[UINavigationController alloc]initWithRootViewController:objLatestIB];
-    navC.view.layer.speed=0.1;
+    //navC.view.layer.speed=0.1;
     [self presentViewController:navC animated:YES completion:^{
-     navC.view.layer.speed=1.0;
+    // navC.view.layer.speed=1.0;
     }];
 }
 - (IBAction)btnCancel:(id)sender {
