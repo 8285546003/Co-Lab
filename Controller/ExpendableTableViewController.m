@@ -220,7 +220,7 @@
         }
     }
     else{
-        return lblHeight.frame.size.height+60;
+        return lblHeight.frame.size.height+140;
 
        // return kheightForRowAtIndexPath;
     }
@@ -233,8 +233,9 @@
     [cell setTag:3];
     if (cell == nil) {
         cell = [[[NSBundle mainBundle]loadNibNamed:kStaticIdentifier owner:self options:nil]lastObject];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     }
-    
+    cell.backgroundColor=[UIColor redColor];
     [cell.btnEmail setHidden:NO];
     [cell.btnEmail addTarget:self action:@selector(buttonPressedAction:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -249,7 +250,6 @@
     cell.lblTag.textColor=[UIColor whiteColor];
     cell.lblDescription.text=ibModelDetails.description_idea_brief;
     [cell.lblDescription sizeToFit];
-
     NSString *imageName=ibModelDetails.image;
 
     if ([self isImageExist:imageName]) {

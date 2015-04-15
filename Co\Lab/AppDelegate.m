@@ -51,9 +51,8 @@ static NSString * const kClientID = @"1043369017986-eatg764omdvlrp4jb8tcge2uf6nk
 {
     NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
-    
+    [UIApplication sharedApplication].applicationIconBadgeNumber=[[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"] integerValue];
     [PPUtilts sharedInstance].deviceTocken=token;
-    
     NSLog(@"content---%@", token);
 }
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
