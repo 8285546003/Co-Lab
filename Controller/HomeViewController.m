@@ -239,7 +239,7 @@
                     [[NSUserDefaults standardUserDefaults] setValue:notificationCount.totalnotification forKey:@"NOTIFICATION"];
                     if ([notificationCount.totalnotification integerValue]>0) {
                         badge = [CustomBadge customBadgeWithString:[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"] withStyle:[BadgeStyle oldStyle]];
-                        badge.frame=CGRectMake(45, -4, 25, 25);
+                        badge.frame=CGRectMake(52, -1, 25, 25);
                         [badge bringSubviewToFront:cell.contentView];
                         [cell.contentView  addSubview:badge];
                 }
