@@ -337,10 +337,18 @@
     [objLatestIB setIsCurrentControllerPresented:YES];
     UINavigationController *navC=[[UINavigationController alloc]initWithRootViewController:objLatestIB];
     //navC.view.layer.speed=0.1;
+    // objLatestIB.transitioningDelegate = self;
+    // objLatestIB.modalPresentationStyle = UIModalPresentationCustom;
     [self presentViewController:navC animated:YES completion:^{
     // navC.view.layer.speed=1.0;
     }];
+    
 }
+//#pragma mark - Transitioning Delegate (Modal)
+//-(id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
+//    _modalAnimationController.type = AnimationTypePresent;
+//    return _modalAnimationController;
+//}
 - (IBAction)btnCancel:(id)sender {
     NotificationViewController *objNotification = [NotificationViewController new];
     [self.navigationController pushViewController:objNotification animated:YES];
