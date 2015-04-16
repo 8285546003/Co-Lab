@@ -66,6 +66,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [self settingBarButton];
+    [txtSearch becomeFirstResponder];
     [self.view setBackgroundColor:[UIColor PPBackGroundColor]];
     [super viewWillAppear:YES];
 }

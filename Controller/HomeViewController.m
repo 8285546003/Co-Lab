@@ -238,6 +238,7 @@
                     notificationCount=notificationCountModel.NotificatioTotal[[ZERO integerValue]];
                     [[NSUserDefaults standardUserDefaults] setValue:notificationCount.totalnotification forKey:@"NOTIFICATION"];
                     if ([notificationCount.totalnotification integerValue]>0) {
+                        [UIApplication sharedApplication].applicationIconBadgeNumber=[[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"] integerValue];
                         badge = [CustomBadge customBadgeWithString:[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"] withStyle:[BadgeStyle oldStyle]];
                         badge.frame=CGRectMake(52, -1, 25, 25);
                         [badge bringSubviewToFront:cell.contentView];

@@ -35,10 +35,10 @@ DEPENDENCIES:
   - SDWebImage (~> 3.6)
 
 SPEC CHECKSUMS:
-  AFNetworking: 8bee59492a6ff15d69130efa4d0dc67e0094a52a
-  google-plus-ios-sdk: bb7b918c2ee0d5f5e389c4fddc06d71995481f67
-  JSONModel: cbdef0fdff1cc70e913a860861d3072860efd3a1
-  MBProgressHUD: f3747dcbd45a9e855a6b0674550651e0b7ed250c
+  AFNetworking: 10e85a00bb0f475124e4ff2677bf15693b2c1523
+  google-plus-ios-sdk: 47adbe03ea904bdb7aa1c0eca282a23c4686e1bc
+  JSONModel: 6ffcb4ffa3659c9e9a2e5d45d6c7705bab187c03
+  MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
 
 COCOAPODS: 0.35.0

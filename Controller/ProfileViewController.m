@@ -120,8 +120,9 @@ NSArray *cellTitleText;
     else if (indexPath.row==3){
         cell.textLabel.font=[UIFont fontWithName:@"HelveticaNeue-Light" size:20];
         if (![[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"] integerValue]==0) {
+            [UIApplication sharedApplication].applicationIconBadgeNumber=[[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"] integerValue];
            badge = [CustomBadge customBadgeWithString:[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"] withStyle:[BadgeStyle oldStyle]];
-            badge.frame=CGRectMake(45, -4, 25, 25);
+            badge.frame=CGRectMake(52, -4, 25, 25);
             [badge bringSubviewToFront:cell.contentView];
             [cell.contentView  addSubview:badge];
         }
