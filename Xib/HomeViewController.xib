@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="btnLIB" destination="W4e-pa-sua" id="Jei-zV-7XU"/>
                 <outlet property="homeTableView" destination="HVd-pe-aa4" id="NMc-0E-fMV"/>
+                <outlet property="lblLIB" destination="PXU-Wi-xL0" id="4H7-Xf-OVg"/>
                 <outlet property="lblNotificationCount" destination="8m6-wI-c38" id="cmo-Qr-Ebu"/>
                 <outlet property="notificationView" destination="dSX-Au-GD5" id="V8m-Fe-ktp"/>
                 <outlet property="view" destination="1" id="3"/>
@@ -29,18 +30,18 @@
                     <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </tableView>
                 <view contentMode="scaleToFill" id="GId-7K-XUw">
-                    <rect key="frame" x="0.0" y="491" width="320" height="77"/>
+                    <rect key="frame" x="0.0" y="476" width="320" height="77"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Latest Ideas &amp; Brief" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PXU-Wi-xL0">
-                            <rect key="frame" x="65" y="12" width="177" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   Latest Ideas &amp; Brief" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PXU-Wi-xL0">
+                            <rect key="frame" x="23" y="-9" width="239" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="W4e-pa-sua">
-                            <rect key="frame" x="0.0" y="0.0" width="45" height="77"/>
+                            <rect key="frame" x="0.0" y="-3" width="45" height="82"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="lib.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -50,7 +51,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <view alpha="0.94999999999999996" contentMode="scaleToFill" id="dSX-Au-GD5">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="395"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="talk.png" id="HEM-Bb-2KD">

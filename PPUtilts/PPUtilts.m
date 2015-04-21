@@ -37,7 +37,7 @@
     if( screenHeight < screenWidth ){
         screenHeight = screenWidth;
     }
-    if ( screenHeight > 480 && screenHeight < 736 ){
+    if ( screenHeight > 568 && screenHeight < 736 ){
         return YES;
     }
     else{
@@ -63,7 +63,7 @@
     if( screenHeight < screenWidth ){
         screenHeight = screenWidth;
     }
-    if ( screenHeight > 480 ){
+    if ( screenHeight > 667){
         return YES;
     }
     else{

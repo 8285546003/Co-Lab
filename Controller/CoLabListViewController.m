@@ -22,6 +22,7 @@
 #import "MyIdeaModel.h"
 #import "MyBriefModel.h"
 #import "AFNInjector.h"
+#import "HomeViewController.h"
 
 @interface CoLabListViewController (){
     
@@ -295,7 +296,8 @@
 
 - (void)settingBarMethod:(UIButton *)settingBtn{
     switch (settingBtn.tag) {
-        case PPkCancel:_isCurrentControllerPresented?[self dismissViewControllerAnimated:YES completion:nil]:[self.navigationController popViewControllerAnimated:YES];
+        case PPkCancel:_isCurrentControllerPresented?[self dismissViewControllerAnimated:YES completion:nil]:
+            [self.navigationController popViewControllerAnimated:YES];
             break;
         case PPkAttachment:
             break;
@@ -305,6 +307,56 @@
             break;
     }
 }
+
+
+
+
+
+
+//[UIView
+// animateWithDuration:0.2
+// animations:^{
+//     self.view.frame=CGRectMake(0, 0, 320, 568);
+//     
+//     [PPUtilts sharedInstance].apiCall=kApiCallLatestIdeaBrief;
+//     CoLabListViewController *objLatestIB = [CoLabListViewController new];
+//     [objLatestIB setIsCurrentControllerPresented:YES];
+//     UINavigationController *navC=[[UINavigationController alloc]initWithRootViewController:objLatestIB];
+//     navC.view.layer.speed=0.2;
+//     [self presentViewController:navC animated:YES completion:^{
+//         navC.view.layer.speed=1.0;
+//     }];
+//     
+// }];
+
+//-(void)dismiss{
+////    //self.view.layer.speed=0.1f;
+////    [UIView
+////     animateWithDuration:0.2
+////     animations:^{
+////         //self.view.frame=CGRectMake(0, -590, 320, 0);
+////         
+//////         [PPUtilts sharedInstance].apiCall=kApiCallLatestIdeaBrief;
+//////         CoLabListViewController *objLatestIB = [CoLabListViewController new];
+//////         [objLatestIB setIsCurrentControllerPresented:YES];
+////         [self dismissViewControllerAnimated:YES completion:^{
+////                  //[self popoverPresentationController:objLatestIB animated:YES completion:^{
+////             self.view.layer.speed=1.0;
+////         }];
+////         
+////     }];
+//    
+// //   HomeViewController *obj=[HomeViewController new];
+//    //obj.view.layer.speed=0.2f;
+//    [UIView
+//     animateWithDuration:0.2
+//     animations:^{
+//         //[self presentViewController:obj animated:YES completion:^{
+//             //obj.view.layer.speed=0.2;
+//             //obj.view.frame=CGRectMake(0, 568, 320, 568);
+//         //}];
+//     }];
+//}
 
 //-----------------------------------------OVERLAY---------------------------------------------
 

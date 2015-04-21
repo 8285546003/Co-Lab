@@ -55,7 +55,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
+    [self updateFrame];
     // Disable iOS 7 back gesture
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
@@ -114,8 +114,14 @@
 
     UIPanGestureRecognizer *gesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(btnSlideDown)];
     [_viewLIB addGestureRecognizer:gesture];
-    
-    imageArray=ImageArray ;
+    if ([PPUtilts isiPhone6]||[PPUtilts isiPhone6Plus]) {
+        imageArray=ImageArray6 ;
+ 
+    }
+    else{
+        imageArray=ImageArray ;
+
+    }
     cellTitleText = CellTitleText;
     
     
@@ -128,10 +134,12 @@
 -(void)btnSlideDown{
    // _viewLIB.adjustsImageWhenHighlighted = YES;
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
-    animation.duration = .3;
-    // animation.repeatCount = 5;
+    animation.duration = 0.12f;
+   // animation.repeatCount = 2;
     animation.fromValue = [NSValue valueWithCGPoint:_viewLIB.center];
-    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(_viewLIB.center.x, _viewLIB.center.y+40)];
+    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(_viewLIB.center.x, _viewLIB.center.y-40)];
+   // animation.toValue = [NSValue valueWithCGPoint:CGPointMake(_viewLIB.center.x, _viewLIB.center.y+40)];
+
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     animation.autoreverses = YES;
     animation.removedOnCompletion = NO;
@@ -161,11 +169,11 @@
     }
     //[self.homeTableView setBackgroundColor:[UIColor redColor]];
     [self.view setBackgroundColor:[UIColor PPBackGroundColor]];
+
     [self updateFrame];
 }
 -(void)updateFrame{
     _viewLIB.frame=CGRectMake(25, self.view.frame.size.height-76, 320, 103);
-   // _btnLIB.frame=CGRectMake(15, self.view.frame.size.height-103, 60, 103);
     if ([PPUtilts isIPad]) {
         self.homeTableView.frame=CGRectMake(10, 540, self.view.frame.size.width, self.view.frame.size.height);
     }
@@ -174,11 +182,19 @@
         self.homeTableView.frame=CGRectMake(10, 220, self.view.frame.size.width, self.view.frame.size.height);
     }
     else if ([PPUtilts isiPhone6]){
-        self.homeTableView.frame=CGRectMake(10, 318, self.view.frame.size.width, self.view.frame.size.height);
+
+        _viewLIB.frame=CGRectMake(0, self.view.frame.size.height-130, 320, 103);
+        [_btnLIB setImage:[UIImage imageNamed:@"lib6"] forState:UIControlStateNormal];
+        [_btnLIB setFrame:CGRectMake(25, 0, 70, 128)];
+        [_lblLIB setFrame:CGRectMake(90, 30, 200, 50)];
+        self.homeTableView.frame=CGRectMake(10, 150, self.view.frame.size.width, self.view.frame.size.height);
     }
     else if ([PPUtilts isiPhone6Plus]){
-        _viewLIB.frame=CGRectMake(30, self.view.frame.size.height-77, 320, 103);
-        self.homeTableView.frame=CGRectMake(10, 385, self.view.frame.size.width, self.view.frame.size.height);
+        _viewLIB.frame=CGRectMake(5, self.view.frame.size.height-130, 320, 103);
+        [_btnLIB setImage:[UIImage imageNamed:@"lib6"] forState:UIControlStateNormal];
+        [_btnLIB setFrame:CGRectMake(25, 0, 70, 128)];
+        [_lblLIB setFrame:CGRectMake(90, 30, 200, 50)];
+        self.homeTableView.frame=CGRectMake(10, 220, self.view.frame.size.width, self.view.frame.size.height);
     }
     else{
         self.homeTableView.frame=CGRectMake(10, 130, self.view.frame.size.width, self.view.frame.size.height);
@@ -245,6 +261,7 @@
                         [cell.contentView  addSubview:badge];
                 }
                     else{
+                        [UIApplication sharedApplication].applicationIconBadgeNumber=0;
                         [badge removeFromSuperview];
                     }
             }
@@ -292,7 +309,13 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return (indexPath.row==0)?kCellHeightAtIndexZero:(indexPath.row==5)?kCellHeightAtIndexfive:kCellHeight;
+    if ([PPUtilts isiPhone6]||[PPUtilts isiPhone6Plus]) {
+        return (indexPath.row==0)?85:(indexPath.row==5)?kCellHeightAtIndexfive:75;
+    }
+    else{
+        return (indexPath.row==0)?kCellHeightAtIndexZero:(indexPath.row==5)?kCellHeightAtIndexfive:kCellHeight;
+
+    }
 }
 
 
@@ -332,24 +355,43 @@
     [objCreateIdea setIsIdeaSubmitScreen:NavigationType];
     [self.navigationController pushViewController:objCreateIdea animated:YES];
 }
+- (void)animateViewHeight:(UIView*)animateView withAnimationType:(NSString*)animType {
+    CATransition *animation = [CATransition animation];
+    [animation setType:kCATransitionPush];
+    [animation setSubtype:animType];
+    
+    [animation setDuration:0.5];
+    [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    [[animateView layer] addAnimation:animation forKey:kCATransition];
+    animateView.hidden = !animateView.hidden;
+}
 -(void)goToLatestIdeaBriefs{
-    [PPUtilts sharedInstance].apiCall=kApiCallLatestIdeaBrief;
-    CoLabListViewController *objLatestIB = [CoLabListViewController new];
-    [objLatestIB setIsCurrentControllerPresented:YES];
-    UINavigationController *navC=[[UINavigationController alloc]initWithRootViewController:objLatestIB];
-    //navC.view.layer.speed=0.1;
-    // objLatestIB.transitioningDelegate = self;
-    // objLatestIB.modalPresentationStyle = UIModalPresentationCustom;
-    [self presentViewController:navC animated:YES completion:^{
-    // navC.view.layer.speed=1.0;
-    }];
+    self.view.layer.speed=0.1f;
+    [UIView
+     animateWithDuration:0.2
+     animations:^{
+         self.view.frame=CGRectMake(0, -self.view.frame.size.height, self.view.frame.size.width, self.view.frame.size.height);
+         [PPUtilts sharedInstance].apiCall=kApiCallLatestIdeaBrief;
+         CoLabListViewController *objLatestIB = [CoLabListViewController new];
+         [objLatestIB setIsCurrentControllerPresented:YES];
+         UINavigationController *navC=[[UINavigationController alloc]initWithRootViewController:objLatestIB];
+         navC.view.layer.speed=0.15;
+         
+         [self.navigationController presentViewController:navC animated:YES completion:^{
+             navC.view.layer.speed=1.0;
+         }];
+         
+     }];
+//    [PPUtilts sharedInstance].apiCall=kApiCallLatestIdeaBrief;
+//    CoLabListViewController *objLatestIB = [CoLabListViewController new];
+//    [objLatestIB setIsCurrentControllerPresented:YES];
+//    UINavigationController *navC=[[UINavigationController alloc]initWithRootViewController:objLatestIB];
+//    navC.view.layer.speed=0.1;
+//    [self presentViewController:navC animated:YES completion:^{
+//     navC.view.layer.speed=1.0;
+//    }];
     
 }
-//#pragma mark - Transitioning Delegate (Modal)
-//-(id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
-//    _modalAnimationController.type = AnimationTypePresent;
-//    return _modalAnimationController;
-//}
 - (IBAction)btnCancel:(id)sender {
     NotificationViewController *objNotification = [NotificationViewController new];
     [self.navigationController pushViewController:objNotification animated:YES];

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define BASE_URL @"http://miprojects2.com.php53-6.ord1-1.websitetestlink.com/colab/api/version3"
+#define BASE_URL @"http://miprojects2.com.php53-6.ord1-1.websitetestlink.com/colab/api/version4"
 #define BASE_URL_IMAGE @"http://miprojects2.com.php53-6.ord1-1.websitetestlink.com/colab/"
 
 
@@ -56,8 +56,15 @@
 #define     G                   @"G"
 #define     B                   @"B"
 
+#define ImageArray6 @[@"app_icon6.png",@"ideas6.png",@"brief6.png",@"search6.png",@"profile6.png"]
+
+
 #define ImageArray @[@"app_icon.png",@"ideas.png",@"brief.png",@"search.png",@"profile.png"]
 #define  CellTitleText  @[@" CO\\Lab",@" Create New Idea",@" Create New Brief",@" Search",@" Profile"]
+
+
+#define imageArrayProfile6 @[@"profile_white6.png",@"ideaT6.png",@"briefT6.png",@"notification6.png",@"logout6.png"]
+
 
 #define imageArrayProfile @[@"profile_white.png",@"ideaT.png",@"briefT.png",@"notification.png",@"logout.png"]
 #define cellTitleProfile  @[@"Profile",@"My Ideas",@"My Briefs",@"Notifications",@"Log out"]

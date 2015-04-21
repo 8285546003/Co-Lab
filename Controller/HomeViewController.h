@@ -13,5 +13,7 @@
 - (IBAction)btnCancel:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *btnLIB;
 @property (weak, nonatomic) IBOutlet UIView   *viewLIB;
+@property (weak, nonatomic) IBOutlet UILabel   *lblLIB;
+
 
 @end

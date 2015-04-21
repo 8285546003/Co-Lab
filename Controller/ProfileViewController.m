@@ -20,14 +20,22 @@ NSArray *cellTitleText;
     CustomBadge *badge;
 }
 @property (nonatomic, strong) IBOutlet UITableView *profileTableView;
+@property (nonatomic, strong) IBOutlet UIImageView *imgIcon;
+
 @end
 
 @implementation ProfileViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if ([PPUtilts isiPhone6]||[PPUtilts isiPhone6Plus]) {
+        imageArray    = imageArrayProfile6;
 
-    imageArray    = imageArrayProfile;
+    }
+    else{
+        imageArray    = imageArrayProfile;
+
+    }
     cellTitleText = cellTitleProfile;
     
     self.profileTableView.delegate   = self ;
@@ -41,7 +49,9 @@ NSArray *cellTitleText;
     [self.view setBackgroundColor:[UIColor PPProfileBackGroundColor]];
 }
 -(void)updateFrame{
-    
+    _imgIcon.image=nil;
+  //  [_imgIcon setImage:[UIImage imageNamed:@"app_icon"]];
+
     if ([PPUtilts isIPad]) {
         self.profileTableView.frame=CGRectMake(10, 600, self.view.frame.size.width, self.view.frame.size.height);
     }
@@ -50,10 +60,14 @@ NSArray *cellTitleText;
         self.profileTableView.frame=CGRectMake(10, 250, self.view.frame.size.width, self.view.frame.size.height);
     }
     else if ([PPUtilts isiPhone6]){
-        self.profileTableView.frame=CGRectMake(10, 348, self.view.frame.size.width, self.view.frame.size.height);
+        [_imgIcon setImage:[UIImage imageNamed:@"app_icon6"]];
+        [_imgIcon setFrame:CGRectMake(20, 20, 70, 70)];
+        self.profileTableView.frame=CGRectMake(10, 207, self.view.frame.size.width, self.view.frame.size.height);
     }
     else if ([PPUtilts isiPhone6Plus]){
-        self.profileTableView.frame=CGRectMake(10, 420, self.view.frame.size.width, self.view.frame.size.height);
+        [_imgIcon setImage:[UIImage imageNamed:@"app_icon6"]];
+        [_imgIcon setFrame:CGRectMake(20, 20, 70, 70)];
+        self.profileTableView.frame=CGRectMake(10, 275, self.view.frame.size.width, self.view.frame.size.height);
     }
     if ([PPUtilts isiPhone4]){
         self.profileTableView.frame=CGRectMake(10, 160, self.view.frame.size.width, self.view.frame.size.height);
@@ -68,10 +82,17 @@ NSArray *cellTitleText;
 }
 - (void)settingBarButton{
     UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    
-    [cancelButton setFrame:CGRectMake(25, self.view.bounds.size.height - 45, 45, 45)];
-    [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME_WHITE] forState:UIControlStateNormal];
-    [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME_WHITE] forState:UIControlStateSelected];
+    if ([PPUtilts isiPhone6]||[PPUtilts isiPhone6Plus]){
+        [cancelButton setFrame:CGRectMake(25, self.view.bounds.size.height - 70, 70, 70)];
+        [cancelButton setImage:[UIImage imageNamed:@"preWhite6.png"] forState:UIControlStateNormal];
+        [cancelButton setImage:[UIImage imageNamed:@"preWhite6.png"] forState:UIControlStateSelected];
+    }
+    else{
+        [cancelButton setFrame:CGRectMake(25, self.view.bounds.size.height - 45, 45, 45)];
+        [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME_WHITE] forState:UIControlStateNormal];
+        [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME_WHITE] forState:UIControlStateSelected];
+    }
+
     [cancelButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
     cancelButton.tag = PPkCancel;
     [self.view addSubview:cancelButton];
@@ -127,6 +148,7 @@ NSArray *cellTitleText;
             [cell.contentView  addSubview:badge];
         }
         else{
+            [UIApplication sharedApplication].applicationIconBadgeNumber=0;
             [badge removeFromSuperview];
         }
     }
@@ -140,7 +162,15 @@ NSArray *cellTitleText;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
- return (indexPath.row==0) ?  kCellHeightAtIndexZero : kCellHeight;
+    if ([PPUtilts isiPhone6]||[PPUtilts isiPhone6Plus]) {
+        return (indexPath.row==0) ?  85 : 75;
+
+    }
+    else{
+        return (indexPath.row==0) ?  kCellHeightAtIndexZero : kCellHeight;
+
+    }
+    
 }
 
 
