@@ -10,7 +10,7 @@
 #import "MBProgressHUD.h"
 #import "AFNetworking.h"
 #import "PPUtilts.h"
-#import "CoLabListViewController.h"
+#import "HomeViewController.h"
 #import "StatusModel.h"
 #import "StatusModelDetails.h"
 #import "SearchModel.h"
@@ -26,6 +26,7 @@
     StatusModelDetails* status;
     SearchModelDetails* ibModelDetails;
 }
+@property (nonatomic, strong) IBOutlet UIImageView *imgIcon;
 
 @end
 
@@ -33,24 +34,48 @@
 @synthesize allDataTableView,txtSearch;
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-  //  UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-   // UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 60, 50)];
     
-   // self.txtSearch.leftView = paddingView;
-   // self.txtSearch.leftViewMode = UITextFieldViewModeAlways;
-  //  [paddingView addSubview:imageView];
-   // imageView.image = [UIImage imageNamed:@"search"];
-    
-    
-   // CGRect frameRect = self.txtSearch.frame;
-    //frameRect.size.height = 60;
-   // self.txtSearch.frame = frameRect;
     
 
     
-    //self.txtSearch.leftView = paddingView;
-    //self.txtSearch.leftViewMode=UITextFieldViewModeAlways;
+    if ([PPUtilts isiPhone6]||[PPUtilts isiPhone6Plus]) {
+        [_imgIcon setImage:[UIImage imageNamed:@"app_icon6"]];
+         [_imgIcon setFrame:CGRectMake(20, 20, 60, 60)];
+    }
+
+
+    
+
+    if ([PPUtilts isiPhone6]||[PPUtilts isiPhone6Plus]) {
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
+        imageView.image = [UIImage imageNamed:@"search6"];
+        UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 80, 70)];
+        
+        self.txtSearch.leftView = paddingView;
+        self.txtSearch.leftViewMode = UITextFieldViewModeAlways;
+        [paddingView addSubview:imageView];
+        self.txtSearch.leftView = paddingView;
+
+    }
+    else{
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+       imageView.image = [UIImage imageNamed:@"search"];
+        UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 60, 50)];
+        
+        self.txtSearch.leftView = paddingView;
+        self.txtSearch.leftViewMode = UITextFieldViewModeAlways;
+        [paddingView addSubview:imageView];
+        self.txtSearch.leftView = paddingView;
+    }
+
+    CGRect frameRect = self.txtSearch.frame;
+    frameRect.size.height = 60;
+    self.txtSearch.frame = frameRect;
+    
+
+    
+    
+    self.txtSearch.leftViewMode=UITextFieldViewModeAlways;
     self.txtSearch.delegate=self;
     
     self.allDataTableView.backgroundColor=[UIColor clearColor];
@@ -60,6 +85,11 @@
     
     [self.view addGestureRecognizer:gestureRecognizer];
     
+    
+//    CALayer *bottomBorder = [CALayer layer];
+//    bottomBorder.frame = CGRectMake(0.0f, self.txtSearch.bounds.size.height - 2, 280, self.txtSearch.bounds.size.height-5);
+//    bottomBorder.backgroundColor = [UIColor blackColor].CGColor;
+//    [self.txtSearch.layer addSublayer:bottomBorder];
     
     // Do any additional setup after loading the view from its nib.
 }
@@ -159,9 +189,15 @@
 
 - (void)settingBarButton{
     UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    if ([PPUtilts isiPhone6]||[PPUtilts isiPhone6Plus]) {
+        [cancelButton setImage:[UIImage imageNamed:@"cancel6"] forState:UIControlStateNormal];
+        [cancelButton setImage:[UIImage imageNamed:@"cancel6"] forState:UIControlStateSelected];        [cancelButton setFrame:CGRectMake(20, self.view.bounds.size.height - 60, 60, 60)];
+    }
+    else{
     [cancelButton setFrame:CANCEL_BUTTON_FRAME];
     [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateNormal];
     [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateSelected];
+    }
     [cancelButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
     cancelButton.tag=PPkCancel;
     [self.view addSubview:cancelButton];
@@ -171,6 +207,7 @@
 - (void)settingBarMethod:(UIButton *)settingBtn{
     switch (settingBtn.tag) {
         case PPkCancel:
+            [PPUtilts sharedInstance].apiCall=nil;
             [self.navigationController popViewControllerAnimated:YES];
             break;
         case PPkAttachment:
@@ -185,8 +222,7 @@
 
 -(void)goToLatestIdeaBriefs{
     [PPUtilts sharedInstance].apiCall=kApiCallTagSearch;
-    CoLabListViewController *objLatestIB = [CoLabListViewController new];
-    [self.navigationController pushViewController:objLatestIB animated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

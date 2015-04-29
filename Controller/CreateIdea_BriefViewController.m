@@ -8,7 +8,7 @@
 
 #import "CreateIdea_BriefViewController.h"
 #import "MBProgressHUD.h"
-#import "CoLabListViewController.h"
+#import "HomeViewController.h"
 #import "AFNInjector.h"
 #import "StatusModel.h"
 #import "StatusModelDetails.h"
@@ -43,10 +43,10 @@
     [self.mainDataDictionary setValue:@"" forKey:@"DESCRIPTION"];
     [self.mainDataDictionary setValue:@"" forKey:@"TAGS"];
     [self.mainDataDictionary setValue:@"" forKey:@"IMAGE"];
-    self.baseScrollView.frame=CGRectMake(0, 85, self.view.frame.size.width, self.view.frame.size.height);
+    self.baseScrollView.frame=CGRectMake(0, 85, self.view.frame.size.width, self.view.frame.size.height-85);
     if (self.isIdeaSubmitScreen) {
         if (isAnswerTheBriefs) {
-            lbltitle.text=@"Answer The Brief";
+            lbltitle.text=@"Answer the brief";
             isCurrentControllerPresented=YES;
             // self.view.backgroundColor=[UIColor PPYellowColor];
             // self.baseScrollView.backgroundColor = [UIColor PPYellowColor];
@@ -54,14 +54,34 @@
         else{
             //self.view.backgroundColor=[UIColor PPRedColor];
             //self.baseScrollView.backgroundColor = [UIColor PPRedColor];
-            lbltitle.text=@"Create New Idea";
+            lbltitle.text=@"Create new idea";
         }
-        headerImage.image=[UIImage imageNamed:@"ideas.png"];
+        if ([PPUtilts isiPhone6]||[PPUtilts isiPhone6Plus]){
+            headerImage.image=[UIImage imageNamed:@"ideas6.png"];
+            [headerImage setFrame:CGRectMake(20, 20, 60, 60)];
+            self.baseScrollView.frame=CGRectMake(0, 100, self.view.frame.size.width, self.view.frame.size.height-100);
+
+        }
+        else{
+            headerImage.image=[UIImage imageNamed:@"ideas.png"];
+ 
+        }
         self.view.backgroundColor=[UIColor PPYellowColor];
         self.baseScrollView.backgroundColor = [UIColor PPYellowColor];
     }else{
-        lbltitle.text=@"Create New Brief";
-        headerImage.image=[UIImage imageNamed:@"brief.png"];
+        lbltitle.text=@"Create new brief";
+        
+        if ([PPUtilts isiPhone6]||[PPUtilts isiPhone6Plus]){
+             headerImage.image=[UIImage imageNamed:@"brief6.png"];
+            [headerImage setFrame:CGRectMake(20, 20, 60, 60)];
+            self.baseScrollView.frame=CGRectMake(0, 100, self.view.frame.size.width, self.view.frame.size.height-100);
+            
+        }
+        else{
+           headerImage.image=[UIImage imageNamed:@"brief.png"];
+        }
+        
+       
         self.view.backgroundColor=[UIColor PPBlueColor];
         self.baseScrollView.backgroundColor = [UIColor PPBlueColor];
     }
@@ -72,21 +92,22 @@
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:YES];
-    if (!isCurrentControllerPresented) {
-        NoteView *n1=(NoteView *)[self.view viewWithTag:PPkHeader];
-        n1.text=nil;
-        n1.text=@"";
-        NoteView *n2=(NoteView *)[self.view viewWithTag:PPkDescription];
-        n2.text=nil;
-        n2.text=@"";
-        NoteView *n3=(NoteView *)[self.view viewWithTag:PPkTags];
-        n3.text=nil;
-        n3.text=@"";
-        [self.baseScrollView setContentSize:CGSizeMake([[UIScreen mainScreen] bounds].size.width, 0.0f)];
-        dicCharCountLbl.text=@"200";
-        titleCharCountLbl.text = @"80";
-        self.attachmentImage=nil;
-        [self update];
+   // [PPUtilts sharedInstance].apiCall=nil;
+    if (isCurrentControllerPresented) {
+//        NoteView *n1=(NoteView *)[self.view viewWithTag:PPkHeader];
+//        n1.text=nil;
+//        n1.text=@"";
+//        NoteView *n2=(NoteView *)[self.view viewWithTag:PPkDescription];
+//        n2.text=nil;
+//        n2.text=@"";
+//        NoteView *n3=(NoteView *)[self.view viewWithTag:PPkTags];
+//        n3.text=nil;
+//        n3.text=@"";
+//        [self.baseScrollView setContentSize:CGSizeMake([[UIScreen mainScreen] bounds].size.width, 0.0f)];
+//        dicCharCountLbl.text=@"200";
+//        titleCharCountLbl.text = @"80";
+//        self.attachmentImage=nil;
+//        [self update];
     }
     
 }
@@ -334,26 +355,63 @@
 #pragma Setting bar button
 - (void)settingBarButton{
     UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [cancelButton setFrame:CANCEL_BUTTON_FRAME];
-    [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateNormal];
-    [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateSelected];
+    
+    if ([PPUtilts isiPhone6]||[PPUtilts isiPhone6Plus]){
+        [cancelButton setFrame:CANCEL_BUTTON_FRAME6];
+        [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME6] forState:UIControlStateNormal];
+        [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME6] forState:UIControlStateSelected];
+    }
+    else{
+        
+        
+        [cancelButton setFrame:CANCEL_BUTTON_FRAME];
+        [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateNormal];
+        [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateSelected];
+    }
+    
+    
+    
     [cancelButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
     cancelButton.tag = PPkCancel;
     [self.view addSubview:cancelButton];
     
     UIButton *attachButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [attachButton setFrame:ATTACHMENT_BUTTON_FRAME
-];
-    [attachButton setImage:[UIImage imageNamed:ATTACHMENT_BUTTON_NAME] forState:UIControlStateNormal];
-    [attachButton setImage:[UIImage imageNamed:ATTACHMENT_BUTTON_NAME] forState:UIControlStateSelected];
+    
+    
+    if ([PPUtilts isiPhone6]||[PPUtilts isiPhone6Plus]){
+        [attachButton setFrame:ATTACHMENT_BUTTON_FRAME6];
+        [attachButton setImage:[UIImage imageNamed:ATTACHMENT_BUTTON_NAME6] forState:UIControlStateNormal];
+        [attachButton setImage:[UIImage imageNamed:ATTACHMENT_BUTTON_NAME6] forState:UIControlStateSelected];
+    }
+    else{
+        [attachButton setFrame:ATTACHMENT_BUTTON_FRAME];
+        [attachButton setImage:[UIImage imageNamed:ATTACHMENT_BUTTON_NAME] forState:UIControlStateNormal];
+        [attachButton setImage:[UIImage imageNamed:ATTACHMENT_BUTTON_NAME] forState:UIControlStateSelected];
+    }
+    
+
     [attachButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
     attachButton.tag = PPkAttachment;
     [self.view addSubview:attachButton];
     
+    
+    
+    
+    
+    
+    
     UIButton *nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [nextButton setFrame:ADD_BUTTON_FRAME];
-    [nextButton setImage:[UIImage imageNamed:NEXT_BUTTON_NAME] forState:UIControlStateNormal];
-    [nextButton setImage:[UIImage imageNamed:NEXT_BUTTON_NAME] forState:UIControlStateSelected];
+    if ([PPUtilts isiPhone6]||[PPUtilts isiPhone6Plus]){
+        [nextButton setFrame:ADD_BUTTON_FRAME6];
+        [nextButton setImage:[UIImage imageNamed:NEXT_BUTTON_NAME6] forState:UIControlStateNormal];
+        [nextButton setImage:[UIImage imageNamed:NEXT_BUTTON_NAME6] forState:UIControlStateSelected];
+    }
+    else{
+        [nextButton setFrame:ADD_BUTTON_FRAME];
+        [nextButton setImage:[UIImage imageNamed:NEXT_BUTTON_NAME] forState:UIControlStateNormal];
+        [nextButton setImage:[UIImage imageNamed:NEXT_BUTTON_NAME] forState:UIControlStateSelected];
+    }
+    
     [nextButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
     nextButton.tag = PPkAddOrNext;
     [self.view addSubview:nextButton];
@@ -366,8 +424,7 @@
 }
 - (void)settingBarMethod:(UIButton *)settingBtn{
     switch (settingBtn.tag) {
-        case PPkCancel:
-            isCurrentControllerPresented?[self dismissViewControllerAnimated:YES completion:nil]:[self.navigationController popViewControllerAnimated:YES];
+        case PPkCancel:[self dismissViewControllerAnimated:YES completion:nil];
              break;
         case PPkAttachment:[self AddOverLay];
             break;
@@ -394,7 +451,6 @@
 }
 
 - (void)takePhoto {
-    isCurrentControllerPresented=YES;
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         
         UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
@@ -411,20 +467,20 @@
     picker.allowsEditing = YES;
     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     
-    [self presentViewController:picker animated:YES completion:NULL];
+    [self presentViewController:picker animated:YES completion:^{
+       // isCurrentControllerPresented=YES;
+    }];
     
 }
 
 - (void)selectPhoto {
-    isCurrentControllerPresented=YES;
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = YES;
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    
-    [self presentViewController:picker animated:YES completion:NULL];
-    
-    
+    [self presentViewController:picker animated:YES completion:^{
+       // isCurrentControllerPresented=YES;
+    }];
 }
 - (UIImage *)imageWithImage:(UIImage *)image convertToSize:(CGSize)size {
     UIGraphicsBeginImageContext(size);
@@ -443,11 +499,12 @@
 
     //self.attachmentImage.image = [self imageWithImage:chosenImage convertToSize:CGSizeMake(150, 150)];
     [tmpOverlayObj closeMethod:nil];
-    isCurrentControllerPresented=NO;
+  //  isCurrentControllerPresented=NO;
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    
+   //  isCurrentControllerPresented=NO;
+    [tmpOverlayObj closeMethod:nil];
     [picker dismissViewControllerAnimated:YES completion:NULL];
     
 }
@@ -485,6 +542,8 @@
 }
 
 -(void)textViewDidBeginEditing:(UITextView *)textView{
+    textView.autocorrectionType = FALSE; // or use  UITextAutocorrectionTypeNo
+    textView.autocapitalizationType = UITextAutocapitalizationTypeNone;
     if (textView.tag == 103 || textView.tag == 102) {
         [self slideUp];
     }
@@ -523,7 +582,7 @@
         {
             if (!errorAlert.isVisible) {
                 errorAlert = [[UIAlertView alloc] initWithTitle:@"Char count error!"
-                                                        message:@"You have exceeded maximum number of character"
+                                                        message:@"You have exceeded maximum number of characters"
                                                        delegate:nil
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
@@ -546,7 +605,7 @@
         {
             if (!errorAlert.isVisible) {
             errorAlert = [[UIAlertView alloc] initWithTitle:@"Char count error!"
-                                                    message:@"You have exceeded maximum number of character"
+                                                    message:@"You have exceeded maximum number of characters"
                                                    delegate:nil
                                           cancelButtonTitle:@"OK"
                                         otherButtonTitles:nil];
@@ -573,7 +632,7 @@
         {
             if (!errorAlert.isVisible) {
                 errorAlert = [[UIAlertView alloc] initWithTitle:@"Char count error!"
-                                                        message:@"You have exceeded maximum number of character"
+                                                        message:@"You have exceeded maximum number of characters"
                                                        delegate:nil
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
@@ -692,8 +751,12 @@
                         }
                         else{
                             [PPUtilts sharedInstance].apiCall=kApiCallLatestIdeaBrief;
-                            CoLabListViewController *objLatestIB = [CoLabListViewController new];
-                            [self.navigationController pushViewController:objLatestIB animated:YES];
+                            if (isCurrentControllerPresented) {
+                                [self  dismissViewControllerAnimated:YES completion:nil];
+                            }
+                            else{
+                                [self.navigationController popViewControllerAnimated:YES];
+                            }
                         }
 
                     }

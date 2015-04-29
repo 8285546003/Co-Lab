@@ -7,7 +7,7 @@
 //
 
 #import "ProfileViewController.h"
-#import "CoLabListViewController.h"
+#import "HomeViewController.h"
 #import <GooglePlus/GooglePlus.h>
 #import "PPUtilts.h"
 #import "UIColor+PPColor.h"
@@ -49,28 +49,28 @@ NSArray *cellTitleText;
     [self.view setBackgroundColor:[UIColor PPProfileBackGroundColor]];
 }
 -(void)updateFrame{
-    _imgIcon.image=nil;
-  //  [_imgIcon setImage:[UIImage imageNamed:@"app_icon"]];
+    //_imgIcon.image=nil;
+    [_imgIcon setImage:[UIImage imageNamed:@"app_icon"]];
 
     if ([PPUtilts isIPad]) {
         self.profileTableView.frame=CGRectMake(10, 600, self.view.frame.size.width, self.view.frame.size.height);
     }
     else{
     if ([PPUtilts isiPhone5]) {
-        self.profileTableView.frame=CGRectMake(10, 250, self.view.frame.size.width, self.view.frame.size.height);
+        self.profileTableView.frame=CGRectMake(10, 240, self.view.frame.size.width, self.view.frame.size.height);
     }
     else if ([PPUtilts isiPhone6]){
         [_imgIcon setImage:[UIImage imageNamed:@"app_icon6"]];
-        [_imgIcon setFrame:CGRectMake(20, 20, 70, 70)];
-        self.profileTableView.frame=CGRectMake(10, 207, self.view.frame.size.width, self.view.frame.size.height);
+        [_imgIcon setFrame:CGRectMake(25, 20, 60, 60)];
+        self.profileTableView.frame=CGRectMake(10, 250, self.view.frame.size.width, self.view.frame.size.height);
     }
     else if ([PPUtilts isiPhone6Plus]){
         [_imgIcon setImage:[UIImage imageNamed:@"app_icon6"]];
-        [_imgIcon setFrame:CGRectMake(20, 20, 70, 70)];
-        self.profileTableView.frame=CGRectMake(10, 275, self.view.frame.size.width, self.view.frame.size.height);
+        [_imgIcon setFrame:CGRectMake(25, 20, 60, 60)];
+        self.profileTableView.frame=CGRectMake(10, 315, self.view.frame.size.width, self.view.frame.size.height);
     }
     if ([PPUtilts isiPhone4]){
-        self.profileTableView.frame=CGRectMake(10, 160, self.view.frame.size.width, self.view.frame.size.height);
+        self.profileTableView.frame=CGRectMake(10, 154, self.view.frame.size.width, self.view.frame.size.height);
     }
     else{
     }
@@ -82,8 +82,14 @@ NSArray *cellTitleText;
 }
 - (void)settingBarButton{
     UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    if ([PPUtilts isiPhone6]||[PPUtilts isiPhone6Plus]){
-        [cancelButton setFrame:CGRectMake(25, self.view.bounds.size.height - 70, 70, 70)];
+    if ([PPUtilts isiPhone6]){
+        [cancelButton setFrame:CGRectMake(25, self.view.bounds.size.height - 60, 60, 60)];
+        [cancelButton setImage:[UIImage imageNamed:@"preWhite6.png"] forState:UIControlStateNormal];
+        [cancelButton setImage:[UIImage imageNamed:@"preWhite6.png"] forState:UIControlStateSelected];
+    }
+    else if ([PPUtilts isiPhone6Plus]){
+        
+        [cancelButton setFrame:CGRectMake(30, self.view.bounds.size.height - 60, 60, 60)];
         [cancelButton setImage:[UIImage imageNamed:@"preWhite6.png"] forState:UIControlStateNormal];
         [cancelButton setImage:[UIImage imageNamed:@"preWhite6.png"] forState:UIControlStateSelected];
     }
@@ -100,6 +106,9 @@ NSArray *cellTitleText;
 - (void)settingBarMethod:(UIButton *)settingBtn{
     switch (settingBtn.tag) {
         case PPkCancel:
+            if ([PPUtilts sharedInstance].apiCall==kApiCallNotifications) {
+                [PPUtilts sharedInstance].apiCall=nil;
+            }
             [self.navigationController popViewControllerAnimated:YES];
             break;
         case PPkAttachment:
@@ -143,7 +152,15 @@ NSArray *cellTitleText;
         if (![[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"] integerValue]==0) {
             [UIApplication sharedApplication].applicationIconBadgeNumber=[[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"] integerValue];
            badge = [CustomBadge customBadgeWithString:[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"] withStyle:[BadgeStyle oldStyle]];
-            badge.frame=CGRectMake(52, -4, 25, 25);
+            if ([PPUtilts isiPhone6]||[PPUtilts isiPhone6Plus]){
+                badge.frame=CGRectMake(60, -2, 30, 30);
+            }
+            else{
+                badge.frame=CGRectMake(52, -4, 25, 25);
+
+                //badge.frame=CGRectMake(52, -1, 25, 25);
+            }
+
             [badge bringSubviewToFront:cell.contentView];
             [cell.contentView  addSubview:badge];
         }
@@ -163,7 +180,7 @@ NSArray *cellTitleText;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([PPUtilts isiPhone6]||[PPUtilts isiPhone6Plus]) {
-        return (indexPath.row==0) ?  85 : 75;
+        return (indexPath.row==0)?  85 : 65;
 
     }
     else{
@@ -207,8 +224,7 @@ NSArray *cellTitleText;
     else{
         if (GET_USERID) {
             [PPUtilts sharedInstance].apiCall=apiCall;
-            CoLabListViewController *objProfile = [CoLabListViewController new];
-            [self.navigationController pushViewController:objProfile animated:YES];
+            [self.navigationController popViewControllerAnimated:YES];
         }
         else{
             kCustomAlert(@"Failed to Login", @"Something went wrong please go to (profile->Loout) for re-login", @"Ok");

@@ -17,7 +17,22 @@
 
 
 
-#define CANCEL_BUTTON_FRAME      CGRectMake(20, self.view.bounds.size.height - 45, 45, 45)
+#define CANCEL_BUTTON_FRAME       CGRectMake(20, self.view.bounds.size.height - 45, 45, 45)
+#define CANCEL_BUTTON_FRAME6       CGRectMake(20, self.view.bounds.size.height - 60, 60, 60)
+
+#define CANCEL_BUTTON_FRAME6      CGRectMake(20, self.view.bounds.size.height - 60, 60, 60)
+#define ADD_BUTTON_FRAME6         CGRectMake(self.view.frame.size.width -85, self.view.frame.size.height - 60, 60, 60)
+#define ATTACHMENT_BUTTON_FRAME6 CGRectMake(self.view.frame.size.width-150, self.view.frame.size.height - 60, 60, 60)
+#define ADD_BUTTON_NAME6          @"plus6.png"
+#define BACK_BUTTON_NAME6         @"pre6.png"
+
+
+#define CANCEL_BUTTON_NAME6       @"cancel6.png"
+#define NEXT_BUTTON_NAME6         @"next6.png"
+#define ATTACHMENT_BUTTON_NAME6   @"attachment6.png"
+
+
+
 #define CANCEL_BUTTON_NAME       @"cancel.png"
 #define CANCEL_BUTTON_NAME_WHITE @"preWhite.png"
 #define BACK_BUTTON_NAME         @"pre.png"
@@ -41,7 +56,7 @@
 #define kCellHeight              50
 
 #define kCellHeightWithImage     750
-#define kCellHeightWithoutImage  600
+#define kCellHeightWithoutImage  500
 
 
 
@@ -56,11 +71,11 @@
 #define     G                   @"G"
 #define     B                   @"B"
 
-#define ImageArray6 @[@"app_icon6.png",@"ideas6.png",@"brief6.png",@"search6.png",@"profile6.png"]
+#define ImageArray6 @[@"app_icon6.png",@"ideas6.png",@"brief6.png",@"search6.png",@"profile6.png",@"lib6.png"]
 
 
-#define ImageArray @[@"app_icon.png",@"ideas.png",@"brief.png",@"search.png",@"profile.png"]
-#define  CellTitleText  @[@" CO\\Lab",@" Create New Idea",@" Create New Brief",@" Search",@" Profile"]
+#define ImageArray @[@"app_icon.png",@"ideas.png",@"brief.png",@"search.png",@"profile.png",@"lib.png"]
+#define  CellTitleText  @[@" CO\\Lab",@" Create new idea",@" Create new brief",@" Search",@" Profile",@" Latest Ideas & Brief"]
 
 
 #define imageArrayProfile6 @[@"profile_white6.png",@"ideaT6.png",@"briefT6.png",@"notification6.png",@"logout6.png"]
@@ -93,6 +108,8 @@ static NSString *kApiCallLogOut              =@"LogOut";
 static NSString *kApiCallNotifications       =@"NotificatioList";
 static NSString *kApiCallNotificationsCount  =@"MyNotificationTotal";
 static NSString *kApiCallNotificationsDetail =@"NotificationDetail";
+
+
 
 
 static NSString *kResultMessage             =@"Success";
@@ -155,6 +172,10 @@ typedef enum{
 @property (nonatomic, strong) NSString *parent_id;
 @property (nonatomic, strong) NSString *notification_send_time;
 
+@property (nonatomic, strong) NSString *UniversalApi;
+
+
+
 
 
 + (instancetype)sharedInstance;
@@ -167,4 +188,5 @@ typedef enum{
 
 + (BOOL)isIPad;
 + (BOOL)isIPhone;
+
 @end

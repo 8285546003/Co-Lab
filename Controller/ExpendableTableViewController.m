@@ -33,7 +33,9 @@
     IBModelDetails* ibModelDetails;
     StatusModelDetails* status;
     BOOL isAnswerTheBriefs;
-    UILabel *lblHeight;
+    UILabel *heightHeading;
+    UILabel *heightDescription;
+    UIImageView *heightImageView;
 }
 
 @end
@@ -115,23 +117,39 @@
 
 - (void)settingBarButton{
     UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [cancelButton setFrame:CANCEL_BUTTON_FRAME];
-    if ([PPUtilts sharedInstance].apiCall==kApiCallLatestIdeaBrief) {
-        [cancelButton setImage:[UIImage imageNamed:BACK_BUTTON_NAME] forState:UIControlStateNormal];
-        [cancelButton setImage:[UIImage imageNamed:BACK_BUTTON_NAME] forState:UIControlStateSelected];
-    }
-    else{
-        [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateNormal];
-        [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateSelected];
-    }
+        if ([PPUtilts isiPhone6]||[PPUtilts isiPhone6Plus]) {
+            [cancelButton setFrame:CANCEL_BUTTON_FRAME6];
+
+            [cancelButton setImage:[UIImage imageNamed:BACK_BUTTON_NAME6] forState:UIControlStateNormal];
+            [cancelButton setImage:[UIImage imageNamed:BACK_BUTTON_NAME6] forState:UIControlStateSelected];
+        }
+        
+        else{
+            [cancelButton setFrame:CANCEL_BUTTON_FRAME];
+
+            [cancelButton setImage:[UIImage imageNamed:BACK_BUTTON_NAME] forState:UIControlStateNormal];
+            [cancelButton setImage:[UIImage imageNamed:BACK_BUTTON_NAME] forState:UIControlStateSelected];
+        }
+    
     [cancelButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
     cancelButton.tag = PPkCancel;
     [self.view addSubview:cancelButton];
     
     UIButton *addButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [addButton setFrame:ADD_BUTTON_FRAME];
-    [addButton setImage:[UIImage imageNamed:ADD_BUTTON_NAME] forState:UIControlStateNormal];
-    [addButton setImage:[UIImage imageNamed:ADD_BUTTON_NAME] forState:UIControlStateSelected];
+    
+    if ([PPUtilts isiPhone6]||[PPUtilts isiPhone6Plus]) {
+        [addButton setFrame:ADD_BUTTON_FRAME6];
+        [addButton setImage:[UIImage imageNamed:ADD_BUTTON_NAME6] forState:UIControlStateNormal];
+        [addButton setImage:[UIImage imageNamed:ADD_BUTTON_NAME6] forState:UIControlStateSelected];
+    }
+    
+    else{
+        [addButton setFrame:ADD_BUTTON_FRAME];
+        [addButton setImage:[UIImage imageNamed:ADD_BUTTON_NAME] forState:UIControlStateNormal];
+        [addButton setImage:[UIImage imageNamed:ADD_BUTTON_NAME] forState:UIControlStateSelected];
+    }
+    
+
     [addButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
     addButton.tag = PPkAddOrNext;
     [self.view addSubview:addButton];
@@ -139,6 +157,9 @@
 - (void)settingBarMethod:(UIButton *)settingBtn{
     switch (settingBtn.tag) {
         case PPkCancel://_isCurrentControllerPresented?[self dismissViewControllerAnimated:YES completion:^{}]:
+            //[PPUtilts sharedInstance].apiCall=[self getApiCall:[PPUtilts sharedInstance].UniversalApi];
+            [PPUtilts sharedInstance].apiCall=[PPUtilts sharedInstance].UniversalApi;
+
             [self.navigationController popViewControllerAnimated:YES];
             break;
         case PPkAttachment:
@@ -148,6 +169,19 @@
         default:
             break;
     }
+}
+-(NSString*)getApiCall:(NSString*)Api{
+    NSString *strApi;
+    if (Api) {
+        if ([Api isEqualToString:kApiCallDetail]) {
+            strApi=kApiCallLatestIdeaBrief;
+        }
+        else if ([Api isEqualToString:kApiCallMyBrief]){
+            strApi=kApiCallLatestIdeaBrief;
+
+        }
+    }
+    return strApi;
 }
 //-----------------------------------------OVERLAY---------------------------------------------
 
@@ -214,15 +248,18 @@
     if (isexpanded){
         if ([self isImageExist:imageName]) {
             return kCellHeightWithImage;
+            //return heightHeading.frame.size.height+heightDescription.frame.size.height+heightImageView.frame.size.height+50;
+
         }
         else{
             return kCellHeightWithoutImage;
+
+            //return heightHeading.frame.size.height+heightDescription.frame.size.height+50;
         }
     }
     else{
-        return lblHeight.frame.size.height+140;
+        return heightHeading.frame.size.height+50;
 
-       // return kheightForRowAtIndexPath;
     }
 }
 
@@ -246,7 +283,8 @@
     [cell.lblTag setFont:[UIFont fontWithName:@"Helvetica Neue" size:9.0f]];
     cell.lblTag.text=[NSString stringWithFormat:@"     %@",ibModelDetails.user_email];
     cell.lblTag.backgroundColor=[UIColor blackColor];
-    cell.lblTag.alpha=0.5f;
+    cell.lblTag.textAlignment=NSTextAlignmentCenter;
+    cell.lblTag.alpha=0.4f;
     cell.lblTag.textColor=[UIColor whiteColor];
     cell.lblDescription.text=ibModelDetails.description_idea_brief;
     [cell.lblDescription sizeToFit];
@@ -257,7 +295,7 @@
         frame.origin.y = cell.lblHeading.frame.size.height+60;
         cell.imgMain.frame = frame;
         CGRect frame1 = cell.imgMain.frame;
-        frame1.origin.y = cell.imgMain.frame.size.height+cell.lblHeading.frame.size.height+60;
+        frame1.origin.y = cell.imgMain.frame.size.height+cell.lblHeading.frame.size.height+80;
         cell.lblDescription.frame = frame1;
         [cell.lblDescription sizeToFit];
         
@@ -302,22 +340,33 @@
     UIImageView *imgHot=(UIImageView *)  [cell.contentView viewWithTag:PP203];
     UIImageView *imgGoogle=(UIImageView *)  [cell.contentView viewWithTag:PP204];
     [imgGoogle setHidden:NO];
-
-    lblHeight=(UILabel *)[cell.contentView viewWithTag:1000];
-
+    
+    heightHeading=(UILabel *)[cell.contentView viewWithTag:1000];
+    heightDescription=(UILabel *)[cell.contentView viewWithTag:1001];
+    heightImageView=(UIImageView *)[cell.contentView viewWithTag:1002];
     
     NSString *strColorType=ibModelDetails.color_code;
     isAnswerTheBriefs=YES;
+    
+    if (isHot) {
+        cell.lblTag.frame=CGRectMake(40, 22, 240-83, 20);
+
+    }
+    else{
+        cell.lblTag.frame=CGRectMake(40, 22, 240-62, 20);
+
+    }
     
     typedef void (^CaseBlockForColor)();
     NSDictionary *colorType = @{
                                 R:
                                     ^{[cell setBackgroundColor:[UIColor    PPRedColor]];
-                                        //[self.table setBackgroundColor:[UIColor    PPRedColor]];
                                         if (indexPath.row==0) {
                                             [self.view setBackgroundColor:[UIColor    PPRedColor]];
                                         }
-
+                                        cell.lblTag.textColor=[UIColor whiteColor];
+                                        cell.lblHeading.textColor=[UIColor whiteColor];
+                                        cell.lblDescription.textColor=[UIColor whiteColor];
                                         isAnswerTheBriefs=NO;
                                         imgIdea.hidden=NO;
 
@@ -326,42 +375,47 @@
                                             imgGoogle.frame=imgIdea.frame;
 
                                             imgIdea.frame=imgBrief.frame;
+                                            cell.lblTag.frame=CGRectMake(40, 22, 240-62, 20);
+
 
                                         }
                                         else{
                                             imgGoogle.frame=imgBrief.frame;
                                             imgIdea.frame=imgHot.frame;
+                                            cell.lblTag.frame=CGRectMake(40, 22, 240-42, 20);
+
                                         }
                                     },
                                 Y:
                                     ^{[cell setBackgroundColor:[UIColor    PPYellowColor]];
-                                        //[self.table setBackgroundColor:[UIColor    PPYellowColor]];
                                         if (indexPath.row==0) {
                                             [self.view setBackgroundColor:[UIColor    PPYellowColor]];
                                         }
-                                        //[self.view setBackgroundColor:[UIColor    PPYellowColor]];
-                                       // cell.lblTag.backgroundColor=[UIColor PPYellowColor];
+                                        cell.lblTag.textColor=[UIColor PPYellowColor];
 
                                         imgIdea.hidden=NO;
                                         imgBrief.hidden=NO;
                                         if (isHot){
                                             imgHot.hidden =NO;
+                                           // cell.lblTag.frame=CGRectMake(40, 22, 240-63, 20);
+
                                         }
                                         else{
                                             imgGoogle.frame=imgIdea.frame;
 
                                             imgIdea.frame=imgBrief.frame;
                                             imgBrief.frame=imgHot.frame;
+                                           // cell.lblTag.frame=CGRectMake(40, 22, 240-42, 20);
+
                                         }
                                         
                                     },
                                 G:
                                     ^{ [cell setBackgroundColor:[UIColor    PPGreenColor]];
-                                        // [self.table setBackgroundColor:[UIColor    PPGreenColor]];
                                         if (indexPath.row==0) {
                                             [self.view setBackgroundColor:[UIColor    PPGreenColor]];
                                         }
-                                        //[self.view setBackgroundColor:[UIColor    PPGreenColor]];
+                                        cell.lblTag.textColor=[UIColor PPGreenColor];
 
                                         imgIdea.hidden=NO;
                                         imgBrief.hidden=NO;
@@ -379,6 +433,8 @@
    
                                         if (isHot) {
                                             imgHot.hidden =NO;
+                                            //cell.lblTag.frame=CGRectMake(40, 22, 240-63, 20);
+
 
 
                                         }
@@ -386,30 +442,33 @@
                                             imgGoogle.frame=imgBrief.frame;
                                             imgBrief.frame=imgIdea.frame;
                                             imgIdea.frame =imgHot.frame;
-                                            
-                                            
-                                            
-                                           // imgIdea.frame=imgHot.frame;
+                                           // cell.lblTag.frame=CGRectMake(40, 22, 240-42, 20);
 
+                                            
+                                            
+        
                                         }
                                     },
                                 B:
                                     ^{ [cell setBackgroundColor:[UIColor    PPBlueColor]];
-                                        // [self.table setBackgroundColor:[UIColor    PPBlueColor]];
                                         if (indexPath.row==0) {
                                             [self.view setBackgroundColor:[UIColor    PPBlueColor]];
                                         }
-                                        // [self.view setBackgroundColor:[UIColor    PPBlueColor]];
+                                        cell.lblTag.textColor=[UIColor PPBlueColor];
 
                                         imgBrief.hidden=NO;
 
                                         if (isHot) {
                                             imgHot.hidden =NO;
                                             imgGoogle.frame=imgIdea.frame;
+                                            cell.lblTag.frame=CGRectMake(40, 22, 240-62, 20);
+
                                         }
                                         else{
                                             imgGoogle.frame=imgBrief.frame;
                                             imgBrief.frame=imgHot.frame;
+                                            cell.lblTag.frame=CGRectMake(40, 22, 240-42, 20);
+
                                         }
                                     }
                                 };

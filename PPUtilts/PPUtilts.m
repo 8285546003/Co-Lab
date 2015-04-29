@@ -22,7 +22,6 @@
     
     return sharedInstance;
 }
-
 - (BOOL)connected {
     return [AFNetworkReachabilityManager sharedManager].reachable;
 }

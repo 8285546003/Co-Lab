@@ -36,6 +36,7 @@
     CustomBadge *badge;
     
 }
+@property (nonatomic, strong) IBOutlet UIButton *imgIcon;
 
 @end
 
@@ -44,6 +45,11 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    if ([PPUtilts isiPhone6]||[PPUtilts isiPhone6Plus]) {
+        [_imgIcon setBackgroundImage:[UIImage imageNamed:@"notification6"] forState:UIControlStateNormal];
+        [_imgIcon setFrame:CGRectMake(20, 20, 60, 60)];
+    }
 }
 
 // Do any additional setup after loading the view from its nib.
@@ -76,7 +82,14 @@
                     if (![notificationCount.totalnotification integerValue] ==0) {
                         [[NSUserDefaults standardUserDefaults] setValue:notificationCount.totalnotification forKey:@"NOTIFICATION"];
                         badge = [CustomBadge customBadgeWithString:notificationCount.totalnotification withStyle:[BadgeStyle oldStyle]];
-                        badge.frame=CGRectMake(45, 0, 30, 30);
+                        if ([PPUtilts isiPhone6]||[PPUtilts isiPhone6Plus]) {
+                            badge.frame=CGRectMake(65, 5, 30, 30);
+
+                        }
+                        else{
+                            badge.frame=CGRectMake(45, 0, 30, 30);
+
+                        }
                         [self.view addSubview:badge];
                     }
                     else{
@@ -142,6 +155,7 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
      ibModelDetails = notificationModel.NotificatioList[indexPath.row];
+    [PPUtilts sharedInstance].UniversalApi=[PPUtilts sharedInstance].apiCall;
     [PPUtilts sharedInstance].apiCall=kApiCallNotifications;
     [PPUtilts sharedInstance].parent_id=ibModelDetails.n_parent_id;
     [PPUtilts sharedInstance].notification_send_time=ibModelDetails.n_notification_send_time;
@@ -152,9 +166,20 @@
 
 - (void)settingBarButton{
     UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [cancelButton setFrame:CANCEL_BUTTON_FRAME];
-    [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateNormal];
-    [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateSelected];
+    
+    if ([PPUtilts isiPhone6]||[PPUtilts isiPhone6Plus]) {
+        [cancelButton setFrame:CANCEL_BUTTON_FRAME6];
+        [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME6] forState:UIControlStateNormal];
+        [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME6] forState:UIControlStateSelected];
+    }
+    else{
+        [cancelButton setFrame:CANCEL_BUTTON_FRAME];
+        [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateNormal];
+        [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME] forState:UIControlStateSelected];
+        
+    }
+    
+
     [cancelButton addTarget:self action:@selector(settingBarMethod:) forControlEvents:UIControlEventTouchUpInside];
     cancelButton.tag = PPkCancel;
     [self.view addSubview:cancelButton];

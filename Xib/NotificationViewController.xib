@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NotificationViewController">
             <connections>
                 <outlet property="badgeView" destination="5pc-HS-c6W" id="MLA-mK-b8d"/>
+                <outlet property="imgIcon" destination="eMn-83-KgD" id="EDq-DT-xyf"/>
                 <outlet property="notificationTableView" destination="a7b-ud-XNy" id="HCh-UE-o4q"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

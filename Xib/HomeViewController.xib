@@ -7,13 +7,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController">
             <connections>
-                <outlet property="btnLIB" destination="W4e-pa-sua" id="Jei-zV-7XU"/>
-                <outlet property="homeTableView" destination="HVd-pe-aa4" id="NMc-0E-fMV"/>
-                <outlet property="lblLIB" destination="PXU-Wi-xL0" id="4H7-Xf-OVg"/>
-                <outlet property="lblNotificationCount" destination="8m6-wI-c38" id="cmo-Qr-Ebu"/>
-                <outlet property="notificationView" destination="dSX-Au-GD5" id="V8m-Fe-ktp"/>
+                <outlet property="btnLIB" destination="ikI-42-drj" id="scD-Eg-xeP"/>
+                <outlet property="lblNotificationCount" destination="WlU-KN-qpO" id="oRo-VA-CrH"/>
+                <outlet property="notificationView" destination="pYB-9d-fSW" id="kp8-yb-fYP"/>
+                <outlet property="pagingScrollView" destination="Idd-Ow-3Hi" id="hS7-Yc-vFX"/>
                 <outlet property="view" destination="1" id="3"/>
-                <outlet property="viewLIB" destination="GId-7K-XUw" id="ome-hQ-ACh"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -21,69 +19,48 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" id="HVd-pe-aa4">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Idd-Ow-3Hi" customClass="RGMPagingScrollView">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="820"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="datasource" destination="-1" id="LSQ-wc-OOZ"/>
+                        <outlet property="delegate" destination="-1" id="Ckb-se-366"/>
+                    </connections>
+                </scrollView>
+                <view alpha="0.89999999999999991" contentMode="scaleToFill" id="pYB-9d-fSW">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <color key="sectionIndexColor" red="0.14509803921568629" green="0.14509803921568629" blue="0.14509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                </tableView>
-                <view contentMode="scaleToFill" id="GId-7K-XUw">
-                    <rect key="frame" x="0.0" y="476" width="320" height="77"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   Latest Ideas &amp; Brief" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PXU-Wi-xL0">
-                            <rect key="frame" x="23" y="-9" width="239" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
-                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="W4e-pa-sua">
-                            <rect key="frame" x="0.0" y="-3" width="45" height="82"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" image="lib.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                </view>
-                <view alpha="0.94999999999999996" contentMode="scaleToFill" id="dSX-Au-GD5">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="395"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="talk.png" id="HEM-Bb-2KD">
-                            <rect key="frame" x="20" y="20" width="45" height="45"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="notification-screen.png" id="vL0-ls-T4b">
+                            <rect key="frame" x="20" y="137" width="280" height="379"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="talk.png" id="Sub-ng-e1I">
+                            <rect key="frame" x="20" y="80" width="45" height="45"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="kQx-Ew-OiK">
-                            <rect key="frame" x="20" y="504" width="45" height="45"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PKY-Xx-B10">
+                            <rect key="frame" x="90" y="80" width="205" height="45"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ikI-42-drj">
+                            <rect key="frame" x="20" y="524" width="45" height="45"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <state key="normal" backgroundImage="cancel_white.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="btnCancel:" destination="-1" eventType="touchUpInside" id="BUS-L8-NZC"/>
+                                <action selector="btnCancel:" destination="-1" eventType="touchUpInside" id="ZAq-sP-cqb"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9kZ-eD-MT0">
-                            <rect key="frame" x="0.0" y="20" width="320" height="46"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="20"/>
-                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="notification-screen.png" id="y6c-ex-2k6">
-                            <rect key="frame" x="30" y="96" width="259" height="365"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8m6-wI-c38">
-                            <rect key="frame" x="40" y="99" width="239" height="362"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WlU-KN-qpO">
+                            <rect key="frame" x="29" y="165" width="271" height="263"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="32"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -92,12 +69,11 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <point key="canvasLocation" x="490" y="171"/>
+            <point key="canvasLocation" x="471" y="107"/>
         </view>
     </objects>
     <resources>
         <image name="cancel_white.png" width="45" height="45"/>
-        <image name="lib.png" width="45" height="82"/>
         <image name="notification-screen.png" width="240" height="280"/>
         <image name="talk.png" width="45" height="45"/>
     </resources>
