@@ -7,7 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="559" id="rUT-uJ-7kX" customClass="LatestIBCell">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="rUT-uJ-7kX" customClass="LatestIBCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="559"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rUT-uJ-7kX" id="QkQ-Z7-b92">
@@ -51,7 +51,7 @@
                         <rect key="frame" x="218" y="22" width="20" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <imageView hidden="YES" userInteractionEnabled="NO" tag="204" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gp.png" id="rNF-v9-CXs">
+                    <imageView hidden="YES" userInteractionEnabled="NO" tag="204" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="rNF-v9-CXs">
                         <rect key="frame" x="197" y="22" width="20" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                     </imageView>
@@ -62,6 +62,14 @@
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
                         <nil key="highlightedColor"/>
                         <size key="shadowOffset" width="0.0" height="1"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="q1S-VC-Cdj">
+                        <rect key="frame" x="197" y="22" width="20" height="20"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="11"/>
+                        <color key="textColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
                     </label>
                     <button hidden="YES" opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="a6D-bQ-bTM">
                         <rect key="frame" x="40" y="8" width="240" height="52"/>
@@ -77,6 +85,7 @@
                 <outlet property="btnEmail" destination="a6D-bQ-bTM" id="8zL-ew-wLi"/>
                 <outlet property="imgMain" destination="KaW-ro-pdY" id="nMU-5A-tuR"/>
                 <outlet property="lblDescription" destination="fiq-P0-b1D" id="Yd6-JL-tJo"/>
+                <outlet property="lblGPlus" destination="q1S-VC-Cdj" id="V3h-kx-608"/>
                 <outlet property="lblHeading" destination="yZB-c2-EPa" id="i9R-Hl-oEx"/>
                 <outlet property="lblTag" destination="zZx-UT-e9t" id="A9P-7x-DQP"/>
             </connections>
@@ -85,7 +94,6 @@
     </objects>
     <resources>
         <image name="briefL.png" width="20" height="20"/>
-        <image name="gp.png" width="20" height="20"/>
         <image name="hot.png" width="20" height="20"/>
         <image name="ideaL.png" width="20" height="20"/>
         <image name="lines.png" width="240" height="25"/>

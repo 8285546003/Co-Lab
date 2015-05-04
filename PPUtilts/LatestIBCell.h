@@ -10,6 +10,7 @@
 
 @interface LatestIBCell : UITableViewCell
 @property(nonatomic,retain)IBOutlet UILabel     *lblTag;
+@property(nonatomic,retain)IBOutlet UILabel     *lblGPlus;
 @property(nonatomic,retain)IBOutlet UILabel     *lblHeading;
 @property(nonatomic,retain)IBOutlet UILabel     *lblDescription;
 @property(nonatomic,retain)IBOutlet UIImageView *imgMain;

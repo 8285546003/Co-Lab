@@ -97,11 +97,11 @@
                     [self.table setHidden:NO];
                 }
                 else{
-                    kCustomAlert(@"", status.Message, @"Ok");
+                    kCustomAlert(@"", status.Message, @"OK");
                 }
             }
             else{
-                kCustomAlert(@"", status.Message, @"Ok");
+                kCustomAlert(@"", status.Message, @"OK");
             }
             [self settingBarButton];
             [hud hide:YES];
@@ -281,6 +281,10 @@
     cell.lblHeading.text=ibModelDetails.headline;
     [cell.lblHeading sizeToFit];
     [cell.lblTag setFont:[UIFont fontWithName:@"Helvetica Neue" size:9.0f]];
+    
+    NSString *str=@"ℊ+";
+    cell.lblGPlus.text=str;
+
     cell.lblTag.text=[NSString stringWithFormat:@"     %@",ibModelDetails.user_email];
     cell.lblTag.backgroundColor=[UIColor blackColor];
     cell.lblTag.textAlignment=NSTextAlignmentCenter;
@@ -338,8 +342,8 @@
     UIImageView *imgIdea=(UIImageView *) [cell.contentView viewWithTag:PP201];
     UIImageView *imgBrief=(UIImageView *)[cell.contentView viewWithTag:PP202];
     UIImageView *imgHot=(UIImageView *)  [cell.contentView viewWithTag:PP203];
-    UIImageView *imgGoogle=(UIImageView *)  [cell.contentView viewWithTag:PP204];
-    [imgGoogle setHidden:NO];
+   // UIImageView *imgGoogle=(UIImageView *)  [cell.contentView viewWithTag:PP204];
+    //[imgGoogle setHidden:NO];
     
     heightHeading=(UILabel *)[cell.contentView viewWithTag:1000];
     heightDescription=(UILabel *)[cell.contentView viewWithTag:1001];
@@ -349,11 +353,11 @@
     isAnswerTheBriefs=YES;
     
     if (isHot) {
-        cell.lblTag.frame=CGRectMake(40, 22, 240-83, 20);
+        cell.lblTag.frame=CGRectMake(40, 22, 240-63, 20);
 
     }
     else{
-        cell.lblTag.frame=CGRectMake(40, 22, 240-62, 20);
+        cell.lblTag.frame=CGRectMake(40, 22, 240-42, 20);
 
     }
     
@@ -370,19 +374,21 @@
                                         isAnswerTheBriefs=NO;
                                         imgIdea.hidden=NO;
 
+                                        cell.lblGPlus.textColor=[UIColor whiteColor];
+                                        
                                         if (isHot) {
                                             imgHot.hidden =NO;
-                                            imgGoogle.frame=imgIdea.frame;
+                                            cell.lblGPlus.frame=imgIdea.frame;
 
                                             imgIdea.frame=imgBrief.frame;
-                                            cell.lblTag.frame=CGRectMake(40, 22, 240-62, 20);
+                                            cell.lblTag.frame=CGRectMake(40, 22, 240-42, 20);
 
 
                                         }
                                         else{
-                                            imgGoogle.frame=imgBrief.frame;
+                                            cell.lblGPlus.frame=imgBrief.frame;
                                             imgIdea.frame=imgHot.frame;
-                                            cell.lblTag.frame=CGRectMake(40, 22, 240-42, 20);
+                                            cell.lblTag.frame=CGRectMake(40, 22, 240-22, 20);
 
                                         }
                                     },
@@ -392,6 +398,7 @@
                                             [self.view setBackgroundColor:[UIColor    PPYellowColor]];
                                         }
                                         cell.lblTag.textColor=[UIColor PPYellowColor];
+                                        cell.lblGPlus.textColor=[UIColor PPYellowColor];
 
                                         imgIdea.hidden=NO;
                                         imgBrief.hidden=NO;
@@ -401,7 +408,7 @@
 
                                         }
                                         else{
-                                            imgGoogle.frame=imgIdea.frame;
+                                            cell.lblGPlus.frame=imgIdea.frame;
 
                                             imgIdea.frame=imgBrief.frame;
                                             imgBrief.frame=imgHot.frame;
@@ -416,6 +423,7 @@
                                             [self.view setBackgroundColor:[UIColor    PPGreenColor]];
                                         }
                                         cell.lblTag.textColor=[UIColor PPGreenColor];
+                                        cell.lblGPlus.textColor=[UIColor PPGreenColor];
 
                                         imgIdea.hidden=NO;
                                         imgBrief.hidden=NO;
@@ -439,7 +447,7 @@
 
                                         }
                                         else{
-                                            imgGoogle.frame=imgBrief.frame;
+                                            cell.lblGPlus.frame=imgBrief.frame;
                                             imgBrief.frame=imgIdea.frame;
                                             imgIdea.frame =imgHot.frame;
                                            // cell.lblTag.frame=CGRectMake(40, 22, 240-42, 20);
@@ -455,19 +463,20 @@
                                             [self.view setBackgroundColor:[UIColor    PPBlueColor]];
                                         }
                                         cell.lblTag.textColor=[UIColor PPBlueColor];
+                                        cell.lblGPlus.textColor=[UIColor PPBlueColor];
 
                                         imgBrief.hidden=NO;
 
                                         if (isHot) {
                                             imgHot.hidden =NO;
-                                            imgGoogle.frame=imgIdea.frame;
-                                            cell.lblTag.frame=CGRectMake(40, 22, 240-62, 20);
+                                            cell.lblGPlus.frame=imgIdea.frame;
+                                            cell.lblTag.frame=CGRectMake(40, 22, 240-42, 20);
 
                                         }
                                         else{
-                                            imgGoogle.frame=imgBrief.frame;
+                                            cell.lblGPlus.frame=imgBrief.frame;
                                             imgBrief.frame=imgHot.frame;
-                                            cell.lblTag.frame=CGRectMake(40, 22, 240-42, 20);
+                                            cell.lblTag.frame=CGRectMake(40, 22, 240-22, 20);
 
                                         }
                                     }

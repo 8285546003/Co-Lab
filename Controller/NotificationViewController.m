@@ -48,7 +48,7 @@
     
     if ([PPUtilts isiPhone6]||[PPUtilts isiPhone6Plus]) {
         [_imgIcon setBackgroundImage:[UIImage imageNamed:@"notification6"] forState:UIControlStateNormal];
-        [_imgIcon setFrame:CGRectMake(20, 20, 60, 60)];
+        [_imgIcon setFrame:CGRectMake(20, 20, 52, 52)];
     }
 }
 
@@ -83,7 +83,7 @@
                         [[NSUserDefaults standardUserDefaults] setValue:notificationCount.totalnotification forKey:@"NOTIFICATION"];
                         badge = [CustomBadge customBadgeWithString:notificationCount.totalnotification withStyle:[BadgeStyle oldStyle]];
                         if ([PPUtilts isiPhone6]||[PPUtilts isiPhone6Plus]) {
-                            badge.frame=CGRectMake(65, 5, 30, 30);
+                            badge.frame=CGRectMake(55, 5, 30, 30);
 
                         }
                         else{
@@ -100,11 +100,11 @@
                     [self.notificationTableView reloadData];
                 }
                 else{
-                    kCustomAlert(@"", status.Message, @"Ok");
+                    kCustomAlert(@"", status.Message, @"OK");
                 }
             }
             else{
-                kCustomAlert(@"", status.Message, @"Ok");
+                kCustomAlert(@"", status.Message, @"OK");
             }
             [self settingBarButton];
             [hud hide:YES];

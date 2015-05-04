@@ -174,7 +174,7 @@
                 }
             }
             else{
-                kCustomAlert(@"", status.Message, @"Ok");
+                kCustomAlert(@"", status.Message, @"OK");
             }
              [self settingBarButton];
         } else {

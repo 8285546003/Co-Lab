@@ -61,13 +61,13 @@ NSArray *cellTitleText;
     }
     else if ([PPUtilts isiPhone6]){
         [_imgIcon setImage:[UIImage imageNamed:@"app_icon6"]];
-        [_imgIcon setFrame:CGRectMake(25, 20, 60, 60)];
-        self.profileTableView.frame=CGRectMake(10, 250, self.view.frame.size.width, self.view.frame.size.height);
+        [_imgIcon setFrame:CGRectMake(25, 20, 52, 52)];
+        self.profileTableView.frame=CGRectMake(10, 300, self.view.frame.size.width, self.view.frame.size.height);
     }
     else if ([PPUtilts isiPhone6Plus]){
         [_imgIcon setImage:[UIImage imageNamed:@"app_icon6"]];
-        [_imgIcon setFrame:CGRectMake(25, 20, 60, 60)];
-        self.profileTableView.frame=CGRectMake(10, 315, self.view.frame.size.width, self.view.frame.size.height);
+        [_imgIcon setFrame:CGRectMake(25, 20, 52, 52)];
+        self.profileTableView.frame=CGRectMake(10, 360, self.view.frame.size.width, self.view.frame.size.height);
     }
     if ([PPUtilts isiPhone4]){
         self.profileTableView.frame=CGRectMake(10, 154, self.view.frame.size.width, self.view.frame.size.height);
@@ -83,18 +83,18 @@ NSArray *cellTitleText;
 - (void)settingBarButton{
     UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
     if ([PPUtilts isiPhone6]){
-        [cancelButton setFrame:CGRectMake(25, self.view.bounds.size.height - 60, 60, 60)];
+        [cancelButton setFrame:CGRectMake(25, self.view.bounds.size.height - 52, 52, 52)];
         [cancelButton setImage:[UIImage imageNamed:@"preWhite6.png"] forState:UIControlStateNormal];
         [cancelButton setImage:[UIImage imageNamed:@"preWhite6.png"] forState:UIControlStateSelected];
     }
     else if ([PPUtilts isiPhone6Plus]){
         
-        [cancelButton setFrame:CGRectMake(30, self.view.bounds.size.height - 60, 60, 60)];
+        [cancelButton setFrame:CGRectMake(30, self.view.bounds.size.height - 52, 52, 52)];
         [cancelButton setImage:[UIImage imageNamed:@"preWhite6.png"] forState:UIControlStateNormal];
         [cancelButton setImage:[UIImage imageNamed:@"preWhite6.png"] forState:UIControlStateSelected];
     }
     else{
-        [cancelButton setFrame:CGRectMake(25, self.view.bounds.size.height - 45, 45, 45)];
+        [cancelButton setFrame:CGRectMake(25, self.view.bounds.size.height - 52, 52, 52)];
         [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME_WHITE] forState:UIControlStateNormal];
         [cancelButton setImage:[UIImage imageNamed:CANCEL_BUTTON_NAME_WHITE] forState:UIControlStateSelected];
     }
@@ -180,7 +180,7 @@ NSArray *cellTitleText;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([PPUtilts isiPhone6]||[PPUtilts isiPhone6Plus]) {
-        return (indexPath.row==0)?  85 : 65;
+        return (indexPath.row==0)?  85 : 55;
 
     }
     else{
@@ -227,7 +227,7 @@ NSArray *cellTitleText;
             [self.navigationController popViewControllerAnimated:YES];
         }
         else{
-            kCustomAlert(@"Failed to Login", @"Something went wrong please go to (profile->Loout) for re-login", @"Ok");
+            kCustomAlert(@"Failed to Login", @"Something went wrong please go to (profile->Loout) for re-login", @"OK");
         }
 
     }

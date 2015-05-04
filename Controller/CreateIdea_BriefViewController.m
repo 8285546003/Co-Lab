@@ -58,7 +58,7 @@
         }
         if ([PPUtilts isiPhone6]||[PPUtilts isiPhone6Plus]){
             headerImage.image=[UIImage imageNamed:@"ideas6.png"];
-            [headerImage setFrame:CGRectMake(20, 20, 60, 60)];
+            [headerImage setFrame:CGRectMake(20, 20, 52, 52)];
             self.baseScrollView.frame=CGRectMake(0, 100, self.view.frame.size.width, self.view.frame.size.height-100);
 
         }
@@ -424,7 +424,7 @@
 }
 - (void)settingBarMethod:(UIButton *)settingBtn{
     switch (settingBtn.tag) {
-        case PPkCancel:[self dismissViewControllerAnimated:YES completion:nil];
+        case PPkCancel:isCurrentControllerPresented?[self dismissViewControllerAnimated:YES completion:nil]:[self.navigationController popViewControllerAnimated:YES];
              break;
         case PPkAttachment:[self AddOverLay];
             break;
@@ -439,7 +439,7 @@
             [self saveDataToServer];
         }
         else{
-            kCustomAlert(@"Failed to Login", @"Something went wrong please go to profile->Loout to re-login", @"Ok");
+            kCustomAlert(@"Failed to Login", @"Something went wrong please go to profile->Loout to re-login", @"OK");
         }
 }
 -(void)AddOverLay{
@@ -708,16 +708,16 @@
     
     
     if([[self.mainDataDictionary valueForKey:@"HEADER"] isEqualToString:@""]){
-        kCustomAlert(@"", @"Please enter header.",@"Ok");
+        kCustomAlert(@"", @"Please enter header.",@"OK");
         return;
     }
     else if([[self.mainDataDictionary valueForKey:@"DESCRIPTION"] isEqualToString:@""]){
-        kCustomAlert(@"", @"Please enter description.",@"Ok");
+        kCustomAlert(@"", @"Please enter description.",@"OK");
         return;
         
     }
     else if([[self.mainDataDictionary valueForKey:@"TAGS"] isEqualToString:@""]){
-        kCustomAlert(@"", @"Please enter tags.",@"Ok");
+        kCustomAlert(@"", @"Please enter tags.",@"OK");
         return;
         
     }
@@ -768,11 +768,11 @@
                     
                 }
                 else{
-                    kCustomAlert(@"", status.Message, @"Ok");
+                    kCustomAlert(@"", status.Message, @"OK");
                 }
             }
             else{
-                kCustomAlert(@"", status.Message, @"Ok");
+                kCustomAlert(@"", status.Message, @"OK");
             }
             [self settingBarButton];
             [hud hide:YES];

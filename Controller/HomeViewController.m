@@ -157,11 +157,11 @@ static NSInteger numberOfPages = 2;
                     [self->homeTableView reloadData];
                 }
                 else{
-                    kCustomAlert(@"", status.Message, @"Ok");
+                    kCustomAlert(@"", status.Message, @"OK");
                 }
             }
             else{
-                kCustomAlert(@"", status.Message, @"Ok");
+                kCustomAlert(@"", status.Message, @"OK");
             }
         } else {
             
@@ -440,10 +440,10 @@ static NSInteger numberOfPages = 2;
         self->homeTableView.frame=CGRectMake(10, 215, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height-215);
     }
     else if ([PPUtilts isiPhone6]){
-        self->homeTableView.frame=CGRectMake(10, 205, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height-205);
+        self->homeTableView.frame=CGRectMake(10, 270, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height-205);
     }
     else if ([PPUtilts isiPhone6Plus]){
-        self->homeTableView.frame=CGRectMake(10, 275, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height-275);
+        self->homeTableView.frame=CGRectMake(10, 340, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height-275);
     }
     else{
         self->homeTableView.frame=CGRectMake(10, 130, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height-130);
@@ -478,11 +478,11 @@ static NSInteger numberOfPages = 2;
                     [self->allDataTableView reloadData];
                 }
                 else{
-                    kCustomAlert(@"", status.Message, @"Ok");
+                    kCustomAlert(@"", status.Message, @"OK");
                 }
             }
             else{
-                kCustomAlert(@"", status.Message, @"Ok");
+                kCustomAlert(@"", status.Message, @"OK");
             }
             [self settingBarButton];
             [hud hide:YES];
@@ -684,17 +684,14 @@ static NSInteger numberOfPages = 2;
     
     if (self->homeTableView) {
         if ([PPUtilts isiPhone6]||[PPUtilts isiPhone6Plus]) {
-            return (indexPath.row==0)?85:(indexPath.row==5)?116:65;
+            return (indexPath.row==0)?75:(indexPath.row==5)?100:55;
         }
         else{
             return (indexPath.row==0)?kCellHeightAtIndexZero:(indexPath.row==5)?85:kCellHeight;
         }
     }
     else{
-        return lblHeight.frame.size.height+60;
-        [self->allDataTableView beginUpdates];
-        [self->allDataTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-        [self->allDataTableView endUpdates];
+        return lblHeight.frame.size.height+80;
     }
 }
 

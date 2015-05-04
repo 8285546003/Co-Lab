@@ -18,11 +18,11 @@
 
 
 #define CANCEL_BUTTON_FRAME       CGRectMake(20, self.view.bounds.size.height - 45, 45, 45)
-#define CANCEL_BUTTON_FRAME6       CGRectMake(20, self.view.bounds.size.height - 60, 60, 60)
+#define CANCEL_BUTTON_FRAME6       CGRectMake(20, self.view.bounds.size.height - 52, 52, 52)
 
-#define CANCEL_BUTTON_FRAME6      CGRectMake(20, self.view.bounds.size.height - 60, 60, 60)
-#define ADD_BUTTON_FRAME6         CGRectMake(self.view.frame.size.width -85, self.view.frame.size.height - 60, 60, 60)
-#define ATTACHMENT_BUTTON_FRAME6 CGRectMake(self.view.frame.size.width-150, self.view.frame.size.height - 60, 60, 60)
+#define CANCEL_BUTTON_FRAME6      CGRectMake(20, self.view.bounds.size.height - 52, 52, 52)
+#define ADD_BUTTON_FRAME6         CGRectMake(self.view.frame.size.width -85, self.view.frame.size.height - 52, 52, 52)
+#define ATTACHMENT_BUTTON_FRAME6 CGRectMake(self.view.frame.size.width-150, self.view.frame.size.height - 52, 52, 52)
 #define ADD_BUTTON_NAME6          @"plus6.png"
 #define BACK_BUTTON_NAME6         @"pre6.png"
 
@@ -78,7 +78,7 @@
 #define  CellTitleText  @[@" CO\\Lab",@" Create new idea",@" Create new brief",@" Search",@" Profile",@" Latest Ideas & Brief"]
 
 
-#define imageArrayProfile6 @[@"profile_white6.png",@"ideaT6.png",@"briefT6.png",@"notification6.png",@"logout6.png"]
+#define imageArrayProfile6 @[@"profile_white6.png",@"ideas6.png",@"briefT6.png",@"notification6.png",@"logout6.png"]
 
 
 #define imageArrayProfile @[@"profile_white.png",@"ideaT.png",@"briefT.png",@"notification.png",@"logout.png"]

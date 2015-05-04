@@ -174,11 +174,11 @@
                                         [self.navigationController pushViewController:homeCont animated:NO];
                                     }
                                     else{
-                                        kCustomAlert(@"", status.Message, @"Ok");
+                                        kCustomAlert(@"", status.Message, @"OK");
                                     }
                                 }
                                 else{
-                                    kCustomAlert(@"", status.Message, @"Ok");
+                                    kCustomAlert(@"", status.Message, @"OK");
                                 }
                                 [hud hide:YES];
                             } else {
