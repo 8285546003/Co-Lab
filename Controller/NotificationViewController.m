@@ -139,7 +139,25 @@
     
     ibModelDetails = notificationModel.NotificatioList[indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.lblNotificationDescription.text=ibModelDetails.msg;
+    
+    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:ibModelDetails.msg];
+    NSRange selectedRange = NSMakeRange(9, 1); // 4 characters, starting at index 22
+    
+     NSRange selectedRange1 = NSMakeRange(38, string.length-61); // 4 characters, starting at index 22
+    
+    [string beginEditing];
+    
+    [string addAttribute:NSFontAttributeName
+                   value:[UIFont fontWithName:@"HelveticaNeue-Bold" size:12.0]
+                   range:selectedRange];
+    
+    [string addAttribute:NSFontAttributeName
+                   value:[UIFont fontWithName:@"HelveticaNeue-Bold" size:12.0]
+                   range:selectedRange1];
+    
+    [string endEditing];;
+    
+    cell.lblNotificationDescription.attributedText=string;
     cell.lblTime.text=ibModelDetails.send_time;
     
     BOOL isMessageRead=[ibModelDetails.read_status isEqualToString:BOOL_YES];

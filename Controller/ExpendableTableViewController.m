@@ -374,7 +374,7 @@
                                         isAnswerTheBriefs=NO;
                                         imgIdea.hidden=NO;
 
-                                        cell.lblGPlus.textColor=[UIColor whiteColor];
+                                        cell.lblGPlus.textColor=[UIColor PPRedColor];
                                         
                                         if (isHot) {
                                             imgHot.hidden =NO;

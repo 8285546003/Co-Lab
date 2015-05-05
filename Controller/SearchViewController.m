@@ -40,16 +40,16 @@
     
     if ([PPUtilts isiPhone6]||[PPUtilts isiPhone6Plus]) {
         [_imgIcon setImage:[UIImage imageNamed:@"app_icon6"]];
-         [_imgIcon setFrame:CGRectMake(20, 20, 60, 60)];
+         [_imgIcon setFrame:CGRectMake(20, 20, 52, 52)];
     }
 
 
     
 
     if ([PPUtilts isiPhone6]||[PPUtilts isiPhone6Plus]) {
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 52, 52)];
         imageView.image = [UIImage imageNamed:@"search6"];
-        UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 80, 70)];
+        UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 60, 70)];
         
         self.txtSearch.leftView = paddingView;
         self.txtSearch.leftViewMode = UITextFieldViewModeAlways;
@@ -191,7 +191,7 @@
     UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
     if ([PPUtilts isiPhone6]||[PPUtilts isiPhone6Plus]) {
         [cancelButton setImage:[UIImage imageNamed:@"cancel6"] forState:UIControlStateNormal];
-        [cancelButton setImage:[UIImage imageNamed:@"cancel6"] forState:UIControlStateSelected];        [cancelButton setFrame:CGRectMake(20, self.view.bounds.size.height - 60, 60, 60)];
+        [cancelButton setImage:[UIImage imageNamed:@"cancel6"] forState:UIControlStateSelected];        [cancelButton setFrame:CGRectMake(20, self.view.bounds.size.height - 52, 52, 52)];
     }
     else{
     [cancelButton setFrame:CANCEL_BUTTON_FRAME];
