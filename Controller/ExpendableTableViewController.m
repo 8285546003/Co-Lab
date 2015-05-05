@@ -22,6 +22,10 @@
 #import "CreateIdea_BriefViewController.h"
 #import "NotificatioDetail.h"
 
+#import <QuartzCore/QuartzCore.h>
+#import <CoreText/CTStringAttributes.h>
+#import <CoreText/CoreText.h>
+
 
 
 @interface ExpendableTableViewController (){
@@ -263,6 +267,21 @@
     }
 }
 
+- (NSMutableAttributedString *)plainStringToAttributedUnits:(NSString *)string;
+{
+    NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:string];
+    UIFont *font = [UIFont systemFontOfSize:10.0f];
+    UIFont *smallFont = [UIFont systemFontOfSize:9.0f];
+    
+    [attString beginEditing];
+    [attString addAttribute:NSFontAttributeName value:(font) range:NSMakeRange(0, string.length - 2)];
+    [attString addAttribute:NSFontAttributeName value:(smallFont) range:NSMakeRange(string.length - 1, 1)];
+    [attString addAttribute:(NSString*)kCTSuperscriptAttributeName value:@"1" range:NSMakeRange(string.length - 1, 1)];
+    [attString addAttribute:(NSString*)kCTForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, string.length - 1)];
+    [attString endEditing];
+    return attString;
+}
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath isExpanded:(BOOL)isExpanded
 {
     NSString *CellIdentifier = kStaticIdentifier;
@@ -282,10 +301,15 @@
     [cell.lblHeading sizeToFit];
     [cell.lblTag setFont:[UIFont fontWithName:@"Helvetica Neue" size:9.0f]];
     
+    
     NSString *str=@"ℊ+";
-    cell.lblGPlus.text=str;
+    
+    cell.lblGPlus.attributedText = [self plainStringToAttributedUnits:str];
+    
+    
+   // cell.lblGPlus.text=str;
 
-    cell.lblTag.text=[NSString stringWithFormat:@"     %@",ibModelDetails.user_email];
+    cell.lblTag.text=[NSString stringWithFormat:@"%@",ibModelDetails.user_email];
     cell.lblTag.backgroundColor=[UIColor blackColor];
     cell.lblTag.textAlignment=NSTextAlignmentCenter;
     cell.lblTag.alpha=0.4f;
@@ -388,7 +412,7 @@
                                         else{
                                             cell.lblGPlus.frame=imgBrief.frame;
                                             imgIdea.frame=imgHot.frame;
-                                            cell.lblTag.frame=CGRectMake(40, 22, 240-22, 20);
+                                            cell.lblTag.frame=CGRectMake(40, 22, 240-21, 20);
 
                                         }
                                     },
@@ -476,7 +500,7 @@
                                         else{
                                             cell.lblGPlus.frame=imgBrief.frame;
                                             imgBrief.frame=imgHot.frame;
-                                            cell.lblTag.frame=CGRectMake(40, 22, 240-22, 20);
+                                            cell.lblTag.frame=CGRectMake(40, 22, 240-21, 20);
 
                                         }
                                     }
@@ -486,6 +510,8 @@
     
     return cell;
 }
+
+
 - (void)buttonPressedAction:(id)sender
 {
     CGPoint buttonOriginInTableView = [sender convertPoint:CGPointZero toView:self.table];

@@ -63,11 +63,11 @@
                         <nil key="highlightedColor"/>
                         <size key="shadowOffset" width="0.0" height="1"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="q1S-VC-Cdj">
-                        <rect key="frame" x="197" y="22" width="20" height="20"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="q1S-VC-Cdj">
+                        <rect key="frame" x="185" y="15" width="30" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="11"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
                         <color key="textColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -89,7 +89,7 @@
                 <outlet property="lblHeading" destination="yZB-c2-EPa" id="i9R-Hl-oEx"/>
                 <outlet property="lblTag" destination="zZx-UT-e9t" id="A9P-7x-DQP"/>
             </connections>
-            <point key="canvasLocation" x="665.5" y="123.5"/>
+            <point key="canvasLocation" x="665" y="123.5"/>
         </tableViewCell>
     </objects>
     <resources>
