@@ -244,9 +244,13 @@
     if (indexPath.row==[ZERO intValue]){
         if ([self isImageExist:imageName]) {
             return kCellHeightWithImage;
+           // return heightHeading.frame.size.height+heightDescription.frame.size.height+heightImageView.frame.size.height+50;
+
         }
         else{
             return kCellHeightWithoutImage;
+            //return heightHeading.frame.size.height+heightDescription.frame.size.height;
+
         }
     }
     if (isexpanded){
@@ -281,6 +285,22 @@
     [attString endEditing];
     return attString;
 }
+- (float)heightOfLabel:(NSString *)tString{
+    
+    NSString *trimmedString = [tString stringByTrimmingCharactersInSet:
+                               [NSCharacterSet whitespaceCharacterSet]];
+    NSString *tmpString = trimmedString;
+    CGSize constrainedSize = CGSizeMake(340, FLT_MAX);
+    
+    NSDictionary *attributesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                          [UIFont fontWithName:@"HelveticaNeue" size:36.0f], NSFontAttributeName,nil];
+    
+    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:tmpString attributes:attributesDictionary];
+    
+    CGRect requiredHeight = [string boundingRectWithSize:constrainedSize options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+    return requiredHeight.size.height;
+}
+
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath isExpanded:(BOOL)isExpanded
 {
@@ -297,8 +317,56 @@
     
     ([PPUtilts sharedInstance].apiCall==kApiCallNotifications)?(ibModelDetails= notificationModel.NotificatioDetail[indexPath.row]):(ibModelDetails = ibModel.Detail[indexPath.row]);
 
-    cell.lblHeading.text=ibModelDetails.headline;
-    [cell.lblHeading sizeToFit];
+      cell.lblHeading.text=ibModelDetails.headline;
+    
+       NSString *imageName=ibModelDetails.image;
+    
+    if ([PPUtilts isiPhone6Plus]||[PPUtilts isiPhone6]) {
+        if ([self isImageExist:imageName]) {
+            cell.lblHeading.lineBreakMode=NSLineBreakByCharWrapping;
+        }
+        else{
+            
+            
+            
+            
+            
+            
+            
+            float newHeight = [self heightOfLabel:ibModelDetails.headline];
+            
+            NSLog(@"=======height === %f",newHeight);
+            CGRect newRect;
+            if (newHeight<50) {
+                newRect = CGRectMake(40, 51, 240, newHeight);
+                [cell.lblHeading setFrame:newRect];
+                
+                
+           }
+            
+            else if(newHeight >240){
+                newRect = CGRectMake(40, 31, 240, newHeight);
+                [cell.lblHeading setFrame:newRect];
+            }
+            else{
+                newRect = CGRectMake(40, 31, 240, newHeight);
+                [cell.lblHeading setFrame:newRect];
+            }
+            [cell.lblDescription setFrame:CGRectMake(40, 51, 240, newHeight)];
+
+            cell.lblHeading.lineBreakMode=NSLineBreakByCharWrapping;
+            [cell.lblHeading sizeToFit];
+        }
+        
+
+        
+
+    }
+    else{
+        cell.lblHeading.lineBreakMode=NSLineBreakByCharWrapping;
+        [cell.lblHeading sizeToFit];
+    }
+
     [cell.lblTag setFont:[UIFont fontWithName:@"Helvetica Neue" size:9.0f]];
     
     
@@ -316,9 +384,12 @@
     cell.lblTag.textColor=[UIColor whiteColor];
     cell.lblDescription.text=ibModelDetails.description_idea_brief;
     [cell.lblDescription sizeToFit];
-    NSString *imageName=ibModelDetails.image;
+    
+    
+ 
 
     if ([self isImageExist:imageName]) {
+
         CGRect frame = cell.imgMain.frame;
         frame.origin.y = cell.lblHeading.frame.size.height+60;
         cell.imgMain.frame = frame;
@@ -345,6 +416,7 @@
                                         cell.imgMain.image = image;
                                         [activityIndicator stopAnimating];
                                         [activityIndicator removeFromSuperview];
+                                        activityIndicator.center = cell.imgMain.center;
                                     }
                                 }
                                 else{
@@ -377,11 +449,11 @@
     isAnswerTheBriefs=YES;
     
     if (isHot) {
-        cell.lblTag.frame=CGRectMake(40, 22, 240-63, 20);
+        cell.lblTag.frame=CGRectMake(40, 26, 240-63, 20);
 
     }
     else{
-        cell.lblTag.frame=CGRectMake(40, 22, 240-42, 20);
+        cell.lblTag.frame=CGRectMake(40, 26, 240-42, 20);
 
     }
     
@@ -405,14 +477,14 @@
                                             cell.lblGPlus.frame=imgIdea.frame;
 
                                             imgIdea.frame=imgBrief.frame;
-                                            cell.lblTag.frame=CGRectMake(40, 22, 240-42, 20);
+                                            cell.lblTag.frame=CGRectMake(40, 26, 240-42, 20);
 
 
                                         }
                                         else{
                                             cell.lblGPlus.frame=imgBrief.frame;
                                             imgIdea.frame=imgHot.frame;
-                                            cell.lblTag.frame=CGRectMake(40, 22, 240-21, 20);
+                                            cell.lblTag.frame=CGRectMake(40, 26, 240-21, 20);
 
                                         }
                                     },
@@ -494,13 +566,13 @@
                                         if (isHot) {
                                             imgHot.hidden =NO;
                                             cell.lblGPlus.frame=imgIdea.frame;
-                                            cell.lblTag.frame=CGRectMake(40, 22, 240-42, 20);
+                                            cell.lblTag.frame=CGRectMake(40, 26, 240-42, 20);
 
                                         }
                                         else{
                                             cell.lblGPlus.frame=imgBrief.frame;
                                             imgBrief.frame=imgHot.frame;
-                                            cell.lblTag.frame=CGRectMake(40, 22, 240-21, 20);
+                                            cell.lblTag.frame=CGRectMake(40, 26, 240-21, 20);
 
                                         }
                                     }

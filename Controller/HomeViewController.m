@@ -598,8 +598,17 @@ static NSInteger numberOfPages = 2;
         cell.lblHeading.numberOfLines=5;
         cell.lblHeading.lineBreakMode=NSLineBreakByCharWrapping;
         
+        
+        
+        
+
+        
+        
         cell.lblHeading.text=ibModelDetails.headline;
 
+        
+        
+        
         [cell.lblHeading sizeToFit];
         cell.lblTag.text=ibModelDetails.tag;
         isHot  =[ibModelDetails.is_hot  isEqualToString:BOOL_YES];
@@ -691,9 +700,55 @@ static NSInteger numberOfPages = 2;
         }
     }
     else{
-        return lblHeight.frame.size.height+80;
+        if ([PPUtilts isiPhone6]||[PPUtilts isiPhone6Plus]) {
+        ibModelDetails = ibModel.LatestIdeaBrief[indexPath.row];
+        float newHeight = [self heightOfLabel:ibModelDetails.headline];
+        NSLog(@"=======height === %f",newHeight);
+        CGRect newRect;
+        
+        if (newHeight<50) {
+            newRect = CGRectMake(40, 51, 240, newHeight);
+            [lblHeight setFrame:newRect];
+            return lblHeight.frame.size.height+70;
+        }
+        
+        else if(newHeight >240){
+            newRect = CGRectMake(40, 31, 240, newHeight);
+            [lblHeight setFrame:newRect];
+            return lblHeight.frame.size.height+70;
+        }
+        else{
+            newRect = CGRectMake(40, 31, 240, newHeight);
+            [lblHeight setFrame:newRect];
+            return lblHeight.frame.size.height+10;
+        }
+    }
+        
+        else{
+            return lblHeight.frame.size.height+80;
+        }
+        
+        
     }
 }
+
+
+- (float)heightOfLabel:(NSString *)tString{
+    
+    NSString *trimmedString = [tString stringByTrimmingCharactersInSet:
+                               [NSCharacterSet whitespaceCharacterSet]];
+    NSString *tmpString = trimmedString;
+    CGSize constrainedSize = CGSizeMake(340, FLT_MAX);
+    
+    NSDictionary *attributesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                          [UIFont fontWithName:@"HelveticaNeue" size:36.0f], NSFontAttributeName,nil];
+    
+    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:tmpString attributes:attributesDictionary];
+    
+    CGRect requiredHeight = [string boundingRectWithSize:constrainedSize options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+    return requiredHeight.size.height;
+}
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView.tag==2000) {
