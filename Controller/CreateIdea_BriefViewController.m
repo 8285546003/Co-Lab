@@ -150,8 +150,17 @@
    // CGRect screenRect = [[UIScreen mainScreen] bounds];
     //CGFloat screenWidth = screenRect.size.width;
    // self.attachmentImage.frame=CGRectMake(40, textView.contentSize.height+25, 250, 200);
+
     self.attachmentImage.alpha=1.0f;
-    self.attachmentImage = [[UIImageView alloc] initWithFrame:CGRectMake(40, height, 240, 170)];
+    
+    if ([PPUtilts isiPhone6]||[PPUtilts isiPhone6Plus]) {
+        self.attachmentImage = [[UIImageView alloc] initWithFrame:CGRectMake(40, height, self.view.frame.size.width-80, 170)];
+
+    }
+    else{
+        self.attachmentImage = [[UIImageView alloc] initWithFrame:CGRectMake(40, height, 240, 170)];
+
+    }
     [self.baseScrollView addSubview:self.attachmentImage];
     height += 200;
 }

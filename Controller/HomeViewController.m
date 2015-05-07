@@ -155,6 +155,13 @@ static NSInteger numberOfPages = 2;
                 NSString *str=[NSString stringWithFormat:@"%@.                          YOU HAVE                        %@ NEW IDEAS                 TO YOUR                          %@ BRIEFS.",[[NSUserDefaults standardUserDefaults] valueForKey:@"USERNAME"],[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATIONIDEA"],notificationCount.totalnotification];
                     lblNotificationCount.text=str;
                     [self->homeTableView reloadData];
+                    if ([[NSUserDefaults standardUserDefaults]boolForKey:@"FIRSTLOGIN"]) {
+                        notificationView.hidden=NO;
+                        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"FIRSTLOGIN"];
+                    }
+                    else{
+                        notificationView.hidden=YES;
+                    }
                 }
                 else{
                     kCustomAlert(@"", status.Message, @"OK");
@@ -384,13 +391,7 @@ static NSInteger numberOfPages = 2;
     [self addPageView];
     if (GET_USERID) {
         [self getNotificationCount];
-        if ([[NSUserDefaults standardUserDefaults]boolForKey:@"FIRSTLOGIN"]) {
-            notificationView.hidden=NO;
-            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"FIRSTLOGIN"];
-        }
-        else{
-            notificationView.hidden=YES;
-        }
+
     }
     [self updateFrame];
     [self.pagingScrollView reloadData];
@@ -557,7 +558,7 @@ static NSInteger numberOfPages = 2;
                         [UIApplication sharedApplication].applicationIconBadgeNumber=[[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"] integerValue];
                         badge = [CustomBadge customBadgeWithString:[[NSUserDefaults standardUserDefaults] valueForKey:@"NOTIFICATION"] withStyle:[BadgeStyle oldStyle]];
                         if ([PPUtilts isiPhone6]||[PPUtilts isiPhone6Plus]){
-                            badge.frame=CGRectMake(60, -2, 30, 30);
+                            badge.frame=CGRectMake(55, -2, 30, 30);
                         }
                         else{
                             badge.frame=CGRectMake(48, -1, 25, 25);
@@ -596,20 +597,31 @@ static NSInteger numberOfPages = 2;
             cell.lblHeading.font=[UIFont boldSystemFontOfSize:70.0f];
         }
         cell.lblHeading.numberOfLines=5;
+        
+        
         cell.lblHeading.lineBreakMode=NSLineBreakByCharWrapping;
         
+        //[cell.lblHeading sizeToFit];
         
-        
-        
+        if ([PPUtilts isiPhone6]||[PPUtilts isiPhone6Plus]) {
+            NSString *labelText =ibModelDetails.headline;
+            NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:labelText];
+            NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+            [paragraphStyle setLineHeightMultiple:0.90f];
+            [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [labelText length])];
+            cell.lblHeading.attributedText = attributedString ;
+        }
+        else{
+             cell.lblHeading.text=ibModelDetails.headline;
+
+        }
 
         
         
-        cell.lblHeading.text=ibModelDetails.headline;
 
-        
-        
-        
-        [cell.lblHeading sizeToFit];
+      //  [cell.lblHeading setBackgroundColor:[UIColor magentaColor]];
+
+
         cell.lblTag.text=ibModelDetails.tag;
         isHot  =[ibModelDetails.is_hot  isEqualToString:BOOL_YES];
         isBrief=[ibModelDetails.is_brief isEqualToString:BOOL_YES];
@@ -690,6 +702,12 @@ static NSInteger numberOfPages = 2;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    ibModelDetails = ibModel.LatestIdeaBrief[indexPath.row];
+    float newHeight;
+    CGRect newRect;
+
+    lblHeight.lineBreakMode=NSLineBreakByCharWrapping;
+    [lblHeight sizeToFit];
     
     if (self->homeTableView) {
         if ([PPUtilts isiPhone6]||[PPUtilts isiPhone6Plus]) {
@@ -701,33 +719,95 @@ static NSInteger numberOfPages = 2;
     }
     else{
         if ([PPUtilts isiPhone6]||[PPUtilts isiPhone6Plus]) {
-        ibModelDetails = ibModel.LatestIdeaBrief[indexPath.row];
-        float newHeight = [self heightOfLabel:ibModelDetails.headline];
-        NSLog(@"=======height === %f",newHeight);
-        CGRect newRect;
-        
-        if (newHeight<50) {
-            newRect = CGRectMake(40, 51, 240, newHeight);
-            [lblHeight setFrame:newRect];
-            return lblHeight.frame.size.height+70;
-        }
-        
-        else if(newHeight >240){
-            newRect = CGRectMake(40, 31, 240, newHeight);
-            [lblHeight setFrame:newRect];
-            return lblHeight.frame.size.height+70;
-        }
-        else{
-            newRect = CGRectMake(40, 31, 240, newHeight);
-            [lblHeight setFrame:newRect];
-            return lblHeight.frame.size.height+10;
-        }
+            
+            
+            if (ibModelDetails!=nil) {
+                 newHeight = [self heightOfLabel:ibModelDetails.headline];
+            }
+            else{
+                return lblHeight.frame.size.height+80;
+            }
+          
+            
+            if (newHeight<50) {
+                newRect = CGRectMake(40, 53, self.view.frame.size.width-130, newHeight);
+                
+                [lblHeight setFrame:newRect];
+                return lblHeight.frame.size.height+63;
+            }
+            
+            else if(newHeight >240){
+                newRect = CGRectMake(40, 10, self.view.frame.size.width-130, newHeight);
+                [lblHeight setFrame:newRect];
+                NSLog(@"=======height === %f \n and %@",newHeight,lblHeight.text);
+
+                return lblHeight.frame.size.height-20;
+            }
+            else if(newHeight >185){
+                newRect = CGRectMake(40, 40, self.view.frame.size.width-130, newHeight);
+                [lblHeight setFrame:newRect];
+                NSLog(@"=======height === %f \n and %@",newHeight,lblHeight.text);
+
+                return lblHeight.frame.size.height+40;
+            }
+
+            else{
+                newRect = CGRectMake(40, 48, self.view.frame.size.width-130, newHeight);
+                [lblHeight setFrame:newRect];
+                NSLog(@"=======height === %f \n and %@",newHeight,lblHeight.text);
+
+                return lblHeight.frame.size.height+53;
+            }
+
+
     }
         
         else{
-            return lblHeight.frame.size.height+80;
+            
+            //iPhone 5
+            
+            
+            if (ibModelDetails!=nil) {
+                newHeight = [self heightOfLabel:ibModelDetails.headline];
+            }
+            else{
+                return lblHeight.frame.size.height+80;
+            }
+            
+            
+            if (newHeight<50) {
+                newRect = CGRectMake(40, 53, 240, newHeight);
+    
+                [lblHeight setFrame:newRect];
+                NSLog(@"=======height === %f \n and %@",newHeight,lblHeight.text);
+
+                return lblHeight.frame.size.height+68;
+            }
+            
+            else if(newHeight >240){
+                newRect = CGRectMake(40, 25, 240, newHeight);
+                [lblHeight setFrame:newRect];
+                NSLog(@"=======height === %f \n and %@",newHeight,lblHeight.text);
+                
+                return lblHeight.frame.size.height+25;
+            }
+            else if(newHeight >190){
+                newRect = CGRectMake(40, 45,240, newHeight+50);
+                [lblHeight setFrame:newRect];
+                NSLog(@"=======height === %f \n and %@",newHeight,lblHeight.text);
+                
+                return lblHeight.frame.size.height+40;
+            }
+            
+            else{
+                newRect = CGRectMake(40, 48, 240, newHeight);
+                [lblHeight setFrame:newRect];
+                NSLog(@"=======height === %f \n and %@",newHeight,lblHeight.text);
+                
+                return lblHeight.frame.size.height+53;
+            }
+
         }
-        
         
     }
 }
@@ -738,12 +818,13 @@ static NSInteger numberOfPages = 2;
     NSString *trimmedString = [tString stringByTrimmingCharactersInSet:
                                [NSCharacterSet whitespaceCharacterSet]];
     NSString *tmpString = trimmedString;
-    CGSize constrainedSize = CGSizeMake(340, FLT_MAX);
+    CGSize constrainedSize = CGSizeMake(self.view.frame.size.width, FLT_MAX);
     
     NSDictionary *attributesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-                                          [UIFont fontWithName:@"HelveticaNeue" size:36.0f], NSFontAttributeName,nil];
+                                          [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:40.0f], NSFontAttributeName,nil];
     
     NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:tmpString attributes:attributesDictionary];
+    
     
     CGRect requiredHeight = [string boundingRectWithSize:constrainedSize options:NSStringDrawingUsesLineFragmentOrigin context:nil];
     return requiredHeight.size.height;

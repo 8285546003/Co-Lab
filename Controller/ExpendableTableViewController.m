@@ -244,29 +244,35 @@
     if (indexPath.row==[ZERO intValue]){
         if ([self isImageExist:imageName]) {
             return kCellHeightWithImage;
-           // return heightHeading.frame.size.height+heightDescription.frame.size.height+heightImageView.frame.size.height+50;
 
         }
         else{
             return kCellHeightWithoutImage;
-            //return heightHeading.frame.size.height+heightDescription.frame.size.height;
 
         }
     }
     if (isexpanded){
         if ([self isImageExist:imageName]) {
             return kCellHeightWithImage;
-            //return heightHeading.frame.size.height+heightDescription.frame.size.height+heightImageView.frame.size.height+50;
 
         }
         else{
             return kCellHeightWithoutImage;
 
-            //return heightHeading.frame.size.height+heightDescription.frame.size.height+50;
         }
     }
     else{
-        return heightHeading.frame.size.height+50;
+
+        if ([PPUtilts isiPhone6Plus]||[PPUtilts isiPhone6]) {
+            return heightHeading.frame.size.height+50;
+
+        }
+        else{
+            
+            return heightHeading.frame.size.height+80;
+
+        }
+        
 
     }
 }
@@ -293,7 +299,7 @@
     CGSize constrainedSize = CGSizeMake(340, FLT_MAX);
     
     NSDictionary *attributesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-                                          [UIFont fontWithName:@"HelveticaNeue" size:36.0f], NSFontAttributeName,nil];
+                                          [UIFont fontWithName:@"HelveticaNeue" size:40.0f], NSFontAttributeName,nil];
     
     NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:tmpString attributes:attributesDictionary];
     
@@ -317,66 +323,29 @@
     
     ([PPUtilts sharedInstance].apiCall==kApiCallNotifications)?(ibModelDetails= notificationModel.NotificatioDetail[indexPath.row]):(ibModelDetails = ibModel.Detail[indexPath.row]);
 
-      cell.lblHeading.text=ibModelDetails.headline;
-    
-       NSString *imageName=ibModelDetails.image;
-    
     if ([PPUtilts isiPhone6Plus]||[PPUtilts isiPhone6]) {
-        if ([self isImageExist:imageName]) {
-            cell.lblHeading.lineBreakMode=NSLineBreakByCharWrapping;
-        }
-        else{
-            
-            
-            
-            
-            
-            
-            
-            float newHeight = [self heightOfLabel:ibModelDetails.headline];
-            
-            NSLog(@"=======height === %f",newHeight);
-            CGRect newRect;
-            if (newHeight<50) {
-                newRect = CGRectMake(40, 51, 240, newHeight);
-                [cell.lblHeading setFrame:newRect];
-                
-                
-           }
-            
-            else if(newHeight >240){
-                newRect = CGRectMake(40, 31, 240, newHeight);
-                [cell.lblHeading setFrame:newRect];
-            }
-            else{
-                newRect = CGRectMake(40, 31, 240, newHeight);
-                [cell.lblHeading setFrame:newRect];
-            }
-            [cell.lblDescription setFrame:CGRectMake(40, 51, 240, newHeight)];
-
-            cell.lblHeading.lineBreakMode=NSLineBreakByCharWrapping;
-            [cell.lblHeading sizeToFit];
-        }
         
-
-        
-
+        NSString *labelText =ibModelDetails.headline;
+        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:labelText];
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        [paragraphStyle setLineHeightMultiple:0.85f];
+        [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [labelText length])];
+        cell.lblHeading.attributedText = attributedString ;
     }
     else{
-        cell.lblHeading.lineBreakMode=NSLineBreakByCharWrapping;
-        [cell.lblHeading sizeToFit];
-    }
+        
+          cell.lblHeading.text=ibModelDetails.headline;
 
-    [cell.lblTag setFont:[UIFont fontWithName:@"Helvetica Neue" size:9.0f]];
+    }
     
+    NSString *imageName=ibModelDetails.image;
+    
+    [cell.lblTag setFont:[UIFont fontWithName:@"Helvetica Neue" size:9.0f]];
     
     NSString *str=@"ℊ+";
     
     cell.lblGPlus.attributedText = [self plainStringToAttributedUnits:str];
     
-    
-   // cell.lblGPlus.text=str;
-
     cell.lblTag.text=[NSString stringWithFormat:@"%@",ibModelDetails.user_email];
     cell.lblTag.backgroundColor=[UIColor blackColor];
     cell.lblTag.textAlignment=NSTextAlignmentCenter;
@@ -389,14 +358,184 @@
  
 
     if ([self isImageExist:imageName]) {
+        if ([PPUtilts isiPhone6Plus]||[PPUtilts isiPhone6]) {
+            cell.lblHeading.lineBreakMode=NSLineBreakByCharWrapping;
+            [cell.lblHeading sizeToFit];
+            float newHeight = [self heightOfLabel:ibModelDetails.headline];
+            float newHeightDesc = [self heightOfLabel:ibModelDetails.description_idea_brief];
+            CGRect newRect;
+            
+            CGRect frame = cell.imgMain.frame;
+            frame.origin.y = cell.lblHeading.frame.size.height+50;
+            cell.imgMain.frame = frame;
+            
+            if (newHeight<50) {
+                
+                CGRect frameHeading = cell.lblHeading.frame;
+                frameHeading.origin.y = 60;
+                cell.lblHeading.frame = frameHeading;
+                
+                CGRect frameImgMain = cell.imgMain.frame;
+                frameImgMain.origin.y = cell.lblHeading.frame.size.height+75;
+                cell.imgMain.frame = frameImgMain;
+                
+                
+                CGRect frameDesc = cell.imgMain.frame;
+                frameDesc.origin.y = cell.imgMain.frame.size.height+cell.lblHeading.frame.size.height+95;
+                cell.lblDescription.frame = frameDesc;
+                
+                NSLog(@"=======height === %f \n ",newHeight);
+                
+            }
+            
+            else if(newHeight >240){
+                
+                CGRect frameHeading = cell.lblHeading.frame;
+                frameHeading.origin.y = 40;
+                cell.lblHeading.frame = frameHeading;
+                
+                CGRect frameImgMain = cell.imgMain.frame;
+                frameImgMain.origin.y = cell.lblHeading.frame.size.height+20;
+                cell.imgMain.frame = frameImgMain;
+                
+                
+                CGRect frameDesc = cell.imgMain.frame;
+                frameDesc.origin.y = cell.imgMain.frame.size.height+cell.lblHeading.frame.size.height+40;
+                cell.lblDescription.frame = frameDesc;
+                
+                NSLog(@"=======height === %f \n ",newHeight);
+                
+            }
+            else if(newHeight >185){
+                newRect = CGRectMake(40, 40, self.view.frame.size.width-130, newHeight);
+                [cell.lblHeading setFrame:newRect];
+                
+                [cell.lblDescription setFrame:CGRectMake(40, cell.lblHeading.frame.size.height+cell.imgMain.frame.size.height+90 , self.view.frame.size.width-130, newHeightDesc)];
+                NSLog(@"=======height === %f \n ",newHeight);
+                
+            }
+            
+            else{
+                
+                CGRect frameHeading = cell.lblHeading.frame;
+                frameHeading.origin.y = 60;
+                cell.lblHeading.frame = frameHeading;
+                
+                CGRect frameImgMain = cell.imgMain.frame;
+                frameImgMain.origin.y = cell.lblHeading.frame.size.height+65;
+                cell.imgMain.frame = frameImgMain;
+                
+                
+                CGRect frameDesc = cell.imgMain.frame;
+                frameDesc.origin.y = cell.imgMain.frame.size.height+cell.lblHeading.frame.size.height+76;
+                cell.lblDescription.frame = frameDesc;
+                NSLog(@"=======height === %f \n ",newHeight);
+                //83
+                //125
+                
+            }
 
-        CGRect frame = cell.imgMain.frame;
-        frame.origin.y = cell.lblHeading.frame.size.height+60;
-        cell.imgMain.frame = frame;
-        CGRect frame1 = cell.imgMain.frame;
-        frame1.origin.y = cell.imgMain.frame.size.height+cell.lblHeading.frame.size.height+80;
-        cell.lblDescription.frame = frame1;
-        [cell.lblDescription sizeToFit];
+            
+        }
+        
+            else{
+        
+        //All fames are with image in iPhone 5
+        
+                cell.lblHeading.lineBreakMode=NSLineBreakByCharWrapping;
+                [cell.lblHeading sizeToFit];
+                float newHeight = [self heightOfLabel:ibModelDetails.headline];
+                
+                CGRect frame = cell.imgMain.frame;
+                frame.origin.y = cell.lblHeading.frame.size.height+50;
+                cell.imgMain.frame = frame;
+                
+                if (newHeight<50) {
+                    
+                    CGRect frameHeading = cell.lblHeading.frame;
+                    frameHeading.origin.y = 56;
+                    cell.lblHeading.frame = frameHeading;
+                    
+                    CGRect frameImgMain = cell.imgMain.frame;
+                    frameImgMain.origin.y = cell.lblHeading.frame.size.height+58;
+                    cell.imgMain.frame = frameImgMain;
+                    
+                    
+                    CGRect frameDesc = cell.imgMain.frame;
+                    frameDesc.origin.y = cell.imgMain.frame.size.height+cell.lblHeading.frame.size.height+73;
+                    cell.lblDescription.frame = frameDesc;
+                    
+                    
+                    NSLog(@"=======height === %f \n ",newHeight);
+                    
+                }
+                
+                else if(newHeight >240){
+                    CGRect frameHeading = cell.lblHeading.frame;
+                    frameHeading.origin.y = 56;
+                    cell.lblHeading.frame = frameHeading;
+                    
+                    CGRect frameImgMain = cell.imgMain.frame;
+                    frameImgMain.origin.y = cell.lblHeading.frame.size.height+58;
+                    cell.imgMain.frame = frameImgMain;
+                    
+                    
+                    CGRect frameDesc = cell.imgMain.frame;
+                    frameDesc.origin.y = cell.imgMain.frame.size.height+cell.lblHeading.frame.size.height+73;
+                    cell.lblDescription.frame = frameDesc;
+                    
+                    
+                    NSLog(@"=======height === %f \n ",newHeight);
+                    
+                }
+                else if(newHeight >185){
+                    CGRect frameHeading = cell.lblHeading.frame;
+                    frameHeading.origin.y = 56;
+                    cell.lblHeading.frame = frameHeading;
+                    
+                    CGRect frameImgMain = cell.imgMain.frame;
+                    frameImgMain.origin.y = cell.lblHeading.frame.size.height+58;
+                    cell.imgMain.frame = frameImgMain;
+                    
+                    
+                    CGRect frameDesc = cell.imgMain.frame;
+                    frameDesc.origin.y = cell.imgMain.frame.size.height+cell.lblHeading.frame.size.height+73;
+                    cell.lblDescription.frame = frameDesc;
+                    
+                    
+                    NSLog(@"=======height === %f \n ",newHeight);
+                    
+                }
+                
+                else{
+                    
+                    CGRect frameHeading = cell.lblHeading.frame;
+                    frameHeading.origin.y = 56;
+                    cell.lblHeading.frame = frameHeading;
+                    
+                    CGRect frameImgMain = cell.imgMain.frame;
+                    frameImgMain.origin.y = cell.lblHeading.frame.size.height+58;
+                    cell.imgMain.frame = frameImgMain;
+                    
+                    
+                    CGRect frameDesc = cell.imgMain.frame;
+                    frameDesc.origin.y = cell.imgMain.frame.size.height+cell.lblHeading.frame.size.height+73;
+                    cell.lblDescription.frame = frameDesc;
+
+                    
+                    
+                    NSLog(@"=======height === %f \n ",newHeight);
+                    //83
+                    //125
+                    
+                }
+                
+
+                
+                
+
+         
+}
         
         
         UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
@@ -427,9 +566,116 @@
 
     }
     else{
-        CGRect frame = cell.lblDescription.frame;
-        frame.origin.y = cell.lblHeading.frame.size.height+65;
-        cell.lblDescription.frame = frame;
+        
+        cell.lblHeading.lineBreakMode=NSLineBreakByCharWrapping;
+        [cell.lblHeading sizeToFit];
+        float newHeight = [self heightOfLabel:ibModelDetails.headline];
+        float newHeightDesc = [self heightOfLabel:ibModelDetails.description_idea_brief];
+        CGRect newRect;
+        
+        if ([PPUtilts isiPhone6Plus]||[PPUtilts isiPhone6]) {
+            if (newHeight<50) {
+                newRect = CGRectMake(40, 53, self.view.frame.size.width-130, newHeight);
+                [cell.lblHeading setFrame:newRect];
+                [cell.lblDescription setFrame:CGRectMake(40, cell.lblHeading.frame.size.height+60 , self.view.frame.size.width-130, newHeightDesc)];
+                NSLog(@"=======height === %f \n ",newHeight);
+                
+            }
+
+            
+            else if(newHeight >232){
+                newRect = CGRectMake(40, 30, self.view.frame.size.width-130, newHeight);
+                [cell.lblHeading setFrame:newRect];
+                [cell.lblDescription setFrame:CGRectMake(40, cell.lblHeading.frame.size.height+20 , self.view.frame.size.width-130, newHeightDesc)];
+                NSLog(@"=======height === %f \n ",newHeight);
+                
+            }
+            else if(newHeight >185){
+                newRect = CGRectMake(40, 35, self.view.frame.size.width-130, newHeight);
+                [cell.lblHeading setFrame:newRect];
+                CGRect frameDesc = cell.lblHeading.frame;
+                frameDesc.origin.y =cell.lblHeading.frame.size.height+20;
+                cell.lblDescription.frame = frameDesc;
+                
+                NSLog(@"=======height === %f \n ",newHeight);
+                
+            }
+            else if (newHeight>138){
+                
+                newRect = CGRectMake(40, 40, self.view.frame.size.width-130, newHeight);
+                [cell.lblHeading setFrame:newRect];
+                
+                CGRect frameDesc = cell.lblHeading.frame;
+                frameDesc.origin.y =cell.lblHeading.frame.size.height+30;
+                cell.lblDescription.frame = frameDesc;
+                NSLog(@"=======height === %f \n ",newHeight);
+            }
+            
+
+            
+
+            else{
+                newRect = CGRectMake(40, 60, self.view.frame.size.width-130, newHeight);
+                [cell.lblHeading setFrame:newRect];
+
+                CGRect frameDesc = cell.lblHeading.frame;
+                frameDesc.origin.y =cell.lblHeading.frame.size.height+60;
+                cell.lblDescription.frame = frameDesc;
+                NSLog(@"=======height === %f \n ",newHeight);
+                //83
+                //125
+                
+            }
+            
+        }
+        
+        else{
+       //iPhone5 Without Image
+            
+            if (newHeight<50) {
+                newRect = CGRectMake(40, 48, 240, newHeight);
+                [cell.lblHeading setFrame:newRect];
+                CGRect frameDesc = cell.lblHeading.frame;
+                frameDesc.origin.y =cell.lblHeading.frame.size.height+54;
+                cell.lblDescription.frame = frameDesc;
+                NSLog(@"=======height === %f \n ",newHeight);
+                
+            }
+            else if(newHeight >240){
+                newRect = CGRectMake(40, 40, 240, newHeight);
+                [cell.lblHeading setFrame:newRect];
+                NSLog(@"=======height === %f \n ",newHeight);
+            }
+            else if(newHeight >185){
+                newRect = CGRectMake(40, 45, 240, newHeight);
+                [cell.lblHeading setFrame:newRect];
+                CGRect frameDesc = cell.lblHeading.frame;
+                frameDesc.origin.y =cell.lblHeading.frame.size.height+50;
+                cell.lblDescription.frame = frameDesc;
+                NSLog(@"=======height === %f \n ",newHeight);
+                
+            }
+            else{
+                newRect = CGRectMake(40, 47,240, newHeight);
+                [cell.lblHeading setFrame:newRect];
+                CGRect frameDesc = cell.lblHeading.frame;
+                frameDesc.origin.y =cell.lblHeading.frame.size.height+52;
+                cell.lblDescription.frame = frameDesc;
+                NSLog(@"=======height === %f \n ",newHeight);
+                //83
+                //125
+                
+            }
+            
+            //lblHeight.lineBreakMode=NSLineBreakByWordWrapping;
+            //[lblHeight sizeToFit];
+            
+            
+            
+            
+            
+        }
+
     }
     
     

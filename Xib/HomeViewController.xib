@@ -28,7 +28,7 @@
                         <outlet property="delegate" destination="-1" id="Ckb-se-366"/>
                     </connections>
                 </scrollView>
-                <view alpha="0.89999999999999991" contentMode="scaleToFill" id="pYB-9d-fSW">
+                <view hidden="YES" alpha="0.89999999999999991" contentMode="scaleToFill" id="pYB-9d-fSW">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
